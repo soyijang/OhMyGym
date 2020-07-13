@@ -1,0 +1,1977 @@
+@charset "UTF-8"; /******************************
+개인회원 마이홈 CSS
+개인회원 마이페이지 레이아웃 CSS
+******************************/
+html {
+    color: #000;
+    background: #fff
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,blockquote,button {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font-size: 13px;
+    line-height: 1.231;
+    font-family: arial,helvetica,clean,sans-serif;
+    * font-size: small;
+    * font: x-small
+}
+
+table {
+    font-size: 100%
+}
+
+table.n0 {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+td.n0,th.n0 {
+    margin: 0;
+    padding: 0
+}
+
+fieldset,img {
+    border: 0
+}
+
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style: inherit;
+    font-weight: inherit
+}
+
+ol,ul,li {
+    list-style: none
+}
+
+caption,th {
+    text-align: left
+}
+
+q:before,q:after {
+    content: ''
+}
+
+del,ins {
+    text-decoration: none
+}
+
+abbr,acronym {
+    border: 0;
+    font-variant: normal
+}
+
+sup {
+    vertical-align: text-top
+}
+
+sub {
+    vertical-align: text-bottom
+}
+
+legend {
+    color: #000
+}
+
+a {
+    color: #444;
+    text-decoration: none
+}
+
+input,button,textarea,select,option {
+    font-family: dotum,gulim,sans-serif;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit
+}
+
+input,button,textarea,select {
+    line-height: normal
+}
+
+pre,code,kbd,samp,tt {
+    font-family: monospace;
+    font-size: 108%;
+    line-height: 100%
+}
+
+input[type=checkbox] {
+    margin-right: 3px
+}
+
+.hidden,.blind {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    clip: rect(1px,1px,1px,1px)
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+caption, legend, .blind, .hidden {
+    overflow: hidden;
+    visibility: hidden;
+    margin-left: -1px;
+    width: 1px;
+    height: 1px
+}
+
+/* common */
+a, body, option, select, input, p, br, td, div, form, textarea, center, pre, blockquote {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    text-decoration: inherit
+}
+
+.skip_navigation {
+    position: absolute;
+    width: 0;
+    height: 0
+}
+
+
+html,body {
+    height: 100%
+}
+
+body {
+    width: 100%;
+    min-width: 1260px;
+    font-size: 13px;
+    color: #444;
+    font-family: 'Malgun Gothic', '맑은 고딕', Dotum, '돋움', AppleGothic,sans-serif
+}
+
+input,button,select {
+    font-family: 'Malgun Gothic', '맑은 고딕', Dotum, '돋움', AppleGothic,sans-serif
+}
+
+button {
+    cursor: pointer
+}
+
+header,nav,aside,section,article {
+    display: block
+}
+
+div {
+    font-family: inherit
+}
+
+a:hover {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit
+}
+
+p {
+    margin: 0
+}
+
+strong {
+    font-weight: bold
+}
+
+#container {
+    width: auto;
+    min-height: 100%;
+    background-color: #f8f8f8
+}
+
+#top_banner {
+    margin-top: -200px;
+    height: 250px;
+    overflow-y: hidden;
+    -webkit-transition: margin 0.5s;
+    transition: margin 0.5s
+}
+
+#top_banner .inner {
+    margin: 0 auto;
+    position: relative;
+    width: 1260px;
+    height: 250px
+}
+
+#top_banner li.banner_preview_wrap {
+    position: absolute;
+    bottom: 0;
+    width: 1260px;
+    height: 50px;
+    opacity: 1;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s
+}
+
+#top_banner .inner li button.btn_close_banner {
+    position: absolute;
+    right: 0;
+    top: 17px;
+    width: 17px;
+    height: 17px;
+    border: none;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/btn_top_banner01.png) repeat-x 0 0
+}
+
+#top_banner .inner li.banner_wrap button.btn_close_banner {
+    width: 29px;
+    height: 29px;
+    background-position: 0 -50px
+}
+
+#top_banner.expand {
+    margin-top: 0;
+    -webkit-transition: margin 0.5s;
+    transition: margin 0.5s
+}
+
+#top_banner.expand li.banner_preview_wrap {
+    opacity: 0
+}
+
+.ie8 #top_banner.expand li.banner_preview_wrap {
+    display: none
+}
+
+#header {
+    position: relative;
+    padding-bottom: 55px;
+    width: 100%;
+    background-color: #fff;
+    z-index: 30
+}
+
+#header > .inner {
+    position: absolute;
+    width: 100%;
+    height: 55px;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/bg_header01.png) repeat-x 0 0;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
+    z-index: 900
+}
+
+@media \0screen {
+    #header > .inner {
+        border-bottom: 1px solid #e9e9e9\9;
+    }
+}
+
+#header .area_ci {
+    position: relative;
+    margin: 0 auto;
+    width: 1260px;
+    height: 40px
+}
+
+#gnb {
+    margin: 0 auto;
+    position: relative;
+    width: 1260px;
+    height: 55px;
+    text-align: center;
+    letter-spacing: -1px
+}
+
+#header .inner.fixed_script {
+    position: fixed;
+    top: 0
+}
+
+/* util area */
+#header .area_ci p.title_ci {
+    float: left;
+    margin-right: 121px;
+    padding-top: 5px
+}
+
+#header .area_ci .outer_wrap {
+    position: absolute;
+    top: 0;
+    left: 375px;
+    z-index: 930;
+    text-align: right
+}
+
+.area_ci .lately_wrap {
+    position: relative;
+    float: right;
+    display: inline-block;
+    min-height: 40px;
+    padding-left: 12px;
+    text-align: left;
+    font-family: 'Malgun Gothic', '맑은 고딕', NanumGothic, "나눔고딕", sans-serif;
+    letter-spacing: -1px
+}
+
+.area_ci .lately_wrap a {
+    float: none
+}
+
+.area_ci .lately_wrap .lately_menu {
+    position: relative;
+    display: inline-block;
+    height: 40px;
+    font-size: 12px;
+    line-height: 38px;
+    color: #7b7b7b;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 2
+}
+
+.area_ci .lately_wrap .menu_1st {
+    display: inline-block;
+    position: relative;
+    padding-left: 3px;
+    font-size: 11px;
+    line-height: 39px;
+    color: #444;
+    text-decoration: underline
+}
+
+.area_ci .lately_wrap .btn_del {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-left: 3px;
+    font-size: 1px;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(//www.saraminimage.co.kr/ui/top/bg_utilbar01.png) no-repeat right -45px;
+    vertical-align: middle;
+    cursor: pointer
+}
+
+.area_ci .lately_wrap > .btn_del {
+    opacity: 0
+}
+
+.area_ci .lately_wrap .list_wrap {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 198px;
+    font-size: 12px;
+    border: 1px solid #a1a1a1;
+    background-color: #fff;
+    line-height: 25px;
+    z-index: 1
+}
+
+.area_ci .lately_wrap.lately_menu {
+    z-index: 2
+}
+
+.area_ci .lately_wrap.lately_keyword {
+    z-index: 1
+}
+
+.area_ci .lately_wrap.lately_menu .list_wrap .list_menu {
+    max-height: 260px;
+    overflow-y: auto
+}
+
+.area_ci .lately_wrap .list_wrap .list_menu li {
+    padding-left: 17px;
+    height: 25px;
+    line-height: 25px
+}
+
+.area_ci .lately_wrap .list_wrap .list_menu li:first-child {
+    margin-top: 4px
+}
+
+.area_ci .lately_wrap .list_wrap .list_menu li:last-child {
+    margin-bottom: 6px
+}
+
+.area_ci .lately_wrap .list_wrap .list_menu li a {
+    display: block;
+    float: left;
+    width: 135px;
+    color: #666;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden
+}
+
+.area_ci .lately_wrap .list_wrap .list_menu li .btn_del {
+    float: right;
+    margin: 5px 12px 0 0
+}
+
+.area_ci .lately_wrap .list_wrap .list_menu li:hover {
+    background: #f5f5f5
+}
+
+.area_ci .lately_wrap .list_wrap .fix_menu {
+    text-align: center
+}
+
+.area_ci .lately_wrap .list_wrap .fix_menu li {
+    float: left;
+    width: 99px;
+    height: 32px;
+    line-height: 30px;
+    border: solid #e6e6e6;
+    border-width: 1px 0 0;
+    background-color: #fafafa
+}
+
+.area_ci .lately_wrap .list_wrap .fix_menu li:first-child {
+    width: 98px;
+    border-width: 1px 1px 0 0
+}
+
+.area_ci .lately_wrap .list_wrap .fix_menu li a {
+    display: block;
+    height: 35px;
+    font-size: 13px;
+    color: #444
+}
+
+.area_ci .lately_wrap .list_wrap .fix_menu li .ico_recommend {
+    position: relative;
+    padding: 0 2px 0 19px
+}
+
+.area_ci .lately_wrap .list_wrap .fix_menu li .ico_recommend:before {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 14px;
+    height: 22px;
+    background: url(//www.saraminimage.co.kr/sri/common/ico/ico_sri_recommend_s.png) no-repeat;
+    content: ""
+}
+
+.area_ci .lately_wrap:hover > .btn_del {
+    opacity: 1
+}
+
+.area_ci .lately_wrap:hover .list_wrap {
+    display: block
+}
+
+.area_ci .util_default {
+    float: right;
+    height: 40px;
+    color: #7b7b7b;
+    line-height: 38px;
+    font-size: 12px;
+    letter-spacing: -1px
+}
+
+.area_ci .util_default a {
+    margin-left: 16px
+}
+
+.area_ci .util_default .util_app_install {
+    padding-left: 17px;
+    color: #444;
+    background: url(//www.saraminimage.co.kr/ui/top/bg_utilbar01.png) no-repeat 0 -146px
+}
+
+/* gnb nav */
+#gnb ul.gnb_list {
+    position: relative;
+    height: 55px;
+    line-height: 55px
+}
+
+#gnb ul.gnb_list:after {
+    clear: both;
+    content: '';
+    display: block
+}
+
+#gnb ul.gnb_list > li {
+    float: left;
+    width: 141px;
+    font-size: 17px;
+    color: #444;
+    letter-spacing: -2px
+}
+
+#gnb ul.gnb_list li span.depth01_title {
+    display: block;
+    width: 100%;
+    height: 52px;
+    border-bottom: 3px solid transparent;
+    color: #444;
+    font-weight: bold;
+    line-height: 55px;
+    cursor: pointer
+}
+
+#gnb ul.gnb_list li span.depth01_title .txt {
+    letter-spacing: -0.5px
+}
+
+#gnb ul.gnb_list li:hover span.depth01_title {
+    color: #4876ef
+}
+
+#gnb ul.gnb_list li:hover ul.depth02 {
+    display: block
+}
+
+#gnb .gnb_list ul.depth02 {
+    display: none;
+    position: absolute;
+    width: 152px;
+    padding: 8px 0 11px 15px;
+    border: 1px solid #a1a1a1;
+    text-align: left;
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
+    box-sizing: border-box
+}
+
+#gnb .gnb_list ul.depth02 li {
+    float: none;
+    line-height: 24px;
+    font-size: 13px
+}
+
+#gnb .gnb_list ul.depth02 li a {
+    color: #444
+}
+
+#gnb .gnb_list ul.depth02 li a:hover {
+    text-decoration: underline
+}
+
+#gnb .gnb_list li.selected span.depth01_title {
+    border-color: #4876ef;
+    color: #4876ef
+}
+
+#gnb ul.gnb_list li .ico_recommend {
+    position: relative
+}
+
+#gnb ul.gnb_list li .ico_recommend:before {
+    display: inline-block;
+    margin: 13px 8px 0 0;
+    width: 18px;
+    height: 28px;
+    vertical-align: top;
+    background: url(//www.saraminimage.co.kr/sri/common/ico/ico_sri_recommend.png) no-repeat;
+    content: ""
+}
+
+#gnb ul.gnb_list li:hover .ico_recommend:before, #gnb .gnb_list li.selected .ico_recommend:before {
+    background-position: -20px 0
+}
+
+#gnb .side_menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 55px;
+    border: solid #e9e9e9;
+    border-width: 0 1px;
+    font-size: 13px;
+    line-height: 53px;
+    z-index: 910
+}
+
+#gnb .side_menu ul.list:after {
+    clear: both;
+    content: '';
+    display: block
+}
+
+#gnb .side_menu ul.list li {
+    float: left;
+    width: 52px;
+    height: 55px;
+    border-left: 1px solid #e9e9e9
+}
+
+#gnb .side_menu ul.list li:first-child {
+    border-left: none
+}
+
+#gnb .side_menu ul.list li a {
+    display: inline-block;
+    height: 55px
+}
+
+#gnb .side_menu ul.list li.person_name_wrap {
+    position: relative;
+    width: 100%
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .photo {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    margin-top: 10px;
+    border-radius: 50%;
+    border: 1px solid #e5e5e5;
+    vertical-align: top;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/bg_no_photo_33x33.png) no-repeat 50%;
+    overflow: hidden
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .photo img {
+    width: 100%;
+    margin-top: -4px
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .name {
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .name .text {
+    max-width: 100px;
+    font-weight: bold
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .sid {
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 0
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .sid .text {
+    max-width: 70px
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .sid .text.social_type01:before, #gnb .side_menu ul.list li.person_name_wrap .sid .text.social_type02:before, #gnb .side_menu ul.list li.person_name_wrap .sid .text.social_type03:before, #gnb .side_menu ul.list li.person_name_wrap .sid .text.social_type04:before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    padding: 0 3px 0 2px;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_social_type_spr.png) no-repeat 2px 0;
+    vertical-align: middle
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .sid .text.social_type02:before {
+    background-position: 2px -50px
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .sid .text.social_type03:before {
+    background-position: 2px -100px
+}
+
+#gnb .side_menu ul.list li.person_name_wrap .sid .text.social_type04:before {
+    background-position: 2px -150px
+}
+
+#gnb .side_menu ul.list li.person_name_wrap em {
+    display: inline-block;
+    font-style: normal;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+#gnb .side_menu .link_side {
+    display: block;
+    position: relative;
+    width: 195px;
+    height: 55px
+}
+
+#gnb .side_menu .link_side .photo {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    margin-top: 10px;
+    border-radius: 50%;
+    border: 1px solid #e5e5e5;
+    vertical-align: top;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/bg_no_photo_33x33.png) no-repeat 50%;
+    overflow: hidden
+}
+
+#gnb .side_menu .link_side .photo img {
+    width: 100%;
+    margin-top: -4px
+}
+
+#gnb .side_menu .link_side .text {
+    margin: 0;
+    text-align: center;
+    line-height: 53px
+}
+
+/* 이력서 개편후 삭제요망 */
+#gnb .side_menu .link_side .name .text {
+    max-width: 50px;
+    font-weight: bold
+}
+
+#gnb .side_menu .link_side .sid {
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 0
+}
+
+#gnb .side_menu .link_side .sid .text {
+    max-width: 70px
+}
+
+#gnb .side_menu .link_side .sid .text.social_type01:before, #gnb .side_menu .link_side .text.social_type02:before, #gnb .side_menu .link_side .text.social_type03:before, #gnb .side_menu .link_side .sid .text.social_type04:before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    padding: 0 3px 0 2px;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_social_type_spr.png) no-repeat 2px 0;
+    vertical-align: middle
+}
+
+#gnb .side_menu .link_side .sid .text.social_type02:before {
+    background-position: 2px -50px
+}
+
+#gnb .side_menu .link_side .sid .text.social_type03:before {
+    background-position: 2px -100px
+}
+
+#gnb .side_menu .link_side .sid .text.social_type04:before {
+    background-position: 2px -150px
+}
+
+#gnb .side_menu .link_side em {
+    display: inline-block;
+    font-style: normal;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+#gnb .side_menu .notification_myinfo {
+    display: none;
+    position: absolute;
+    right: 242px;
+    top: 12px;
+    padding: 0 21px 0 16px
+}
+
+#gnb .side_menu .notification_myinfo .inner {
+    height: 30px;
+    line-height: 28px;
+    text-align: center;
+    color: #fff;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/bg_toast_message_spr.png) repeat-x 0 -50px;
+    white-space: nowrap
+}
+
+#gnb .side_menu .notification_myinfo:before, #gnb .side_menu .notification_myinfo:after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 30px;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/bg_toast_message_spr.png) no-repeat 0 0
+}
+
+#gnb .side_menu .notification_myinfo:before {
+    left: 0;
+    width: 16px
+}
+
+#gnb .side_menu .notification_myinfo:after {
+    right: 0;
+    width: 21px;
+    background-position: -16px 0
+}
+
+#gnb .side_menu .link_side.login_wrap {
+    width: 145px
+}
+
+#gnb .side_menu .link_side.join {
+    width: 63px
+}
+
+#gnb .side_menu ul.list li.alram_wrap {
+    width: 48px
+}
+
+#gnb .side_menu ul.list li.alram_wrap .btn_alram {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    font-size: 1px;
+    text-indent: -200%;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_alram_center_btn.png) no-repeat 10px;
+    vertical-align: middle;
+    overflow: hidden
+}
+
+#gnb .side_menu ul.list li.alram_wrap .btn_alram .count {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    right: 2px;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    line-height: 18px;
+    color: #fff;
+    letter-spacing: 0;
+    text-indent: 0;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #ff662f
+}
+
+#gnb .side_menu ul.list li.login_wrap {
+    width: 145px
+}
+
+#gnb .side_menu ul.list li.login_wrap .photo {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    margin-top: 10px;
+    border-radius: 50%;
+    border: 1px solid #e5e5e5;
+    vertical-align: top;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/bg_no_photo_33x33.png) no-repeat 50%;
+    overflow: hidden
+}
+
+#gnb .side_menu ul.list li.join {
+    width: 112px
+}
+
+/* activity */
+.layer_myarea_wrap {
+    display: none;
+    position: absolute;
+    top: 55px;
+    right: -1px;
+    width: 400px;
+    background-color: #fff
+}
+
+.layer_myarea_wrap.expand {
+    display: block
+}
+
+.layer_myarea_wrap .profile_wrap {
+    height: 40px;
+    padding: 10px 15px 10px 25px;
+    line-height: 36px;
+    text-align: left;
+    background-color: #4f4f4f
+}
+
+.layer_myarea_wrap .profile_wrap .name_wrap {
+    display: inline-block;
+    max-width: 105px;
+    margin-right: 20px;
+    font-size: 22px;
+    color: #dfdfdf;
+    letter-spacing: -2px
+}
+
+.layer_myarea_wrap .profile_wrap .name_wrap .name {
+    display: inline-block;
+    max-width: 82px;
+    height: 40px;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.layer_myarea_wrap .profile_wrap .btn_personinfo_modify, .layer_myarea_wrap .profile_wrap .btn_logout {
+    display: inline-block;
+    height: 40px;
+    margin-right: 15px;
+    padding: 1px 0 0 20px;
+    font-size: 12px;
+    color: #999;
+    vertical-align: top;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/btn_person_wrap_spr.png) no-repeat
+}
+
+.layer_myarea_wrap .profile_wrap .btn_personinfo_modify:hover, .layer_myarea_wrap .profile_wrap .btn_logout:hover {
+    color: #bbb
+}
+
+.layer_myarea_wrap .profile_wrap .btn_personinfo_modify {
+    background-position: 0 12px
+}
+
+.layer_myarea_wrap .profile_wrap .btn_logout {
+    background-position: 0 -36px
+}
+
+.layer_myarea_wrap .activity_wrap {
+    border: solid #a1a1a1;
+    border-width: 0 1px 1px 1px
+}
+
+.layer_myarea_wrap .tabmenu {
+    height: 50px;
+    font-size: 15px
+}
+
+.layer_myarea_wrap .tabmenu li {
+    float: left;
+    width: 199px;
+    height: 49px;
+    line-height: 49px;
+    border-bottom: 1px solid #dedede;
+    color: #999;
+    background-color: #f8f8f8;
+    cursor: pointer
+}
+
+.layer_myarea_wrap .tabmenu li em.new {
+    display: inline-block;
+    position: relative;
+    margin-top: -12px;
+    width: 5px;
+    height: 5px;
+    font-size: 1px;
+    text-indent: -9999px;
+    vertical-align: middle;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_new01.png) no-repeat;
+    overflow: hidden
+}
+
+.layer_myarea_wrap .tabmenu li:first-child {
+    width: 198px;
+    border-right: 1px solid #dedede
+}
+
+.layer_myarea_wrap .tabmenu li.selected {
+    border-bottom-color: #fff;
+    color: #444;
+    background-color: #fff
+}
+
+.layer_myarea_wrap .tabmenu li.disable {
+    color: #aaa
+}
+
+.layer_myarea_wrap .tabcont_wrap {
+    height: 579px
+}
+
+.layer_myarea_wrap .tabcont_wrap .tabcont {
+    width: 398px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto
+}
+
+.layer_myarea_wrap .tabcont_wrap .tabcont {
+    scrollbar-3dLight-Color: #fff;
+    scrollbar-arrow-color:#fff;scrollbar-base-color:#fff;scrollbar-Face-Color:#e8e8e8;scrollbar-Track-Color:#fff;scrollbar-DarkShadow-Color: #fff;
+    scrollbar-Highlight-Color:#fff;scrollbar-Shadow-Color:#fff}
+
+.layer_myarea_wrap .tabcont_wrap .tabcont::-webkit-scrollbar {
+    width: 8px;
+    height: 8px
+}
+
+.layer_myarea_wrap .tabcont_wrap .tabcont::-webkit-scrollbar-track {
+    background: #fff
+}
+
+.layer_myarea_wrap .tabcont_wrap .tabcont::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 4px
+}
+
+.layer_myarea_wrap .tabcont_wrap .tabcont > .inner {
+    padding: 20px 25px;
+    width: 350px
+}
+
+.layer_myarea_wrap .recruit_summary {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 0;
+    width: 348px;
+    border: 1px solid #e5e5e5;
+    text-align: left;
+    background-color: #fff
+}
+
+.layer_myarea_wrap .recruit_summary:last-child, .layer_myarea_wrap .activity_summary:last-child {
+    margin-top: 0
+}
+
+.layer_myarea_wrap .recruit_summary .desc {
+    height: 32px;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 13px;
+    line-height: 32px
+}
+
+.layer_myarea_wrap .recruit_summary .desc .point {
+    color: #ff6129
+}
+
+.layer_myarea_wrap .recruit_summary .wrap_layer_tooltip {
+    margin: 4px 0 0 2px;
+    height: 16px
+}
+
+.layer_myarea_wrap .recruit_summary .wrap_layer_tooltip button.interested_corp {
+    background-position: -42px 0
+}
+
+.layer_myarea_wrap .recruit_summary .wrap_layer_tooltip button.interested_on {
+    background-position: -62px 0
+}
+
+.layer_myarea_wrap .recruit_summary ul.info_list {
+    padding: 11px 0 37px;
+    line-height: 22px
+}
+
+.layer_myarea_wrap .recruit_summary ul.info_list li.company_name {
+    font-size: 15px;
+    color: #444;
+    font-weight: bold
+}
+
+.layer_myarea_wrap .recruit_summary ul.info_list li.recruit_name {
+    padding-top: 1px;
+    font-size: 14px;
+    color: #444
+}
+
+.layer_myarea_wrap .recruit_summary ul.info_list li.recruit_sector {
+    font-size: 12px;
+    color: #888;
+    line-height: 18px
+}
+
+.layer_myarea_wrap .recruit_summary ul.info_list li.recruit_sector span:before {
+    content: '|';
+    display: inline-block;
+    padding: 0 5px 0 2px;
+    font-size: 10px;
+    color: #e5e5e5
+}
+
+.layer_myarea_wrap .recruit_summary ul.info_list li.recruit_sector span:first-child:before {
+    content: '';
+    padding: 0
+}
+
+.layer_myarea_wrap .recruit_summary .util {
+    position: absolute;
+    right: 20px;
+    bottom: 47px;
+    left: 20px;
+    height: 19px;
+    line-height: 19px;
+    text-align: right
+}
+
+.layer_myarea_wrap .my_activity .recruit_summary .util {
+    bottom: 15px
+}
+
+.layer_myarea_wrap .recruit_summary .util .btn_scrap {
+    float: left;
+    height: 19px;
+    line-height: 19px;
+    vertical-align: top
+}
+
+.layer_myarea_wrap .recruit_summary .util .date {
+    display: inline-block;
+    height: 14px;
+    font-size: 12px;
+    line-height: 14px;
+    color: #666;
+    vertical-align: top
+}
+
+.layer_myarea_wrap .recruit_summary .util .apply {
+    margin-left: 5px;
+    width: 48px;
+    height: 16px
+}
+
+.layer_myarea_wrap .recruit_summary .util .apply span {
+    display: inline-block;
+    width: 46px;
+    padding: 0 0 2px 0;
+    height: 12px;
+    line-height: 12px;
+    border: 1px solid #bebebe;
+    background: #fff;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: -1px;
+    color: #666;
+    vertical-align: top
+}
+
+.layer_myarea_wrap .recruit_summary .util .apply span.now {
+    background: #ff8d5a;
+    border: 1px solid #ff8149;
+    color: #fff
+}
+
+.layer_myarea_wrap .recruit_summary .util .apply span.closed {
+    cursor: default
+}
+
+.layer_myarea_wrap .recruit_summary .from_section {
+    margin: 0;
+    padding: 0 20px 0 30px;
+    height: 32px;
+    line-height: 32px;
+    text-align: right;
+    background-color: #f9f9f9;
+    box-sizing: border-box
+}
+
+.layer_myarea_wrap .recruit_summary .from_section a {
+    display: inline-block;
+    font-size: 12px;
+    font-family: Dotum, '돋움', AppleGothic,sans-serif;
+    color: #555555
+}
+
+.layer_myarea_wrap .recruit_summary .from_section a span {
+    font-family: 'Malgun Gothic', dotum, sans-serif;
+    font-size: 13px
+}
+
+.layer_myarea_wrap .no_activity {
+    display: table;
+    width: 350px;
+    height: 150px
+}
+
+.layer_myarea_wrap .no_activity p {
+    display: table-cell;
+    line-height: 38px;
+    font-size: 30px;
+    color: #444;
+    letter-spacing: -2px;
+    vertical-align: middle
+}
+
+.layer_myarea_wrap .activity_summary {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 0 20px;
+    width: 308px;
+    text-align: left;
+    border: 1px solid #e5e5e5;
+    background-color: #fff
+}
+
+.layer_myarea_wrap .activity_summary .desc {
+    height: 32px;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 14px;
+    line-height: 32px
+}
+
+.layer_myarea_wrap .activity_summary .desc a {
+    display: inline-block;
+    font-size: 12px;
+    font-family: Dotum, '돋움', AppleGothic,sans-serif;
+    color: #444
+}
+
+.layer_myarea_wrap .activity_summary .desc a span {
+    font-family: 'Malgun Gothic', dotum, sans-serif;
+    font-size: 14px
+}
+
+.layer_myarea_wrap .activity_summary .desc .point {
+    color: #ff6129
+}
+
+.layer_myarea_wrap .activity_summary .desc .date {
+    float: right;
+    color: #999;
+    font-size: 13px
+}
+
+.layer_myarea_wrap .activity_summary .wrap_layer_tooltip {
+    margin: 4px 0 0 2px;
+    height: 16px
+}
+
+.layer_myarea_wrap .activity_summary .btn_scrap {
+    display: inline-block;
+    margin-top: 3px;
+    line-height: 20px;
+    vertical-align: top
+}
+
+.layer_myarea_wrap .activity_summary .text_point01 {
+    padding-top: 15px;
+    font-size: 12px;
+    line-height: 14px;
+    color: #ff6129
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list {
+    padding: 11px 0 13px;
+    line-height: 22px
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.company_name, .layer_myarea_wrap .activity_summary ul.info_list li.title {
+    font-size: 15px;
+    word-break: break-all;
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.company_name a, .layer_myarea_wrap .activity_summary ul.info_list li.title a {
+    color: #444;
+    font-weight: bold;
+    word-break: break-all
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_name, .layer_myarea_wrap .activity_summary ul.info_list li.data {
+    width: 308px;
+    font-size: 14px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_name a, .layer_myarea_wrap .activity_summary ul.info_list li.data a {
+    color: #999
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.company_name .sri_layer_tooltip {
+    margin-top: 3px;
+    height: 16px;
+    line-height: 16px
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_name {
+    padding-top: 4px
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_document {
+    font-size: 12px;
+    color: #666
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_document a {
+    text-decoration: underline
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_sector {
+    font-size: 12px;
+    color: #666
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_sector span:before {
+    content: '|';
+    display: inline-block;
+    padding: 0 5px 0 2px;
+    font-size: 10px;
+    color: #e5e5e5
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_sector span:first-child:before {
+    content: '';
+    padding: 0
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_category {
+    font-size: 12px;
+    color: #999999
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.recruit_category span {
+    padding-right: 8px
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.count {
+    padding-top: 3px;
+    font-size: 13px;
+    color: #444
+}
+
+.layer_myarea_wrap .activity_summary ul.info_list li.count .point {
+    color: #ff6129;
+    font-weight: bold;
+    text-decoration: underline
+}
+
+.layer_myarea_wrap .activity_summary a.link_wrap, .layer_myarea_wrap .recruit_summary a.link_wrap {
+    display: block;
+    padding: 0 20px
+}
+
+.layer_myarea_wrap .btn_close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 17px;
+    height: 17px;
+    font-size: 1px;
+    text-indent: -200%;
+    border: none;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/btn_top_banner01.png) no-repeat;
+    overflow: hidden
+}
+
+.alarm_center_layer {
+    display: none;
+    top: 55px;
+    right: -1px;
+    border: 1px solid #a1a1a1
+}
+
+.alarm_center_layer.expand {
+    display: block
+}
+
+/* content layout */
+#pm_contents {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px 0 60px;
+    width: 1260px;
+    letter-spacing: -1px;
+    z-index: 20
+}
+
+#pm_contents:after {
+    display: block;
+    clear: both;
+    content: ''
+}
+
+#content {
+    float: none;
+    padding: 0;
+    position: static;
+    width: 1260px;
+    min-height: 500px;
+    overflow: visible
+}
+
+#content .wrapper_narrow {
+    min-height: 500px
+}
+
+#content.basic .wrapper_narrow {
+    float: left;
+    width: 780px
+}
+
+#content.nonudge .wrapper_narrow {
+    float: left;
+    width: 1060px
+}
+
+#content.nolnb .wrapper_narrow {
+    float: left;
+    width: 980px
+}
+
+#content.full {
+    display: table-cell;
+    width: 1260px;
+    height: 716px;
+    background-color: #fff;
+    vertical-align: middle
+}
+
+#content.full .google-adsense {
+    width: 728px;
+    margin: 100px auto 0
+}
+
+#content:after {
+    clear: both;
+    content: '';
+    display: block
+}
+
+#content .aside_wrap {
+    position: relative;
+    float: left;
+    margin-right: 20px;
+    width: 180px;
+    background-color: #f8f8f8;
+    z-index: 10
+}
+
+#content .aside_wrap .profile_wrap {
+    margin-bottom: 10px;
+    background-color: #fff
+}
+
+#content .aside_wrap .banner_wrap img {
+    vertical-align: top
+}
+
+#lnb .banner_wrap {
+    border: 1px solid #ebebeb;
+    overflow: hidden
+}
+
+#lnb .banner_wrap img {
+    margin-left: -1px;
+    vertical-align: top
+}
+
+#content.common_wrap .wrapper_narrow {
+    padding: 35px 30px 80px;
+    background: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,0.12)
+}
+
+#content.nonudge.common_wrap .wrapper_narrow {
+    padding: 35px 40px 80px
+}
+
+#content .tit_area {
+    min-height: 45px;
+    height: auto;
+    padding-bottom: 38px
+}
+
+#content .tit_area h2 {
+    font-size: 36px;
+    line-height: 36px;
+    color: #444
+}
+
+#content .tit_area .svq_event_banner {
+    position: absolute;
+    right: 340px;
+    top: -20px;
+}
+
+/* wmg-20079 */
+#content .title_wrap {
+    position: relative;
+    padding-bottom: 9px
+}
+
+#content .title_wrap h3 {
+    color: #444;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: -2px
+}
+
+#content .title_wrap .attach_count {
+    color: #444;
+    font-size: 16px;
+    font-weight: normal
+}
+
+#content .title_wrap .attach_count span {
+    color: #ff662f;
+    font-weight: bold
+}
+
+#content .title_wrap .btn_guide {
+    margin-top: 7px
+}
+
+#lnb {
+    float: left;
+    margin-right: 20px;
+    width: 180px;
+    letter-spacing: -1px
+}
+
+#nudge_wrap {
+    float: right;
+    width: 260px;
+}
+
+#nudge_wrap.withscroll {
+    width: 260px;
+    position: absolute;
+    top: -20px;
+    left: 1000px;
+    transform: translateZ(0)
+}
+
+#nudge_wrap.withscroll .inner_wrap {
+    width: 280px;
+    height: 100%;
+    position: relative;
+    left: -10px;
+    overflow: hidden;
+    z-index: 1
+}
+
+#nudge_wrap.withscroll .inner_wrap .scroller {
+    width: 320px;
+    height: 100%;
+    padding: 0 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box
+}
+
+#nudge_wrap.withscroll .inner_wrap .scroller .inner_scroller {
+    padding: 24px 0
+}
+
+.notify_mark {
+    display: block;
+    width: 42px;
+    height: 42px;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/img_viewpage_spr.png) 0 -900px no-repeat;
+    position: fixed;
+    left: 50%;
+    bottom: 120px;
+    margin-left: 480px;
+    z-index: 2
+}
+
+.loading_action_wrap {
+    padding: 50px 0;
+    text-align: center
+}
+
+.loading_action_wrap .text {
+    display: inline-block;
+    padding-left: 43px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 20px;
+    color: #999;
+    background: url(//www.saraminimage.co.kr/js/libs/images/loading.gif) no-repeat 0 0
+}
+
+.wrap_banner_ad {
+    position: absolute;
+    left: 50%;
+    top: 115px;
+    margin-left: 648px
+}
+
+.wrap_banner_ad.fixed_script {
+    position: fixed;
+    top: 75px
+}
+
+.wrap_banner_ad > .banner {
+    width: 120px;
+    height: 240px
+}
+
+/* 상단 title */
+.tit_area {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 63px
+}
+
+.tit_area + .tit_promoapp_nudge {
+    margin-top: 9px
+}
+
+.tit_area.height_auto {
+    height: 127px
+}
+
+.tit_area .wrap_button {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 12;
+    font: 0/0 Arial
+}
+
+.tit_area .tit_img_area {
+    position: absolute;
+    top: 8px;
+    right: 0
+}
+
+.tit_area .tit_img_area img {
+    vertical-align: baseline
+}
+
+.tit_area .tit_btn_area {
+    position: absolute;
+    top: 14px;
+    right: 0
+}
+
+.tit_area .tit_btn_area ul li {
+    float: left;
+    margin-right: 5px
+}
+
+.tit_area .tit_btn_area ul li.last {
+    margin-right: 0
+}
+
+.tit_area .tit_txt_area {
+    position: absolute;
+    top: 27px;
+    *top: 28px;
+    right: 0;
+    font-size: 11px;
+    color: #737373
+}
+
+.tit_area h1, .tit_area h2, .tit_area .title_contents {
+    z-index: 11;
+    margin: 0;
+    padding: 0;
+    height: 44px;
+    font-size: 36px;
+    letter-spacing: -4px;
+    word-spacing: -1px;
+    font-weight: normal;
+    text-align: left;
+    line-height: 36px;
+    color: #444
+}
+
+.tit_area.height_auto h2 {
+    font-size: 26px
+}
+
+.tit_area h2.tbl {
+    top: 40px;
+    *top: 42px
+}
+
+.tit_area h2 span {
+    position: relative;
+    top: -3px;
+    font-size: 28px
+}
+
+.tit_area #flash_content {
+    position: absolute;
+    top: 14px;
+    right: 0;
+    width: 693px
+}
+
+/* lnb */
+#lnb .lnb_list {
+    margin-bottom: 10px;
+    border: 1px solid #e6e6e6
+}
+
+#lnb .lnb_list li {
+    cursor: pointer
+}
+
+#lnb .lnb_list > li {
+    position: relative;
+    min-height: 39px;
+    border-top: 1px solid #ebebeb;
+    overflow: hidden
+}
+
+#lnb .lnb_list > li:first-child {
+    border-top: none
+}
+
+#lnb .lnb_list span.depth01_title {
+    display: block;
+    position: relative;
+    padding-left: 15px;
+    height: 39px;
+    line-height: 37px;
+    font-size: 14px;
+    color: #444;
+    text-decoration: none;
+    vertical-align: top;
+    background-color: #f8f8f8;
+    z-index: 2
+}
+
+#lnb .lnb_list .btn_depth02 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 39px;
+    height: 39px;
+    font-size: 1px;
+    color: #fff;
+    text-indent: -9999px;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_lnb_spr.png) no-repeat 16px -34px;
+    vertical-align: top;
+    z-index: 2
+}
+
+#lnb .lnb_list ul.depth02 {
+    position: relative;
+    margin-top: -999px;
+    padding: 0 0 0 15px;
+    transition: margin-top 0.3s, padding-bottom 0.3s, opacity 0.3s;
+    opacity: 0;
+    z-index: 1
+}
+
+#lnb .lnb_list ul.depth02 li {
+    padding-left: 12px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 13px
+}
+
+#lnb .lnb_list ul.depth02 li a {
+    display: block;
+    height: 24px;
+    color: #999
+}
+
+#lnb .lnb_list ul.depth02 li.selected {
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_lnb_spr.png) no-repeat 0 -92px
+}
+
+#lnb .lnb_list ul.depth02 li.selected a {
+    color: #444
+}
+
+#lnb .lnb_list ul.depth02 li a:hover {
+    color: #444;
+    text-decoration: underline
+}
+
+#lnb .lnb_list ul.depth02 li a[target=_blank]:after {
+    content: '';
+    display: inline-block;
+    margin-left: 10px;
+    width: 11px;
+    height: 11px;
+    vertical-align: middle;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_lnb_spr.png) no-repeat 0 -100px
+}
+
+#lnb .lnb_list > li span.depth01_title:hover, #lnb .lnb_list > li.selected span.depth01_title {
+    font-weight: bold
+}
+
+#lnb .lnb_list > li.expand .btn_depth02 {
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_lnb_spr.png) no-repeat 16px 16px
+}
+
+#lnb .lnb_list > li.expand ul.depth02 {
+    margin-top: 0 !important;
+    padding: 0 0 15px 15px;
+    opacity: 1
+}
+
+#btn_goto_top {
+    display: none;
+    position: fixed;
+    left: 50%;
+    bottom: 15px;
+    margin-left: 645px;
+    width: 39px;
+    height: 39px;
+    font-size: 1px;
+    color: #fff;
+    border: 1px solid #ddd;
+    text-indent: -9999px;
+    background: #fff url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/btn_goto_top.png) no-repeat 13px 11px;
+    z-index: 100
+}
+
+#btn_goto_top:hover {
+    background-position: 13px -42px
+}
+
+/* 마이홈 */
+.layer_myarea_wrap {
+    overflow-x: visible
+}
+
+#content.main .wrapper_narrow {
+    width: 780px
+}
+
+#content.main .profile_wrap {
+    position: relative;
+    text-align: center
+}
+
+#content.main .profile_wrap .img_spr {
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_profile_spr.png)
+}
+
+#content.main .profile_wrap .btn_setup_profile {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    font-size: 1px;
+    line-height: 1px;
+    text-indent: -9999px;
+    color: #fff;
+    background-position: 0 0
+}
+
+#content.main .profile_wrap .profile {
+    position: relative;
+    padding: 30px 40px 20px
+}
+
+#content.main .profile_wrap .profile .photo {
+    position: relative
+}
+
+#content.main .profile_wrap .profile .photo .thum {
+    display: block;
+    width: 98px;
+    height: 98px;
+    border-radius: 50%;
+    border: 1px solid #e5e5e5;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/bg_no_photo_100x100.png) no-repeat 50%;
+    overflow: hidden
+}
+
+#content.main .profile_wrap .profile .photo .thum img {
+    width: 100%;
+    margin-top: -10px
+}
+
+#content.main .profile_wrap .profile .photo button {
+    position: absolute;
+    font-size: 1px;
+    line-height: 1px;
+    text-indent: -9999px;
+    color: #fff;
+    border: none
+}
+
+#content.main .profile_wrap .profile .photo button.btn_del {
+    left: 4px;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+    background-position: 0 -100px
+}
+
+#content.main .profile_wrap .profile .photo button.btn_regist {
+    right: 0;
+    bottom: 0;
+    width: 28px;
+    height: 28px;
+    background-position: 0 -50px
+}
+
+#content.main .profile_wrap .profile .name {
+    padding-top: 7px;
+    font-size: 20px;
+    color: #444;
+    font-weight: bold;
+    letter-spacing: -2px;
+    word-break: break-all
+}
+
+#content.main .profile_wrap .profile .sid {
+    position: relative;
+    left: -20px;
+    width: 140px;
+    padding-top: 2px;
+    font-size: 14px;
+    color: #888
+}
+
+#content.main .profile_wrap .btn_wrap a {
+    display: inline-block;
+    width: 138px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #e5e5e5;
+    font-size: 13px;
+    color: #666;
+    background-color: #fff
+}
+
+#content.main .profile_wrap .btn_wrap a:nth-last-child(1) {
+    margin-top: 7px
+}
+
+#content.main .profile_wrap .txt_alram {
+    margin: 25px 0 0;
+    padding: 25px 0 35px;
+    color: #888;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_text_decoration01_top.png) no-repeat 50% top
+}
+
+#content.main .profile_wrap .txt_alram a {
+    color: #444
+}
+
+#content.main .profile_wrap .txt_alram span.title {
+    text-decoration: underline
+}
+
+#content.main .profile_wrap .txt_alram p {
+    padding: 0 20px 25px;
+    background: url(//www.saraminimage.co.kr/ui/layout/person_mypage_2017/ico_text_decoration01_bottom.png) no-repeat 50% bottom
+}
+
+#content.main .profile_wrap .txt_alram .point_color {
+    color: #f562a2
+}
+
+.summary_wrap .dashboard .activity_list {
+    padding-top: 15px;
+    text-align: left;
+    padding-left:90px;
+}
+
+.summary_wrap .dashboard .activity_list li {
+    display: inline-block;
+    margin: 0 -2px;
+    padding-top: 20px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    box-sizing: border-box
+}
+
+.summary_wrap .dashboard .activity_list li:hover {
+    background-color: #fff
+}
+
+.summary_wrap .dashboard .activity_list li span.doing {
+    display: block;
+    height: 62px;
+    font-size: 18px;
+    color: #cccccc;
+    letter-spacing: -2px
+}

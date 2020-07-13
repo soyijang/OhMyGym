@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+*{
+	font: Noto Sans CJK KR;
+}
+
+div {
+    display: block;
+}
+
+/* 소이 0710오전 폰트사이즈수정 */
+.mypage-contents .right-container .info-container  {
+    font-weight: bold;
+    color: #222222;
+    padding-bottom: 13px;
+    margin-bottom: 20px;
+}
+
+.mypage-contents .right-container .info-container > table > tr {
+	 font-size: 11px;
+}
+
+.info-header{
+	font-size: 30px;
+    border-bottom: 2.5px solid #141414;
+	padding-bottom: 15px;
+}
+
+.left-container {
+	float:left;
+    display: inline-block;
+    width: 200px;
+    padding: 30px 30px 35px 30px;
+    border: solid 1px #dadada;
+    box-sizing: border-box;
+    margin-left: 10%;
+}
+.right-container {
+    display: inline-block;
+    width: 740px;
+    min-height: 700px;
+    margin-left: 10%;
+}
+.mypage-contents .right-container {
+    display: inline-block;
+    width: 740px;
+}
+.left-container .title {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 12px;
+    border-bottom: solid 2.5px #141414;
+}
+.left-container .class_category_list li {
+    padding: 14px 0 14px;
+    border-bottom: solid 1px #ececec;
+    border-collapse: collapse;
+    list-style: none;
+    cursor: pointer;
+    color: #3b3b3b;
+}
+.mypage-contents .right-container .info-container .info-body .info-row .info-form-label {
+    font-size: 13px;
+    text-align: left;
+    color: #2c2c2c;
+    font-weight: normal;
+    width: 115px;
+    vertical-align: text-top;
+    padding-top: 19px;
+}
+.mypage-contents {
+    word-break: keep-all;
+}
+.mypage-contents .right-container .info-container .info-body {
+    width: 550px;
+    font-size: 14px;
+}
+.mypage-contents .right-container .info-container .info-body .info-row .info-form-input input {
+    height: 40px;
+    border-radius: 2px;
+    background-color: #ffffff;
+    border: solid 0.7px #dadada;
+    padding: 0 10px;
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.mypage-contents .right-container .info-container .info-body .info-row .info-form-input input[type='radio'], .mypage-contents .right-container .info-container .info-body .info-row .info-form-input input[type='checkbox'], .mypage-contents .right-container .info-container .info-body .info-row .info-form-input input[type='text'], .mypage-contents .right-container .info-container .info-body .info-row .info-form-input input[type='tel'], .mypage-contents .right-container .info-container .info-body .info-row .info-form-input input[type='password'], .mypage-contents .right-container .info-container .info-body .info-row .info-form-input input[type='number'] {
+    margin: 3.5px 0;
+}
+.mypage-contents .right-container .info-container .info-body .info-row .info-form-input input:disabled, .mypage-contents .right-container .info-container .info-body .info-row .info-form-input select:disabled {
+    background-color: #f2f2f2;
+}
+
+input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark-color(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    -webkit-appearance: textfield;
+    background-color: -internal-light-dark-color(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark-color(rgb(118, 118, 118), rgb(195, 195, 195));
+    border-image: initial;
+}
+input:disabled {
+    color: -internal-light-dark-color(rgb(84, 84, 84), rgb(170, 170, 170));
+    cursor: default;
+    background-color: -internal-light-dark-color(rgb(235, 235, 228), rgb(45, 45, 45));
+}
+.mypage-contents .right-container .info-container .info-body .info-row .info-form-input input[name='gender'] {
+    background-image: url(/site_media/new_images/pay-btn-radio@2x.png);
+    background-repeat: no-repeat;
+    background-size: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+#ohmystamp_title{
+	margin-top: 20px;
+}
+
+#ohmystamp_content{
+	margin-top: 50px;
+	text-align: center;
+}
+
+.stamp .stamp_no td {
+	margin: 10px;
+}
+
+.navi-item-on {
+     color: #fe4101;
+     font-weight: bolder;
+     font-size: medium;
+}

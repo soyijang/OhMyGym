@@ -1,0 +1,683 @@
+@charset "euc-kr";
+
+/* reset */
+* {margin:0; padding:0}
+html {margin:0; padding:0}
+body {margin:0; padding:0; height:100%; font-size:13px; color:#666; line-height:1.2em}
+label {vertical-align:middle; cursor:pointer}
+
+/* 1204 수정 */
+label {position:relative; top:-2px}
+th label {position:relative; top:0; font-family: "Noto Sans KR";}
+
+	td span > label {position:relative; top:-3px; line-height:1.2em; vertical-align:middle} /* 수정(1204) top:-4px */
+	td span > input[type="radio"] {position:relative; top:-2px; vertical-align:middle}
+	td span > input[type="checkbox"] {position:relative; top:-3px; vertical-align:middle}/* 수정(1204) top:-2px */
+		/* ie8 */
+	@media \0screen {
+		td span > label {top:-2px}
+		td span > input[type="radio"],
+		td span > input[type="checkbox"] {top:-1px}
+		label {top:0} /* 수정(1204) label 추가*/
+	}  
+	/* 크롬 */
+	@media screen and (-webkit-min-device-pixel-ratio:0) {
+		 td span > label {top:-4px} 
+		/* td span > input[type="radio"], */  
+		td span > input[type="checkbox"] {top:-2px} /* 수정(1204) label 추가*/
+		label {top:-2px} /* 수정(1204) label 추가*/
+	}
+
+address,em {font-style:normal}
+strong,b,th {font-weight:bold}
+fieldset,img {border:0; vertical-align:middle}
+	#ac_img {width:7px; height:4px}
+	#ac_img img {vertical-align:top}
+caption,legend {width:1px; text-align:left; font-size:0; line-height:0; text-indent:-999em}
+ul,ol,dl,dt,dd,li {list-style:none}
+h1,h2,h3,h4,h5,h6 {font-weight:bold; font-size:100%}
+input,textarea,select {border:0; color:#666; vertical-align:middle}
+article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary {display:block}
+/* div,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,p,form,fieldset,input,table,tr,th,td,button,textarea,select, thead, tbody, tfoot, pre, option {margin:0; padding:0; font-family: Noto Sans CJK KR; !important}
+ */
+/* public */
+table {width:100%; border-spacing:0/* ; border-collapse:collapse; *border-collapse:collapse */}
+table th {letter-spacing:-1px; border-collapse:collapse; *border-collapse:collapse; font-family: "Noto Sans KR"; }
+table td {border-collapse:collapse}
+select {height:21px; border:1px solid #999; vertical-align:middle; font-size:12px}
+button {overflow:visible; position:relative; margin:0; padding:0; border:0; background-color:transparent; cursor:pointer; vertical-align:middle; text-indent:0;}
+
+a {font-family:Malgun Gothic,'맑은고딕', '돋움',Dotum,'굴림',Gulim,Helvetica,sans-serif; color:#666; text-decoration:none}
+
+input[type="text"],
+input[type="password"] {height:15px; line-height:14px; padding:2px 5px; vertical-align:middle; border:1px solid #999; background:#f0f0f0; color:#666; font-size:12px}
+/*input[type="radio"],
+input[type="checkbox"] {display: inline-block; width: 13px; height: 13px; vertical-align: middle; -webkit-appearance: none; border-radius: 0; border: 0; margin:0; padding:0; cursor: pointer}*/
+input[type="radio"],
+input[type="checkbox"] {cursor:pointer}
+input[readonly="readonly"] {background:#cccccc; color:#555555; cursor: default}
+input[type="text"]:disabled, input[type="password"]:disabled, select[disabled="disabled"] {background:#cccccc; color:#555555; cursor:default}
+input[type="submit"] {cursor:pointer}
+input:disabled, input:disabled + label {cursor:default}
+/*
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled {position:absolute; z-index:-1000; top:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;}
+input[type="checkbox"]:disabled + span {padding:0 !important; display: inline-block; margin-top:1px; width: 11px; height: 11p; background:#b3b3b3; border:1px solid #999}
+input[type="radio"]:disabled + span {position:relative; padding:0 !important; -webkit-border-radius:2px; display:inline-block; top:2px; width: 13px; height: 13px; background:url('../images/common/bg_disabled_r.png') no-repeat center center}
+input[type="radio"]:checked:disabled + span {background-image:url('../images/common/bg_disabled_c.png')}
+*/
+.file_list li {}
+.file_list li p {margin-bottom:5px}
+.file_list li span.file_size {position:relative; top:-6px; display:inline-block; color:#7575; font-size:11px}
+.file_input_div {position:relative; display:inline-block; margin-right:5px; overflow: hidden}
+.file_input_hidden {z-index:10; position:absolute; right:0px; top:0px; width:90px; height:22px; opacity:0; filter:alpha(opacity=0); -ms-filter:"alpha(opacity=0)"; -khtml-opacity:0; -moz-opacity:0; cursor:pointer}
+.file_input_div.btn_delAdd .file_input_hidden {right:45px} /* 삭제버튼 추가시 .btn_delAdd */
+
+/* IR */
+.blind {position:absolute; width:1px; text-align:left; font-size:0; line-height:0; text-indent:-999em}
+
+/* SKIP NAV */
+#skipNav{position:fixed; top:0; left:0; width:100%; z-index:900; overflow:hidden}
+#skipNav a{display:block; width:100%; text-align:left; font-size:0; line-height:0}
+#skipNav a:hover, 
+#skipNav a:focus, 
+#skipNav a:active {position:static; left:0; padding:9px 0; height:16px; width:100%; text-align:center; background:#f2f2f2; text-align:center; line-height:16px; font-size:12px; color:#000; font-weight:bold}
+
+/* footer */
+	.footer {background:url('../images/common/bg_footer.gif') repeat-x left top/* ; font-size:12px */}
+	.footer .center_area {position:relative; margin:0 auto; width:980px}
+	.footer .footer_menu {padding-top:8px; height:26px; overflow:hidden; font-size:12px}
+	.footer .footer_menu ul {float:left; margin-top:2px; margin-right:10px}
+	.footer .footer_menu li {float:left; padding-left:14px; background:url('../images/common/bg_footer_line.gif') no-repeat 6px 2px}
+	.footer .footer_menu li:first-child {padding:0; background:none}
+	.footer .footer_menu li a {color:#666}
+	.footer .footer_menu > a {position:relative; top:-2px; margin-right:5px}
+	.footer .site_go {position:absolute; right:0; top:7px}
+	.footer .site_go select {padding:0; margin-left:5px; height:18px; background:#fff; border:1px solid #999; line-height:15px; font-size:11px; color:#333}
+	.footer .site_go .move {background-color:#6b6b6b; border-radius:3px}
+	.footer .site_go .move > span {display:inline-block; padding:0 1px 0 0; width:45px; height:18px; line-height:15px; text-align:center; color:#fff; font-size:11px}
+	.footer .address {position:relative; margin-top:35px; padding:0 0 20px 190px; line-height:18px; font-size:12px}
+	.footer .address .logo {position:absolute; left:0; top:5px}
+	.footer .address p {color:#999}
+	.footer .address p em {color:#333}
+	.footer .address a.wa {position:absolute; right:0; top:0}
+	.footer .award {position:relative; margin-top:5px; padding:0 0 20px 190px; line-height:18px; font-size:12px}
+	.footer .award .logo1 {position:absolute; left:0; top:5px}
+	.footer .award .logo2 {position:absolute; left:196px; top:5px}
+	.footer .award .logo3 {position:absolute; left:395px; top:5px}
+	.footer .award .logo4 {position:absolute; left:593px; top:5px}
+	.footer .award .logo5 {position:absolute; left:788px; top:5px}
+	
+	
+	
+	
+	/* ie8 */
+	@media \0screen {
+		.footer .site_go .move > span {line-height:18px}
+		.footer .footer_menu li {background-position:6px 1px}
+	}
+	/* 크롬 */
+	@media screen and (-webkit-min-device-pixel-ratio:0) {
+		.footer .footer_menu li {background-position:6px 3px}
+		.footer .footer_menu > a {top:-1px}
+	}
+
+/* 공통 팝업 */
+.ui-dialog {z-index:3000; padding-bottom:10px; background:#ededed; border:1px solid #d1d1d1 }
+.ui-dialog-titlebar {padding:4px 50px 8px 20px; background:#4b89d6; border-bottom:1px solid #3a6499}
+.ui-dialog-titlebar .ui-dialog-title {display:block; line-height:24px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; color:#fff; font-size:18px; font-weight:bold} /* 수정 1208 height:19px; 삭제  */
+.ui-dialog-titlebar .ui-dialog-titlebar-close {position:absolute; top:10px; right:17px; width:18px; height:18px; text-indent:-1000px; overflow:hidden; background:none; border:0; margin:0; padding:0}
+.ui-dialog-titlebar .ui-dialog-titlebar-close .ui-button-icon-primary {display:block; width:18px; height:18px; background:url("../images/common/pop_btnClose.png") center center no-repeat}
+.ui-dialog-titlebar .ui-dialog-titlebar-close .ui-button-text {}
+	.popup {display:none; position:relative; overflow:hidden; background:#ededed; border-top:2px solid #a2b5cb; overflow:auto}
+	.popup .pop_header {position:relative; padding:7px 20px 14px; background:#4b89d6; border-bottom:1px solid #3a6499; color:#fff; font-size:18px; font-weight:bold; line-height:18px}
+	.popup .pop_header a {position:absolute; right:20px; top:10px}
+	.popup .pop_contwrap {padding:20px 20px 0}
+	.popup .pop_content {padding:15px; background:#fff; border:1px solid #ccc}/* 공통적용 2014.12.01 */
+	.popup .pop_content p.tit {margin-bottom:18px; font-size:15px; font-weight:bold; color:#333}
+	.popup .pop_content p.stit {margin-bottom:13px; font-size:12px; font-weight:bold; color:#000}
+	.popup .pop_content p.gray {margin-bottom:13px; font-size:12px; font-weight:bold; color:#666}
+	.popup .pop_btnClose {position:absolute; top:12px; right:20px; width:14px; height:14px; background:url("../images/common/pop_btnClose.png") top right no-repeat}
+	.popup .pop_btnClose span {position:absolute; text-indent:-9999999px}
+.ui-widget-overlay {z-index:999; position:fixed; left:0; top:0; width:100%; height:100%; background:#000; opacity:0.5; -moz-opacity:0.5; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"}
+.ui-dialog-buttonpane {padding:10px 0 0; text-align:center}
+
+	/* 주소 검색 */
+	.post label {top:0; font-size:13px; letter-spacing:0}
+	.post select {height:21px; border:1px solid #e4e4e4; vertical-align:middle; font-size:12px}
+	.post input[type="text"] {height:15px; line-height:14px; padding:2px 5px; vertical-align:middle; border:1px solid #e4e4e4; background:#f9f9f9; color:#666; font-size:12px}
+	.post .mb10 {margin-bottom:10px !important}
+	.post .mb20 {margin-bottom:20px !important}
+	.post .fc_r {color:#ff3300 !important}
+	.post .fc_9 {color:#757575 !important}
+	.post .fc_0 {color:#000 !important}
+	.post .conout_tit02 {display:block; margin-bottom:5px; font-weight:bold; font-size:13px; color:#333; line-height:15px; letter-spacing:-1px}
+	.post .tit_blue {font-size:15px; font-weight:bold; color:#4b89d6; line-height:18px}
+	.post .tbl_type4 {/* border:1px solid #e1e1e1;  */border-bottom:none} /* 수정(1124) : border:1px solid #e1e1e1 삭제 */
+	.post .tbl_type4 thead th {padding:6px 10px 10px; background:#f4f4f4; border-left:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1; text-align:center; font-size:13px; color:#000}
+	.post .tbl_type4 thead th:first-child {border-left:none}
+	.post .tbl_type4 tbody th {background:#fff; border-right:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1; font-size:12px; color:#000; text-align:center}
+	.post .tbl_type4 tbody td {padding:10px 20px; border-left:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1; background:#fff; text-align:left; font-size:12px; color:#666}
+	.post .tbl_type4 tbody th:first-child {border-right:none}
+	.post .tbl_layout {border-top:1px solid #e1e1e1}
+	.post .td_layout {border:1px solid #e1e1e1; border-top:none}
+	.post .td_layout tbody td {padding:8px 0 10px; background:#f4f4f4; border-left:1px solid #e1e1e1; text-align:center; font-size:13px; color:#000; font-weight:bold; line-height:13px}
+	.post .td_layout td:first-child {border-left:none; border-top:none}
+	.post .tbl_nonTh td {padding:8px 0 11px 8px; text-align:left; border-top:0; border-bottom:1px solid #e1e1e1; border-right:1px solid #e1e1e1}/* 수정(1124) : border-top:0 추가 */
+	.post .tbl_nonTh td:first-child {padding-left:0; text-align:center; border-left:1px solid #e1e1e1}
+	.post .tbl_nonTh .noData {color:#333; border-bottom:none}
+	.post .cont_ps2 {padding-left:13px; font-size:12px; color:#666; line-height:17px; letter-spacing:-1px; text-indent:-13px}
+	.post .btn3_icon.search {width:33px; background:#3274C2 url(../images/common/btn_search_bg.png) center no-repeat; border:1px solid #427eb5}
+	.post .btn3_icon > span {position:relative; display:inline-block; padding:0; height:19px; line-height:20px; text-align:center; overflow:hidden; vertical-align:middle}
+	
+	.post .tbl_layout .thead {padding-right:17px; background:#f4f4f4; border:1px solid #e1e1e1; border-top:0}
+	.post .tbl_layout .thead table {border:0}
+	.post .tbl_layout .thead tbody td {background:none; border:0; border-left:1px solid #e1e1e1}
+	.post .tbl_layout .thead tbody td:first-child {border-left:0}
+/* jQuery UI */
+	.calendar > button {margin-left:5px}
+	/* 레이어팝업 */
+	.ui-helper-hidden {
+		display: none;
+	}
+	.ui-helper-hidden-accessible {
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+	.ui-helper-reset {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		outline: 0;
+		line-height: 1.3;
+		text-decoration: none;
+		font-size: 100%;
+		list-style: none;
+	}
+	.ui-helper-clearfix:before,
+	.ui-helper-clearfix:after {
+		content: "";
+		display: table;
+		border-collapse: collapse;
+	}
+	.ui-helper-clearfix:after {
+		clear: both;
+	}
+	.ui-helper-clearfix {
+		min-height: 0; /* support: IE7 */
+	}
+	.ui-helper-zfix {
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		position: absolute;
+		opacity: 0;
+		filter:Alpha(Opacity=0); /* support: IE8 */
+	}
+	.ui-front {
+		z-index: 1000;
+	}
+	.ui-state-disabled {
+		cursor: default !important;
+	}
+	.ui-icon {
+		width: 13px;
+		height: 13px;
+		display: block;
+		text-indent: -99999px;
+		overflow: hidden;
+		background-repeat: no-repeat;
+	}
+	.ui-widget-header .ui-icon {background-position:center center; background-repeat:no-repeat}
+	.ui-widget-header .ui-icon.ui-icon-circle-triangle-w {background-image:url('../images/common/calendar_prev.gif')}
+	.ui-widget-header .ui-icon.ui-icon-circle-triangle-e {background-image:url('../images/common/calendar_next.gif')}
+	.ui-widget-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+	.ui-autocomplete {
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: default;
+	}
+	.ui-dialog {
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		left: 0;
+		outline: 0;
+	}
+	.ui-dialog .ui-dialog-title {
+		float: left;
+		margin: .1em 0;
+		white-space: nowrap;
+		width: 90%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.ui-dialog .ui-dialog-content {
+		position: relative;
+		padding:0;
+		border:0;
+		background:none
+	}
+	.ui-dialog .ui-dialog-buttonpane {
+		text-align: left;
+		border-width: 1px 0 0 0;
+	}
+	.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+		/* float: right; */
+		text-align:center;
+		padding-left:5px
+	}
+	.ui-dialog .ui-dialog-buttonset button {overflow:hidden; position:relative; float:none; display:inline-block; margin:0 5px 0 0; padding:0; background-color:#b84100; border:1px solid #963500; vertical-align:middle; text-align:center; font-size:11px; font-weight:bold; border-radius:0}
+	.ui-dialog .ui-dialog-buttonset button:first-child {background-color:#2f5586; border:1px solid #1f3e65}
+	.ui-dialog .ui-dialog-buttonset button span {display:inline-block; padding:0 9px; height:21px; line-height:17px; color:#fff}
+	
+	.ui-dialog .ui-resizable-se {
+		width: 12px;
+		height: 12px;
+		right: -5px;
+		bottom: -5px;
+		background-position: 16px 16px;
+	}
+	.ui-draggable .ui-dialog-titlebar {
+		cursor: move;
+	}
+	.ui-draggable-handle {
+		-ms-touch-action: none;
+		touch-action: none;
+	}
+	.ui-resizable {
+		position: relative;
+	}
+	.ui-resizable-handle {
+		position: absolute;
+		font-size: 0.1px;
+		display: block;
+		-ms-touch-action: none;
+		touch-action: none;
+	}
+	.ui-resizable-disabled .ui-resizable-handle,
+	.ui-resizable-autohide .ui-resizable-handle {
+		display: none;
+	}
+	.ui-resizable-n {
+		cursor: n-resize;
+		height: 7px;
+		width: 100%;
+		top: -5px;
+		left: 0;
+	}
+	.ui-resizable-s {
+		cursor: s-resize;
+		height: 7px;
+		width: 100%;
+		bottom: -5px;
+		left: 0;
+	}
+	.ui-resizable-e {
+		cursor: e-resize;
+		width: 7px;
+		right: -5px;
+		top: 0;
+		height: 100%;
+	}
+	.ui-resizable-w {
+		cursor: w-resize;
+		width: 7px;
+		left: -5px;
+		top: 0;
+		height: 100%;
+	}
+	.ui-resizable-se {
+		cursor: se-resize;
+		width: 12px;
+		height: 12px;
+		right: 1px;
+		bottom: 1px;
+	}
+	.ui-resizable-sw {
+		cursor: sw-resize;
+		width: 9px;
+		height: 9px;
+		left: -5px;
+		bottom: -5px;
+	}
+	.ui-resizable-nw {
+		cursor: nw-resize;
+		width: 9px;
+		height: 9px;
+		left: -5px;
+		top: -5px;
+	}
+	.ui-resizable-ne {
+		cursor: ne-resize;
+		width: 9px;
+		height: 9px;
+		right: -5px;
+		top: -5px;
+	}
+	/* 달력 */
+	input.ui-button::-moz-focus-inner,
+	button.ui-button::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+	.ui-datepicker {
+		width: 17em;
+		padding: 0;
+		display: none;
+		background:#eaeaea;
+		border:1px solid #666
+	}
+	.ui-datepicker .ui-datepicker-header {
+		position: relative;
+		padding: .3em 0;
+		background-color:#0063af;
+		border-bottom:1px solid #0063af
+	}
+	.ui-datepicker .ui-datepicker-prev,
+	.ui-datepicker .ui-datepicker-next {
+		position: absolute;
+		top: 4px;
+		width: 1.8em;
+		height: 1.8em;
+	}
+	.ui-datepicker .ui-datepicker-prev {
+		left: 5px;
+	}
+	.ui-datepicker .ui-datepicker-next {
+		right: 5px;
+	}
+	.ui-datepicker .ui-datepicker-prev span,
+	.ui-datepicker .ui-datepicker-next span {
+		display: block;
+		position: absolute;
+		left: 50%;
+		margin-left: -6.5px;
+		top: 50%;
+		margin-top: -6.5px;
+	}
+	.ui-datepicker .ui-datepicker-title {
+		margin: 0 2.3em;
+		line-height: 1.8em;
+		text-align: center;
+	}
+	.ui-datepicker .ui-datepicker-title select {
+		font-size: 1em;
+		margin: 1px 0;
+	}
+	.ui-datepicker select.ui-datepicker-month,
+	.ui-datepicker select.ui-datepicker-year {
+		width: 45%; color:#333; font-size:12px
+	}
+	.ui-datepicker table {
+		width: 100%;
+		font-size: .9em;
+		border-collapse: collapse;
+		margin: 0 0 .4em;
+	}
+	.ui-datepicker th {
+		padding: .7em .3em;
+		text-align: center;
+		font-weight: bold;
+		border: 0;
+	}
+	.ui-datepicker td {
+		border: 0;
+		padding: 1px;
+		text-align: center;
+	}
+	.ui-datepicker td span,
+	.ui-datepicker td a {
+		display: inline-block;
+		padding: .1em .3em .2em;
+		text-decoration: none;
+		border:1px solid #eaeaea
+	}
+	.ui-datepicker td a.ui-state-default {color:#333}
+	.ui-datepicker td a.ui-state-default.ui-priority-secondary {color:#696969; font-size:11px}
+	.ui-datepicker td a.ui-state-default.ui-state-highlight {background-color:#016cbc; border:1px solid #fff; border-left-color:#434343; border-top-color:#434343; color:#fff}
+	.ui-datepicker td a.ui-state-default.ui-state-active {background-color:#339900; border:1px solid #fff; border-left-color:#434343; border-top-color:#434343; color:#fff}
+	.ui-datepicker .ui-datepicker-buttonpane {
+		background-image: none;
+		margin: 0;
+		padding: 0.7em .2em 0;
+		background-color:#fff;
+		border-left: 0;
+		border-right: 0;
+		border-bottom: 0;
+		overflow:hidden;
+	}
+	.ui-datepicker .ui-datepicker-buttonpane button {
+		float: right;
+		cursor: pointer;
+		margin: 0 5px 10px;
+		width: auto;
+		overflow:visible;
+		color:#333; font-size:11px
+	}
+	.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-close {padding:0 20px 2px; height:18px; background:url('../images/common/bg_total_close.gif') no-repeat right center}
+	.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+		float: left; padding-top:2px; color:#016cbc; font-weight:bold
+	}
+	/* ie8 */
+	@media \0screen {
+		.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-close {padding:2px 20px 2px}
+	}
+
+	/* with multiple calendars */
+	.ui-datepicker.ui-datepicker-multi {
+		width: auto;
+	}
+	.ui-datepicker-multi .ui-datepicker-group {
+		float: left;
+	}
+	.ui-datepicker-multi .ui-datepicker-group table {
+		width: 95%;
+		margin: 0 auto .4em;
+	}
+	.ui-datepicker-multi-2 .ui-datepicker-group {
+		width: 50%;
+	}
+	.ui-datepicker-multi-3 .ui-datepicker-group {
+		width: 33.3%;
+	}
+	.ui-datepicker-multi-4 .ui-datepicker-group {
+		width: 25%;
+	}
+	.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header,
+	.ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header {
+		border-left-width: 0;
+	}
+	.ui-datepicker-multi .ui-datepicker-buttonpane {
+		clear: left;
+	}
+	.ui-datepicker-row-break {
+		clear: both;
+		width: 100%;
+		font-size: 0;
+	}
+	.ui-datepicker-rtl {
+		direction: rtl;
+	}
+	.ui-datepicker-rtl .ui-datepicker-prev {
+		right: 2px;
+		left: auto;
+	}
+	.ui-datepicker-rtl .ui-datepicker-next {
+		left: 2px;
+		right: auto;
+	}
+/* 	.ui-datepicker-rtl .ui-datepicker-prev:hover {
+		right: 1px;
+		left: auto;
+	}
+	.ui-datepicker-rtl .ui-datepicker-next:hover {
+		left: 1px;
+		right: auto;
+	} */
+	.ui-datepicker-rtl .ui-datepicker-buttonpane {
+		clear: right;
+	}
+	.ui-datepicker-rtl .ui-datepicker-buttonpane button {
+		float: left;
+	}
+	.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current,
+	.ui-datepicker-rtl .ui-datepicker-group {
+		float: right;
+	}
+	.ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header,
+	.ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header {
+		border-right-width: 0;
+		border-left-width: 1px;
+	}
+	/* 툴팁 : .info_tool */
+	.ui-tooltip {
+		padding: 10px;
+		position: absolute;
+		z-index: 9999;
+		max-width: 300px;
+		border:1px solid #767676;
+		-webkit-box-shadow: 0 0 5px #767676;
+		box-shadow: 0 0 5px #767676;
+	}
+	body .ui-tooltip {
+		background-color:#f2f2f2;
+		font-size:12px;
+		line-height:20px;
+		color:#575757
+	}
+	.ui-widget-content {border:0; background:#ededed}
+	.ui-state-default, .ui-widget-content .ui-state-default {background:none}
+
+/* 자격정보 */
+/* - 응시자격 */
+.app_docu2 {overflow:hidden; margin:0 auto; padding:10px 0; text-align:center; *zoom:1}
+.app_docu2:after {content:""; clear:both; display:block}
+.app_docu2 ul {display:inline-block}
+.app_docu2 li {float:left; margin-left:38px}
+.app_docu2 li:first-child {margin-left:0}
+.app_docu2 li input[type="radio"] {position:relative; top:1px; margin-right:5px}
+/* ie8 */
+@media \0screen {
+	.app_docu2 li input[type="radio"] {position:relative; top:0}
+}
+
+/* - 국가자격(연간시험 일정) */
+.tbl_normal.tbl_annual tbody td {text-align:center !important}
+/* ie8 */
+@media \0screen {
+	.tbl_annual th {padding:7px 8px 10px !important}
+	.tbl_annual td {padding:5px 8px !important}
+}
+
+/* -민간자격 */
+.lc_group_list2 {border:1px solid #dfdfdf}
+.lc_group_list2 > li {background:#f2f6f9; border-top:1px solid #dfdfdf; line-height:35px}
+.lc_group_list2 > li:first-child {border-top:none}
+.lc_group_list2 li strong {display:inline-block; padding-left:10px; margin-right:20px}
+.lc_group_list2 li a {display:inline-block; font-size:12px; color:#757575; line-height:14px}
+.lc_group_list2 li a:hover {color:#333}
+.lc_group_list2 .tab_list_wrap {width:100%; background:#fff; border-top:1px solid #dfdfdf}
+.lc_group_list2 .tab_list_wrap ul {padding:5px 10px; overflow:hidden}
+.lc_group_list2 .tab_list_wrap ul li {float:left; width:33%}
+.lc_group_list2 .tab_list_wrap ul li a {overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block; line-height:25px; font-size:12px; color:#757575}
+.lc_group_list2 .tab_list_wrap ul li a:hover {color:#333}
+
+/* -경력정보입력란 (전문) */
+.pro_infoentry2 textarea {width:98%; padding:10px; height:15px; border:1px solid #e1e1e1; background:#f9f9f9; font-size:12px; color:#666; line-height:16px}
+
+/* -국가코드 검색 ( 팝업 )  */
+.country_code input[type="radio"] {position:relative; top:2px; margin-right:5px}
+@media \0screen {
+	.country_code input[type="radio"] {position:relative; top:1px}
+}
+	
+/* 외국학력서류 */
+.docbtn_list .btn4 span {width:310px; margin-right:2px}
+
+
+
+
+/* 응시자격 자가진단 > 경력정보입력 */
+.diagnosis_step3 .txt_right {margin:40px 0 5px}
+.diagnosis_step3 .tbl_tlt {margin-bottom:2px; padding:6px 0 5px; font-weight:bold; font-size:13px; color:#333; text-align:center; border:1px solid #e1e1e1; background:#f6d4d4}
+.diagnosis_step3 .tbl_tlt.ok {background:#e9f6d4}
+.diagnosis_step3 th {text-align:center}
+.diagnosis_step3 th .txt_em {position:relative; top:2px; display:inline-block; width:10px; text-align:center}
+.diagnosis_step3 th,
+.tbl_normal.diagnosis_step3 td {padding:5px 10px; line-height:20px} /* 수정(1205) padding:6px 10px 4px; */
+.tbl_normal.diagnosis_step3 td input[type='text'], .tbl_normal.diagnosis_step3 td input[type='password'] {top:0}
+.diagnosis_step3 .fieldSel {margin:5px 0 20px}
+.diagnosis_step3 textarea {width:98%; height:50px; padding:2px 5px; border:1px solid #e4e4e4; background:#f9f9f9; font-size:12px}
+.diagnosis_step3 .redaTxt {width:100px}
+.guideLaw {position:relative; height:20px; padding-bottom:6px !important}
+.guideLaw .posR {position:absolute; top:5px; right:10px; width:173px}
+.step{margin-top: 60px; margin-bottom: 30px;}
+.step tr td{text-align: center;}
+
+/* 응시자격 자가진단 > 진단결과 */
+.tbl_normal.nmlType2 {margin-bottom:2px}
+.tbl_normal.nmlType2 th,
+.tbl_normal.nmlType2 td {padding:10px 2px; font-size:13px}
+.tbl_normal.nmlType2 td {padding-left:10px}
+.tbl_type4.alnType4 th,
+.tbl_type4.alnType4 td {padding:10px 2px; text-align:center}
+.tbl_type4.alnType4 th {font-size:13px}
+.tbl_type4.alnType4 td:first-child {border-left:none}
+.tbl_type4.alnType4 td.left {text-align:left; padding-left:10px}
+
+/* 응시자격 자가진단 > 진단결과_응시불가 */
+p.p_guide {font-size:11px; letter-spacing:-1px; color:#333}
+ul.p_guide {padding-top:5px; font-size:11px; letter-spacing:-1px; color:#333; padding-left:6px}
+ul.p_guide li {text-indent:-6px}
+
+/* 자격취득/미발급조회 > 자격증 미발급자 조회 내역 */
+.personalInfo {border-top:2px solid #3a7ab8}
+.personalInfo fieldset {position:relative; margin:30px auto; width:350px}
+.personalInfo fieldset p {}
+.personalInfo fieldset label {position:relative; top:-5px; display:inline-block; width:84px; margin-right:5px; text-align:right; font-size:13px; font-weight:bold; color:#333}
+.personalInfo fieldset input {vertical-align:top}
+.personalInfo fieldset .loginbtn{position:absolute; top:0; left:276px}
+.personalInfo.nonTbl {border-bottom:1px solid #e1e1e1}
+
+/* 자격취득/미발급조회 > 자격증 진위확인 */
+.tbl_normal.nmlType3 {margin-bottom:0}
+.tbl_normal.nmlType3 th {text-align:right}
+.tbl_normal.nmlType3 .noBdr th, .tbl_normal.nmlType3 .noBdr td {border-top:none}
+.tbl_normal.nmlType3 .txt_right {text-align:right}
+.tbl_normal.nmlType3 .txt_emTr {font-size:14px; color:#0066ff}
+.tbl_normal.nmlType3 .txt_emFl {font-size:14px; color:#e52600}
+.tbl_normal.nmlType3 em {margin-left:20px}
+.mL35 {margin-left:35px !important}
+
+/* 자격취득/미발급조회 > 자격증 진위확인 */
+.slide_menu.rePos {margin-top:40px;}
+.slide_menu.rePos .slide_wrap {*zoom:1; position:relative}
+.slide_menu.rePos .slide_wrap:after {content:""; display:block; clear:both}
+.slide_menu.rePos .img {float:left; width:100px; margin-right:5px}
+.slide_menu.rePos .guide {float:right; width:595px}
+.slide_menu .fc33 {margin:30px 0 14px; color:#333; font-weight:bold}
+.slide_menu .fc33:first-child {margin-top:0}
+
+/* 자격취득/미발급조회 > 단체 진위 확인 신청 */
+.tbl_type5 {border:1px solid #e1e1e1; border-bottom:none}
+.tbl_type5 thead th {padding:10px 0; background:#f4f4f4; border-left:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1; text-align:center; font-size:13px; color:#000; line-height:13px}
+.tbl_type5 thead th:first-child {border-left:none}
+.tbl_type5 tbody td {padding:10px 9px; border-left:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1; background:#fff; text-align:center; font-size:12px; color:#666}
+.tbl_type5 td:first-child {border-left:none}
+.input_txt {width:90%}
+	

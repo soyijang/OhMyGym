@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+   @keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            /*transform: translate3d(-100%, 0, 0);*/
+            transform: translate3d(-10px, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+    .fadeInLeft {
+        animation-name: fadeInLeft;
+    }
+    .animated {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+
+    a:-webkit-any-link {
+        color: -webkit-link;
+        cursor: pointer;
+    }
+
+    .wing_nav.right {
+        left: auto;
+        right: 20px;
+        animation: wing_nav_right 1s ease-in-out alternate forwards;
+    }
+
+    .wing_nav {
+        position: fixed;
+        top: 50%;
+        left: 20px;
+        margin-top: -117px;
+    }   
+
+    .wing_nav .list {
+        width: 56px;
+        padding: 16px 0;
+        background-color: rgba(0,0,0,.5);
+        border-radius: 30px;
+        box-shadow: 0px 2px 10px 0px rgba(0,0,0,.3);
+        list-style: none;
+    }
+
+    .wing_nav .list li > a {
+        position: relative;
+        display: block;
+        padding: 14px 0;
+    }
+    
+    .wing_nav .list li.inquire a:after {
+        width: 26px;
+        height: 28px;
+        background-position: -376px -826px;
+    }  
+
+    .wing_nav .list li.remoteagnt a:after {
+        width: 37px;
+        height: 35px;
+        background-position: -297px -821px;
+    }
+
+    .wing_nav .list li a:after {
+        content: "";
+        display: block;
+        margin: 0 auto;
+        background: url(/omg/resources/img/sp_landing.png) no-repeat 0 -780px;
+    }
+
+
+
+    .wing_nav .list li.inquire a:hover:after, .wing_nav .list li.inquire a:focus:after {
+        background-position: -410px -826px
+        }
+
+    .wing_nav .list li.remoteagnt a:hover:after, .wing_nav .list li.remoteagnt a:focus:after {
+        background-position: -335px -821px
+    }
+
+    .wing_nav .list li.calculator a:hover:after, .wing_nav .list li.calculator a:focus:after {
+        background-position: -385px -780px
+    }
+
+    .wing_nav .list li.download a:hover:after, .wing_nav .list li.download a:focus:after {
+        background-position: -417px -780px
+    }
+
+    .wing_nav .list li > a:hover .txt, .wing_nav .list li > a:focus .txt {
+        display: block;
+    }
+
+    .wing_nav.right .list li .txt {
+        right: 100%;
+        left: auto;
+        margin-left: 0;
+        margin-right: -6px;
+    }
+    
+    .wing_nav .list li .txt {
+        display: none;
+        position: absolute;
+        left: 100%;
+        margin-left: -6px;
+        padding: 0 18px;
+        border-radius: 20px;
+        line-height: 31px;
+        font-size: 14px;
+        white-space: nowrap;
+        letter-spacing: -0.025em;
+        background-color: #ff5b2d;
+        box-shadow: 3px 3px 10px 0 rgba(0,0,0,.23);
+        color: #02303d;
+        animation-duration: 0.5s;
+    }
+
+    .wing_nav .list li .txt:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -5px;
+        display: block;
+        width: 10px;
+        height: 10px;
+        margin-top: -5px;
+        margin-right: -4px;
+        background: url(/omg/resources/img/sp_landing.png) no-repeat -461px -20px;
+        transform: rotate(180deg);
+    }
+
+    .wing_nav.right .list li .txt:after {
+        left: auto;
+        right: -5px;
+        transform: rotate(0deg);
+    }
+
+    @keyframes wing_nav {
+        0% {
+            transform: translateX(-200px);
+        }
+        100%{
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes wing_nav_right {
+        0% {
+            transform: translateX(200px);
+        }
+        100%{
+            transform: translateX(0);
+        }
+    }
+
+    .contentNext_btn{
+        cursor: pointer;
+        -moz-transition:all 0.15s ease-in;
+        -o-transition:all 0.15s ease-in;
+        -webkit-transition:all 0.15s ease-in;
+        transition:all 0.15s ease-in
+    }
+
+    .contentNext_btn:hover{
+        -webkit-filter: opacity(50%) drop-shadow(0 0 0 orangered);
+        filter: opacity(50%) drop-shadow(0 0 0 orangered);
+    }
+
+    .contentNext_btn_quest{
+        cursor: pointer;
+        -moz-transition:all 0.15s ease-in;
+        -o-transition:all 0.15s ease-in;
+        -webkit-transition:all 0.15s ease-in;
+        transition:all 0.15s ease-in
+    }
+
+    .contentNext_btn_quest:hover{
+        -webkit-filter: opacity(50%) drop-shadow(0 0 0 navy);
+        filter: opacity(50%) drop-shadow(0 0 0 navy);
+    }
