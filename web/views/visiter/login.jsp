@@ -85,7 +85,7 @@ h4 {
 </style>
 </head>
 <body>
-	<%@ include file="../common/NonNav.jsp" %>
+	<%@ include file="../common/nonNav.jsp" %>
 
 	<div align="center">
 	<br>
@@ -293,7 +293,7 @@ h4 {
 	
 	
 	<div id="loginfooter">
-	<%@ include file="../common/footer1.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 	</div>
 	 
 	 <script>
