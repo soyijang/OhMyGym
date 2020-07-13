@@ -15,7 +15,7 @@
 
 	<section style="height: 1500px;">
 		<div class="mypage-contents">
-			<%@ include file="tmypageAside.jsp"%>
+			<%@ include file="trainerMypageAside.jsp"%>
 			<div class="right-container">
 				<div class="info-container">
 

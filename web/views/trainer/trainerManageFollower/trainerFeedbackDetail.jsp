@@ -179,7 +179,7 @@
     </section>
     <br><br>
     <footer>
-        <%@ include file="../common/footer1.jsp" %>
+        <%@ include file="../../common/footer.jsp" %>
     </footer>
 </body>
 </html>
