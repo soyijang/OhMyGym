@@ -1,139 +1,328 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+body {
+	font-family: "Noto Sans KR";
+}
+
+#trainnerList::-webkit-scrollbar {
+	width: 13px;
+}
+
+#trainnerList::-webkit-scrollbar-thumb {
+	background-color: #5d5d5d;
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 2px solid transparent;
+}
+
+#trainnerList::-webkit-scrollbar-track {
+	background-color: rgb(184, 184, 184);
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 2px white;
+}
+
+div#follower_Match_Main {
+	margin-left: 50px;
+	margin-top: 15px;
+	margin-bottom: 25px;
+	width: 1300px;
+	height: 650px;
+	border-radius: 10px;
+}
+
+a.arrayTab {
+	margin-left: 20px;
+	margin-right: 20px;
+	border-radius: 25px;
+	cursor: pointer;
+	transition: all ease 0.25s 0s;
+}
+
+a#TabSelect {
+	padding: 7px;
+	font-weight: bold;
+	color: white;
+	background: orangered;
+}
+
+a.arrayTab:hover {
+	padding: 7px;
+	font-weight: bold;
+	color: white;
+	background: orangered;
+}
+
+div.trainer_Info {
+	margin: 15px;
+	width: 350px;
+	height: 450px;
+	border-radius: 10px;
+	border: 2px solid white;
+	transition: all ease 0.35s 0s;
+}
+
+div.trainer_Info:hover {
+	margin: 15px;
+	width: 350px;
+	height: 450px;
+	border-radius: 10px;
+	border: 2px solid orangered;
+	cursor: pointer;
+}
+
+div.trainnerImg {
+	margin: auto;
+	margin-top: 30px;
+	width: 200px;
+	height: 190px;
+	border-radius: 8px;
+}
+
+img.trainnerImg {
+	margin: auto;
+	width: 200px;
+	height: 190px;
+	border-radius: 8px;
+}
+
+div.trainnerTxt {
+	margin: auto;
+	margin-top: 15px;
+	width: 250px;
+	height: 185px;
+	border: 1px solid orangered;
+	border-radius: 8px;
+	text-align: center;
+	padding-top: 15px;
+}
+
+div.trainnerTxt ul {
+	list-style: none;
+	margin-left: 18px;
+}
+
+div.trainnerTxt ul li {
+	float: left;
+	margin-left: 5px;
+}
+
+div.trainerScore {
+	clear: both;
+	margin-top: -15px;
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
+a.trainerName {
+	font-size: 1em;
+	font-weight: bold;
+}
+
+a.trainerId {
+	display: none;
+}
+
+div.tariner_comment {
+	margin-top: 10px;
+	font-size: 0.9em;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+div.tariner_ability {
+	margin-top: 10px;
+	font-size: 0.9em;
+	border-radius: 25px;
+	background: orangered;
+	color: white;
+	font-weight: bold;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.wait_wrap {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10000
+}
+
+.dark_bg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	filter: alpha(opacity = 60);
+	opacity: .6;
+	-moz-opacity: .6
+}
+
+.wait_box {
+	position: relative;
+	top: 25%;
+	width: 535px;
+	height: 275px;
+	background: #fff;
+	margin: 0 auto;
+	border-radius: 8px;
+	background: #fff;
+	border: 1px solid #ccc
+}
+
+.wait_box .close {
+	position: absolute;
+	right: 6px;
+	top: 6px;
+	width: 16px;
+	height: 16px;
+	cursor: pointer
+}
+
+textarea:focus {
+	outline: none;
+}
+
+table.applytable {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+	border-collapse: collapse;
+}
+
+table.applytable tr th {
+	font-size: 0.8em;
+	font-weight: normal;
+}
+
+table.applytable tr td {
+	font-size: 1em;
+	font-weight: bold;
+}
+
+table.applytable tr th, table.applytable tr td {
+	border-bottom: 1px solid black;
+}
+
+button.divbtn{
+	width: 100px; 
+	height: 30px; 
+	border: none; 
+	cursor: pointer; 
+	background: orangered; 
+	color: white; 
+	font-weight: bold;
+}
+
+</style>
 </head>
 <body>
 	<%@ include file="../../common/followerNav.jsp"%>
-	<section>
-		<div class="matching_wrap" style="display: none;">
+
+	<div class="wait_wrap" style="display: none;">
 		<div class="dark_bg"
-			onclick="jQuery('.matching_wrap').fadeOut('slow')"></div>
-		<div class="matching_box">
+			onclick="jQuery('.wait_wrap').fadeOut('slow')"></div>
+		<div class="wait_box">
 			<div
 				style="width: 100%; height: 30px; background: orangered; border-radius: 8px;">
 				<div
-					style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; margin-left: 233px; padding-top: 5px;">매칭 관리</div>
-				<img class="close" onclick="jQuery('.matching_wrap').fadeOut('slow')" src="../../resources/img_icon/closeIcon.png" width="20px" height="20px">
+					style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; margin-left: 235px; padding-top: 5px;">매칭대기</div>
+				<img class="close"
+					onclick="jQuery('.wait_wrap').fadeOut('slow')"
+					src="../../../resources/img_icon/closeIcon.png" width="20px"
+					height="20px">
 			</div>
 			<div class="matching_content">
-				<form>
-				<div style="font-size: 1em; text-align: center;">
-					<div style="margin-top: 10px; font-size: 1.2em; font-weight: bold;">
-						신청내용
+					<div style="font-size: 1em; text-align: center;">
+						<div
+							style="margin-top: 10px; font-size: 1.2em; font-weight: bold;">
+							신청내용</div>
+						<div style="margin-top: 30px;">
+							<table class="applytable">
+								<tbody>
+									<tr>
+										<th>신청트레이너</th>
+										<td><div id="applyname">이대길</div></td>
+										<th>트레이너 ID</th>
+										<td><div id="applyid">chaseNoBig</div></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+							<button onclick="completeMatching();" class="divbtn" style="background: navy; margin-top: 25px;" >직접문의</button>
 					</div>
-					<div>
-						<table class="applytable">
-							<tbody>
-								<tr>
-									<th>신청인</th>
-									<td><div id="applyname">한진희</div></td>
-									<th>신청인 ID</th>
-									<td><div id="applyid">hjh9406</div></td>
-								</tr>
-								<tr>
-									<th>나이</th>
-									<td><div id="age">27</div></td>
-									<th>희망운동부위</th>
-									<td><div id="tpart">배</div></td>
-								</tr>
-								<tr>
-									<th>키</th>
-									<td><div id="tall">174cm</div></td>
-									<th>몸무게</th>
-									<td><div id="weight">66kg</div></td>
-								</tr>
-								<tr>
-									<td colspan="5"><textarea id="followerComment" readonly>화, 목 오후 7시 이후에  트레이닝 받고 싶습니다.</textarea><a id="goTalkBtn">직접상담하기</a><br>
-									
-									</td>
-								</tr>		
-							</tbody>
-						</table>
+					<div style="margin-top: 15px; margin-left: 165px;">
+						<button onclick="completeMatching();"  class="divbtn" style="background: lightgray;">대기중</button>
+						<button onclick="jQuery('.wait_wrap').fadeOut('slow');" class="divbtn">매칭신청취소</button>
 					</div>
-				</div>
-				<div style="margin-top: 15px; margin-left: 165px;">
-					<button onclick="completeMatching();"
-						style="width: 100px; height: 30px; border: none; cursor: pointer; background: orangered; color: white; font-weight: bold;">매칭승인</button>
-					<a onclick="inputReject();"
-						style="margin-left: 10px; padding: 6.5px; font-size: 0.8em; width: 100px; height: 30px; border: none; cursor: pointer; background: navy; color: white; font-weight: bold;">매칭거절</a>
-				</div>
-				<div id="rejectArea">
-						<textarea id="rejectComment" placeholder="거절사유를 상세히 입력해 주세요"></textarea>
-						<input type="submit" id="rejectBtn" value="매칭거절 확정">
-				</div>
-				</form>
 			</div>
 		</div>
 	</div>
 
 
-	<%@ include file="../../common/trainerNav.jsp"%>
-
-	<section style="width: 1300px;">
-		<aside style="margin-left: -100px;">
-			<!--OH마이피티 메뉴-->
-			<!--OH마이피티 메뉴 종료-->
-		</aside>
-		<article id="titleArea">
-			<div>
-				<h1 style="margin-top: 6px;">&nbsp;&nbsp;&nbsp;매칭신청 목록</h1>
-			</div>
-
-			<div
-				style="margin-top: 10px; width: 1000px; height: 600px; border: 2px solid gray">
+	<section>
+		<article>
+			<div id="follower_Match_Main">
 				<div
-					style="margin-top: 25px; margin-left: 70px; width: 850px; height: 500px; border: 1px solid rgb(214, 214, 214); border-radius: 10px;">
-					<table id="ApplyList" style="margin-top: 25px; margin-left: 70px; width: 700px; font-size: 1.2em; color: rgb(214, 214, 214);">
-						<tr>
-							<th>번호</th>
-							<th>신청인ID</th>
-							<th>신청인</th>
-							<th>신청일자</th>
-							<th>상태</th>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>hjh0621</td>
-							<td>한진희</td>
-							<td>2020-07-12</td>
-							<td><div class="checkApply" onclick="submitMatching();" >대기</div></td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>onji677</td>
-							<td>김진오</td>
-							<td>2020-07-11</td>
-							<td><div class="checkApply" onclick="submitMatching();">거절</div></td>
-						</tr>
-					</table>
+					style="margin-top: 15px; margin-left: 40px; font-size: 1.8em; font-weight: bold;">신청
+					트레이너 목록</div>
+				<br> <br>
+				<hr style="width: 1250px">
+				<div id="trainnerList"
+					style="overflow: auto; clear: both; margin-left: auto; margin-right: auto; width: 1250px; height: 500px;">
+					<div
+						style="margin: auto; padding: 10px; padding-left: 30px; padding-right: 30px; text-align: center;">
+						<!-- 리스트 시작 -->
+						<div class="trainer_Info" style="float: left;" onclick="TrainerDetail();">
+							<div class="trainnerImg">
+								<img class="trainnerImg" width="100%" height="100%"
+									src="../../../resources/img/trainerJang.png">
+							</div>
+							<div class="trainnerTxt">
+								<a class="trainerName">트레이너 대길</a> <a class="trainerId">chaseNoBig</a>
+								<ul>
+									<li><img width="20px" height="20px"
+										src="../../../resources/img_icon/ohmystar_pull.png"></li>
+									<li><img width="20px" height="20px"
+										src="../../../resources/img_icon/ohmystar_pull.png"></li>
+									<li><img width="20px" height="20px"
+										src="../../../resources/img_icon/ohmystar_pull.png"></li>
+									<li><img width="20px" height="20px"
+										src="../../../resources/img_icon/ohmystar_pull.png"></li>
+									<li><img width="20px" height="20px"
+										src="../../../resources/img_icon/ohmystar_pull.png"></li>
+								</ul>
+								<div class="trainerScore">5.0</div>
+								<div class="tariner_comment">추노질하는 것보다 팔로워 관리하는게 훨씬 더
+									힘들구만.</div>
+								<div class="tariner_ability">#운동습관형성</div>
+							</div>
+						</div>
+						<!-- 리스트 끝 -->
+					</div>
 				</div>
 			</div>
-
+			<script>
+			
+				function TrainerDetail(){
+					console.log("조회");
+					  $('.wait_wrap').fadeIn('slow');
+				}
+			
+			</script>
 		</article>
-	</section>
-	<script>
-
-   		 $(".checkApply").each(function(index,item){
-   		 	switch($(item).text()){
-   		 	case '대기': $(item).css("background","navy");
-   		 	}
-   		 })
-   		 
-   		function submitMatching(){
-            jQuery('.matching_wrap').fadeIn('slow');
-        }
-   		 
-   		function inputReject(){
-   			$(".matching_box").css({"height":425,"top":"15%"});
-   			$("#rejectArea").css("display","block");
-   		}
-   	
-   	</script>
-	
 	</section>
 	<%@ include file="../../common/footer.jsp"%>
 </body>
