@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.omg.jsp.member.model.service.MemberService;
 import com.omg.jsp.member.model.vo.Member;
 
+import oracle.net.aso.r;
+
 /**
  * Servlet implementation class MemberInsertServlet
  */
@@ -30,6 +32,8 @@ public class MemberInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		
+		
 		String name = request.getParameter("memberName");
 		String memberId = request.getParameter("memberId");
 		String memberPwd = request.getParameter("memberPwd");
@@ -54,6 +58,14 @@ public class MemberInsertServlet extends HttpServlet {
 		requestMember.setEmail(email);
 		requestMember.setAddress(address);
 		
+		//트레이너, 팔로워 구분
+		String type = request.getParameter("joinType");
+		switch(type) {
+		case "follower" : requestMember.setMemberDivision("follower"); break;
+		case "trainer" : requestMember.setMemberDivision("trainer"); break;
+		
+		}
+		
 		System.out.println("servlet member : " + requestMember);
 		
 		int result = new MemberService().insertMember(requestMember);
@@ -74,6 +86,8 @@ public class MemberInsertServlet extends HttpServlet {
 			
 			
 		}
+		
+		
 	
 	}
 
