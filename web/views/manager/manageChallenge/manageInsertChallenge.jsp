@@ -64,6 +64,7 @@
 					<td class="back">모집인원</td>
 					<td><input type=text name=many></td>
 				</tr>
+				
 				<tr id="trs">
 					<td class="back">모집기간</td>
 					<td><input type=text>&nbsp;~&nbsp;<input type=text></td>
