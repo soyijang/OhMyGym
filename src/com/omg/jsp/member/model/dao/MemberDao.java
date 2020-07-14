@@ -1,5 +1,6 @@
 package com.omg.jsp.member.model.dao;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -41,13 +42,15 @@ private Properties prop = new Properties();
 		try {
 			pstmt = con.prepareStatement(query);
 			
-			pstmt.setString(1, requestMember.getUserId());
-			pstmt.setString(2, requestMember.getUserPwd());
-			pstmt.setString(3, requestMember.getNickName());
-			pstmt.setString(4, requestMember.getPhone());
+			pstmt.setString(1, requestMember.getMemberId());
+			pstmt.setString(2, requestMember.getMemberDivision());
+			pstmt.setString(3, requestMember.getName());
+			pstmt.setString(4, requestMember.getMemberPwd());
 			pstmt.setString(5, requestMember.getEmail());
-			pstmt.setString(6, requestMember.getAddress());
-			pstmt.setString(7, requestMember.getInterest());
+			pstmt.setString(6, requestMember.getPhone());
+			pstmt.setString(7, requestMember.getAddress());
+			pstmt.setString(8, requestMember.getGender());
+			
 			
 			result = pstmt.executeUpdate();
 			
