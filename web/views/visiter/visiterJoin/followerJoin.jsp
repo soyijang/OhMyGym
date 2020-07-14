@@ -114,7 +114,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 							<div>
 								<br>
 								<h1>회원가입</h1>
-
+								<input type="text" name="joinType" value="follower" style="display: none;">
 								<br> <a href="folowerJoin.jsp" id="fnt" class="fnt1">팔로워</a>
 								<a href="trainerJoin.jsp" id="fnt" class="fnt2">트레이너</a>
 
