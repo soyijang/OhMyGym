@@ -119,7 +119,7 @@
                     <tbody>
                         <tr>
                             <td id="trainer_welcome" colspan="2">
-                                <a id="trainer_name"><!--트레이너이름--></a> 트레이너님<br>
+                                <a id="trainer_name"><%= loginUser.getName() %><!--트레이너이름--></a> 트레이너님<br>
                                	 환영합니다!
                             </td>
                         </tr>
