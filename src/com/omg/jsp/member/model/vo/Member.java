@@ -17,12 +17,13 @@ public class Member implements Serializable{
 	private String profileAttachmentCode;
 	private String enrollDate;
 	private String enrollTime;
+	private int memberAge;
 	
 	public Member() {}
 
 	public Member(String name, String memberId, String memberPwd, String memberDivision, String memberStatus,
 			String gender, String address, String email, String phone, String profileAttachmentCode, String enrollDate,
-			String enrollTime) {
+			String enrollTime, int memberAge) {
 		super();
 		this.name = name;
 		this.memberId = memberId;
@@ -36,8 +37,12 @@ public class Member implements Serializable{
 		this.profileAttachmentCode = profileAttachmentCode;
 		this.enrollDate = enrollDate;
 		this.enrollTime = enrollTime;
+		this.memberAge = memberAge;
 	}
 
+	
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -133,14 +138,23 @@ public class Member implements Serializable{
 	public void setEnrollTime(String enrollTime) {
 		this.enrollTime = enrollTime;
 	}
+	
+	public int getMemberAge() {
+		return memberAge;
+	}
+	
+	public void setMemberAge(int memberAge) {
+		this.memberAge = memberAge;
+	}
 
 	@Override
 	public String toString() {
 		return "Member [name=" + name + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberDivision="
 				+ memberDivision + ", memberStatus=" + memberStatus + ", gender=" + gender + ", address=" + address
 				+ ", email=" + email + ", phone=" + phone + ", profileAttachmentCode=" + profileAttachmentCode
-				+ ", enrollDate=" + enrollDate + ", enrollTime=" + enrollTime + "]";
+				+ ", enrollDate=" + enrollDate + ", enrollTime=" + enrollTime + ", memberAge=" + memberAge + "]";
 	}
+
 	
 	
 
