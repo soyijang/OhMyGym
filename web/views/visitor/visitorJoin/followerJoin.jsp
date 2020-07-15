@@ -167,7 +167,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 											<tr>
 												<th>생일/성별</th>
-												<td class="select"><select name="memberAge" id="memberAge"
+												<td class="select"><select name="birthYear" id="birthYear"
 													style="width: 100px; height: 40px;"
 													class="MS_select MS_birthday">
 														<option value="">선택</option>
@@ -272,7 +272,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 														<option value="2018">2018</option>
 														<option value="2019">2019</option>
 														<option value="2020">2020</option>
-												</select> 년 <select name="birthmonth" class="MS_select MS_birthday"
+												</select> 년 <select name="birthMonth" class="MS_select MS_birthday"
 													style="width: 100px; height: 40px;">
 														<option value="">선택</option>
 														<option value="01">1</option>
@@ -287,7 +287,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 														<option value="10">10</option>
 														<option value="11">11</option>
 														<option value="12">12</option>
-												</select> 월 <select name="birthdate" class="MS_select MS_birthday"
+												</select> 월 <select name="birthDate" class="MS_select MS_birthday"
 													style="width: 100px; height: 40px;">
 														<option value="">선택</option>
 														<option value="01">1</option>
