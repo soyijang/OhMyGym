@@ -32,25 +32,30 @@ public class MemberInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		
 		
 		String name = request.getParameter("memberName");
 		String memberId = request.getParameter("memberId");
 		String memberPwd = request.getParameter("memberPwd");
 		String gender = request.getParameter("gender");
-		String zip = request.getParameter("zipCode");
-		String add1 = request.getParameter("address1");
-		String add2 = request.getParameter("address2");
+		String zip = request.getParameter("zipNo");
+		String add1 = request.getParameter("haddress1");
+		String add2 = request.getParameter("haddress2");
 		String address = zip + "$" + add1 + "$" + add2;
+		String email1 = request.getParameter("email1");
+		String email2 = request.getParameter("email2");
+		String email = email1 + "@" + email2;
 		String tel1 = request.getParameter("tel1");
 		String tel2 = request.getParameter("tel2");
 		String tel3 = request.getParameter("tel3");
 		String phone = tel1 + "-" + tel2 + "-" + tel3;
-		String email = request.getParameter("email");
 		String birth1 = request.getParameter("birthYear");
 		String birth2 = request.getParameter("birthMonth");
 		String birth3 = request.getParameter("birthDate");
 		String memberAge = birth1 + "-" + birth2 + "-" + birth3;
+		
 	
 		
 		Member requestMember = new Member();
@@ -61,6 +66,7 @@ public class MemberInsertServlet extends HttpServlet {
 		requestMember.setPhone(phone);
 		requestMember.setEmail(email);
 		requestMember.setAddress(address);
+		requestMember.setMemberAge(memberAge);
 		
 		//트레이너, 팔로워 구분
 		String type = request.getParameter("joinType");

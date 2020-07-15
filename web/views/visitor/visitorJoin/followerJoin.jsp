@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"> </script>
 <title>Insert title here</title>
 
 
@@ -53,7 +54,7 @@ body {
 function goPopup(){
 	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-	var pop = window.open("jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	var pop = window.open("../../common/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
@@ -136,11 +137,12 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 											<tr>
 												<th>아이디</th>
 												<td><input type="text" name="memberId" id="memberId" value=""
-													style="height: 40px" class="MS_input_txt w137" size="50"
+													style="height: 40px" size="50"
 													maxlength="12" placeholder="아이디를 입력해주세요">
-													<button onclick="idCheck()"
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">중복확인</button>
+													<a onclick="idCheck()"
+														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">중복확인</a>
 													<span class="idpw-info"><br>
+													<span id="result"></apan>
 													<p style="font-size: 0.7em; color: orangered;">* 회원아이디는
 															영문/숫자만 사용가능합니다.</p></span> </a></td>
 											</tr>
@@ -321,9 +323,9 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 														<option value="29">29</option>
 														<option value="30">30</option>
 														<option value="31">31</option>
-												</select> 일&nbsp;&nbsp;<input type="radio" name="gender" value="1"
+												</select> 일&nbsp;&nbsp;<input type="radio" name="gender" value="M" checked=""
 													class="MS_radio">남 <input type="radio"
-													name="gender" value="2" class="MS_radio" checked="">여<br>
+													name="gender" value="F" class="MS_radio" >여<br>
 												<br>
 											</tr>
 
@@ -334,27 +336,27 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 												<td>
 													<div class="tb-l post">
 
-														<input type="text" name="zipCode" form="join_form"
-															id="hpost" style="width: 100px; height: 40px;"
+														<input type="text" name="zipNo" 
+															id="zipNo" style="width: 100px; height: 40px;"
 															class="MS_input_txt" value="" size="7" maxlength="15"
-															readonly="">
-														<button onclick="goPopup()"
-															style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">주소검색</button>
+														>
+														<a onclick="goPopup()"
+															style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">주소검색</a>
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<th>집주소</th>
-												<td><input type="text" name="address1"
-													form="join_form" id="haddress1"
+												<td><input type="text" name="haddress1"
+												id="haddress1"
 													style="width: 360px; height: 40px;"
 													class="MS_input_txt w415" value="" size="50"
-													maxlength="100" readonly="readonly"></td>
+													maxlength="100" ></td>
 											</tr>
 											<tr>
 												<th>상세주소</th>
-												<td><input type="text" name="address2"
-													form="join_form" id="haddress2"
+												<td><input type="text" name="haddress2"
+													id="haddress2"
 													style="width: 360px; height: 40px;"
 													class="MS_input_txt w415" value="" size="50"
 													maxlength="100"></td>
@@ -364,24 +366,18 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 											<tr>
 												<th>이메일</th>
-												<td class="select"><input type="hidden" name="email"
-													id="oldemail" value=""> <input type="hidden"
-													name="email" id="email" value=""> <input
-													type="text" name="email1" id="email1"
+												<td class="select">
+												
+													<input type="text" name="email1" id="email1" style="width: 100px; height: 40px;"
+													size="10" maxlength="20" value="">
+													<span>@</span> <input
+														type="text" name="email2" id="email2"
+														style="width: 200px; height: 40px;"
+														value="" size="15" maxlength="25">
+											<select name="selectEmail" id="selectEmail"
 													style="width: 100px; height: 40px;"
-													onchange="this.form.emailcheck.value=''"
-													class="MS_input_txt" size="10" maxlength="20" value="">
-													<span>@</span> <span id="direct_email"
-													style="margin-top: 3px; display: inline-block"> <input
-														type="text" name="email3" id="email3"
-														style="width: 200px; height: 40px;" class="MS_input_txt"
-														value="" size="15" maxlength="25"
-														onchange="this.form.emailcheck.value=''">
-												</span> <select name="email2" id="email2"
-													class="MS_select MS_email"
-													style="width: 100px; height: 40px;"
-													style="margin-right:5px;" onchange="viewdirect()">
-														<option value="direct">직접입력</option>
+													style="margin-right:5px;" >
+														<option value="1">직접입력</option>
 														<option value="naver.com">naver.com</option>
 														<option value="hotmail.com">hotmail.com</option>
 														<option value="hanmail.net">hanmail.net</option>
@@ -392,8 +388,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 														<option value="gmail.com">gmail.com</option>
 														<option value="netian.com">netian.com</option>
 												</select>
-													<button onclick=""
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">인증하기</button>
+													
 												</td>
 											</tr>
 
@@ -403,9 +398,10 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 											<tr>
 												<th>휴대폰</th>
-												<td><input type="hidden" name="tel1"
-													form="join_form" value=""> <select
-													name="etcphone1" id="etcphone1" form="join_form"
+												<td><input type="hidden" name="tel"
+													form="join_form" value=""> 
+													<select
+													name="tel1" id="etcphone1" 
 													style="width: 100px; height: 40px;"
 													class="MS_select MS_tel">
 														<option value="">선택</option>
@@ -415,16 +411,16 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 														<option value="017">017</option>
 														<option value="018">018</option>
 														<option value="019">019</option>
-												</select> - <input type="text" name="tel2" form="join_form"
+												</select> - <input type="text" name="tel2" 
 													id="etcphone2" class="MS_input_tel" value="" size="4"
 													maxlength="4" style="width: 115px; height: 40px;">
-													- <input type="text" name="tel3" form="join_form"
+													- <input type="text" name="tel3" 
 													id="etcphone3" class="MS_input_tel" value="" size="4"
 													maxlength="4" style="width: 115px; height: 40px;"
 													minlength="4">
 
-													<button onclick=""
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">본인인증</button>
+													<a onclick=""
+														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">본인인증</a>
 												</td>
 
 
@@ -438,7 +434,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 								</div>
 								<!-- #personInfo -->
-				</form>
 
 			</div>
 
@@ -449,6 +444,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 					style="width: 200px; height: 40px; background-color: orangered; color: white; border: none;">가입하기</button>
 
 			</div>
+				</form>
 			<br>
 			<div class="align-center margin-top40"></div>
 
@@ -466,7 +462,24 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	</div>
 
 	</div>
-	
+	<!-- 중복체크 -->
+	<script type="text/javascript">
+		function idCheck(){
+			
+			var idStr=$("#memberId").val();
+			$.ajax({
+				url:"/src/com/omg/jsp/member/controller/idCheckServlet?memberId="+idStr,
+				success:function(data){
+					if(data == "success") {
+						$("#result").text("사용가능한 아이디입니다.");
+					}else if(data == "fail") {
+						$("#result").text("중복된 아이디입니다.");
+					}
+				}
+			});
+		}
+	</script>
+
 	<script>
    
          function insertMember(){
@@ -474,32 +487,28 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
             
          }
          
-         $(function(){
-        	 $("#idCheck").click(function(){
-        		 var memberId = $("#memberId").val();
-        		 
-        		 console.log(memberId);
-        		 
-        		 $.ajax({
-        			 url: "/jsp/idCheck.me",
-        			 type: "post",
-        			 data: {memberId: memberId},
-        			 success: function(data) {
-        				 if(data == "fail") {
-        					 alert("아이디가 중복됩니다.");
-        					 
-        				 } else {
-        					 alert("사용가능한 아이디입니다.")
-        				 }
-        			 },
-        			 error: function(data) {
-        				 console.log("실패!");
-        			 }
-        		 })
-        	 })
-         })
-         
       
-   </script>
+    </script>
+		
+	<script type="text/javascript">
+		//이메일 입력방식 선택 
+		$('#selectEmail').change(function(){
+			$("#selectEmail option:selected").each(function () {
+				if($(this).val()== '1'){ 
+					//직접입력일 경우
+					$("#email2").val(''); 
+					//값 초기화 
+					$("#email2").attr("disabled",false); 
+					//활성화
+				}else{ 
+					//직접입력이 아닐경우
+					$("#email2").val($(this).text()); 
+					//선택값 입력 
+					$("#email2").attr("disabled",true); 
+					//비활성화
+					} }); });
+	</script>
+
+	
 </body>
 </html>
