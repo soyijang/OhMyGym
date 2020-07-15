@@ -24,4 +24,18 @@ public int insertMember(Member requestMember) {
 		
 		return result;
 	}
+
+public Member loginCheck(Member loginMember) {
+	
+	Connection con = getConncection();
+	Member loginUser= new MemberDao().loginCheck(con, loginMember);
+	System.out.println("service : " + con);
+	System.out.println("service : " + loginMember);
+	
+	close(con);
+	return loginUser;
 }
+}
+
+
+
