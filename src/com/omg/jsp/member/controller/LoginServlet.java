@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.omg.jsp.member.model.service.MemberService;
 import com.omg.jsp.member.model.vo.Member;
 
 /**
@@ -29,30 +30,42 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("_loginId");
+		
+		String id = request.getParameter("loginId");
+		String pwd = request.getParameter("loginPw");
 		String type = request.getParameter("loginType");
 		
-		System.out.println(type);
-		System.out.println(id);
+		System.out.println("loginid : " + id);
+		System.out.println("loginpwd : " + pwd);
+		System.out.println("loginType : " + type);
 		
 		Member loginMember = new Member();
 		
 		loginMember.setMemberId(id);
-		loginMember.setName("김윤기");
+		loginMember.setMemberPwd(pwd);
 		
-		request.getSession().setAttribute("loginUser", loginMember);
+		Member loginUser = new MemberService().loginCheck(loginMember);
+		String page = "";
 		
-		switch(type) {
-		
-		case "follower" : 
-			response.sendRedirect("views/follower/followerMain.jsp");
-			break;
-		case "trainer" :
-			response.sendRedirect("views/trainer/trainerMain.jsp");
-			break;
+		if(loginUser!= null) {
+			
+			request.getSession().setAttribute("loginUser", loginUser);
+			
+			switch(type) {
+			
+			case "follower" : 
+				response.sendRedirect("views/follower/followerMain.jsp");
+				break;
+			case "trainer" :
+				response.sendRedirect("views/trainer/trainerMain.jsp");
+				break;
+			}
+			
+		} else {
+			request.setAttribute("msg","로그인실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 
-	
 	}
 
 	/**

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*,com.omg.jsp.followerDiet.model.vo.*"%>
+	<% ArrayList<FollowerDiet> list = (ArrayList<FollowerDiet>) request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/omg/resources/css/daumcommon.css">
 <link rel="stylesheet" type="text/css"
@@ -63,7 +64,7 @@
 				<li class="navi-item ">건강정보</li>
 				<li class="navi-item ">밥스타그램</li>
 			</ul>
-		</div>
+		</div>.......................................................0
 	</div>
 
 	<div class="left-container" style="width: 1080px; margin-left: 30px;">
@@ -91,22 +92,18 @@
 		</thead>
 		
 		<tbody>
+		<% for(FollowerDiet fd : list) {%>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><%=fd.getIntakeDate() %></td>
+				<td><%=fd.getFoodCode() %></td>
+				<td><%=fd.getIntakeVolume() %></td>
 			</tr>
 			
-			
+		<%} %>
 		</tbody>
 		
 		<tfoot></tfoot>
 		</table>
-
-		
-		
-		
-		
 		
 		
 		<!-- delete, upload block -->
@@ -114,10 +111,27 @@
 		
 		<div style="text-align: right; margin-right: 120px;">
 		<button id="delete"><label>삭제</label></button>
-		<a href="/omg/views/bobstagram/bobstagram_detail_insert01.jsp"><button id="upload"><label>업로드</label></button></a>
+		<button id="upload" onclick="location.href='views/follower/followerDiet/followerInsertTodayMeal.jsp'"><label>업로드</label></button>
 		</div>
 		<br><br><br>
 
 		<%@ include file="../../common/footer.jsp"%>
+		
+		
+		<script>
+		$(function() {
+			$("#listArea td").mouseenter(function() {
+				$(this).parent().css({"background":"gray","cursor":"pointer"});
+			}).mouseout(function() {
+				$(this).parent().css({"background":"black"});
+			}).click(function() {
+				var num=$(this).parent().children("input").val();
+				console.log(num);
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num="+num;
+			});
+		});
+	
+	
+	</script>
 </body>
 </html>

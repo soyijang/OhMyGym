@@ -108,7 +108,7 @@
 													<option value="">수료</option>
 													<option value="">중퇴</option>
 													<option value="">재학</option>
-													<option value="">입학</option>
+													<option value="">휴학</option>
 											</select></td>
 
 										</tr>

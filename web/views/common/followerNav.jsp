@@ -134,7 +134,7 @@ a {
 	<div class="container_top">
 		<ul class="header_top_menu" id="header_top">
 			<li id="webIntro" style="color: rgb(63, 63, 63);">로그아웃</li>
-			<li id="webClasses"><a href="../fmypage/fmyInfo.jsp"
+			<li id="webClasses"><a href="../follower/followerMypage/followerMyInfo.jsp"
 				style="color: rgb(63, 63, 63);">마이페이지</a></li>
 		</ul>
 	</div>
@@ -158,7 +158,7 @@ a {
 					</li>
 					<li><a><div class="NavLink" style="color: rgb(63, 63, 63);">건강관리</div></a>
 						<ul>
-							<li><a style="color: white;">밥스타그램</a>&nbsp;&nbsp;&nbsp;<a
+							<li><a style="color: white;">오늘의 밥그릇</a>&nbsp;&nbsp;&nbsp;<a
 								style="color: white;">건강정보게시판</a>&nbsp;&nbsp;&nbsp;<a
 								style="color: white;">내 상태 기록</a></li>
 						</ul></li>

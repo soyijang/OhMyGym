@@ -124,9 +124,8 @@
 <body>
 <div class="container_top">
         <ul class="header_top_menu" id="header_top">
-            <li id="webIntro">로그인</li>
+            <li id="webIntro"><a href="views/visitor/login.jsp">로그인</a></li>
             <li id="webClasses">회원가입</li>
-            </li>
         </ul>
     </div>
     <br>
@@ -158,7 +157,6 @@
                             <ul>
                                 <li><a>오마이짐이란?</a>&nbsp;&nbsp;&nbsp;<a>결제안내</a></li>
                             </ul>
-                        </li>
                         </li>
                     </ul>
                 </ul>

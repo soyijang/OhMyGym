@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,7 @@
         margin-left: 40px;
         font-size: 14px;
     }
-    #inpuHealthInfo {
+    #healthInfoNow {
         margin-top: 20px;
         width: 1000px;
         height: 496px;
@@ -115,7 +116,7 @@
             position: relative;
             top: 25%;
             width: 635px;
-            height: 300px;
+            height: 330px;
             background: #fff;
             margin: 0 auto;
             border-radius: 8px;
@@ -124,9 +125,6 @@
         }
 
         .login_box .close {
-            /* position: absolute;
-            right: 6px;
-            top: 6px; */
             cursor: pointer
         }
         .amountBtn {
@@ -138,6 +136,51 @@
             margin-top: 30px;
             text-align: center;
         }
+        #healthInfoNowTable, #modifyHealthInfo {
+        	border-collapse:collapse;
+        	margin-top: 20px;
+        }
+        #healthInfoNowTable tr, #modifyHealthInfo tr {
+        	height: 40px;
+        	text-align: center;
+        }
+        #healthInfoNowTable th, #modifyHealthInfo th {
+        	width: 100px;
+        }
+        #healthInfoNowTable {
+        	position:relative;
+        }
+        #healthInfoNowTable td, #modifyHealthInfo td {
+        	text-align: left;
+        	padding-left: 10px;
+        }
+        #modifyHealthInfo input {
+        	width:300px;
+        	border: 1px solid gray;
+        }
+        #modifyHealthInfo input[type="reset"], #modifyHealthInfo input[type="submit"] {
+        	text-align: center;
+        	border: none;
+        	font-family: "Noto Sans KR";
+        	height: 2em;
+        	cursor: pointer;
+        }
+        #modifyHealthInfo input[type="submit"] {
+        	background: orangered;
+        	color: white;
+        }
+        #healthInfoNowTable button {
+        	border: none;
+        	font-family: "Noto Sans KR";
+        	height: 2em;
+        	background: orangered;
+        	color: white;
+        	width: 200px;
+        	font-weight: 500;
+        }
+         #modifyHealthInfo {
+        	display: none;
+        }
 </style>
 </head>
 <body>
@@ -145,89 +188,140 @@
         <%@ include file="../../common/followerNav.jsp"%>
     </nav>
     
-    <aside style="display: inline-block; float: left; width: 20%;" align="center">
-        <div id="asideArea" align="center">
-            <div id="profilePhoto"></div>
-            <table id="bodyInfo">
-                <tr>
-                    <td colspan="2">
-                        <button id="inputInfoBtn" onclick="jQuery('.login_wrap').fadeIn('slow');">정보 입력하기</button>
-                        <div class="login_wrap" style="display: none;">
-                            <div class="dark_bg" onclick="jQuery('.login_wrap').fadeOut('slow')"></div>
-                            <div class="login_box">
-                                <div style="width: 100%; height: 30px; background: orangered; border-radius: 8px;">
-                                    <div style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; padding-top: 5px; width: 100%; text-align: center;">내 상태 기록하기</div>
-                                    <div align="center" style="margin-top: 40px;">
-                                        <form action="">
-                                                <table width="400px" height="140px" style="border-top: 2px solid; border-bottom: 2px solid; border-collapse:collapse;">
-                                                    <tr style="text-align: center; border-bottom: 1px solid gray;">
-                                                        <th width="200px" style="background: #F5F5F5;">&nbsp;몸무게</th>
-                                                        <td width="200px">&nbsp;<input type="text" style="width: 150px;">kg</td>
-                                                    </tr>
-                                                    <tr style="text-align: center; border-bottom: 1px solid gray;">
-                                                        <th style="background: #F5F5F5;">&nbsp;운동 시간</th>
-                                                        <td>&nbsp;<input type="text" style="width: 50px;">시간  <input type="text" style="width: 50px;">분</td>
-                                                    </tr>
-                                                    <tr style="text-align: center; border-bottom: 1px solid gray;">
-                                                        <th style="background: #F5F5F5;">&nbsp;수면 시간</th>
-                                                        <td>&nbsp;<input type="text" style="width: 50px;">시간  <input type="text" style="width: 50px;">분</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div id="amountArea">
-                                                <button class="close amountBtn" onclick="jQuery('.login_wrap').fadeOut('slow')" src="img_icon/closeIcon.png">취소</button>
-                                                <button class="amountBtn" type="submit" style="margin-left: 10px; border-style: none; background: orangered;">확인</button>
-                                            </div>
-                                        </form>
-                                </div>
-                                <div class="login_content">
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th width="100px;">키</th>
-                    <td>178.7cm</td>
-                </tr>
-                <tr>
-                    <th>몸무게</th>
-                    <td>68.2kg</td>
-                </tr>
-                <tr>
-                    <th>운동시간</th>
-                    <td>2시간 30분</td>
-                </tr>
-                <tr>
-                    <th>수면시간</th>
-                    <td>7시간 0분</td>
-                </tr>
-                <tr>
-                    <th colspan="2">트레이닝 종료까지</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><div class="msg">D - 27</div></th>
-                </tr>
-            </table>
-        </div>
+    <aside style="display: inline-block; float: left; width: 20%;">
+        <%@ include file="followerHealthAside.jsp" %>
     </aside>
 
 	<section>
+	
+	<!-- 임시 loginUser -->
+	<% Member loginUser = new Member(); 
+	   loginUser.setMemberId("test1");
+	   loginUser.setMemberDivision("F");
+	   loginUser.setName("이김박");
+	   loginUser.setEmail("aklj@lkad.com");
+	   loginUser.setPhone("010-1234-4212");
+	   loginUser.setAddress("경기도 용인시 기흥구");
+	   loginUser.setEnrollDate("2002-10-20");
+	   loginUser.setMemberStatus("Y");
+	   loginUser.setEnrollTime("20:20:20");
+	   loginUser.setMemberAge("1993-12-25");
+	   %>
         
         <article id="titleArea">
             <div>
                 <h1 style="margin-top: 8px;">&nbsp;&nbsp;&nbsp;내 상태 기록</h1>
             </div>
         </article>
-        <article>
-            <div id="inpuHealthInfo" align="center">
-                <div style="width: 30%; height: 40%; border: 1px solid gray; width: 90%; height:95%; margin-top: 10px;">
-                    체중, 수면시간, 운동시간 그래프
-                </div>
+        <article id="healthInfoNowArea">
+        	<!-- 현재 건강정보 출력 -->
+            <div id="healthInfoNow" align="center">
+	            <table style="width:90%;" id="healthInfoNowTable">
+	              	<tr>
+	              		<th colspan="4" style="height: 50px;"><h3>현재 건강정보</h3></th>
+	              	</tr>
+	              	<tr>
+	              		<th>키</th>
+	              		<td>test cm</td>
+	              		<th>몸무게</th>
+	              		<td>test kg</td>
+	              	</tr>
+	              	<tr>
+	              		<th>운동시간</th>
+	              		<td>시간  분</td>
+	              		<th>수면시간</th>
+	              		<td>시간  분</td>
+	              	</tr>
+	              	<tr>
+	              		<th>집중 부위</th>
+	              		<td>test</td>
+	              		<th>활동 수준</th>
+	              		<td>test</td>
+	              	</tr>
+	              	<tr>
+	              		<th>동기부여</th>
+	              		<td>test</td>
+	              		<th>신체적 어려움</th>
+	              		<td>test</td>
+	              	</tr>
+	              	<tr>
+	              		<th>목표</th>
+	              		<td colspan="3">test</td>
+	              	</tr>
+	              	<tr>
+	              		<td colspan="4" style="text-align: center;"><button onclick="modifyInfo();">수정하기</button></td>
+	              	</tr>
+	              </table>
+	              
+	              <script>
+	              	function modifyInfo() {
+	              		$("#healthInfoNowTable").hide();
+	              		$("#modifyHealthInfo").show();
+	              	}
+	              </script>
+	              
+	              <form action="<%= request.getContextPath() %>/Update.hi" method="post">
+	              	<input type="hidden" value="<%= loginUser.getMemberId() %>" name="userId">
+	              	<table id="modifyHealthInfo" style="width:90%;">
+	              	<tr>
+	              		<th colspan="4" style="height: 50px;"><h3>건강정보 수정</h3></th>
+	              	</tr>
+	              	<tr>
+	              		<th>키</th>
+	              		<td><input type="text" style="width: 100px;" name="height"> cm</td>
+	              		<th>몸무게</th>
+	              		<td><input type="text" style="width: 100px;" name="weight"> kg</td>
+	              	</tr>
+	              	<tr>
+	              		<th>운동시간</th>
+	              		<td>
+		              		<input type="text" style="width: 100px;" name="exerciseH"> 시간  
+		              		<input type="text" style="width: 100px;" name="exerciseM"> 분
+		              	</td>
+	              		<th>수면시간</th>
+	              		<td>
+	              			<input type="text" style="width: 100px;" name="sleepH"> 시간  
+	              			<input type="text" style="width: 100px;" name="sleepM"> 분
+	              		</td>
+	              	</tr>
+	              	<tr>
+	              		<th>집중 부위</th>
+	              		<td><input type="text" placeholder="ex) 팔, 허벅지, 복부 등" name="focus"></td>
+	              		<th>활동 수준</th>
+	              		<td>
+	              			<select style="width: 308px;" name="active">
+	              				<option value="veryHard">활동량 매우 많음</option>
+	              				<option value="hard">활동량 많음</option>
+	              				<option value="normal">보통</option>
+	              				<option value="few">활동량 적음</option>
+	              				<option value="veryFew">활동량 매우 적음</option>
+	              			</select>
+	              		</td>
+	              	</tr>
+	              	<tr>
+	              		<th>동기부여</th>
+	              		<td><input type="text" placeholder="ex) 다이어트 자극사진을 봤을 때 등" name="motive"></td>
+	              		<th>신체적 어려움</th>
+	              		<td><input type="text" placeholder="ex) 무릎 통증이 있음, 허리 디스크 등" name="bodyUneasy"></td>
+	              	</tr>
+	              	<tr>
+	              		<th>목표</th>
+	              		<td colspan="3"><input type="text" style="width:740px;" placeholder="ex) x월까지 xx키로 감량 등" name="goal"></td>
+	              	</tr>
+	              	<tr>
+	              		<td colspan="4" style="text-align: center;">
+	              			<input type="reset" value="취소">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="저장">
+	              		</td>
+	              	</tr>
+	              </table>
+	            </form>
+	              
             </div>
         </article>
     </section>
+    
     <br><br>
+    
     <footer style="clear: both;">
         <%@ include file="../../common/footer.jsp"%>
     </footer>
