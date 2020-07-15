@@ -50,6 +50,7 @@ private Properties prop = new Properties();
 			pstmt.setString(6, requestMember.getPhone());
 			pstmt.setString(7, requestMember.getAddress());
 			pstmt.setString(8, requestMember.getGender());
+			pstmt.setString(9, requestMember.getMemberAge());
 			
 			
 			result = pstmt.executeUpdate();
