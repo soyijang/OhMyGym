@@ -17,13 +17,13 @@ public class Member implements Serializable{
 	private String profileAttachmentCode;
 	private String enrollDate;
 	private String enrollTime;
-	private int memberAge;
+	private String memberAge;
 	
 	public Member() {}
 
 	public Member(String name, String memberId, String memberPwd, String memberDivision, String memberStatus,
 			String gender, String address, String email, String phone, String profileAttachmentCode, String enrollDate,
-			String enrollTime, int memberAge) {
+			String enrollTime, String memberAge) {
 		super();
 		this.name = name;
 		this.memberId = memberId;
@@ -139,11 +139,11 @@ public class Member implements Serializable{
 		this.enrollTime = enrollTime;
 	}
 	
-	public int getMemberAge() {
+	public String getMemberAge() {
 		return memberAge;
 	}
 	
-	public void setMemberAge(int memberAge) {
+	public void setMemberAge(String memberAge) {
 		this.memberAge = memberAge;
 	}
 
