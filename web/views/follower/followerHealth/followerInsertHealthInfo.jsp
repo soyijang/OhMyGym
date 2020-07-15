@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*"%>
-
+<% Member loginUser = (Member) session.getAttribute("loginUser"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	$(function(){
+		var memberId = loginUser.getMemberId();
+		
+		console.log(memberId);
+	});
+</script>
 <style>
     * {
         font-family: "Noto Sans KR";
@@ -195,7 +202,7 @@
 	<section>
 	
 	<!-- 임시 loginUser -->
-	<% Member loginUser = new Member(); 
+<%-- 	<% Member loginUser = new Member(); 
 	   loginUser.setMemberId("test1");
 	   loginUser.setMemberDivision("F");
 	   loginUser.setName("이김박");
@@ -206,7 +213,7 @@
 	   loginUser.setMemberStatus("Y");
 	   loginUser.setEnrollTime("20:20:20");
 	   loginUser.setMemberAge("1993-12-25");
-	   %>
+	   %> --%>
         
         <article id="titleArea">
             <div>
@@ -218,11 +225,11 @@
             <div id="healthInfoNow" align="center">
 	            <table style="width:90%;" id="healthInfoNowTable">
 	              	<tr>
-	              		<th colspan="4" style="height: 50px;"><h3>현재 건강정보</h3></th>
+	              		<th colspan="4" style="height: 50px;"><h3><%= loginUser.getName() %>님의 건강정보</h3></th>
 	              	</tr>
 	              	<tr>
 	              		<th>키</th>
-	              		<td>test cm</td>
+	              		<td> cm</td>
 	              		<th>몸무게</th>
 	              		<td>test kg</td>
 	              	</tr>
@@ -310,10 +317,16 @@
 	              	</tr>
 	              	<tr>
 	              		<td colspan="4" style="text-align: center;">
-	              			<input type="reset" value="취소">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="저장">
+	              			<input type="reset" value="취소" onclick="showInfo();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="저장">
 	              		</td>
 	              	</tr>
 	              </table>
+	              <script type="text/javascript">
+	              	function showInfo() {
+	              		$("#healthInfoNowTable").show();
+	              		$("#modifyHealthInfo").hide();
+	              	}
+	              </script>
 	            </form>
 	              
             </div>
