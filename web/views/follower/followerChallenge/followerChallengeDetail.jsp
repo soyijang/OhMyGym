@@ -57,7 +57,7 @@
         position: absolute;
         width: 1070px;
         left: 330px;
-        top: 180px;
+        top: 80px;
 
         background: rgba(196, 196, 196, 0.35);
     }
@@ -202,10 +202,62 @@
 
         color: #FFFFFF;
     }
-
+.overlay {
+  display: none;
+  z-index: 1000;
+  position: fixed;
+  width: 100%; height: 100%;
+  left: 0; top: 0;
+  background-color: rgba(0,0,0, 0.4);
+  overflow-x: hidden;
+}
+.whitePop{
+	background-color: white;
+	width: 700px;
+	height: 700px;
+	margin: auto;
+	margin-top: 100px;
+}
+.silverBox1{
+	position: relative;
+	width: 600px;
+	height: 600px;
+	background-color: rgba(196, 196, 196, 0.15);
+	margin: auto;
+	top: 50px;
+}
+.whiteBox{
+	width: 550px;
+	height: 100px;
+	background-color: white;
+	margin: auto;
+}
+#btnLast{
+	position: relative;
+    background: orangered;
+    border: 0px;
+    color: white;
+    font-size: 77px;
+    width: 500px;
+    left: 44px;
+    top: 20px
+}
+.one{
+	float: right;
+    font-size: 25px;
+    font-weight: bold;
+    position: relative;
+    top: -20px;
+}
+.one2{
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+    position: relative;
+    top: 25px;
+}
 </style>
 <body>
-    <%@ include file="../../common/followerNav.jsp" %>
  <nav id="side_nav">
         <div class="side_container">
             <ul class="side_menu">
@@ -248,7 +300,7 @@
                     <div id="box_2_Contents">모집인원이 해당 수 이상일 경우 모집 종료일이 조기마감 될 수 있습니다.</div>
                     <div class="parent">
                         <div class="child1">
-                            <img src="../../../resources/challengeImg/image 03.png" style="height: 50px;">
+                            <img src="../../resources/challengeImg/image 03.png" style="height: 50px;">
                             <div class="orange_color" id="orange_size">144명</div>
                             <div class="box_2_bold">참가인원</div>
                         </div>
@@ -268,27 +320,27 @@
                     <div id="table_center">
                         <table id="table_dis" style="margin-left: auto; margin-right: auto;">
                             <tr>
-                                <td><img src="../../../resources/challengeImg/image 04.png"></td>
+                                <td><img src="../../resources/challengeImg/image 04.png"></td>
                                 <td class="font_all">&nbsp;&nbsp;모집 시작일</td>
                                 <td>2020.07.01</td>
                             </tr>
                             <tr>
-                                <td><img src="../../../resources/challengeImg/image 05.png"></td>
+                                <td><img src="../../resources/challengeImg/image 05.png"></td>
                                 <td class="font_all">&nbsp;&nbsp;모집 종료일</td>
                                 <td>2020.07.06</td>
                             </tr>
                             <tr>
-                                <td><img src="../../../resources/challengeImg/image 03.png"></td>
+                                <td><img src="../../resources/challengeImg/image 03.png"></td>
                                 <td class="font_all">&nbsp;&nbsp;모집 인원</td>
                                 <td>500명</td>
                             </tr>
                             <tr>
-                                <td><img src="../../../resources/challengeImg/image 06.png"></td>
+                                <td><img src="../../resources/challengeImg/image 06.png"></td>
                                 <td class="font_all">&nbsp;&nbsp;챌린지 종료일</td>
                                 <td>2020.07.07</td>
                             </tr>
                             <tr>
-                                <td><img src="../../../resources/challengeImg/image 01.png"></td>
+                                <td><img src="../../resources/challengeImg/image 01.png"></td>
                                 <td class="font_all">&nbsp;&nbsp;포인트 지급</td>
                                 <td>2020.07.21</td>
                             </tr>
@@ -309,8 +361,39 @@
             </div>
         </div>
     </section>
-        <div style="position: absolute; top:1400px; left:150px;">
-    <%@ include file="../../common/footer.jsp" %>
-    </div>
+    <script>
+$(function() {
+  $("#font_join").click(function() {
+    $(".overlay").show();
+  });
+});
+</script>
+<!-- 참가하기 버튼 클릭이후 나오는 div 팝업창 -->
+<div class="overlay">
+	<div class="whitePop">
+		<div class="silverBox1">
+			<div style="color: orangered; font-weight: bold; font-size: 35px;">결제 상품</div>
+			<div class="whiteBox">
+				<img src="../../../resources/challengeImg/image 02.png" style="float: left; margin-left: 100px;">
+				<div style="font-size: 20px; position:relative; left: 50px; top:10px;">OMG 챌린지 서비스</div>
+			</div>
+			<div style="font-weight: bold; font-size: 35px;">금액입력</div>
+			<div class="whiteBox" id="wbox1">
+				<div style="width: 350px; height: 50px; position: relative; left: 50px; font-size: 30px; font-weight: bold;"></div>
+				<div class="one">원</div>
+			</div>
+			<div style="color: orangered; font-weight: bold; font-size: 35px;">최종 결제 정보</div>
+			<div class="whiteBox" id="wbox2">
+				<input type="number" style="width: 350px; height: 50px; position: relative; left: 50px; font-size: 30px; font-weight: bold; ">
+				<div class="one2">원</div>			
+			</div>
+			<div>
+				<input type="submit" value="결제하기" id="btnLast">
+			</div>
+		</div>
+		<div class="silverBox2"></div>
+	</div>
+</div>
+
 </body>
 </html>
