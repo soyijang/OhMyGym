@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.Member"%>
+	
 <!DOCTYPE html>
 <html>
 
@@ -31,7 +32,7 @@
 								<div class="info-form-label">아이디</div>
 								<div class="info-form-input">
 									<input readonly="" name="myid" type="text"
-										class="id-input input-box" disabled="" value="soi0205">
+										class="id-input input-box" disabled="" value="<%= loginUser.getMemberId()%>">
 								</div>
 							</div>
 							<div class="info-row">
@@ -54,9 +55,7 @@
 									<div class="info-form-input-name">
 										<input readonly="" name="first-name-input" type="text"
 											placeholder="성" class="first-name-input input-box"
-											disabled="" value="장"><input readonly=""
-											name="last-name-input" type="text" placeholder="이름"
-											class="last-name-input input-box" disabled="" value="소이">
+											disabled="" value="<%= loginUser.getName()%>">
 									</div>
 									<p class="err-msg name-input">이름 변경이 필요하신 경우, 고객센터로 문의하여
 										주세요.</p>
@@ -67,19 +66,19 @@
 								<div class="info-form-input">
 									<input name="email" type="text" placeholder="제목을 입력해주세요"
 										class="email-input input-box" maxlength="50"
-										value="soi0205@naver.com">
+										value="<%= loginUser.getEmail()%>">
 								</div>
 							</div>
 							<div class="info-row board-category">
 								<div class="info-form-label">생년월일</div>
 								<div class="info-form-input date">
 									<div class="info-form-input-date">
-										<input readonly="" name="birth_year" type="text"
-											class="birth-year-input input-box" disabled="" value="1995"><input
-											readonly="" name="birth_month" type="text"
-											class="birth-month-input input-box" disabled="" value="02"><input
-											readonly="" name="birth_day" type="text"
-											class="birth-day-input input-box" disabled="" value="05">
+										<input name="birth_year" type="text"
+											class="birth-year-input input-box" disabled="" value="<%= loginUser.getMemberAge() %>"><input
+											name="birth_month" type="text"
+											class="birth-month-input input-box" disabled="" value="<%= loginUser.getMemberAge() %>"><input
+											name="birth_day" type="text"
+											class="birth-day-input input-box" disabled="" value="<%= loginUser.getMemberAge()%>">
 									</div>
 								</div>
 							</div>
@@ -87,7 +86,7 @@
 								<div class="info-form-label">직업</div>
 								<div class="info-form-input">
 									<input name="job" type="text" placeholder="제목을 입력해주세요"
-										class="job-input input-box" maxlength="20" value="개발자">
+										class="job-input input-box" maxlength="20" value="">
 								</div>
 							</div>
 							<div class="info-row">
@@ -343,7 +342,7 @@
 								<div class="info-form-input">
 									<input name="phone" type="text" pattern="[0-9]*"
 										placeholder="- 없이 입력해 주세요" class="mobile-input input-box"
-										maxlength="20" value="01099748184">
+										maxlength="20" value="<%= loginUser.getPhone()%>">
 								</div>
 							</div>
 						</form>
@@ -356,9 +355,9 @@
 							이벤트 및 마케팅 정보 수신에 동의(선택)</label>
 					</div>
 					<div class="term-wrapper sub-term">
-						<input readonly="" type="radio" name="email_acceptance"
+						<input type="radio" name="email_acceptance"
 							class="term-input"><label class="term-label email">이메일</label><input
-							readonly="" type="radio" name="sms_acceptance" class="term-input"><label
+							type="radio" name="sms_acceptance" class="term-input"><label
 							class="term-label">SMS</label>
 					</div>
 				</div>

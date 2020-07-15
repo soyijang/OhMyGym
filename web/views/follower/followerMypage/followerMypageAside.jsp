@@ -15,14 +15,14 @@
 </head>
 <body>
  <div class="left-container"><div class="class_category_container">
-            <div class="title"><a href="fmypage.jsp">🏠  마이페이지</a></div>
+            <div class="title"><a href="fmypage.jsp">마이페이지</a></div>
             <ul class="class_category_list">
-                <li id="taside1" class="navi-item " onclick="on(1);"><a href="fmyInfo.jsp">내 정보</a></li>
-                <li id="taside2" class="navi-item " onclick="on(2);"><a href="bookMark.jsp">북마크</a></li>
-                <li id="taside3" class="navi-item" onclick="on(3);"><a href="myOHMoney.jsp">결제관리</a></li>
-                <li id="taside5" class="navi-item " onclick="on(5);"><a href="fmyStamp.jsp">스템프</a></li>
-                <li id="taside6" class="navi-item " onclick="on(6);"><a href="report.jsp">신고</a></li>
-                <li id="taside7" class="navi-item " onclick="on(7);"><a href="deleteMember.jsp">회원탈퇴</a></li>
+                <li id="taside1" class="navi-item " onclick="on(1);"><a href="followerMyInfo.jsp">내 정보</a></li>
+                <li id="taside2" class="navi-item " onclick="on(2);"><a href="followerBookMark.jsp">북마크</a></li>
+                <li id="taside3" class="navi-item" onclick="on(3);"><a href="followerMyOhMoney.jsp">결제관리</a></li>
+                <li id="taside5" class="navi-item " onclick="on(5);"><a href="followerStamp.jsp">스템프</a></li>
+                <li id="taside6" class="navi-item " onclick="on(6);"><a href="followerReport.jsp">신고</a></li>
+                <li id="taside7" class="navi-item " onclick="on(7);"><a href="followerWithdraw.jsp">회원탈퇴</a></li>
             </ul>
 	        </div>
     </div> 
