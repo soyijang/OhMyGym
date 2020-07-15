@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -60,6 +61,51 @@ private Properties prop = new Properties();
 		}
 		
 		return result;
+	}
+
+
+	public Member loginCheck(Connection con, Member loginMember) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member loginUser = null;
+		
+		String query = prop.getProperty("loginSelect");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, loginMember.getMemberId());
+			pstmt.setString(2, loginMember.getMemberPwd());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				loginUser = new Member();
+				
+				loginUser.setName(rset.getString("MEMBER_NAME"));
+				loginUser.setMemberId(rset.getString("MEMBER_ID"));
+				loginUser.setMemberPwd(rset.getString("MEMBER_PWD"));
+				loginUser.setMemberDivision(rset.getString("MEMBER_TYPE"));
+				loginUser.setEmail(rset.getString("EMAIL"));
+				loginUser.setPhone(rset.getString("PHONE"));
+				loginUser.setAddress(rset.getString("ADDRESS"));
+				loginUser.setProfileAttachmentCode(rset.getString("PRORILE_FILECODE"));
+				loginUser.setEnrollDate(rset.getString("ENROLL_DATE"));
+				loginUser.setMemberStatus(rset.getString("MEMBER_STATUS"));
+				loginUser.setGender(rset.getString("GENDER"));
+				loginUser.setEnrollTime(rset.getString("ENROLL_TIME"));
+				loginUser.getMemberAge(rset.getString("MEMBER_AGE"));
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return loginUser;
 	}
 
 }
