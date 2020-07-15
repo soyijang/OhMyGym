@@ -1,7 +1,7 @@
 package com.omg.jsp.member.model.dao;
 
 
-import java.io.FileNotFoundException;
+import java.io.FileNotFoundException; 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,6 +12,8 @@ import java.util.Properties;
 
 import com.omg.jsp.member.model.dao.MemberDao;
 import com.omg.jsp.member.model.vo.Member;
+import static com.omg.jsp.common.JDBCTemplate.*; 
+
 
 public class MemberDao {
 	
@@ -93,7 +95,7 @@ private Properties prop = new Properties();
 				loginUser.setMemberStatus(rset.getString("MEMBER_STATUS"));
 				loginUser.setGender(rset.getString("GENDER"));
 				loginUser.setEnrollTime(rset.getString("ENROLL_TIME"));
-				loginUser.getMemberAge(rset.getString("MEMBER_AGE"));
+				loginUser.setMemberAge(rset.getString("MEMBER_AGE"));
 				
 			}
 			
@@ -104,8 +106,9 @@ private Properties prop = new Properties();
 			close(pstmt);
 			close(rset);
 		}
-		
+		System.out.println("loginuser dao: "+loginUser);
 		return loginUser;
+		
 	}
 
 }
