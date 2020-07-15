@@ -14,119 +14,6 @@ body {
 	overflow-x: hidden;
 }
 
-.NavLink {
-	padding-top: 30px;
-	width: 120px;
-	height: 40px;
-}
-
-.container_top {
-	display: block;
-	color: rgb(105, 111, 116);
-	font-size: 0.8em;
-	font-family: "Noto Sans KR";
-	font-weight: 900;
-	line-height: 1.25em;
-	margin-right: 100px;
-}
-
-.container_top ul li {
-	list-style: none;
-	float: right;
-	margin-left: 20px;
-	margin-right: 10px;
-}
-
-nav {
-	display: block;
-	color: rgb(117, 117, 117);
-	font-size: 0.8em;
-	font-family: "Noto Sans KR";
-	font-weight: bold;
-	line-height: 1.25em;
-}
-
-nav ul {
-	list-style: none;
-}
-
-.container #page_NAME {
-	margin-top: 1px;
-	margin-left: 50px;
-	float: left;
-}
-
-.container #header_bottom_sidemenu {
-	margin-right: 140px;
-}
-
-ul.sideMenu li {
-	width: 120px;
-}
-
-ul.sideMenu li:hover {
-	background-color: orangered;
-	color: white;
-	transition: all ease 0.25s 0s;
-}
-
-ul.sideMenu li:hover div {
-	color: white;
-	transition: all ease 0.25s 0s;
-}
-
-ul.sideMenu ul {
-	display: none;
-	margin-left: -1400px;
-}
-
-ul.sideMenu li ul li {
-	width: 2400px;
-}
-
-ul.sideMenu li ul li a {
-	margin-left: 30px;
-}
-
-ul.sideMenu li:hover>ul {
-	padding-top: 20px;
-	height: 25px;
-	text-align: center;
-	float: left;
-	background: rgba(255, 69, 0, 1);
-	transition: all ease 0.25s 0s;
-	display: block;
-}
-
-ul.sideMenu li:hover>ul li a:hover {
-	background: rgb(179, 21, 0);
-	transition: all ease 0.25s 0s;
-}
-
-.container {
-	min-width: 1200px;
-	width: 100%;
-	height: 70px;
-	margin-top: 11px;
-}
-
-#navigateID ul li {
-	list-style: none;
-	color: rgb(63, 63, 63);
-	float: right;
-	text-align: center;
-	font-weight: bolder;
-	font-size: 14px;
-	margin-top: -13px;
-}
-
-ul#header_bottom_sidemenu li ul li {
-	color: white;
-	text-align: center;
-	margin-left: 200px;
-	margin-top: -4px;
-}
-
 nav#side_nav {
 	font-family: Noto Sans SC;
 	position: absolute;
@@ -437,9 +324,44 @@ textarea.add_postBox:focus {
 	outline: none;
 }
 
-.post_userprofile{
- display: inline-block; 
- vertical-align: top;
+.post_userprofile {
+	display: inline-block;
+	vertical-align: top;
+}
+
+/*포스트 스타일부분*/
+div.user_img{
+	display: inline-block;
+}
+
+div.user_img img{
+	border-radius: 70%; 
+	overflow: hidden;
+}
+
+div.user_profile{
+	display: inline-block; 
+	vertical-align: top;
+}
+
+div.post_Content_img{
+	padding: 20px; 
+	text-align: center;
+}
+
+#open_comment{
+	margin-top: 15px;
+}
+
+#open_comment summary{
+	font-weight: bold; 
+	font-size: 0.9em;
+}
+
+div.post_commentback{
+	background: rgb(245, 245, 245); 
+	width: 100%; 
+	height: 100%;"
 }
 </style>
 </head>
@@ -497,172 +419,36 @@ textarea.add_postBox:focus {
 					<article>
 						<div>
 							<div id="Board">
-									<div class="add_part">
-										<!-- 사용자 프로필 -->
-										<div class="user_img" style="display: inline-block;">
-											<img src="../../../resources/img/crush_ps.png" width="50px"
-												height="50px" style="border-radius: 70%; overflow: hidden;">
-										</div>
-										<div id="user_profile" class="post_userprofile">
-											<em class="user_name">
-												<!--업로드 유저명(DB에서 탐색)-->크러쉬
-											</em><br>
-											<!-- 사용자 프로필 -->
-											<input type="file" name="selectuploadImg"
-												id="selectuploadImg" onchange="loadImg(this)"
-												style="display: none">
-											<a id="addImgBtn" style=""
-												onclick="document.all.selectuploadImg.click()">이미지추가</a>
-											<button id="uploadBtn" onclick="addPost();" style="margin-top: 5px; margin-left: 200px;">업로드</button>
-											<button onclick="offInputPost();">닫기</button>
-										</div>
-										<hr>
-										<div class="add_postcontent"
-											style="border-radius: 8px; border: 1px solid rgb(193, 193, 193); margin-left: 25px;">
-											<div class="add_postBox">
-												<textarea id="add_postBox" class="add_postBox" onkeydown="addresize(this)"
-													onkeyup="addresize(this)" cols="62" name="addpost"
-													placeholder="하고싶은 말을 적어주세요."></textarea>
-												<div id="add_img" style="text-align: center;"></div>
-											</div>
-										</div>
-										<script>
-	                                            function addresize(obj) {
-	                                              obj.style.height = "1px";
-	                                              obj.style.height = (12+obj.scrollHeight)+"px";
-	                                            }
-	
-	                                            var inputImg = 1;
-	                                            function loadImg(value) {
-	                                                if(value.files && value.files[0]) {
-	                                                    var reader = new FileReader();
-	                                                    
-	                                                    reader.onload = function(e) {
-	                                                        var inputImgArea = document.getElementById("add_img");
-	                                                        inputImgArea.innerHTML += "<img id='titleImg"+inputImg+"' width='150' height='150'><br>";
-	                                                        $("#titleImg"+inputImg).attr("src", e.target.result);
-	                                                        inputImg = inputImg + 1;
-	                                                    }
-	                                                    reader.readAsDataURL(value.files[0]);
-	                                                }
-			                                    }
-	                                        </script>
-									</div>
-								<div class="post_part">
+								<div class="add_part">
 									<!-- 사용자 프로필 -->
 									<div class="user_img" style="display: inline-block;">
-										<img src="../../../resources/img/crush_ps.png" width="50px"
-											height="50px" style="border-radius: 70%; overflow: hidden;">
+										<img src="../../../resources/img/crush_ps.png" width="50px" height="50px" style="border-radius: 70%; overflow: hidden;">
 									</div>
-									<div id="user_profile"
-										style="display: inline-block; vertical-align: top;">
-										<em class="user_name">
-											<!--업로드 유저명(DB에서 탐색)-->크러쉬
-										</em><br> <span class="upload_time">5분전</span>
+									<div id="user_profile" class="post_userprofile">
+										<em class="user_name"> <!--업로드 유저명(DB에서 탐색)-->크러쉬
+										</em><br>
+										<!-- 사용자 프로필 -->
+										<input type="file" name="selectuploadImg" id="selectuploadImg"
+											onchange="loadImg(this)" style="display: none"> <a
+											id="addImgBtn" style=""
+											onclick="document.all.selectuploadImg.click()">이미지추가</a>
+										<button id="uploadBtn" onclick="addPost();"
+											style="margin-top: 5px; margin-left: 200px;">업로드</button>
+										<button onclick="offInputPost();">닫기</button>
 									</div>
 									<hr>
-									<div class="post_Content">
-										<textarea class="post_box" cols="60" name="post_content"
-											readonly>  이상하게도 말일은 뭐가 이리 바쁜지 모르겠어요.그냥 눈만 감았다 뜬것 같은데 어...</textarea>
-									</div>
-									<div id="post_Content_img"
-										style="padding: 20px; text-align: center;">
-									</div>
-									<div id="MarkAndLike" style="margin-top: 20px;">
-										<span class="like"
-											style="margin-right: 10px; font-weight: bold;"> <i
-											class="fas fa-thumbs-up" style="margin-right: 5px;"></i>좋아요 <a>74</a>
-										</span> <span class="mark" style="font-weight: bold;"> <i
-											class="far fa-bookmark" style="margin-right: 5px;"></i>북마크 <a>20</a>
-										</span>
-									</div>
-									<details id="open_comment" open style="margin-top: 15px;">
-										<summary style="font-weight: bold; font-size: 0.9em;">댓글</summary>
-										<div
-											style="background: rgb(245, 245, 245); width: 100%; height: 100%;">
-											<div id="post_comments">
-												<div class="post_part_comment" style="padding: 5px;">
-													<div class="user_img"
-														style="display: block; float: left; margin-top: 10px;">
-														<img src="../../resources/img/crush_ps.png" width="30px"
-															height="30px"
-															style="border-radius: 70%; overflow: hidden;">
-													</div>
-													<div id="user_profile"
-														style="display: block; float: left; margin-left: 15px; margin-top: 10px;">
-														<em class="user_name_comment"
-															style="font-size: 10px; display: block; float: left;">
-															<!--업로드 유저명(DB에서 탐색)-->크러쉬
-														</em><br> <span class="upload_time_comment"
-															style="font-size: 10px;">5분전</span>
-													</div>
-													<textarea class="comments_box" cols="55"
-														name="post_comments_content"
-														style="display: block; height: 60px; float: left;"
-														readonly>동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시</textarea>
-												</div>
-											</div>
-											<form>
-											<div id="add_comments">
-												<div class="add_part_comment"
-													style="padding: 5px; min-height: 40px;">
-													<div style="float: left;">
-														<textarea placeholder="댓글을 입력해주세요."
-															onkeydown="resize(this)" onkeyup="resize(this)"
-															class="input_comments_box" cols="42"
-															name="post_comments_content"
-															style="float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;"></textarea>
-														<button id="add_comment_btn">입력하기</button>
-													</div>
-												</div>
-											</div>
-											</form>
-											<script>
-                                                    function resize(obj) {
-                                                       obj.style.height = "1px";
-                                                       obj.style.height = (12+obj.scrollHeight)+"px";
-                                                       $(".add_part_comment").css("height", $(".input_comments_box").height()+12);
-                                                     }
-                                                    
-                                                    function addPost(){
-	                                            				var writerId = "test01";
-                                                    			var writer = "한진희";
-	                                            				var content = $("#add_postBox").val();
-	                                            				
-	                                            				console.log(writer);
-	                                            				console.log(content);
-	                                            				$.ajax({
-	                                            					url: "/omg/insertGroupCommu.follower",
-	                                            					data: {writer: writer, content: content, writerId: writerId},
-	                                            					type: "post",
-	                                            					success: function(data) {
-	                                            						console.log(data);
-// 	                                            						var $replySelectTable = $("#replySelectTable tbody");
-// 	                                            						$replySelectTable.html('');
-	                                            						
-	                                            						//for(var key in data) {
-// 	                                            							var $tr = $("<tr>");
-// 	                                            							var $writerTd = $("<td>").text(data[key].nickName).css("width", "100px");
-// 	                                            							var $contentTd = $("<td>").text(data[key].bContent).css("width", "400px");
-// 	                                            							var $dateTd = $("<td>").text(data[key].bDate).css("width", "200px");
-	                                            							
-// 	                                            							$tr.append($writerTd);
-// 	                                            							$tr.append($contentTd);
-// 	                                            							$tr.append($dateTd);
-	                                            							
-// 	                                            							$replySelectTable.append($tr);
-	                                            						//}
-	                                            						
-	                                            					},
-	                                            					error: function() {
-	                                            						console.log("실패!")
-	                                            					}
-	                                            			});
-	                                 				}
-                                            
-                                            </script>
+									<div class="add_postcontent"
+										style="border-radius: 8px; border: 1px solid rgb(193, 193, 193); margin-left: 25px;">
+										<div class="add_postBox">
+											<textarea id="add_postBox" class="add_postBox"
+												onkeydown="addresize(this)" onkeyup="addresize(this)"
+												cols="62" name="addpost" placeholder="하고싶은 말을 적어주세요."></textarea>
+											<div id="add_img" style="text-align: center;"></div>
 										</div>
-									</details>
+									</div>
+
+								</div>
+								<div id="postcontainer">
 								</div>
 							</div>
 						</div>
@@ -672,18 +458,100 @@ textarea.add_postBox:focus {
 		</article>
 	</section>
 	<script>
-        function onInputPost(){
-            $(".add_part").css("display","block");
-        }
+		function addresize(obj) {
+			obj.style.height = "1px";
+			obj.style.height = (12 + obj.scrollHeight) + "px";
+		}
 
-        function offInputPost(){
-            $(".add_part").css("display","none");
-        }
+		var inputImg = 1;
+		function loadImg(value) {
+			if (value.files && value.files[0]) {
+				var reader = new FileReader();
 
-        $(".comments_box").height(1).height( $(".comments_box").prop('scrollHeight'));
-        $(".post_part_comment").css("height", $(".comments_box").height());
-        $(".comments_box").css("height", $(".comments_box").height()/2);
-    </script>
+				reader.onload = function(e) {
+					var inputImgArea = document.getElementById("add_img");
+					inputImgArea.innerHTML += "<img id='titleImg"+inputImg+"' width='150' height='150'><br>";
+					$("#titleImg" + inputImg).attr("src", e.target.result);
+					inputImg = inputImg + 1;
+				}
+				reader.readAsDataURL(value.files[0]);
+			}
+		}
+	</script>
+
+	<script>
+		function onInputPost() {
+			$(".add_part").css("display", "block");
+		}
+
+		function offInputPost() {
+			$(".add_part").css("display", "none");
+		}
+
+		$(".comments_box").height(1).height(
+				$(".comments_box").prop('scrollHeight'));
+		$(".post_part_comment").css("height", $(".comments_box").height());
+		$(".comments_box").css("height", $(".comments_box").height() / 2);
+	</script>
+
+	<script>
+		function resize(obj) {
+			obj.style.height = "1px";
+			obj.style.height = (12 + obj.scrollHeight) + "px";
+			$(".add_part_comment").css("height",
+					$(".input_comments_box").height() + 12);
+		}
+
+		function addPost() {
+			var writerId = "test01";
+			var writer = "한진희";
+			var content = $("#add_postBox").val();
+			$("#add_postBox").val('');
+			console.log(writer);
+			console.log(content);
+			$.ajax({
+				url : "/omg/insertGroupCommu.follower",
+				data : {
+					writer : writer,
+					content : content,
+					writerId : writerId
+				},
+				type : "post",
+				success : function(data) {
+					var $addPostPart = $("#postcontainer");
+					$addPostPart.prepend("<div id='postcontainer'>" +
+						"<div class='post_part' id='postcontent'>"+
+						"<div class='user_img' style='display: inline-block;'>"+
+						"<img src='' width='50px' height='50px'></div>"+
+						"<div id='user_profile' class='user_profile'>"+
+						"<em class='user_name'>"+data.groupUserId+"</em><br>"+ 
+						"<span class='upload_time'>"+"</span></div><hr>"+
+						"<div class='post_Content'>"+
+						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data.groupContent+"</textarea></div>"+	
+						"<div id='post_Content_img'>"+"</div>"+
+						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
+						"<span class='like' style='margin-right: 10px; font-weight: bold;'> <i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
+						"좋아요<a>"+"</a></span>"+
+						"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
+						"북마크 <a>"+"</a></span></div>"+
+						"<details id='open_comment' open style='margin-top: 15px;'>"+
+						"<summary>댓글</summary>"+
+						"<div class='post_commentback'>"+
+						"<div id='post_comments'>"+"</div>"+
+							"<form><div id='add_comments'>"+
+									"<div class='add_part_comment' style='padding: 5px; min-height: 40px;'>"+
+										"<div style='float: left;'>"+
+											"<textarea placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
+											"</textarea>"+
+											"<button id='add_comment_btn'>입력하기</button>"+
+											"</div></div></div></form></div></details></div></div>");
+				},
+				error : function() {
+					console.log("실패!")
+				}
+			})
+		}
+	</script>
 	<div
 		style="position: absolute; top: 1100px; margin-left: 0px; margin-right: 0px;">
 		<%@ include file="../../common/footer.jsp"%>

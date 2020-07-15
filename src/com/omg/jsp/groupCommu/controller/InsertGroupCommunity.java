@@ -34,10 +34,9 @@ public class InsertGroupCommunity extends HttpServlet {
 		requestPost.setGroupContent(content);
 		
 		int result = new GroupCommuService().insertPost(requestPost);
-		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(requestPost, response.getWriter());
-		
-		response.sendRedirect("index.jsp");
 		
 	}
 
