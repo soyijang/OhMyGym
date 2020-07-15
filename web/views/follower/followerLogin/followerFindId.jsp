@@ -195,7 +195,7 @@ a.sendNum {
 		</div>
 	</div>
 
-	<%@ include file="../../common/followerNav.jsp"%>
+	<%@ include file="/views/common/nonNav.jsp"%>
 	<!-- 첫목록 -->
 	<section style="height: 800px;">
 		<div class="login_wrap">

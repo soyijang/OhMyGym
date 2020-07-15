@@ -124,7 +124,7 @@
 <body>
 <div class="container_top">
         <ul class="header_top_menu" id="header_top">
-            <li id="webIntro"><a href="views/visitor/login.jsp">로그인</a></li>
+            <li id="webIntro"><a href="/omg/views/visitor/login.jsp">로그인</a></li>
             <li id="webClasses">회원가입</li>
         </ul>
     </div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*" %>
+	pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.Member"%>
+<% Member loginUser = (Member) session.getAttribute("loginUser");%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,7 +136,7 @@ a {
 	<div class="container_top">
 		<ul class="header_top_menu" id="header_top">
 			<li id="webIntro" style="color: rgb(63, 63, 63);">로그아웃</li>
-			<li id="webClasses"><a href="../follower/followerMypage/followerMyInfo.jsp"
+			<li id="webClasses"><a href="/omg/views/follower/followerMypage/followerMyInfo.jsp"
 				style="color: rgb(63, 63, 63);">마이페이지</a></li>
 		</ul>
 	</div>
