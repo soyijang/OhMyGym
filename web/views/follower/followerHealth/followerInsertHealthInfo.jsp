@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -192,6 +193,20 @@
     </aside>
 
 	<section>
+	
+	<!-- 임시 loginUser -->
+	<% Member loginUser = new Member(); 
+	   loginUser.setMemberId("test1");
+	   loginUser.setMemberDivision("F");
+	   loginUser.setName("이김박");
+	   loginUser.setEmail("aklj@lkad.com");
+	   loginUser.setPhone("010-1234-4212");
+	   loginUser.setAddress("경기도 용인시 기흥구");
+	   loginUser.setEnrollDate("2002-10-20");
+	   loginUser.setMemberStatus("Y");
+	   loginUser.setEnrollTime("20:20:20");
+	   loginUser.setMemberAge("1993-12-25");
+	   %>
         
         <article id="titleArea">
             <div>
@@ -245,46 +260,53 @@
 	              	}
 	              </script>
 	              
-	              <form action="" method="post">
+	              <form action="<%= request.getContextPath() %>/Update.hi" method="post">
+	              	<input type="hidden" value="<%= loginUser.getMemberId() %>" name="userId">
 	              	<table id="modifyHealthInfo" style="width:90%;">
 	              	<tr>
 	              		<th colspan="4" style="height: 50px;"><h3>건강정보 수정</h3></th>
 	              	</tr>
 	              	<tr>
 	              		<th>키</th>
-	              		<td><input type="text" style="width: 100px;"> cm</td>
+	              		<td><input type="text" style="width: 100px;" name="height"> cm</td>
 	              		<th>몸무게</th>
-	              		<td><input type="text" style="width: 100px;"> kg</td>
+	              		<td><input type="text" style="width: 100px;" name="weight"> kg</td>
 	              	</tr>
 	              	<tr>
 	              		<th>운동시간</th>
-	              		<td><input type="text" style="width: 100px;"> 시간  <input type="text" style="width: 100px;"> 분</td>
+	              		<td>
+		              		<input type="text" style="width: 100px;" name="exerciseH"> 시간  
+		              		<input type="text" style="width: 100px;" name="exerciseM"> 분
+		              	</td>
 	              		<th>수면시간</th>
-	              		<td><input type="text" style="width: 100px;"> 시간  <input type="text" style="width: 100px;"> 분</td>
+	              		<td>
+	              			<input type="text" style="width: 100px;" name="sleepH"> 시간  
+	              			<input type="text" style="width: 100px;" name="sleepM"> 분
+	              		</td>
 	              	</tr>
 	              	<tr>
 	              		<th>집중 부위</th>
-	              		<td><input type="text" placeholder="ex) 팔, 허벅지, 복부 등"></td>
+	              		<td><input type="text" placeholder="ex) 팔, 허벅지, 복부 등" name="focus"></td>
 	              		<th>활동 수준</th>
 	              		<td>
-	              			<select style="width: 308px;">
-	              				<option value="">활동량 매우 많음</option>
-	              				<option value="">활동량 많음</option>
-	              				<option value="">보통</option>
-	              				<option value="">활동량 적음</option>
-	              				<option value="">활동량 매우 적음</option>
+	              			<select style="width: 308px;" name="active">
+	              				<option value="veryHard">활동량 매우 많음</option>
+	              				<option value="hard">활동량 많음</option>
+	              				<option value="normal">보통</option>
+	              				<option value="few">활동량 적음</option>
+	              				<option value="veryFew">활동량 매우 적음</option>
 	              			</select>
 	              		</td>
 	              	</tr>
 	              	<tr>
 	              		<th>동기부여</th>
-	              		<td><input type="text" placeholder="ex) 다이어트 자극사진을 봤을 때 등"></td>
+	              		<td><input type="text" placeholder="ex) 다이어트 자극사진을 봤을 때 등" name="motive"></td>
 	              		<th>신체적 어려움</th>
-	              		<td><input type="text" placeholder="ex) 무릎 통증이 있음, 허리 디스크 등"></td>
+	              		<td><input type="text" placeholder="ex) 무릎 통증이 있음, 허리 디스크 등" name="bodyUneasy"></td>
 	              	</tr>
 	              	<tr>
 	              		<th>목표</th>
-	              		<td colspan="3"><input type="text" style="width:740px;" placeholder="ex) x월까지 xx키로 감량 등"></td>
+	              		<td colspan="3"><input type="text" style="width:740px;" placeholder="ex) x월까지 xx키로 감량 등" name="goal"></td>
 	              	</tr>
 	              	<tr>
 	              		<td colspan="4" style="text-align: center;">
@@ -295,20 +317,11 @@
 	            </form>
 	              
             </div>
-            <!-- 현재 건강정보 출력 종료 -->
-            
-            
-            <!-- 건강정보 수정 -->
-<!--        <div id="modifyHealthInfo">
-           		
-            </div> -->
-
-           
-            
-           
         </article>
     </section>
+    
     <br><br>
+    
     <footer style="clear: both;">
         <%@ include file="../../common/footer.jsp"%>
     </footer>
