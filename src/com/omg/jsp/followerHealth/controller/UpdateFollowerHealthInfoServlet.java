@@ -1,23 +1,26 @@
-package com.omg.jsp.member.controller.followerHealth;
+package com.omg.jsp.followerHealth.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.omg.jsp.followerHealth.model.vo.HealthHistory;
+
 /**
  * Servlet implementation class UpdateFollowerHealthInfo
  */
 @WebServlet("/Update.hi")
-public class UpdateFollowerHealthInfo extends HttpServlet {
+public class UpdateFollowerHealthInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateFollowerHealthInfo() {
+    public UpdateFollowerHealthInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -54,15 +57,17 @@ public class UpdateFollowerHealthInfo extends HttpServlet {
 //		System.out.println("몸불편한곳 : " + bodyUneasy);
 //		System.out.println("목표 : " + goal);
 		
+		HealthHistory hh = new HealthHistory();
+		
+		
+		
 		
 		
 		
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
