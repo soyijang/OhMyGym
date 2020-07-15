@@ -1,8 +1,6 @@
 package com.omg.jsp.member.model.service;
 
-import static com.omg.jsp.common.JDBCTemplate.close;
-import static com.omg.jsp.common.JDBCTemplate.commit;
-import static com.omg.jsp.common.JDBCTemplate.getConncection;
+import static com.omg.jsp.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
@@ -27,14 +25,13 @@ public int insertMember(Member requestMember) {
 
 public Member loginCheck(Member loginMember) {
 	
-	Connection con = getConncection();
-	Member loginUser= new MemberDao().loginCheck(con, loginMember);
-	System.out.println("service : " + con);
-	System.out.println("service : " + loginMember);
-	
-	close(con);
-	return loginUser;
-}
+		Connection con = getConncection();
+		Member loginUser= new MemberDao().loginCheck(con, loginMember);
+		System.out.println("login service : " + loginUser);
+		
+		close(con);
+		return loginUser;
+	}
 }
 
 

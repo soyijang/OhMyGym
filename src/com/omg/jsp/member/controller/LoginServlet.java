@@ -30,13 +30,14 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("_loginId");
-		String pwd = request.getParameter("_loginPw");
+		
+		String id = request.getParameter("loginId");
+		String pwd = request.getParameter("loginPw");
 		String type = request.getParameter("loginType");
 		
-		System.out.println(type);
-		System.out.println(id);
-		System.out.println(pwd);
+		System.out.println("loginid : " + id);
+		System.out.println("loginpwd : " + pwd);
+		System.out.println("loginType : " + type);
 		
 		Member loginMember = new Member();
 		
@@ -48,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(loginUser!= null) {
 			
-			request.getSession().setAttribute("loginUser", loginMember);
+			request.getSession().setAttribute("loginUser", loginUser);
 			
 			switch(type) {
 			
@@ -65,7 +66,6 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 
-	
 	}
 
 	/**
