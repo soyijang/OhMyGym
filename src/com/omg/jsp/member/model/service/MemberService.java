@@ -6,6 +6,7 @@ import java.sql.Connection;
 
 import com.omg.jsp.member.model.dao.MemberDao;
 import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.member.model.vo.TrainerInfo;
 
 public class MemberService {
 	
@@ -23,6 +24,7 @@ public int insertMember(Member requestMember) {
 		return result;
 	}
 
+
 public Member loginCheck(Member loginMember) {
 	
 		Connection con = getConncection();
@@ -32,6 +34,24 @@ public Member loginCheck(Member loginMember) {
 		close(con);
 		return loginUser;
 	}
+
+
+
+
+public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
+
+	Connection con = getConncection();
+	
+	int result = new MemberDao().insertTrainerInfo(con, requestTrainer, memberId);
+	
+	if(result > 0) {
+		commit(con);
+	}
+	close(con);
+	
+	return result;
+}
+
 }
 
 

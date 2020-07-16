@@ -5,8 +5,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"> </script>
+<script>
+	function passwordCheckFunction() {
+		var password1 = $("#memberPwd1").val();
+		var password2 = $("#memberPwd2").val();
+		if(password1 != password2) {
+			$("#checkMessage").html("비밀번호가 일치하지 않습니다.");
+		} else {
+			$("#checkMessage").html("");
+		}
+		
+	}
+	
+	function idCheckFunction() {
+		var memberId = $("#memberId").val();
+		$.ajax({
+			type: 'POST',
+			url: '/omg/IdCheckServlet',
+			success: function(result) {
+				if(result == 1) {
+					
+					alert("사용할 수 있는 아이디입니다.");
+				} else {
+					
+					alert("사용중인 아이디입니다. 다른 아이디를 입력해주세요");
+				}
+			}
+		});
+	}
+</script>
 <style>
 #main-center {
 	margin-left: 450px;
@@ -148,8 +176,8 @@ body {
 												<td><input type="text" name="memberId" id="memberId"
 													value="" style="height: 40px" class="MS_input_txt w137"
 													size="50" maxlength="12" placeholder="아이디를 입력해주세요">
-													<button onclick="idCheck()"
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">중복확인</button>
+													<a onclick="IdCheckFunction()"
+														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">중복확인</a>
 													<span class="idpw-info"><br>
 														<p style="font-size: 0.7em; color: orangered;">*
 															회원아이디는 영문/숫자만 사용가능합니다.</p> </span> </a></td>
@@ -159,10 +187,11 @@ body {
 											<tr>
 												<th>비밀번호</th>
 												<td><input type="password" name="memberPwd"
-													id="memberPwd" style="height: 40px"
+													id="memberPwd1" style="height: 40px"
 													class="MS_input_txt w137" value="" size="50" maxlength="20"
-													onkeyup="check_pwd_length(this, 'password');"
+													onkeyup="passwordCheckFunction();"
 													placeholder="비밀번호를 입력해주세요"> <span class="idpw-info"><br>
+													<span id="result"></apan>
 														<p style="font-size: 0.7em; color: orangered;">* 비밀번호는
 															8자 이상으로 입력해 주세요.</p> </span></td>
 											</tr>
@@ -171,8 +200,9 @@ body {
 												<td><input type="password" name="memberPwd2"
 													id="memberPwd2" style="height: 40px"
 													class="MS_input_txt w137" value="" size="50" maxlength="20"
-													onkeyup="check_pwd_length(this, 'repassword');"
-													placeholder="비밀번호를 한번 더 입력해주세요"></td>
+													onkeyup="passwordCheckFunction();"
+													placeholder="비밀번호를 한번 더 입력해주세요">
+													<sapn id="checkMessage" style="color:red; font-weigth:bold"></sapn></td>
 											</tr>
 
 											<tr>
@@ -331,9 +361,9 @@ body {
 														<option value="29">29</option>
 														<option value="30">30</option>
 														<option value="31">31</option>
-												</select> 일&nbsp;&nbsp;<input type="radio" name="gender" value="1"
-													class="MS_radio">남 <input type="radio"
-													name="gender" value="2" class="MS_radio" checked="">여<br>
+												</select> 일&nbsp;&nbsp;<input type="radio" name="gender" value="M"
+													class="MS_radio">남 <input type="radio" checked=""
+													name="gender" value="F" class="MS_radio" >여<br>
 												<br>
 											</tr>
 
@@ -348,8 +378,8 @@ body {
 															id="hpost" style="width: 100px; height: 40px;"
 															class="MS_input_txt" value="" size="7" maxlength="15"
 															readonly="">
-														<button onclick="goPopup()"
-															style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">주소검색</button>
+														<a onclick="goPopup()"
+															style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">주소검색</a>
 													</div>
 												</td>
 											</tr>
@@ -372,24 +402,18 @@ body {
 
 											<tr>
 												<th>이메일</th>
-												<td class="select"><input type="hidden" name="email"
-													id="oldemail" value=""> <input type="hidden"
-													name="email" id="email" value=""> <input
-													type="text" name="email1" id="email1"
+												<td class="select">
+												
+													<input type="text" name="email1" id="email1" style="width: 100px; height: 40px;"
+													size="10" maxlength="20" value="">
+													<span>@</span> <input
+														type="text" name="email2" id="email2"
+														style="width: 200px; height: 40px;"
+														value="" size="15" maxlength="25">
+											<select name="selectEmail" id="selectEmail"
 													style="width: 100px; height: 40px;"
-													onchange="this.form.emailcheck.value=''"
-													class="MS_input_txt" size="10" maxlength="20" value="">
-													<span>@</span> <span id="direct_email"
-													style="margin-top: 3px; display: inline-block"> <input
-														type="text" name="email3" id="email3"
-														style="width: 200px; height: 40px;" class="MS_input_txt"
-														value="" size="15" maxlength="25"
-														onchange="this.form.emailcheck.value=''">
-												</span> <select name="email2" id="email2"
-													class="MS_select MS_email"
-													style="width: 100px; height: 40px;"
-													style="margin-right:5px;" onchange="viewdirect()">
-														<option value="direct">직접입력</option>
+													style="margin-right:5px;" >
+														<option value="1">직접입력</option>
 														<option value="naver.com">naver.com</option>
 														<option value="hotmail.com">hotmail.com</option>
 														<option value="hanmail.net">hanmail.net</option>
@@ -400,8 +424,7 @@ body {
 														<option value="gmail.com">gmail.com</option>
 														<option value="netian.com">netian.com</option>
 												</select>
-													<button onclick=""
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">인증하기</button>
+													
 												</td>
 											</tr>
 
@@ -411,9 +434,11 @@ body {
 
 											<tr>
 												<th>휴대폰</th>
-												<td><input type="hidden" name="tel1" form="join_form"
-													value=""> <select name="etcphone1" id="tel1"
-													form="join_form" style="width: 100px; height: 40px;"
+												<td><input type="hidden" name="tel"
+													form="join_form" value=""> 
+													<select
+													name="tel1" id="etcphone1" 
+													style="width: 100px; height: 40px;"
 													class="MS_select MS_tel">
 														<option value="">선택</option>
 														<option value="010">010</option>
@@ -422,15 +447,16 @@ body {
 														<option value="017">017</option>
 														<option value="018">018</option>
 														<option value="019">019</option>
-												</select> - <input type="text" name="tel2" form="join_form" id="tel2"
-													class="MS_input_tel" value="" size="4" maxlength="4"
-													style="width: 115px; height: 40px;"> - <input
-													type="text" name="tel3" form="join_form" id="tel3"
-													class="MS_input_tel" value="" size="4" maxlength="4"
-													style="width: 115px; height: 40px;" minlength="4">
+												</select> - <input type="text" name="tel2" 
+													id="etcphone2" class="MS_input_tel" value="" size="4"
+													maxlength="4" style="width: 115px; height: 40px;">
+													- <input type="text" name="tel3" 
+													id="etcphone3" class="MS_input_tel" value="" size="4"
+													maxlength="4" style="width: 115px; height: 40px;"
+													minlength="4">
 
-													<button onclick=""
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">본인인증</button>
+													<a onclick=""
+														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">본인인증</a>
 												</td>
 
 
@@ -438,27 +464,23 @@ body {
 											</tr>
 											<tr>
 												<th>은행</th>
-												<td><input type="hidden" name="bank" form="join_form"
-													value=""> <select name="bank" id="bank"
-													form="join_form" style="width: 100px; height: 40px;"
+												<td><input type="hidden" name="bankCode" form="join_form"
+													value=""> <select name="bankCode" id="bankCode"
+												style="width: 100px; height: 40px;"
 													class="MS_bank">
 														<option value="">선택</option>
-														<option value="기업은행">기업은행</option>
-														<option value="국민은행">국민은행</option>
-														<option value="우리은행">우리은행</option>
-														<option value="수협">수협</option>
-														<option value="농협">농협</option>
-														<option value="부산은행">부산은행</option>
-														<option value="SC제일은행">SC제일은행</option>
-														<option value="신한은행">신한은행</option>
-														<option value="KEB하나은행">KEB하나은행</option>
-														<option value="광주은행">광주은행</option>
-														<option value="우체국">우체국</option>
-														<option value="대구은행">대구은행</option>
-														<option value="경남은행">경남은행</option>
+														<option value="1">국민은행</option>
+														<option value="2">우리은행</option>
+														<option value="3">수협</option>
+														<option value="4">농협</option>
+														<option value="5">기업은행</option>
+														<option value="6">하나은행</option>
+														<option value="7">신한은행</option>
+														<option value="8">카카오</option>
+													
 
-												</select> <input type="text" name="bank_no" form="join_form"
-													id="bank_no" style="width: 255px; height: 40px;"
+												</select> <input type="text" name="bankAccount" 
+													id="bankAccount" style="width: 255px; height: 40px;"
 													class="MS_bank" value="" size="30" maxlength="100"
 													placeholder="계좌번호입력 ('-'제외)">
 											</tr>
@@ -515,33 +537,29 @@ body {
             
          }
          
-         $(function(){
-        	 $("#idCheck").click(function(){
-        		 var memberId = $("#memberId").val();
-        		 
-        		 console.log(memberId);
-        		 
-        		 $.ajax({
-        			 url: "/jsp/idCheck.me",
-        			 type: "post",
-        			 data: {memberId: memberId},
-        			 success: function(data) {
-        				 if(data == "fail") {
-        					 alert("아이디가 중복됩니다.");
-        					 
-        				 } else {
-        					 alert("사용가능한 아이디입니다.")
-        				 }
-        			 },
-        			 error: function(data) {
-        				 console.log("실패!");
-        			 }
-        		 })
-        	 })
-         })
+        
          
       
    </script>
+   
+   <script type="text/javascript">
+		//이메일 입력방식 선택 
+		$('#selectEmail').change(function(){
+			$("#selectEmail option:selected").each(function () {
+				if($(this).val()== '1'){ 
+					//직접입력일 경우
+					$("#email2").val(''); 
+					//값 초기화 
+					$("#email2").attr("disabled",false); 
+					//활성화
+				}else{ 
+					//직접입력이 아닐경우
+					$("#email2").val($(this).text()); 
+					//선택값 입력 
+					$("#email2").attr("disabled",true); 
+					//비활성화
+					} }); });
+	</script>
 
 </body>
 </html>
