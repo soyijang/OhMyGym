@@ -8,6 +8,13 @@ public class HealthInfo {
 	private int healthInfoNowManagecode;
 	
 	public HealthInfo() {}
+	
+	public HealthInfo(String memberId, String healthData, String healthInfoCode) {
+		super();
+		this.memberId = memberId;
+		this.healthData = healthData;
+		this.healthInfoCode = healthInfoCode;
+	}
 
 	public HealthInfo(String memberId, String healthData, String healthInfoCode, int healthInfoNowManagecode) {
 		super();

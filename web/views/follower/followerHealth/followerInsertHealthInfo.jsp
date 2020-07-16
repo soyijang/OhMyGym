@@ -183,7 +183,7 @@ th {
 	border: 1px solid gray;
 }
 
-#modifyHealthInfo input[type="reset"], #modifyHealthInfo input[type="submit"]
+#modifyHealthInfo input[type="reset"], #modifyHealthInfo input[type="button"]
 	{
 	text-align: center;
 	border: none;
@@ -192,7 +192,7 @@ th {
 	cursor: pointer;
 }
 
-#modifyHealthInfo input[type="submit"] {
+#modifyHealthInfo input[type="button"] {
 	background: orangered;
 	color: white;
 }
@@ -243,9 +243,9 @@ th {
 						<td><%= list.get(1).getHealthData() %> kg</td>
 					</tr>
 					<tr>
-						<th>운동시간</th>
-						<td><%= list.get(2).getHealthData() %></td>
 						<th>수면시간</th>
+						<td><%= list.get(2).getHealthData() %></td>
+						<th>운동시간</th>
 						<td><%= list.get(3).getHealthData() %></td>
 					</tr>
 					<tr>
@@ -293,30 +293,30 @@ th {
 	              	}
 	              </script>
 
-				<form action="<%= request.getContextPath() %>/Update.hi" method="post">
-					<input type="hidden" value="<%= loginUser.getMemberId() %>"
-						name="userId">
+				<form id="updateForm" action="<%= request.getContextPath() %>/insertHistory.hi" method="post">
+					<input type="hidden" value="<%= loginUser.getMemberId() %>" name="userId">
 					<table id="modifyHealthInfo" style="width: 90%;">
 						<tr>
 							<th colspan="4" style="height: 50px;"><h3>건강정보 수정</h3></th>
 						</tr>
 						<tr>
 							<th>키</th>
-							<td><input type="text" style="width: 100px;" name="height"
-								value="<%if(list.get(0).getHealthData() != null) {%><%= list.get(0).getHealthData() %><% } %>">
-								cm</td>
+							<td>
+								<input type="text" style="width: 100px;" name="height" value="<%if(list.get(0).getHealthData() != null) {%><%= list.get(0).getHealthData() %><% } %>">
+								cm
+							</td>
 							<th>몸무게</th>
 							<td><input type="text" style="width: 100px;" name="weight"
 								value="<%if(list.get(1).getHealthData() != null) {%><%= list.get(1).getHealthData() %><% } %>">
 								kg</td>
 						</tr>
 						<tr>
-							<th>운동시간</th>
-							<td><input type="text" name="exercise"
-								value="<%if(list.get(2).getHealthData() != null) {%><%= list.get(2).getHealthData() %><% } %>">
-							</td>
 							<th>수면시간</th>
 							<td><input type="text" style="width: 100px;" name="sleep"
+								value="<%if(list.get(2).getHealthData() != null) {%><%= list.get(2).getHealthData() %><% } %>">
+							</td>
+							<th>운동시간</th>
+							<td><input type="text" name="exercise"
 								value="<%if(list.get(3).getHealthData() != null) {%><%= list.get(3).getHealthData() %><% } %>">
 							</td>
 						</tr>
@@ -359,13 +359,28 @@ th {
 						<tr>
 							<td colspan="4" style="text-align: center;"><input
 								type="reset" value="취소" onclick="showInfo();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-								type="submit" value="저장"></td>
+								type="button" value="저장" id="checkBtn" onclick="go();"></td>
 						</tr>
 					</table>
 					<script>
 	              	function showInfo() {
 	              		$("#healthInfoNowTable").show();
 	              		$("#modifyHealthInfo").hide();
+	              	}
+	              	
+	              	function go() {
+ 	              		var count = 0;
+	              		var input = document.getElementsByTagName("input");
+	              		for(var i = 0; i < input.length; i++) {
+	              			if(input[i].value == "") {
+	              				count += 1;
+	              			}
+	              		}
+						if(count == 0) {
+							$("#updateForm").submit();
+ 						} else {
+							alert("내용을 모두 입력 해 주세요.");
+						}
 	              	}
 	              </script>
 				</form>

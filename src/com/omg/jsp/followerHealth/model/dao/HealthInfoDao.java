@@ -64,5 +64,17 @@ public class HealthInfoDao {
 
 		return list;
 	}
+
+	public int insertHealthHistory(Connection con, ArrayList<HealthInfo> list) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertHealthHistory");
+		
+		
+		
+		
+		return result;
+	}
 }
 

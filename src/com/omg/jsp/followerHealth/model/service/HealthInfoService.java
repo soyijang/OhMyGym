@@ -22,6 +22,22 @@ public class HealthInfoService {
 		return list;
 	}
 
+	public int insertHealthHistory(ArrayList<HealthInfo> list) {
+		Connection con = getConncection();
+		
+		int result = new HealthInfoDao().insertHealthHistory(con, list);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
 
 
 }
