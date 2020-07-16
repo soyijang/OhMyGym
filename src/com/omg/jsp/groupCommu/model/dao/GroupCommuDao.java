@@ -5,12 +5,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.omg.jsp.groupCommu.model.vo.GroupCommuPost;
 import com.omg.jsp.member.model.dao.MemberDao;
+import static com.omg.jsp.common.JDBCTemplate.*;
+
 
 public class GroupCommuDao {
 
@@ -27,13 +30,13 @@ public class GroupCommuDao {
 		}
 	}
 	
-	public int insertReply(Connection con, GroupCommuPost requestPost) {
+	public int insertPost(Connection con, GroupCommuPost requestPost) {
 		
 		PreparedStatement pstmt = null;
 		
 		int result = 0;
 		
-		String query =prop.getProperty("insertReply");
+		String query =prop.getProperty("insertpost");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -52,8 +55,41 @@ public class GroupCommuDao {
 		return result;
 	}
 
-	public ArrayList<GroupCommuPost> selectPostList(Connection con) {
-		return null;
+	public ArrayList<GroupCommuPost> selectPost(Connection con) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<GroupCommuPost> list = null;
+		
+		String query = prop.getProperty("selectPostList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<GroupCommuPost>();
+			
+			while(rset.next()) {
+				GroupCommuPost post = new GroupCommuPost();
+				post.setGroupUserId(rset.getString("MEMBER_ID"));
+				post.setGroupContent(rset.getString("GROUP_CONTENT"));
+				post.setGroupDate(rset.getString("GROUP_DATE"));
+				post.setGroupFileCode(rset.getString("GROUP_FILECODE"));
+				post.setGroupType(rset.getString("GROUP_TYPE"));
+				post.setGroupDateTime(rset.getString("GROUP_TIME"));
+				list.add(post);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
 	}
 
 }
