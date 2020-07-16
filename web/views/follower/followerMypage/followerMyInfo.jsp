@@ -20,16 +20,14 @@
 			<div class="right-container">
 				<div class="info-container">
 
-					<div class="head_article">
-						<h3 class="info-header">회원 정보 수정</h3>
-					</div>
+					<h3 class="info-header">회원 정보 수정</h3>
 
 					<div class="info-body">
 						<form>
 							<div class="info-row">
 								<div class="info-form-label">아이디</div>
 								<div class="info-form-input">
-									<input readonly="" name="myid" type="text"
+									<input name="myid" type="text"
 										class="id-input input-box" disabled="" value="<%= loginUser.getMemberId()%>">
 								</div>
 							</div>
@@ -62,9 +60,13 @@
 							<div class="info-row">
 								<div class="info-form-label">이메일</div>
 								<div class="info-form-input">
-									<input name="email" type="text" placeholder="제목을 입력해주세요"
-										class="email-input input-box" maxlength="50"
-										value="<%= loginUser.getEmail()%>">
+									<% String [] emailsplit = loginUser.getEmail().split("@"); %>
+									<input type="text" id="sendEmail1" name="sendEmail1" style="width: 150px;"
+									class="tf_inquiry" title="이메일 앞자리" value="<%= emailsplit[0] %>" disabled=""> <span
+									class="txt_at">@</span> 
+									<input type="text" id="sendEmail2" style="width: 200px;"
+									name="sendEmail2" class="tf_inquiry" title="이메일 뒷자리" value="<%= emailsplit[1]%>" disabled=""><br><br>
+										
 								</div>
 							</div>
 							<div class="info-row board-category">

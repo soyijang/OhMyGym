@@ -5,6 +5,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/omg/resources/css/daumcommon.css">
     <link rel="stylesheet" type="text/css" href="/omg/resources/css/fmypageContainer.css">
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="UTF-8">

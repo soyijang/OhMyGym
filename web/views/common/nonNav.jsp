@@ -124,7 +124,8 @@
 <body>
 <div class="container_top">
         <ul class="header_top_menu" id="header_top">
-            <li id="webIntro"><a href="/omg/views/visitor/login.jsp">로그인</a></li>
+            <li id="webIntro"><a href="/omg/views/manager/managerLogin.jsp" style="text-decoration: none;">관리자로그인</a></li>
+            <li id="webIntro"><a href="/omg/views/visitor/login.jsp" style="text-decoration: none;">로그인</a></li>
             <li id="webClasses">회원가입</li>
         </ul>
     </div>
@@ -132,7 +133,8 @@
     <nav id="navigateID">
         <div class="container" style="vertical-align: middle;">
                 <ul class="header_bottom_menu" id="header_bottom">
-                    <li id="page_NAME"><a href=""><div id="logo"><img src="/omg/resources/img/OHmyGymLogo.png"></div></a></li>
+                    <li id="page_NAME"><a href="">
+                    <div id="logo"><img src="/omg/resources/img/OHmyGymLogo.png"></div></a></li>
                     <ul id="header_bottom_sidemenu" class="sideMenu">
                         <li>
                             <a><div class="NavLink">공지/이벤트</div></a>
