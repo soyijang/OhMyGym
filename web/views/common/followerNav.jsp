@@ -174,7 +174,7 @@ a {
 						<ul>
 							<li><a href="../fOhMyGym/fTrainingRoom.jsp"
 								style="color: white;">트레이닝</a>
-								&nbsp;&nbsp;&nbsp;<a style="color: white;">그룹소통방</a>
+								&nbsp;&nbsp;&nbsp;<a href="/omg/views/follower/followerCommunity/followerGroupCommunity.jsp" style="color: white;">그룹소통방</a>
 								&nbsp;&nbsp;&nbsp;<a>챌린지</a>
 								&nbsp;&nbsp;&nbsp;<a href="../fOhMyGym/fFeedbackList.jsp" style="color: white;">피드백룸</a>
 								&nbsp;&nbsp;&nbsp;<a href="../fOhMyGym/fReview.jsp" style="color: white;">트레이닝 리뷰</a>
