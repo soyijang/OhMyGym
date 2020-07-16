@@ -45,31 +45,31 @@
 	<%@ include file="../../common/managerNav.jsp" %>
 	<div id="main">
 		<div id="title">챌린지 목록관리</div>
-		<form action="<%=request.getContextPath()%>/insert.bo" method="post">
+		<form action="<%=request.getContextPath()%>/insert.mch" method="post">
 			<table id="tables">
 				<tr id="trs">
 					<td class="back">진행현황</td>
 					<td>
 					<select name="category">
 						<option value="10">모집중</option>
-						<option value="20">종료</option>
+						<!--  <option value="20">종료</option> -->
 					</select>
 					</td>
 					<td class="back">한도금액</td>
-					<td><input type=text name="much">원</td>
+					<td><input type="text" name="payLimit">원</td>
 				</tr>
 				<tr id="trs">
 					<td class="back">제목</td>
-					<td><input type=text name=title style="width: 350px;"></td>
+					<td><input type="text" name="title" style="width: 350px;"></td>
 					<td class="back">모집인원</td>
-					<td><input type=text name=many></td>
+					<td><input type="text" name="limit"></td>
 				</tr>
 				
 				<tr id="trs">
 					<td class="back">모집기간</td>
-					<td><input type=text>&nbsp;~&nbsp;<input type=text></td>
+					<td><input type="text" name="startDate">&nbsp;~&nbsp;<input type="text" name="endDate"></td>
 					<td class="back">진행기간</td>
-					<td><input type=text>&nbsp;~&nbsp;<input type=text></td>
+					<td><input type="text" name="ingStartDate">&nbsp;~&nbsp;<input type="text" name="ingEndDate"></td>
 				</tr>
 				<tr>
 					<td class="back">내용</td>
@@ -77,7 +77,7 @@
 				</tr>
 				<tr>
 					<td class="back">첨부파일</td>
-					<td><input type=file></td>
+					<td><input type="file" name="file"></td>
 				</tr>
 			</table>
 			<div><input type="submit" value="저장하기" id="button"></div>
