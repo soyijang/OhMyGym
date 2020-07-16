@@ -11,11 +11,12 @@ public class GroupCommuPost implements Serializable{
 	private String groupUserId;
 	private String userType;
 	private String groupDateTime;
+	private int groupContainerNum;
 	
 	public GroupCommuPost() {}
 
 	public GroupCommuPost(String groupType, String groupContent, String groupFileCode, String groupDate,
-			String groupBoardNum, String groupUserId, String userType, String groupDateTime) {
+			String groupBoardNum, String groupUserId, String userType, String groupDateTime, int groupContainerNum) {
 		super();
 		this.groupType = groupType;
 		this.groupContent = groupContent;
@@ -25,9 +26,11 @@ public class GroupCommuPost implements Serializable{
 		this.groupUserId = groupUserId;
 		this.userType = userType;
 		this.groupDateTime = groupDateTime;
+		this.groupContainerNum = groupContainerNum;
 	}
-	
-	
+
+
+
 	public String getGroupType() {
 		return groupType;
 	}
@@ -77,10 +80,19 @@ public class GroupCommuPost implements Serializable{
 		this.groupDateTime = groupDateTime;
 	}
 
+	public int getGroupContainerNum() {
+		return groupContainerNum;
+	}
+
+	public void setGroupContainerNum(int groupContainerNum) {
+		this.groupContainerNum = groupContainerNum;
+	}	
 	@Override
 	public String toString() {
 		return "GroupCommuPost [groupType=" + groupType + ", groupContent=" + groupContent + ", groupFileCode="
 				+ groupFileCode + ", groupDate=" + groupDate + ", groupBoardNum=" + groupBoardNum + ", groupUserId="
-				+ groupUserId + ", userType=" + userType + ", groupDateTime=" + groupDateTime + "]";
-	}	
+				+ groupUserId + ", userType=" + userType + ", groupDateTime=" + groupDateTime + ", groupContainerNum="
+				+ groupContainerNum + "]";
+	}
+
 }
