@@ -1,6 +1,8 @@
 package com.omg.jsp.groupCommu.model.vo;
 
-public class GroupComment {
+import java.io.Serializable;
+
+public class GroupComment implements Serializable{
 	private String commentNum;
 	private String commentUserId;
 	private String commentContent;
