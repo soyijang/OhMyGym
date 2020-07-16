@@ -6,10 +6,8 @@
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css"
-	href="/omg/resources/css/fmypageContainer.css">
-<link rel="stylesheet" type="text/css"
-	href="/omg/resources/css/tjob.css">
+<link rel="stylesheet" type="text/css" href="/omg/resources/css/fmypageContainer.css">
+<link rel="stylesheet" type="text/css" href="/omg/resources/css/tjob.css">
 <title>Insert title here</title>
 </head>
 
@@ -92,10 +90,8 @@
 							<div class="info-row">
 								<div class="info-form-label">성별</div>
 								<div class="info-form-input">
-									<label class="radio-label sex"><input type="radio"
-										name="gender" value="1" checked="">여성</label><label
-										class="radio-label sex"><input type="radio"
-										name="gender" value="0">남성</label>
+									<label class="radio-label"><input type="radio" name="gender" value="1" checked="">여성</label>
+									<label class="radio-label"><input type="radio" name="gender" value="0">남성</label>
 								</div>
 							</div>
 							<div class="info-row board-category">

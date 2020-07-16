@@ -1,7 +1,7 @@
 package com.omg.jsp.member.model.dao;
 
 
-import java.io.FileNotFoundException; 
+import java.io.FileNotFoundException;  
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -53,6 +53,7 @@ private Properties prop = new Properties();
 			pstmt.setString(6, requestMember.getPhone());
 			pstmt.setString(7, requestMember.getAddress());
 			pstmt.setString(8, requestMember.getGender());
+			pstmt.setString(9, requestMember.getMemberAge());
 			
 			
 			result = pstmt.executeUpdate();
@@ -109,6 +110,33 @@ private Properties prop = new Properties();
 		System.out.println("loginuser dao: "+loginUser);
 		return loginUser;
 		
+	}
+
+
+
+	public int memberIdCheck(String memberId) {
+		PreparedStatement pstmt = null;
+		Connection con = getConncection();
+		ResultSet rset = null;
+		
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				return 0; //이미 존재하는 아이디
+			} else {
+				return 1; //가입 가능
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return -1; //데이터 베이스 오류
 	}
 
 }

@@ -130,7 +130,7 @@ ul#header_bottom_sidemenu li ul li {
 	<div class="container_top">
 		<ul class="header_top_menu" id="header_top">
 			<li id="webIntro">로그아웃</li>
-			<li id="webClasses"><a href="../trainer/trainerMypage/trainerMyInfo.jsp">마이페이지</a></li>
+			<li id="webClasses"><a href="/views/trainer/trainerMypage/trainerMyInfo.jsp">마이페이지</a></li>
 		</ul>
 	</div>
 	<br>

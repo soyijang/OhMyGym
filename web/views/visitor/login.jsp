@@ -6,16 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/common/common.css">
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/common/layout.css">
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/pages/mix_common.css">
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/front/assets/css/motion.css?20200601_1">
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/pages/member.css">
+<link rel="stylesheet" href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/common/common.css">
+<link rel="stylesheet" href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/common/layout.css">
+<link rel="stylesheet" href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/pages/mix_common.css">
+<link rel="stylesheet" href="//s.wemep.co.kr/front/assets/css/motion.css?20200601_1">
+<link rel="stylesheet" href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/pages/member.css">
 <script src="//s.wemep.co.kr/front/assets/js/pc/vendor.js?20200601_1"></script>
 <script src="//s.wemep.co.kr/front/assets/js/pc/plugins.js?20200601_1"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
