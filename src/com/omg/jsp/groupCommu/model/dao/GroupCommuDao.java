@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.omg.jsp.groupCommu.model.vo.GroupComment;
 import com.omg.jsp.groupCommu.model.vo.GroupCommuPost;
 import com.omg.jsp.member.model.dao.MemberDao;
 import static com.omg.jsp.common.JDBCTemplate.*;
@@ -45,11 +46,14 @@ public class GroupCommuDao {
 			pstmt.setString(2, requestPost.getGroupContent());
 			pstmt.setString(3, requestPost.getGroupUserId());
 			pstmt.setString(4, "follower");
+			pstmt.setInt(5, 135);
 			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;
@@ -66,6 +70,8 @@ public class GroupCommuDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			
+			pstmt.setInt(1, 135);
+			
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<GroupCommuPost>();
@@ -78,8 +84,71 @@ public class GroupCommuDao {
 				post.setGroupFileCode(rset.getString("GROUP_FILECODE"));
 				post.setGroupType(rset.getString("GROUP_TYPE"));
 				post.setGroupDateTime(rset.getString("GROUP_TIME"));
+				post.setGroupBoardNum(rset.getString("GROUP_BOARDNUM"));
 				list.add(post);
 				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+
+	public int insertComment(Connection con, GroupComment comment) {
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query =prop.getProperty("insertComment");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+				
+			pstmt.setString(1,comment.getCommentContent());
+			pstmt.setString(2, comment.getGroupBoardNum());
+			pstmt.setString(3, comment.getCommentUserId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<GroupComment> selectComment(Connection con) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<GroupComment> list = null;
+		
+		String query = prop.getProperty("selectCommentList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+	
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<GroupComment>();
+			
+			while(rset.next()) {
+				GroupComment comment = new GroupComment();
+				
+				comment.setCommentContent(rset.getString("GROUP_COMMENT_CONTENT"));
+				comment.setCommentDate(rset.getString("GROUP_COMMNET_DATE"));
+				comment.setCommentNum(rset.getString("GROUP_COMMNET_MANAGECODE"));
+				comment.setCommentTime(rset.getString("GROUP_COMMENT_TIME"));
+				comment.setCommentUserId(rset.getString("MEMBER_ID"));
+				comment.setGroupBoardNum(rset.getString("GROUP_BOARDNUM"));
+				list.add(comment);
 			}
 			
 		} catch (SQLException e) {

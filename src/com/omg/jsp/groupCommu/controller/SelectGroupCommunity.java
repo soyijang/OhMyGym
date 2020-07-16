@@ -36,6 +36,7 @@ public class SelectGroupCommunity extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		new Gson().toJson(postList, response.getWriter());
+		
 	}
 
 	/**

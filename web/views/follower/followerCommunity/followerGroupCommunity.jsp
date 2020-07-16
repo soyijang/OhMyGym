@@ -449,6 +449,84 @@ div.post_commentback{
 
 								</div>
 								<div id="postcontainer">
+									<div class="post_part">
+									<!-- 사용자 프로필 -->
+									<div class="user_img" style="display: inline-block;">
+										<img src="../../../resources/img/crush_ps.png" width="50px"
+											height="50px" style="border-radius: 70%; overflow: hidden;">
+									</div>
+									<div id="user_profile"
+										style="display: inline-block; vertical-align: top;">
+										<em class="user_name">
+											<!--업로드 유저명(DB에서 탐색)-->크러쉬
+										</em><br> <span class="upload_time">5분전</span>
+									</div>
+									<hr>
+									<div class="post_Content">
+										<textarea class="post_box" cols="60" name="post_content"
+											readonly>  이상하게도 말일은 뭐가 이리 바쁜지 모르겠어요.그냥 눈만 감았다 뜬것 같은데 어...</textarea>
+									</div>
+									<div id="post_Content_img"
+										style="padding: 20px; text-align: center;">
+									</div>
+									<div id="MarkAndLike" style="margin-top: 20px;">
+										<span class="like"
+											style="margin-right: 10px; font-weight: bold;"> <i
+											class="fas fa-thumbs-up" style="margin-right: 5px;"></i>좋아요 <a>74</a>
+										</span> <span class="mark" style="font-weight: bold;"> <i
+											class="far fa-bookmark" style="margin-right: 5px;"></i>북마크 <a>20</a>
+										</span>
+									</div>
+									<details id="open_comment" open style="margin-top: 15px;">
+										<summary style="font-weight: bold; font-size: 0.9em;">댓글</summary>
+										<div
+											style="background: rgb(245, 245, 245); width: 100%; height: 100%;">
+											
+											<div id="post_comments">
+											
+												<div class="post_part_comment" style="padding: 5px;">
+													<div class="user_img"
+														style="display: block; float: left; margin-top: 10px;">
+														<img src="../../resources/img/crush_ps.png" width="30px"
+															height="30px"
+															style="border-radius: 70%; overflow: hidden;">
+													</div>
+													<div id="user_profile"
+														style="display: block; float: left; margin-left: 15px; margin-top: 10px;">
+														<em class="user_name_comment"
+															style="font-size: 10px; display: block; float: left;">
+															<!--업로드 유저명(DB에서 탐색)-->크러쉬
+														</em><br> <span class="upload_time_comment"
+															style="font-size: 10px;">5분전</span>
+													</div>
+													<textarea class="comments_box" cols="55"
+														name="post_comments_content"
+														style="display: block; height: 60px; float: left;"
+														readonly>동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시</textarea>
+												</div>
+												
+											</div>
+											<form>
+											
+											<div id="add_comments">
+												<div class="add_part_comment"
+													style="padding: 5px; min-height: 40px;">
+													<div style="float: left;">
+														<textarea onclick="printData('히히헤헤호호');" placeholder="댓글을 입력해주세요."
+															onkeydown="resize(this)" onkeyup="resize(this)"
+															class="input_comments_box" cols="42"
+															name="post_comments_content"
+															style="float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;"></textarea>
+														<button onclick="addReply();" id="add_comment_btn">입력하기</button>
+													</div>
+												</div>
+											</div>
+											
+											</form>
+											</div>
+											</details>
+											</div>
+
 								</div>
 							</div>
 						</div>
@@ -459,7 +537,8 @@ div.post_commentback{
 	</section>
 	
 	<script>
-	$(function(){
+
+	function selectAllPost(){
 		$("#add_postBox").val('');
 		console.log("조회시작");
 		$.ajax({
@@ -487,14 +566,14 @@ div.post_commentback{
 						"<details id='open_comment' open style='margin-top: 15px;'>"+
 						"<summary>댓글</summary>"+
 						"<div class='post_commentback'>"+
-						"<div id='post_comments'>"+"</div>"+
-							"<form><div id='add_comments'>"+
+						"<div id='post_comments"+data[key].groupBoardNum+"'>"+"</div>"+
+							"<div id='add_comments'>"+
 									"<div class='add_part_comment' style='padding: 5px; min-height: 40px;'>"+
 										"<div style='float: left;'>"+
-											"<textarea placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
+											"<textarea id='input_comment"+data[key].groupBoardNum+"' onclick='printData("+data[key].groupBoardNum+");' placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
 											"</textarea>"+
-											"<button id='add_comment_btn'>입력하기</button>"+
-											"</div></div></div></form></div></details></div></div>");
+											"<button id='add_comment_btn' onclick='addReply("+data[key].groupBoardNum+");'>입력하기</button>"+
+											"</div></div></div></div></details></div></div>");
 					updatePosts();
 				}
 			},
@@ -502,7 +581,42 @@ div.post_commentback{
 				console.log("실패!")
 			}
 		})
+	}
+	
+	function selectAllComment(){
+		$.ajax({
+				url : "/omg/selectGroupReply.follower",
+				data : {},
+				type : "post",
+				success : function(data) {
+					for(var key in data){
+						console.log("#post_comments"+data[key].groupBoardNum);
+						var $addCommentPart = $("#post_comments"+data[key].groupBoardNum);
+						$addCommentPart.prepend("<div class='post_part_comment' style='padding: 5px;'>"+
+							"<div class='user_img' style='display: block; float: left; margin-top: 10px;'>"+
+								"<img src='' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
+							"<div id='user_profile' style='display: block; float: left; margin-left: 15px; margin-top: 10px;'>"+
+								"<em class='user_name_comment' style='font-size: 10px; display: block; float: left;'>"+
+								data[key].commentUserId+
+								"</em><br> <span class='upload_time_comment' style='font-size: 10px;'>"+"5분전"+"</span>	</div>"+
+							"<textarea class='comments_box' cols='55' name='post_comments_content' style='display: block; height: 60px; float: left;' readonly>"+
+							data[key].commentContent+"</textarea></div>");
+						
+						updateReplys();
+					}
+				},
+				error : function(){
+					console.log("싈패ㅜㅜㅜㅜㅜ");
+				}
+			})
+	}
+	
+	
+	$(function(){
+		selectAllPost();
+		selectAllComment();
 	})
+	
 	
 	</script>
 		
@@ -532,12 +646,11 @@ div.post_commentback{
 
 	<script>
 		function updatePosts(){
-			console.log("리사이즈");
-	        
 	        $(".post_box").each(function(index,item){
-	               $(item).height(1).height( $(item).prop('scrollHeight'));
+	               $(item).height(1).height($(item).prop('scrollHeight'));
 	               $(item).css("height", $(item).height());
 	        })
+	        updateReplys();
 		}
 	
 		function onInputPost() {
@@ -547,18 +660,22 @@ div.post_commentback{
 		function offInputPost() {
 			$(".add_part").css("display", "none");
 		}
+	
+		function updateReplys(){
+			  $(".comments_box").each(function(index,item){
+				  $(item).height(1).height($(item).prop('scrollHeight'));
+				  $(item).parent(".post_part_comment").css("height", $(item).height());
+				$(item).css("height", $(item).height() / 2);
+			  })
+		}
 
-		$(".comments_box").height(1).height($(".comments_box").prop('scrollHeight'));
-		$(".post_part_comment").css("height", $(".comments_box").height());
-		$(".comments_box").css("height", $(".comments_box").height() / 2);
 	</script>
 
 	<script>
 		function resize(obj) {
 			obj.style.height = "1px";
 			obj.style.height = (12 + obj.scrollHeight) + "px";
-			$(".add_part_comment").css("height",
-					$(".input_comments_box").height() + 12);
+			$(obj).parent().parent("div .add_part_comment").css("height",$(obj).height() + 12);
 		}
 
 		function addPost() {
@@ -597,24 +714,72 @@ div.post_commentback{
 						"<summary>댓글</summary>"+
 						"<div class='post_commentback'>"+
 						"<div id='post_comments'>"+"</div>"+
-							"<form><div id='add_comments'>"+
+							"<div id='add_comments'>"+
 									"<div class='add_part_comment' style='padding: 5px; min-height: 40px;'>"+
 										"<div style='float: left;'>"+
-											"<textarea placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
+											"<textarea onclick='printData();' placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
 											"</textarea>"+
 											"<button id='add_comment_btn'>입력하기</button>"+
-											"</div></div></div></form></div></details></div></div>");
+											"</div></div></div></div></details></div></div>");
+			        $(".post_box").each(function(index,item){
+			               $(item).height(1).height( $(item).prop('scrollHeight'));
+			               $(item).css("height", $(item).height());
+			        })
+			        console.log("글작성");
 				},
 				error : function() {
 					console.log("실패!")
 				}
-			})
-			
-	
-			
-		
+
+			})	
 		}
 	</script>
+
+	<script>
+		function printData(value) {
+			console.log(value);
+		}
+		
+		function addReply(value) {
+			
+ 			var writerId =  "test01";
+  			var writer = "한진희";
+ 			var replyContent = $("#input_comment"+value).val();
+ 			var postId = value;
+ 			console.log(replyContent);
+
+ 			$.ajax({
+ 				url : "/omg/insertGroupReply.follower",
+ 				data : {
+ 					writer : writer,
+ 					content : replyContent,
+ 					writerId : writerId,
+ 					postId : postId
+ 				},
+ 				type : "post",
+ 				success : function(data) {
+ 					var $addCommentPart = $("#post_comments"+data.groupBoardNum);
+ 					console.log($addCommentPart);
+ 					$addCommentPart.prepend("<div class='post_part_comment' style='padding: 5px;'>"+
+							"<div class='user_img' style='display: block; float: left; margin-top: 10px;'>"+
+								"<img src='' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
+							"<div id='user_profile' style='display: block; float: left; margin-left: 15px; margin-top: 10px;'>"+
+								"<em class='user_name_comment' style='font-size: 10px; display: block; float: left;'>"+
+								data.commentUserId+
+								"</em><br> <span class='upload_time_comment' style='font-size: 10px;'>"+"5분전"+"</span>	</div>"+
+							"<textarea class='comments_box' cols='55' name='post_comments_content' style='display: block; height: 60px; float: left;' readonly>"+
+							data.commentContent+"</textarea></div>");
+ 					
+ 					updateReplys();
+ 				},
+ 				error : function(){
+ 					console.log("싈패ㅜㅜㅜㅜㅜ");
+ 				}
+ 			})
+		}
+	</script>
+
+
 	<div
 		style="position: absolute; top: 1100px; margin-left: 0px; margin-right: 0px;">
 		<%@ include file="../../common/footer.jsp"%>

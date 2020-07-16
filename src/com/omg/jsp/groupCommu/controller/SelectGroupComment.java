@@ -11,37 +11,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.omg.jsp.groupCommu.model.service.GroupCommuService;
-import com.omg.jsp.groupCommu.model.vo.GroupCommuPost;
+import com.omg.jsp.groupCommu.model.vo.GroupComment;
 
-@WebServlet("/insertGroupCommu.follower")
-public class InsertGroupCommunity extends HttpServlet {
+/**
+ * Servlet implementation class SelectGroupComment
+ */
+@WebServlet("/selectGroupReply.follower")
+public class SelectGroupComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public InsertGroupCommunity() {
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SelectGroupComment() {
         super();
     }
 
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String writerId = request.getParameter("writerId");
-		String writer = request.getParameter("writer");
-		String content = request.getParameter("content");
 		
-		GroupCommuPost requestPost = new GroupCommuPost();
+		System.out.println("댓글들 조회");
 		
-		requestPost.setGroupUserId(writerId);
-		requestPost.setGroupContent(content);
-		
-		int result = new GroupCommuService().insertPost(requestPost);
+		ArrayList<GroupComment> commentList = new GroupCommuService().selectComment();
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		new Gson().toJson(requestPost, response.getWriter());
 		
+		new Gson().toJson(commentList, response.getWriter());
 	}
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
