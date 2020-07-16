@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.omg.jsp.member.model.service.MemberService;
 import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.member.model.vo.TrainerInfo;
 
 import oracle.net.aso.r;
 
@@ -32,7 +33,8 @@ public class MemberInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		
 		String name = request.getParameter("memberName");
 		String memberId = request.getParameter("memberId");
@@ -46,7 +48,9 @@ public class MemberInsertServlet extends HttpServlet {
 		String tel2 = request.getParameter("tel2");
 		String tel3 = request.getParameter("tel3");
 		String phone = tel1 + "-" + tel2 + "-" + tel3;
-		String email = request.getParameter("email");
+		String email1 = request.getParameter("email1");
+		String email2 = request.getParameter("email2");
+		String email = email1 + "@" + email2;
 		String birth1 = request.getParameter("birthYear");
 		String birth2 = request.getParameter("birthMonth");
 		String birth3 = request.getParameter("birthDate");
@@ -57,24 +61,20 @@ public class MemberInsertServlet extends HttpServlet {
 		requestMember.setMemberId(memberId);
 		requestMember.setMemberPwd(memberPwd);
 		requestMember.setName(name);
-		requestMember.setGender(gender);
+		requestMember.setGender("M");
 		requestMember.setPhone(phone);
 		requestMember.setEmail(email);
 		requestMember.setAddress(address);
+		requestMember.setMemberAge(memberAge);
 		
+		
+		String page = "";
 		//트레이너, 팔로워 구분
 		String type = request.getParameter("joinType");
 		switch(type) {
-		case "follower" : requestMember.setMemberDivision("follower"); break;
-		case "trainer" : requestMember.setMemberDivision("trainer"); break;
-		
-		}
-		
-		System.out.println("servlet member : " + requestMember);
-		
-		int result = new MemberService().insertMember(requestMember);
-		
-		String page = "";
+		case "follower" : requestMember.setMemberDivision("follower"); 
+		int result = new MemberService().insertMember(requestMember); 
+		System.out.println(email);
 		if(result > 0) {
 	         //page = "index.jsp";
 	         
@@ -90,6 +90,49 @@ public class MemberInsertServlet extends HttpServlet {
 			
 			
 		}
+		
+		break;
+		
+		case "trainer" : requestMember.setMemberDivision("trainer");
+						
+						String bankCode = request.getParameter("bankCode");
+						String bankAccount = request.getParameter("bankAccount");
+						
+						TrainerInfo requestTrainer = new TrainerInfo();
+						requestTrainer.setBankCode(bankCode);
+						requestTrainer.setBankAccount(bankAccount);
+						requestTrainer.setMemberId(memberId);
+						
+						int result2 = new MemberService().insertMember(requestMember); 
+						
+						if(result2 > 0) {
+							//page = "index.jsp";
+							int result3 = new MemberService().insertTrainerInfo(requestTrainer, memberId);
+							page = "views/common/successPage.jsp";
+							
+							request.setAttribute("successCode", "insertMember");
+							request.getRequestDispatcher(page).forward(request, response);
+							//response.sendRedirect(page);
+						} else {
+							page = "views/common/errorPage.jsp";
+							request.setAttribute("msg", "회원가입실패!");
+							request.getRequestDispatcher(page).forward(request, response);
+
+
+						}
+
+						
+						
+						break;
+		
+		}
+		
+		System.out.println("servlet member : " + requestMember);
+		
+		
+		
+		
+		
 		
 		
 	

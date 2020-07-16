@@ -138,10 +138,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 					<div id="main-center" style="margin-left: 450px">
 
-
-
 						<div class="join2">
-
 
 							<div>
 								<br>
@@ -495,23 +492,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	</div>
 
 	</div>
-	<!-- 중복체크 -->
-	<script type="text/javascript">
-		function idCheck(){
-			
-			var idStr=$("#memberId").val();
-			$.ajax({
-				url:"/src/com/omg/jsp/member/controller/idCheckServlet?memberId="+idStr,
-				success:function(data){
-					if(data == "success") {
-						$("#result").text("사용가능한 아이디입니다.");
-					}else if(data == "fail") {
-						$("#result").text("중복된 아이디입니다.");
-					}
-				}
-			});
-		}
-	</script>
+	
 
 	<script>
    
