@@ -22,8 +22,8 @@ div {
 
 .info-header{
 	font-size: 30px;
-    border-bottom: 2.5px solid #141414;
 	padding-bottom: 15px;
+	border-bottom: medium ;
 }
 
 .left-container {
@@ -60,7 +60,7 @@ div {
     color: #3b3b3b;
 }
 .mypage-contents .right-container .info-container .info-body .info-row .info-form-label {
-    font-size: 13px;
+    font-size: 11px;
     text-align: left;
     color: #2c2c2c;
     font-weight: normal;
@@ -73,7 +73,7 @@ div {
 }
 .mypage-contents .right-container .info-container .info-body {
     width: 550px;
-    font-size: 14px;
+    font-size: 11px;
 }
 .mypage-contents .right-container .info-container .info-body .info-row .info-form-input input {
     height: 40px;
@@ -81,7 +81,7 @@ div {
     background-color: #ffffff;
     border: solid 0.7px #dadada;
     padding: 0 10px;
-    font-size: 13px;
+    font-size: 11px;
     width: 100%;
     box-sizing: border-box;
 }

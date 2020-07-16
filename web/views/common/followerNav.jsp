@@ -135,7 +135,7 @@ a {
 <body>
 	<div class="container_top">
 		<ul class="header_top_menu" id="header_top">
-			<li id="webIntro" style="color: rgb(63, 63, 63);">로그아웃</li>
+			<li id="webIntro"><a onclick="logout();" style="color: rgb(63, 63, 63);">로그아웃</a></li>
 			<li id="webClasses"><a href="/omg/views/follower/followerMypage/followerMyInfo.jsp"
 				style="color: rgb(63, 63, 63);">마이페이지</a></li>
 		</ul>
@@ -187,5 +187,13 @@ a {
 	</nav>
 	<br>
 	<br>
+	
+	<script type="text/javascript">
+		function logout() {
+			alert("<%= loginUser.getName()%>님 내일도 오마이짐에서 만나요!");
+			location.href= "<%= request.getContextPath()%>/logout.me";
+		}
+	
+	</script>
 </body>
 </html>

@@ -1,27 +1,23 @@
-package com.omg.jsp.manager.controller;
+package com.omg.jsp.report.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.omg.jsp.manager.model.service.ManagerService;
-import com.omg.jsp.manager.model.vo.Manager;
-
 /**
- * Servlet implementation class ManagerLoginServlet
+ * Servlet implementation class InsertReportServlet
  */
-@WebServlet("/login.mg")
-public class ManagerLoginServlet extends HttpServlet {
+@WebServlet("/insert.rp")
+public class InsertReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerLoginServlet() {
+    public InsertReportServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +26,8 @@ public class ManagerLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String id = request.getParameter("loginId");
-		String pwd = request.getParameter("loginPw");		
-		
-		Manager loginManager = new Manager();
-		loginManager.setManagerId(id);
-		loginManager.setManagerPwd(pwd);
-		
-		Manager loginUserManager = new ManagerService().loginCheck(loginManager);
-		
-		if(loginUserManager!=null) {
-			request.getSession().setAttribute("loginManager", loginUserManager);
-			response.sendRedirect("views/manager/manageAll/manageReport.jsp");
-		}else {
-			request.setAttribute("msg", "관리자로그인실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

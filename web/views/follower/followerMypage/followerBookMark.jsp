@@ -47,9 +47,7 @@
 		<div class="right-container">
 			<div class="info-container">
 
-				<div class="head_article">
 					<h3 class="info-header">북마크 한 게시물</h3>
-				</div>
 
 				<div>
 					<ul class="news-article-list article-list list ui-area-article-list">

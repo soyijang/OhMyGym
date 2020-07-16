@@ -18,14 +18,12 @@
 
 </head>
 <body>
-	<section style="height: 1500px">
+	<section style="height: 1900px">
 		<%@ include file="../../common/followerNav.jsp"%>
 		<%@ include file="followerMypageAside.jsp"%>
 
 		<div class="right-container">
-			<div class="head_article">
 				<h3 class="info-header">유해정보 신고</h3>
-			</div>
 
 			<form name="redbellRigthForm" class="cs_inquiry cs_troll2"
 				method="POST" enctype="multipart/form-data">
@@ -57,79 +55,22 @@
 								<label for="sendEmail1" class="lab_inquiry">이메일</label> <em
 									class="emph_g">(필수)</em>
 							</div>
+							
+							<%
+								String [] emailsplit = loginUser.getEmail().split("@"); 
+							%>
+							
 							<div class="wrap_field">
 								<input type="text" id="sendEmail1" name="sendEmail1"
-									class="tf_inquiry" title="이메일 앞자리" value=""> <span
+									class="tf_inquiry" title="이메일 앞자리" value="<%= emailsplit[0] %>" disabled=""> <span
 									class="txt_at">@</span> <input type="text" id="sendEmail2"
-									name="sendEmail2" class="tf_inquiry" title="이메일 뒷자리" value="">
-								<div class="select_custom select_live "
-									data-select-custom-type="email" style="z-index: 22;">
-									<!-- open_select -->
+									name="sendEmail2" class="tf_inquiry" title="이메일 뒷자리" value="<%= emailsplit[1]%>" disabled=""><br><br>
 
-									<a href="#inq_option_email" class="btn_select"><span
-										class="txt_g">메일계정선택</span><span class="bg_cs"></span></a>
-
-									<ul id="inq_option_email" class="inquiry_option">
-										<li><input type="radio" id="opt_mail1" name="opt_mail"
-											class="inp_inquiry" value="daum.net"><label
-											for="opt_mail1" class="lab_inquiry">daum.net</label></li>
-										<li><input type="radio" id="opt_mail2" name="opt_mail"
-											class="inp_inquiry" value="hanmail.net"><label
-											for="opt_mail2" class="lab_inquiry">hanmail.net</label></li>
-										<li><input type="radio" id="opt_mail3" name="opt_mail"
-											class="inp_inquiry" value="chol.com"><label
-											for="opt_mail3" class="lab_inquiry">chol.com</label></li>
-										<li><input type="radio" id="opt_mail4" name="opt_mail"
-											class="inp_inquiry" value="dreamwiz.com"><label
-											for="opt_mail4" class="lab_inquiry">dreamwiz.com</label></li>
-										<li><input type="radio" id="opt_mail5" name="opt_mail"
-											class="inp_inquiry" value="empal.com"><label
-											for="opt_mail5" class="lab_inquiry">empal.com</label></li>
-										<li><input type="radio" id="opt_mail6" name="opt_mail"
-											class="inp_inquiry" value="freechal.com"><label
-											for="opt_mail6" class="lab_inquiry">freechal.com</label></li>
-										<li><input type="radio" id="opt_mail7" name="opt_mail"
-											class="inp_inquiry" value="gmail.com"><label
-											for="opt_mail7" class="lab_inquiry">gmail.com</label></li>
-										<li><input type="radio" id="opt_mail8" name="opt_mail"
-											class="inp_inquiry" value="hanafos.com"><label
-											for="opt_mail8" class="lab_inquiry">hanafos.com</label></li>
-										<li><input type="radio" id="opt_mail9" name="opt_mail"
-											class="inp_inquiry" value="hanmir.com"><label
-											for="opt_mail9" class="lab_inquiry">hanmir.com</label></li>
-										<li><input type="radio" id="opt_mail10" name="opt_mail"
-											class="inp_inquiry" value="hitel.net"><label
-											for="opt_mail10" class="lab_inquiry">hitel.net</label></li>
-										<li><input type="radio" id="opt_mail11" name="opt_mail"
-											class="inp_inquiry" value="hotmail.com"><label
-											for="opt_mail11" class="lab_inquiry">hotmail.com</label></li>
-										<li><input type="radio" id="opt_mail12" name="opt_mail"
-											class="inp_inquiry" value="korea.com"><label
-											for="opt_mail12" class="lab_inquiry">korea.com</label></li>
-										<li><input type="radio" id="opt_mail13" name="opt_mail"
-											class="inp_inquiry" value="lycos.co.kr"><label
-											for="opt_mail13" class="lab_inquiry">lycos.co.kr</label></li>
-										<li><input type="radio" id="opt_mail14" name="opt_mail"
-											class="inp_inquiry" value="nate.com"><label
-											for="opt_mail14" class="lab_inquiry">nate.com</label></li>
-										<li><input type="radio" id="opt_mail15" name="opt_mail"
-											class="inp_inquiry" value="naver.com"><label
-											for="opt_mail15" class="lab_inquiry">naver.com</label></li>
-										<li><input type="radio" id="opt_mail16" name="opt_mail"
-											class="inp_inquiry" value="netian.com"><label
-											for="opt_mail16" class="lab_inquiry">netian.com</label></li>
-										<li><input type="radio" id="opt_mail17" name="opt_mail"
-											class="inp_inquiry" value="paran.com"><label
-											for="opt_mail17" class="lab_inquiry">paran.com</label></li>
-										<li><input type="radio" id="opt_mail18" name="opt_mail"
-											class="inp_inquiry" value="yahoo.co.kr"><label
-											for="opt_mail18" class="lab_inquiry">yahoo.co.kr</label></li>
-										<li><input type="radio" id="opt_mail_self"
-											name="opt_mail" class="inp_inquiry" value="self"><label
-											for="opt_mail_self" class="lab_inquiry">직접입력</label></li>
-									</ul>
-								</div>
-
+							<p class="troll_notice">
+								오마이짐은 고객님의 신고에 대한 처리를 빠르게 진행하기 위해 최선을 다하고 있습니다.<br>
+								위 이메일이 아닌 다른 이메일을 사용하실 회원께서는 개인정보수정을 먼저 진행해주시기 바랍니다.
+							</p>
+							
 							</div>
 
 						</div>

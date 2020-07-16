@@ -1,10 +1,5 @@
 @charset "euc-kr";
 
-/* reset */
-* {margin:0; padding:0}
-html {margin:0; padding:0}
-body {margin:0; padding:0; height:100%; font-size:13px; color:#666; line-height:1.2em}
-label {vertical-align:middle; cursor:pointer}
 
 /* 1204 ¼öÁ¤ */
 label {position:relative; top:-2px}
@@ -47,8 +42,8 @@ table td {border-collapse:collapse}
 select {height:21px; border:1px solid #999; vertical-align:middle; font-size:12px}
 button {overflow:visible; position:relative; margin:0; padding:0; border:0; background-color:transparent; cursor:pointer; vertical-align:middle; text-indent:0;}
 
-a {font-family:Malgun Gothic,'¸¼Àº°íµñ', 'µ¸¿ò',Dotum,'±¼¸²',Gulim,Helvetica,sans-serif; color:#666; text-decoration:none}
-
+/* a {font-family:Malgun Gothic,'¸¼Àº°íµñ', 'µ¸¿ò',Dotum,'±¼¸²',Gulim,Helvetica,sans-serif; color:#666; text-decoration:none}
+ */
 input[type="text"],
 input[type="password"] {height:15px; line-height:14px; padding:2px 5px; vertical-align:middle; border:1px solid #999; background:#f0f0f0; color:#666; font-size:12px}
 /*input[type="radio"],
@@ -82,45 +77,6 @@ input[type="radio"]:checked:disabled + span {background-image:url('../images/com
 #skipNav a:hover, 
 #skipNav a:focus, 
 #skipNav a:active {position:static; left:0; padding:9px 0; height:16px; width:100%; text-align:center; background:#f2f2f2; text-align:center; line-height:16px; font-size:12px; color:#000; font-weight:bold}
-
-/* footer */
-	.footer {background:url('../images/common/bg_footer.gif') repeat-x left top/* ; font-size:12px */}
-	.footer .center_area {position:relative; margin:0 auto; width:980px}
-	.footer .footer_menu {padding-top:8px; height:26px; overflow:hidden; font-size:12px}
-	.footer .footer_menu ul {float:left; margin-top:2px; margin-right:10px}
-	.footer .footer_menu li {float:left; padding-left:14px; background:url('../images/common/bg_footer_line.gif') no-repeat 6px 2px}
-	.footer .footer_menu li:first-child {padding:0; background:none}
-	.footer .footer_menu li a {color:#666}
-	.footer .footer_menu > a {position:relative; top:-2px; margin-right:5px}
-	.footer .site_go {position:absolute; right:0; top:7px}
-	.footer .site_go select {padding:0; margin-left:5px; height:18px; background:#fff; border:1px solid #999; line-height:15px; font-size:11px; color:#333}
-	.footer .site_go .move {background-color:#6b6b6b; border-radius:3px}
-	.footer .site_go .move > span {display:inline-block; padding:0 1px 0 0; width:45px; height:18px; line-height:15px; text-align:center; color:#fff; font-size:11px}
-	.footer .address {position:relative; margin-top:35px; padding:0 0 20px 190px; line-height:18px; font-size:12px}
-	.footer .address .logo {position:absolute; left:0; top:5px}
-	.footer .address p {color:#999}
-	.footer .address p em {color:#333}
-	.footer .address a.wa {position:absolute; right:0; top:0}
-	.footer .award {position:relative; margin-top:5px; padding:0 0 20px 190px; line-height:18px; font-size:12px}
-	.footer .award .logo1 {position:absolute; left:0; top:5px}
-	.footer .award .logo2 {position:absolute; left:196px; top:5px}
-	.footer .award .logo3 {position:absolute; left:395px; top:5px}
-	.footer .award .logo4 {position:absolute; left:593px; top:5px}
-	.footer .award .logo5 {position:absolute; left:788px; top:5px}
-	
-	
-	
-	
-	/* ie8 */
-	@media \0screen {
-		.footer .site_go .move > span {line-height:18px}
-		.footer .footer_menu li {background-position:6px 1px}
-	}
-	/* Å©·Ò */
-	@media screen and (-webkit-min-device-pixel-ratio:0) {
-		.footer .footer_menu li {background-position:6px 3px}
-		.footer .footer_menu > a {top:-1px}
-	}
 
 /* °øÅë ÆË¾÷ */
 .ui-dialog {z-index:3000; padding-bottom:10px; background:#ededed; border:1px solid #d1d1d1 }

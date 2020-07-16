@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>오마이짐 관리자 페이지</title>
     <style>
         html {
@@ -105,7 +106,7 @@
         <div style="width: 800px; right: -600px;" align="right">
             <a href="#">개발요청페이지</a> &nbsp;&nbsp;&nbsp;
             <%= loginManager.getManagerName()%>님 환영합니다!
-            &nbsp;&nbsp;&nbsp;<a href="#">로그아웃</a>
+            &nbsp;&nbsp;&nbsp;<a onclick="logout();">로그아웃</a>
         </div>
     </header>
     <nav>
@@ -165,8 +166,13 @@
         </details></ul>
         <img src="/omg/resources/imageManager/menu_bar.png" id="nav_background">
     </nav>
-    <section>
-
-    </section>
+    
+    <script type="text/javascript">
+		function logout() {
+			location.href= "<%=request.getContextPath()%>/logout.mg";
+			alert("<%=loginManager.getManagerName()%>관리자님의 로그아웃이 성공적으로 완료되었습니다.");
+		}
+	
+	</script>
 </body>
 </html>
