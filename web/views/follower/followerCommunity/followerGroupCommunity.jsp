@@ -457,6 +457,57 @@ div.post_commentback{
 			</div>
 		</article>
 	</section>
+	
+	<script>
+	$(function(){
+		$("#add_postBox").val('');
+		console.log("조회시작");
+		$.ajax({
+			url : "/omg/selectGroupCommu.follower",
+			data : {},
+			type : "post",
+			success : function(data) {
+				for(var key in data){
+					var $addPostPart = $("#postcontainer");
+					$addPostPart.prepend("<div id='postcontainer'>" +
+						"<div class='post_part' id='postcontent'>"+
+						"<div class='user_img' style='display: inline-block;'>"+
+						"<img src='' width='50px' height='50px'></div>"+
+						"<div id='user_profile' class='user_profile'>"+
+						"<em class='user_name'>"+data[key].groupUserId+"</em><br>"+ 
+						"<span class='upload_time'>"+data[key].groupDate+" "+data[key].groupDateTime+"</span></div><hr>"+
+						"<div class='post_Content'>"+
+						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
+						"<div id='post_Content_img'>"+"</div>"+
+						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
+						"<span class='like' style='margin-right: 10px; font-weight: bold;'> <i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
+						"좋아요<a>"+"</a></span>"+
+						"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
+						"북마크 <a>"+"</a></span></div>"+
+						"<details id='open_comment' open style='margin-top: 15px;'>"+
+						"<summary>댓글</summary>"+
+						"<div class='post_commentback'>"+
+						"<div id='post_comments'>"+"</div>"+
+							"<form><div id='add_comments'>"+
+									"<div class='add_part_comment' style='padding: 5px; min-height: 40px;'>"+
+										"<div style='float: left;'>"+
+											"<textarea placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
+											"</textarea>"+
+											"<button id='add_comment_btn'>입력하기</button>"+
+											"</div></div></div></form></div></details></div></div>");
+					updatePosts();
+				}
+			},
+			error : function() {
+				console.log("실패!")
+			}
+		})
+	})
+	
+	</script>
+		
+		
+	
 	<script>
 		function addresize(obj) {
 			obj.style.height = "1px";
@@ -480,6 +531,15 @@ div.post_commentback{
 	</script>
 
 	<script>
+		function updatePosts(){
+			console.log("리사이즈");
+	        
+	        $(".post_box").each(function(index,item){
+	               $(item).height(1).height( $(item).prop('scrollHeight'));
+	               $(item).css("height", $(item).height());
+	        })
+		}
+	
 		function onInputPost() {
 			$(".add_part").css("display", "block");
 		}
@@ -488,8 +548,7 @@ div.post_commentback{
 			$(".add_part").css("display", "none");
 		}
 
-		$(".comments_box").height(1).height(
-				$(".comments_box").prop('scrollHeight'));
+		$(".comments_box").height(1).height($(".comments_box").prop('scrollHeight'));
 		$(".post_part_comment").css("height", $(".comments_box").height());
 		$(".comments_box").css("height", $(".comments_box").height() / 2);
 	</script>
@@ -503,7 +562,7 @@ div.post_commentback{
 		}
 
 		function addPost() {
-			var writerId = "test01";
+			var writerId =  "test01";
 			var writer = "한진희";
 			var content = $("#add_postBox").val();
 			$("#add_postBox").val('');
@@ -550,6 +609,10 @@ div.post_commentback{
 					console.log("실패!")
 				}
 			})
+			
+	
+			
+		
 		}
 	</script>
 	<div

@@ -14,7 +14,7 @@ public class GroupCommuService {
 
 		Connection con = getConncection();
 		
-		int result = new GroupCommuDao().insertReply(con, requestPost);
+		int result = new GroupCommuDao().insertPost(con, requestPost);
 		//ArrayList<GroupCommuPost> replyList = new GroupCommuDao().selectPostList(con);
 		
 		if(result>0) {
@@ -28,14 +28,14 @@ public class GroupCommuService {
 		return result;
 	}
 	
-	public ArrayList<GroupCommuPost> selectOneReply() {
+	public ArrayList<GroupCommuPost> selectPost() {
 		Connection con = getConncection();
 		
-		ArrayList<GroupCommuPost> replyList = new GroupCommuDao().selectPostList(con);
+		ArrayList<GroupCommuPost> postList = new GroupCommuDao().selectPost(con);
 		
 		close(con);
 		
-		return replyList;
+		return postList;
 	}
 
 }
