@@ -115,25 +115,12 @@ input {
     border-color: -internal-light-dark-color(rgb(118, 118, 118), rgb(195, 195, 195));
     border-image: initial;
 }
-input:disabled {
-    color: -internal-light-dark-color(rgb(84, 84, 84), rgb(170, 170, 170));
-    cursor: default;
-    background-color: -internal-light-dark-color(rgb(235, 235, 228), rgb(45, 45, 45));
-}
 .mypage-contents .right-container .info-container .info-body .info-row .info-form-input input[name='gender'] {
-    background-image: url(/site_media/new_images/pay-btn-radio@2x.png);
-    background-repeat: no-repeat;
-    background-size: 20px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     vertical-align: middle;
     margin-right: 5px;
     width: 20px;
     height: 20px;
     cursor: pointer;
-    outline: none;
-    border: none;
 }
 
 #ohmystamp_title{

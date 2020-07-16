@@ -120,7 +120,7 @@
     </style>
 </head>
 <body>
-    <%@ include file="../../common/managerNav.jsp" %>
+    <%@ include file="/views/common/managerNav.jsp" %>
     <section>
         <!--헤더 영역-->
         <article id="menuTitleArea">
