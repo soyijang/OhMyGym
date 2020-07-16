@@ -1,5 +1,7 @@
 package com.omg.jsp.groupCommu.model.dao;
 
+import static com.omg.jsp.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,10 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.omg.jsp.groupCommu.model.vo.GroupComment;
-import com.omg.jsp.groupCommu.model.vo.GroupCommuPost;
+import com.omg.jsp.groupCommu.model.vo.*;
 import com.omg.jsp.member.model.dao.MemberDao;
-import static com.omg.jsp.common.JDBCTemplate.*;
 
 
 public class GroupCommuDao {

@@ -8,7 +8,7 @@ public class GroupComment {
 	private String commentTime;
 	private String groupBoardNum;
 	
-	public GroupComment() {};
+	public GroupComment() {}
 	
 	public GroupComment(String commentNum, String commentUserId, String commentContent, String commentDate,
 			String commentTime, String groupBoardNum) {
