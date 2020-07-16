@@ -162,7 +162,7 @@ a {
 						<ul>
 							<li><a style="color: white;">오늘의 밥그릇</a>&nbsp;&nbsp;&nbsp;<a
 								style="color: white;">건강정보게시판</a>&nbsp;&nbsp;&nbsp;<a
-								style="color: white;">내 상태 기록</a></li>
+								style="color: white;" href="<%= request.getContextPath() %>/healthInfo.hi">내 상태 기록</a></li>
 						</ul></li>
 					<li><a><div class="NavLink" style="color: rgb(63, 63, 63);">매칭신청</div></a>
 						<ul>

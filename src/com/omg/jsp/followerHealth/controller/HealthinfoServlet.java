@@ -1,11 +1,17 @@
 package com.omg.jsp.followerHealth.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.omg.jsp.followerHealth.model.service.HealthInfoService;
+import com.omg.jsp.followerHealth.model.vo.HealthInfo;
+import com.omg.jsp.member.model.vo.Member;
 
 /**
  * Servlet implementation class HealthinfoServlet
@@ -28,9 +34,15 @@ public class HealthinfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String memberId = request.getParameter("memberId");
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		
-		System.out.println(memberId);
+		System.out.println("servlet loginUser : " + loginUser);
+		
+		ArrayList<HealthInfo> list = new HealthInfoService().selectHealthInfo(loginUser);
+		
+		
+		
+		
 	}
 
 	/**

@@ -90,7 +90,7 @@ private Properties prop = new Properties();
 				loginUser.setEmail(rset.getString("EMAIL"));
 				loginUser.setPhone(rset.getString("PHONE"));
 				loginUser.setAddress(rset.getString("ADDRESS"));
-				loginUser.setProfileAttachmentCode(rset.getString("PRORILE_FILECODE"));
+				loginUser.setProfileAttachmentCode(rset.getString("PROFILE_FILECODE"));
 				loginUser.setEnrollDate(rset.getString("ENROLL_DATE"));
 				loginUser.setMemberStatus(rset.getString("MEMBER_STATUS"));
 				loginUser.setGender(rset.getString("GENDER"));
