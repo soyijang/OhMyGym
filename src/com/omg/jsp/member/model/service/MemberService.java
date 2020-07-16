@@ -1,6 +1,6 @@
 package com.omg.jsp.member.model.service;
 
-import static com.omg.jsp.common.JDBCTemplate.*;
+import static com.omg.jsp.common.JDBCTemplate.*; 
 
 import java.sql.Connection;
 

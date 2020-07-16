@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.omg.jsp.manager.model.vo.Manager"%>
+<% Manager loginManager = (Manager)session.getAttribute("loginManager"); %>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,7 +103,8 @@
         <img src="/omg/resources/imageManager/top.png" id="top_background">
         <a href="#" id="logo"><img src="/omg/resources/imageManager/logo.png" alt="logo"></a>
         <div style="width: 800px; right: -600px;" align="right">
-            <a href="#">개발요청페이지</a> &nbsp;&nbsp;&nbsp;OhMyGym님 환영합니다. 
+            <a href="#">개발요청페이지</a> &nbsp;&nbsp;&nbsp;
+            <%= loginManager.getManagerName()%>님 환영합니다!
             &nbsp;&nbsp;&nbsp;<a href="#">로그아웃</a>
         </div>
     </header>

@@ -70,7 +70,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a id="myPage" class="link_text" href="" >
+                                <a id="myPage" class="link_text" href="/views/trainer/trainerMypage/trainerMypageMain.jsp" >
                                     	마이페이지
                                 </a>
                             </td>

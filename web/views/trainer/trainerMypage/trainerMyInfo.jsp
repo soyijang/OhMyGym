@@ -29,7 +29,7 @@
 								<div class="info-form-label">아이디</div>
 								<div class="info-form-input">
 									<input readonly="" name="myid" type="text"
-										class="id-input input-box" disabled="" value="">
+										class="id-input input-box" disabled="" value="<%= loginUser.getMemberId()%>">
 								</div>
 							</div>
 							<div class="info-row">
@@ -51,10 +51,8 @@
 								<div class="info-form-input">
 									<div class="info-form-input-name">
 										<input readonly="" name="first-name-input" type="text"
-											placeholder="성" class="first-name-input input-box"
-											disabled="" value="장"><input readonly=""
-											name="last-name-input" type="text" placeholder="이름"
-											class="last-name-input input-box" disabled="" value="소이">
+											placeholder="이름없음" class="first-name-input input-box"
+											disabled="" value="<%= loginUser.getName() %>">
 									</div>
 									<p class="err-msg name-input">이름 변경이 필요하신 경우, 고객센터로 문의하여
 										주세요.</p>
@@ -65,13 +63,14 @@
 								<div class="info-form-input">
 									<input name="email" type="text" placeholder="제목을 입력해주세요"
 										class="email-input input-box" maxlength="50"
-										value="soi0205@naver.com">
+										value="<%=loginUser.getEmail()%>">
 								</div>
 							</div>
 							<div class="info-row board-category">
 								<div class="info-form-label">생년월일</div>
 								<div class="info-form-input date">
 									<div class="info-form-input-date">
+									
 										<input readonly="" name="birth_year" type="text"
 											class="birth-year-input input-box" disabled="" value="1995"><input
 											readonly="" name="birth_month" type="text"
@@ -82,19 +81,10 @@
 								</div>
 							</div>
 							<div class="info-row">
-								<div class="info-form-label">직업</div>
-								<div class="info-form-input">
-									<input name="job" type="text" placeholder="제목을 입력해주세요"
-										class="job-input input-box" maxlength="20" value="개발자">
-								</div>
-							</div>
-							<div class="info-row">
 								<div class="info-form-label">성별</div>
 								<div class="info-form-input">
-									<label class="radio-label sex"><input type="radio"
-										name="gender" value="1" checked="">여성</label><label
-										class="radio-label sex"><input type="radio"
-										name="gender" value="0">남성</label>
+									<label class="radio-label"><input type="radio" name="gender" value="1" checked="">여성</label>
+									<label class="radio-label"><input type="radio" name="gender" value="0">남성</label>
 								</div>
 							</div>
 							<div class="info-row board-category">
