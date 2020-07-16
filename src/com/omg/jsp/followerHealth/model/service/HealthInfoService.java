@@ -14,8 +14,6 @@ public class HealthInfoService {
 
 	public ArrayList<HealthInfo> selectHealthInfo(Member loginUser) {
 		Connection con = getConncection();
-		
-		System.out.println("service loginUser : " + loginUser);
 
 		ArrayList<HealthInfo> list = new HealthInfoDao().selectHealthInfo(con, loginUser);
 		

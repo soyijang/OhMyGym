@@ -36,12 +36,20 @@ public class HealthinfoServlet extends HttpServlet {
 		
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		
-		System.out.println("servlet loginUser : " + loginUser);
-		
 		ArrayList<HealthInfo> list = new HealthInfoService().selectHealthInfo(loginUser);
 		
+		System.out.println("servlet : " + list);
+
+		String page = "";
+		if(list != null) {
+			page = "views/follower/followerHealth/followerInsertHealthInfo.jsp";
+			request.setAttribute("list", list);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "HealthInfo 조회 실패");
+		}
 		
-		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 
