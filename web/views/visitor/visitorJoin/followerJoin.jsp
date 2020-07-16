@@ -6,6 +6,37 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"> </script>
 <title>Insert title here</title>
+<script>
+
+	function passwordCheckFunction() {
+		var password1 = $("#memberPwd1").val();
+		var password2 = $("#memberPwd2").val();
+		if(password1 != password2) {
+			$("#checkMessage").html("비밀번호가 일치하지 않습니다.");
+		} else {
+			$("#checkMessage").html("");
+		}
+		
+	}
+	
+	function idCheckFunction() {
+		var memberId = $("#memberId").val();
+		$.ajax({
+			type: 'POST',
+			url: '/omg/IdCheckServlet',
+			success: function(result) {
+				if(result == 1) {
+					
+					alert("사용할 수 있는 아이디입니다.");
+				} else {
+					
+					alert("사용중인 아이디입니다. 다른 아이디를 입력해주세요");
+				}
+			}
+		});
+	}
+
+</script>
 
 
 <style>
@@ -139,7 +170,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 												<td><input type="text" name="memberId" id="memberId" value=""
 													style="height: 40px" size="50"
 													maxlength="12" placeholder="아이디를 입력해주세요">
-													<a onclick="idCheck()"
+													<a onclick="idCheckFunction()"
 														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">중복확인</a>
 													<span class="idpw-info"><br>
 													<span id="result"></apan>
@@ -151,9 +182,9 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 											<tr>
 												<th>비밀번호</th>
 												<td><input type="password" name="memberPwd"
-													id="memberPwd" style="height: 40px"
+													id="memberPwd1" style="height: 40px"
 													class="MS_input_txt w137" value="" size="50" maxlength="20"
-													onkeyup="check_pwd_length(this, 'password');"
+													onkeyup="passwordCheckFunction();"
 													placeholder="비밀번호를 입력해주세요"> <span class="idpw-info"><br>
 														<p style="font-size: 0.7em; color: orangered;">* 비밀번호는
 															8자 이상으로 입력해 주세요.</p> </span></td>
@@ -163,8 +194,9 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 												<td><input type="password" name="memberPwd2"
 													id="memberPwd2" style="height: 40px"
 													class="MS_input_txt w137" value="" size="50" maxlength="20"
-													onkeyup="check_pwd_length(this, 'repassword');"
-													placeholder="비밀번호를 한번 더 입력해주세요"></td>
+													onkeyup="passwordCheckFunction();"
+													placeholder="비밀번호를 한번 더 입력해주세요">
+													<sapn id="checkMessage" style="color:red; font-weigth:bold"></sapn></td>
 											</tr>
 
 											<tr>
@@ -426,6 +458,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 
 											</tr>
+											
 
 
 
