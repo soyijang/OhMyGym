@@ -450,7 +450,7 @@ div.post_commentback{
 								</div>
 								<div id="postcontainer">
 									<div class="post_part">
-									<!-- 사용자 프로필 -->
+									사용자 프로필
 									<div class="user_img" style="display: inline-block;">
 										<img src="../../../resources/img/crush_ps.png" width="50px"
 											height="50px" style="border-radius: 70%; overflow: hidden;">
@@ -458,7 +458,7 @@ div.post_commentback{
 									<div id="user_profile"
 										style="display: inline-block; vertical-align: top;">
 										<em class="user_name">
-											<!--업로드 유저명(DB에서 탐색)-->크러쉬
+											업로드 유저명(DB에서 탐색)크러쉬
 										</em><br> <span class="upload_time">5분전</span>
 									</div>
 									<hr>
@@ -471,8 +471,8 @@ div.post_commentback{
 									</div>
 									<div id="MarkAndLike" style="margin-top: 20px;">
 										<span class="like"
-											style="margin-right: 10px; font-weight: bold;"> <i
-											class="fas fa-thumbs-up" style="margin-right: 5px;"></i>좋아요 <a>74</a>
+											style="margin-right: 10px; font-weight: bold;"> <a onclick="addLike();" style="cursor: pointer;"><i
+											class="fas fa-thumbs-up" style="margin-right: 5px;"></i>좋아요</a><a>74</a>
 										</span> <span class="mark" style="font-weight: bold;"> <i
 											class="far fa-bookmark" style="margin-right: 5px;"></i>북마크 <a>20</a>
 										</span>
@@ -495,7 +495,7 @@ div.post_commentback{
 														style="display: block; float: left; margin-left: 15px; margin-top: 10px;">
 														<em class="user_name_comment"
 															style="font-size: 10px; display: block; float: left;">
-															<!--업로드 유저명(DB에서 탐색)-->크러쉬
+															업로드 유저명(DB에서 탐색)크러쉬
 														</em><br> <span class="upload_time_comment"
 															style="font-size: 10px;">5분전</span>
 													</div>
@@ -540,7 +540,6 @@ div.post_commentback{
 
 	function selectAllPost(){
 		$("#add_postBox").val('');
-		console.log("조회시작");
 		$.ajax({
 			url : "/omg/selectGroupCommu.follower",
 			data : {},
@@ -559,8 +558,8 @@ div.post_commentback{
 						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
 						"<div id='post_Content_img'>"+"</div>"+
 						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
-						"<span class='like' style='margin-right: 10px; font-weight: bold;'> <i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
-						"좋아요<a>"+"</a></span>"+
+						"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data[key].groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
+						"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
 						"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
 						"북마크 <a>"+"</a></span></div>"+
 						"<details id='open_comment' open style='margin-top: 15px;'>"+
@@ -574,8 +573,9 @@ div.post_commentback{
 											"</textarea>"+
 											"<button id='add_comment_btn' onclick='addReply("+data[key].groupBoardNum+");'>입력하기</button>"+
 											"</div></div></div></div></details></div></div>");
-					updatePosts();
+					selectLikes(data[key].groupBoardNum);
 				}
+				updatePosts();
 			},
 			error : function() {
 				console.log("실패!")
@@ -590,7 +590,6 @@ div.post_commentback{
 				type : "post",
 				success : function(data) {
 					for(var key in data){
-						console.log("#post_comments"+data[key].groupBoardNum);
 						var $addCommentPart = $("#post_comments"+data[key].groupBoardNum);
 						$addCommentPart.prepend("<div class='post_part_comment' style='padding: 5px;'>"+
 							"<div class='user_img' style='display: block; float: left; margin-top: 10px;'>"+
@@ -683,8 +682,6 @@ div.post_commentback{
 			var writer = "한진희";
 			var content = $("#add_postBox").val();
 			$("#add_postBox").val('');
-			console.log(writer);
-			console.log(content);
 			$.ajax({
 				url : "/omg/insertGroupCommu.follower",
 				data : {
@@ -706,26 +703,25 @@ div.post_commentback{
 						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data.groupContent+"</textarea></div>"+	
 						"<div id='post_Content_img'>"+"</div>"+
 						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
-						"<span class='like' style='margin-right: 10px; font-weight: bold;'> <i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
-						"좋아요<a>"+"</a></span>"+
+						"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data.groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
+						"좋아요</a>+0+<a id='postlike"+data.groupBoardNum+"'>"+"</a></span>"+
 						"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
 						"북마크 <a>"+"</a></span></div>"+
 						"<details id='open_comment' open style='margin-top: 15px;'>"+
 						"<summary>댓글</summary>"+
 						"<div class='post_commentback'>"+
-						"<div id='post_comments'>"+"</div>"+
+						"<div id='post_comments"+data.groupBoardNum+"'>"+"</div>"+
 							"<div id='add_comments'>"+
 									"<div class='add_part_comment' style='padding: 5px; min-height: 40px;'>"+
 										"<div style='float: left;'>"+
-											"<textarea onclick='printData();' placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
+											"<textarea id='input_comment"+data.groupBoardNum+"' placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
 											"</textarea>"+
-											"<button id='add_comment_btn'>입력하기</button>"+
+											"<button id='add_comment_btn'  onclick='addReply("+data.groupBoardNum+");' >입력하기</button>"+
 											"</div></div></div></div></details></div></div>");
 			        $(".post_box").each(function(index,item){
 			               $(item).height(1).height( $(item).prop('scrollHeight'));
 			               $(item).css("height", $(item).height());
 			        })
-			        console.log("글작성");
 				},
 				error : function() {
 					console.log("실패!")
@@ -741,12 +737,11 @@ div.post_commentback{
 		}
 		
 		function addReply(value) {
-			
  			var writerId =  "test01";
   			var writer = "한진희";
  			var replyContent = $("#input_comment"+value).val();
  			var postId = value;
- 			console.log(replyContent);
+ 			$("#input_comment"+value).val('');
 
  			$.ajax({
  				url : "/omg/insertGroupReply.follower",
@@ -759,7 +754,6 @@ div.post_commentback{
  				type : "post",
  				success : function(data) {
  					var $addCommentPart = $("#post_comments"+data.groupBoardNum);
- 					console.log($addCommentPart);
  					$addCommentPart.prepend("<div class='post_part_comment' style='padding: 5px;'>"+
 							"<div class='user_img' style='display: block; float: left; margin-top: 10px;'>"+
 								"<img src='' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
@@ -778,10 +772,79 @@ div.post_commentback{
  			})
 		}
 	</script>
+	<script>
+		function checkLikes(value){
+			var postId = value;
+			var likeId =  "test01";
+			$.ajax({
+ 				url : "/omg/checkLike.follower",
+ 				data : {
+ 					postId : postId,
+ 					likeId : likeId
+ 				},
+ 				type : "post",
+ 				success : function(data) {
+ 					if(data){
+ 						$("#postlike"+value).css("color","orangered");
+ 					} else {
+ 						$("#postlike"+value).css("color","black");
+ 					}
+ 				},
+ 				error : function(){
+ 					console.log("싈패ㅜㅜㅜㅜㅜ");
+ 				}
+ 			})
+		}
+	
+	
+		function selectLikes(value){
+			var postId = value;
+			$.ajax({
+ 				url : "/omg/checkLike.follower",
+ 				data : {
+ 					postId : postId
+ 				},
+ 				type : "post",
+ 				success : function(data) {
+ 					 $("#postlike"+postId).text(data);
+ 					checkLikes(value);
+ 				},
+ 				error : function(){
+ 					console.log("싈패ㅜㅜㅜㅜㅜ");
+ 				}
+ 			})
+		}
+	
+		function addLike(value){
+			var likeId =  "test01";
+ 			var likeCount = $("#postlike"+value).text();
+ 			var postId = value;
 
+ 			$.ajax({
+ 				url : "/omg/addCountLike.follower",
+ 				data : {
+ 					likeId : likeId,
+ 					postId : postId,
+ 					likeCount: likeCount
+ 				},
+ 				type : "post",
+ 				success : function(data) {
+ 					selectLikes(postId);
+ 					if(data){
+ 						$("#postlike"+value).css("color","orangered");
+ 					} else {
+ 						$("#postlike"+value).css("color","black");
+ 					}
+ 				},
+ 				error : function(){
+ 					console.log("싈패ㅜㅜㅜㅜㅜ");
+ 				}
+ 			})
+		}
+	
+	</script>
 
-	<div
-		style="position: absolute; top: 1100px; margin-left: 0px; margin-right: 0px;">
+	<div style="position: absolute; top: 1100px; margin-left: 0px; margin-right: 0px;">
 		<%@ include file="../../common/footer.jsp"%>
 	</div>
 

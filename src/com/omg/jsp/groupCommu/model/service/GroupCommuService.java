@@ -19,11 +19,11 @@ public class GroupCommuService {
 		Connection con = getConncection();
 		
 		int result = new GroupCommuDao().insertPost(con, requestPost);
-		//ArrayList<GroupCommuPost> replyList = new GroupCommuDao().selectPostList(con);
-		
 		if(result>0) {
 			System.out.println("커어밋");
 			commit(con);
+			String insertPostNum = new GroupCommuDao().selectCurrval(con);
+			requestPost.setGroupBoardNum(insertPostNum);
 		} else {
 			rollback(con);
 		}
@@ -67,6 +67,58 @@ public class GroupCommuService {
 		close(con);
 		
 		return commentList;
+	}
+
+	public boolean checkLike(String likedId, String postId) {
+		Connection con = getConncection();
+		
+		boolean result = new GroupCommuDao().checkLike(con, likedId, postId);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int addLike(String likedId, String postId) {
+		Connection con = getConncection();
+		
+		int result = new GroupCommuDao().addLike(con, likedId, postId);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int removeLike(String likedId) {
+		Connection con = getConncection();
+		
+		int result = new GroupCommuDao().removeLike(con, likedId);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int selectLike(String postId) {
+		Connection con = getConncection();
+		
+		int resultNumber = new GroupCommuDao().selectLike(con, postId);
+		
+		close(con);
+		
+		return resultNumber;
 	}
 
 }

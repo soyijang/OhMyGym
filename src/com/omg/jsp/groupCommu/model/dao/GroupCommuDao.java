@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -58,6 +59,35 @@ public class GroupCommuDao {
 		
 		return result;
 	}
+	
+	public String selectCurrval(Connection con) {
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		String bid = "";
+		
+		String query = prop.getProperty("selectCurrval");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			
+			if(rset.next()) {
+				bid =  Integer.toString(rset.getInt("currval"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			close(stmt);
+			close(rset);
+		}
+		
+		return bid;
+	}
+	
 
 	public ArrayList<GroupCommuPost> selectPost(Connection con) {
 		PreparedStatement pstmt = null;
@@ -159,6 +189,114 @@ public class GroupCommuDao {
 		}
 		
 		return list;
+	}
+
+	public boolean checkLike(Connection con, String likedId, String postId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = true;
+		
+		String query = prop.getProperty("checkLike");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, postId);
+			pstmt.setString(2, likedId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = false;//좋아요가 불가
+			} else {
+				result = true; //좋아요가 가능
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
+
+	public int addLike(Connection con, String likedId, String postId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("addLike");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, postId);
+			pstmt.setString(2, likedId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int removeLike(Connection con, String likedId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("removeLike");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, likedId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int selectLike(Connection con, String postId) {
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		int resultNum = 0;
+		
+		String query = prop.getProperty("selectLike");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, postId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				resultNum += 1;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return resultNum;
 	}
 
 }
