@@ -14,10 +14,10 @@ import com.omg.jsp.groupCommu.model.service.GroupCommuService;
 import com.omg.jsp.groupCommu.model.vo.GroupCommuPost;
 
 @WebServlet("/insertGroupCommu.follower")
-public class InsertGroupCommunity extends HttpServlet {
+public class InsertGroupCommunityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public InsertGroupCommunity() {
+    public InsertGroupCommunityServlet() {
         super();
     }
 

@@ -422,7 +422,7 @@ div.post_commentback{
 								<div class="add_part">
 									<!-- 사용자 프로필 -->
 									<div class="user_img" style="display: inline-block;">
-										<img src="../../../resources/img/crush_ps.png" width="50px" height="50px" style="border-radius: 70%; overflow: hidden;">
+										<img src="" width="50px" height="50px" style="border-radius: 70%; overflow: hidden;">
 									</div>
 									<div id="user_profile" class="post_userprofile">
 										<em class="user_name"><%=loginUser.getName()%>
@@ -578,6 +578,7 @@ div.post_commentback{
 					selectLikes(data[key].groupBoardNum);
 				}
 				updatePosts();
+				selectAllComment();
 			},
 			error : function() {
 				console.log("실패!")
@@ -586,6 +587,7 @@ div.post_commentback{
 	}
 	
 	function selectAllComment(){
+		console.log("댓글로드");
 		$.ajax({
 				url : "/omg/selectGroupReply.follower",
 				data : {},
@@ -615,14 +617,10 @@ div.post_commentback{
 	
 	$(function(){
 		selectAllPost();
-		selectAllComment();
 	})
 	
 	
 	</script>
-		
-		
-	
 	<script>
 		function addresize(obj) {
 			obj.style.height = "1px";
