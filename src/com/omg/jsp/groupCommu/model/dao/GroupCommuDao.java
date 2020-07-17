@@ -32,7 +32,7 @@ public class GroupCommuDao {
 		}
 	}
 	
-	public int insertPost(Connection con, GroupCommuPost requestPost) {
+	public int insertPost(Connection con, GroupCommuPost requestPost, String roomId) {
 		
 		PreparedStatement pstmt = null;
 		
@@ -47,7 +47,7 @@ public class GroupCommuDao {
 			pstmt.setString(2, requestPost.getGroupContent());
 			pstmt.setString(3, requestPost.getGroupUserId());
 			pstmt.setString(4, "follower");
-			pstmt.setInt(5, 135);
+			pstmt.setString(5, roomId);
 			
 			result = pstmt.executeUpdate();
 			
@@ -89,7 +89,7 @@ public class GroupCommuDao {
 	}
 	
 
-	public ArrayList<GroupCommuPost> selectPost(Connection con) {
+	public ArrayList<GroupCommuPost> selectPost(Connection con, String roomId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -100,7 +100,7 @@ public class GroupCommuDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			
-			pstmt.setInt(1, 135);
+			pstmt.setString(1, roomId);
 			
 			rset = pstmt.executeQuery();
 			

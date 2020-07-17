@@ -1,31 +1,29 @@
 package com.omg.jsp.groupCommu.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.omg.jsp.groupCommu.model.service.GroupCommuService;
-import com.omg.jsp.groupCommu.model.vo.GroupComment;
+import com.omg.jsp.matching.member.service.MatchingService;
+import com.omg.jsp.matching.member.vo.MatchingRequest;
+import com.omg.jsp.member.model.vo.Member;
 
 /**
- * Servlet implementation class SelectGroupComment
+ * Servlet implementation class OpenGroupCommunity
  */
-@WebServlet("/selectGroupReply.follower")
-public class SelectGroupComment extends HttpServlet {
+@WebServlet("/groupCommu.follower")
+public class OpenGroupCommunity extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectGroupComment() {
+    public OpenGroupCommunity() {
         super();
     }
 
@@ -34,21 +32,23 @@ public class SelectGroupComment extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<GroupComment> commentList = new GroupCommuService().selectComment();
-		Collections.sort(commentList, new Comparator<GroupComment>() {
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("loginUser");
+		
+		System.out.println(member.getMemberId());
 
-			@Override
-			public int compare(GroupComment o1, GroupComment o2) {
-				
-				return o1.getGroupBoardNum().compareTo(o2.getGroupBoardNum());
-			}
+		MatchingRequest matchResult = new MatchingService().checkMatch(member.getMemberId());
+		
+		String page = "";
+		if(matchResult != null) {
+    		page = "views/follower/followerCommunity/followerGroupCommunity.jsp";
+    		request.setAttribute("matchResult", matchResult);
+    		request.getRequestDispatcher(page).forward(request, response);
 			
-		});
-		
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		
-		new Gson().toJson(commentList, response.getWriter());
+		} else {
+			System.out.println("조회실패");
+		}
+
 	}
 
 	/**

@@ -30,18 +30,21 @@ public class AddCountLike extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String likedId = request.getParameter("likeId");
 		String postId = request.getParameter("postId");
+		String massage = request.getParameter("msg");
 		
 		boolean result = new GroupCommuService().checkLike(likedId, postId);
 		
 		int checkNum = 0;
-		
-		if(result) {
-			//좋아요 추가
-			checkNum = new GroupCommuService().addLike(likedId, postId);
-			
-		} else {
-			//좋아요 삭제
-			checkNum = new GroupCommuService().removeLike(likedId);
+	
+		if(massage.equals("add")) {
+			if(result) {
+				//좋아요 추가
+				checkNum = new GroupCommuService().addLike(likedId, postId);
+				
+			} else {
+				//좋아요 삭제
+				checkNum = new GroupCommuService().removeLike(likedId);
+			}
 		}
 		
 		response.setContentType("application/json");

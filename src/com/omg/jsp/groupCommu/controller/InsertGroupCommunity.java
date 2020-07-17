@@ -24,6 +24,7 @@ public class InsertGroupCommunity extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String roomId = request.getParameter("roomId");
 		String writerId = request.getParameter("writerId");
 		String writer = request.getParameter("writer");
 		String content = request.getParameter("content");
@@ -33,7 +34,7 @@ public class InsertGroupCommunity extends HttpServlet {
 		requestPost.setGroupUserId(writerId);
 		requestPost.setGroupContent(content);
 		
-		int result = new GroupCommuService().insertPost(requestPost);
+		int result = new GroupCommuService().insertPost(requestPost, roomId);
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

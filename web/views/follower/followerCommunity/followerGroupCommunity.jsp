@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.omg.jsp.matching.member.vo.MatchingRequest"%>
+<% MatchingRequest matchInfo  = (MatchingRequest) request.getAttribute("matchResult");%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -375,8 +376,7 @@ div.post_commentback{
 					<li><a
 						style="font-size: 20px; font-weight: bold; margin-left: -10px;">OH!마이짐</a>
 						<hr style="margin-left: -25px; border: 1.5px solid;"></li>
-					<li><a style="font-size: 14px; font-weight: normal;">트레이닝
-							룸</a>
+					<li><a style="font-size: 14px; font-weight: normal;">트레이닝룸</a>
 						<hr></li>
 					<li><a class="select"
 						style="font-size: 14px; font-weight: normal;">그룹소통방</a>
@@ -390,7 +390,7 @@ div.post_commentback{
 			<div class="commu_room_Name">
 				<p id="commu_Trainer_Name">
 					<!--트레이너 이름-->
-					트레이너 Y 그룹 소통방
+					<%=matchInfo.getTrainerName()%>트레이너 그룹 소통방
 				</p>
 				<nav id="In_Board_nav">
 					<div class="Board_side_container">
@@ -425,7 +425,7 @@ div.post_commentback{
 										<img src="../../../resources/img/crush_ps.png" width="50px" height="50px" style="border-radius: 70%; overflow: hidden;">
 									</div>
 									<div id="user_profile" class="post_userprofile">
-										<em class="user_name"> <!--업로드 유저명(DB에서 탐색)-->크러쉬
+										<em class="user_name"><%=loginUser.getName()%>
 										</em><br>
 										<!-- 사용자 프로필 -->
 										<input type="file" name="selectuploadImg" id="selectuploadImg"
@@ -449,84 +449,83 @@ div.post_commentback{
 
 								</div>
 								<div id="postcontainer">
-									<div class="post_part">
-									사용자 프로필
-									<div class="user_img" style="display: inline-block;">
-										<img src="../../../resources/img/crush_ps.png" width="50px"
-											height="50px" style="border-radius: 70%; overflow: hidden;">
-									</div>
-									<div id="user_profile"
-										style="display: inline-block; vertical-align: top;">
-										<em class="user_name">
-											업로드 유저명(DB에서 탐색)크러쉬
-										</em><br> <span class="upload_time">5분전</span>
-									</div>
-									<hr>
-									<div class="post_Content">
-										<textarea class="post_box" cols="60" name="post_content"
-											readonly>  이상하게도 말일은 뭐가 이리 바쁜지 모르겠어요.그냥 눈만 감았다 뜬것 같은데 어...</textarea>
-									</div>
-									<div id="post_Content_img"
-										style="padding: 20px; text-align: center;">
-									</div>
-									<div id="MarkAndLike" style="margin-top: 20px;">
-										<span class="like"
-											style="margin-right: 10px; font-weight: bold;"> <a onclick="addLike();" style="cursor: pointer;"><i
-											class="fas fa-thumbs-up" style="margin-right: 5px;"></i>좋아요</a><a>74</a>
-										</span> <span class="mark" style="font-weight: bold;"> <i
-											class="far fa-bookmark" style="margin-right: 5px;"></i>북마크 <a>20</a>
-										</span>
-									</div>
-									<details id="open_comment" open style="margin-top: 15px;">
-										<summary style="font-weight: bold; font-size: 0.9em;">댓글</summary>
-										<div
-											style="background: rgb(245, 245, 245); width: 100%; height: 100%;">
+<!-- 									<div class="post_part"> -->
+<!-- 									사용자 프로필 -->
+<!-- 									<div class="user_img" style="display: inline-block;"> -->
+<!-- 										<img src="../../../resources/img/crush_ps.png" width="50px" -->
+<!-- 											height="50px" style="border-radius: 70%; overflow: hidden;"> -->
+<!-- 									</div> -->
+<!-- 									<div id="user_profile" -->
+<!-- 										style="display: inline-block; vertical-align: top;"> -->
+<!-- 										<em class="user_name"> -->
+<!-- 											업로드 유저명(DB에서 탐색)크러쉬 -->
+<!-- 										</em><br> <span class="upload_time">5분전</span> -->
+<!-- 									</div> -->
+<!-- 									<hr> -->
+<!-- 									<div class="post_Content"> -->
+<!-- 										<textarea class="post_box" cols="60" name="post_content" -->
+<!-- 											readonly>  이상하게도 말일은 뭐가 이리 바쁜지 모르겠어요.그냥 눈만 감았다 뜬것 같은데 어...</textarea> -->
+<!-- 									</div> -->
+<!-- 									<div id="post_Content_img" -->
+<!-- 										style="padding: 20px; text-align: center;"> -->
+<!-- 									</div> -->
+<!-- 									<div id="MarkAndLike" style="margin-top: 20px;"> -->
+<!-- 										<span class="like" -->
+<!-- 											style="margin-right: 10px; font-weight: bold;"> <a onclick="addLike();" style="cursor: pointer;"><i -->
+<!-- 											class="fas fa-thumbs-up" style="margin-right: 5px;"></i>좋아요</a><a>74</a> -->
+<!-- 										</span> <span class="mark" style="font-weight: bold;"> <i -->
+<!-- 											class="far fa-bookmark" style="margin-right: 5px;"></i>북마크 <a>20</a> -->
+<!-- 										</span> -->
+<!-- 									</div> -->
+<!-- 									<details id="open_comment" open style="margin-top: 15px;"> -->
+<!-- 										<summary style="font-weight: bold; font-size: 0.9em;">댓글</summary> -->
+<!-- 										<div -->
+<!-- 											style="background: rgb(245, 245, 245); width: 100%; height: 100%;"> -->
 											
-											<div id="post_comments">
+<!-- 											<div id="post_comments"> -->
 											
-												<div class="post_part_comment" style="padding: 5px;">
-													<div class="user_img"
-														style="display: block; float: left; margin-top: 10px;">
-														<img src="../../resources/img/crush_ps.png" width="30px"
-															height="30px"
-															style="border-radius: 70%; overflow: hidden;">
-													</div>
-													<div id="user_profile"
-														style="display: block; float: left; margin-left: 15px; margin-top: 10px;">
-														<em class="user_name_comment"
-															style="font-size: 10px; display: block; float: left;">
-															업로드 유저명(DB에서 탐색)크러쉬
-														</em><br> <span class="upload_time_comment"
-															style="font-size: 10px;">5분전</span>
-													</div>
-													<textarea class="comments_box" cols="55"
-														name="post_comments_content"
-														style="display: block; height: 60px; float: left;"
-														readonly>동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시</textarea>
-												</div>
+<!-- 												<div class="post_part_comment" style="padding: 5px;"> -->
+<!-- 													<div class="user_img" -->
+<!-- 														style="display: block; float: left; margin-top: 10px;"> -->
+<!-- 														<img src="../../resources/img/crush_ps.png" width="30px" -->
+<!-- 															height="30px" -->
+<!-- 															style="border-radius: 70%; overflow: hidden;"> -->
+<!-- 													</div> -->
+<!-- 													<div id="user_profile" -->
+<!-- 														style="display: block; float: left; margin-left: 15px; margin-top: 10px;"> -->
+<!-- 														<em class="user_name_comment" -->
+<!-- 															style="font-size: 10px; display: block; float: left;"> -->
+<!-- 															업로드 유저명(DB에서 탐색)크러쉬 -->
+<!-- 														</em><br> <span class="upload_time_comment" -->
+<!-- 															style="font-size: 10px;">5분전</span> -->
+<!-- 													</div> -->
+<!-- 													<textarea class="comments_box" cols="55" -->
+<!-- 														name="post_comments_content" -->
+<!-- 														style="display: block; height: 60px; float: left;" -->
+<!-- 														readonly>동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시</textarea> -->
+<!-- 												</div> -->
 												
-											</div>
-											<form>
+<!-- 											</div> -->
+<!-- 											<form> -->
 											
-											<div id="add_comments">
-												<div class="add_part_comment"
-													style="padding: 5px; min-height: 40px;">
-													<div style="float: left;">
-														<textarea onclick="printData('히히헤헤호호');" placeholder="댓글을 입력해주세요."
-															onkeydown="resize(this)" onkeyup="resize(this)"
-															class="input_comments_box" cols="42"
-															name="post_comments_content"
-															style="float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;"></textarea>
-														<button onclick="addReply();" id="add_comment_btn">입력하기</button>
-													</div>
-												</div>
-											</div>
+<!-- 											<div id="add_comments"> -->
+<!-- 												<div class="add_part_comment" -->
+<!-- 													style="padding: 5px; min-height: 40px;"> -->
+<!-- 													<div style="float: left;"> -->
+<!-- 														<textarea onclick="printData('히히헤헤호호');" placeholder="댓글을 입력해주세요." -->
+<!-- 															onkeydown="resize(this)" onkeyup="resize(this)" -->
+<!-- 															class="input_comments_box" cols="42" -->
+<!-- 															name="post_comments_content" -->
+<!-- 															style="float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;"></textarea> -->
+<!-- 														<button onclick="addReply();" id="add_comment_btn">입력하기</button> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 											
-											</form>
-											</div>
-											</details>
-											</div>
-
+<!-- 											</form> -->
+<!-- 											</div> -->
+<!-- 											</details> -->
+<!-- 											</div> -->
 								</div>
 							</div>
 						</div>
@@ -540,9 +539,12 @@ div.post_commentback{
 
 	function selectAllPost(){
 		$("#add_postBox").val('');
+		var roomId = "<%=matchInfo.getGroupCommuNum()%>";
 		$.ajax({
 			url : "/omg/selectGroupCommu.follower",
-			data : {},
+			data : {
+				roomId : roomId
+			},
 			type : "post",
 			success : function(data) {
 				for(var key in data){
@@ -678,13 +680,15 @@ div.post_commentback{
 		}
 
 		function addPost() {
-			var writerId =  "test01";
-			var writer = "한진희";
+			var roomId = "<%=matchInfo.getGroupCommuNum()%>";
+			var writerId =  "<%=loginUser.getMemberId()%>";
+			var writer = "<%=loginUser.getName()%>";
 			var content = $("#add_postBox").val();
 			$("#add_postBox").val('');
 			$.ajax({
 				url : "/omg/insertGroupCommu.follower",
 				data : {
+					roomId : roomId,
 					writer : writer,
 					content : content,
 					writerId : writerId
@@ -704,7 +708,7 @@ div.post_commentback{
 						"<div id='post_Content_img'>"+"</div>"+
 						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
 						"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data.groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
-						"좋아요</a>+0+<a id='postlike"+data.groupBoardNum+"'>"+"</a></span>"+
+						"좋아요</a>"+0+"<a id='postlike"+data.groupBoardNum+"'>"+"</a></span>"+
 						"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
 						"북마크 <a>"+"</a></span></div>"+
 						"<details id='open_comment' open style='margin-top: 15px;'>"+
@@ -737,8 +741,8 @@ div.post_commentback{
 		}
 		
 		function addReply(value) {
- 			var writerId =  "test01";
-  			var writer = "한진희";
+			var writerId =  "<%=loginUser.getMemberId()%>";
+			var writer = "<%=loginUser.getName()%>";
  			var replyContent = $("#input_comment"+value).val();
  			var postId = value;
  			$("#input_comment"+value).val('');
@@ -772,22 +776,25 @@ div.post_commentback{
  			})
 		}
 	</script>
+	
 	<script>
 		function checkLikes(value){
 			var postId = value;
-			var likeId =  "test01";
+			var likeId =  "<%=loginUser.getMemberId()%>";
+			var msg = "non";
 			$.ajax({
- 				url : "/omg/checkLike.follower",
+ 				url : "/omg/addCountLike.follower",
  				data : {
  					postId : postId,
- 					likeId : likeId
+ 					likeId : likeId,
+ 					msg : msg
  				},
  				type : "post",
  				success : function(data) {
  					if(data){
- 						$("#postlike"+value).css("color","orangered");
- 					} else {
  						$("#postlike"+value).css("color","black");
+ 					} else {
+ 						$("#postlike"+value).css("color","orangered");
  					}
  				},
  				error : function(){
@@ -816,16 +823,18 @@ div.post_commentback{
 		}
 	
 		function addLike(value){
-			var likeId =  "test01";
+			var likeId =   "<%=loginUser.getMemberId()%>";
  			var likeCount = $("#postlike"+value).text();
  			var postId = value;
+ 			var msg = "add";
 
  			$.ajax({
  				url : "/omg/addCountLike.follower",
  				data : {
  					likeId : likeId,
  					postId : postId,
- 					likeCount: likeCount
+ 					likeCount: likeCount,
+ 					msg : msg
  				},
  				type : "post",
  				success : function(data) {
