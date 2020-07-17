@@ -1,4 +1,4 @@
-package com.omg.jsp.matching.member.dao;
+package com.omg.jsp.matching.model.dao;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.omg.jsp.matching.member.vo.MatchingRequest;
+import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.member.model.dao.MemberDao;
 import static com.omg.jsp.common.JDBCTemplate.*;
 

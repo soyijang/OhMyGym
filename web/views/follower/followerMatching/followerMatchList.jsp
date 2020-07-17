@@ -178,22 +178,21 @@ div.tariner_ability {
 						<!-- 리스트 시작 -->
 						<div class="trainer_Info" style="float: left;">
 							<div class="trainnerImg">
-								<img class="trainnerImg" width="100%" height="100%"
-									src="../../resources/img/trainerJang.png">
+								<img class="profileImg" width="100%" height="100%" src="">
 							</div>
 							<div class="trainnerTxt">
 								<a class="trainerName">트레이너 대길</a> <a class="trainerId">chaseNoBig</a>
 								<ul>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
+<!-- 									<li><img width="20px" height="20px" -->
+<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
+<!-- 									<li><img width="20px" height="20px" -->
+<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
+<!-- 									<li><img width="20px" height="20px" -->
+<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
+<!-- 									<li><img width="20px" height="20px" -->
+<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
+<!-- 									<li><img width="20px" height="20px" -->
+<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
 								</ul>
 								<div class="trainerScore">5.0</div>
 								<div class="tariner_comment">추노질하는 것보다 팔로워 관리하는게 훨씬 더
@@ -202,7 +201,7 @@ div.tariner_ability {
 							</div>
 						</div>
 
-						<div class="trainer_Info" style="float: left;">
+						<!-- <div class="trainer_Info" style="float: left;">
 							<div class="trainnerImg">
 								<img class="trainnerImg" width="100%" height="100%"
 									src="../../resources/img/trainerJang2.png">
@@ -276,7 +275,7 @@ div.tariner_ability {
 								<div class="tariner_comment">호랑이 장관의 독한 운동법!</div>
 								<div class="tariner_ability">#체력관리 #다이어트</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- 리스트 끝 -->
 
 					</div>
@@ -284,6 +283,15 @@ div.tariner_ability {
 			</div>
 		</article>
 	</section>
+	
+	<script>
+		
+	
+	
+	</script>
+	
+	
+	
 	<%@ include file="../../common/footer.jsp"%>
 </body>
 </html>
