@@ -1,6 +1,7 @@
 package com.omg.jsp.followerHealth.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -46,28 +47,27 @@ public class InsertHealthHistoryServlet extends HttpServlet {
 		sarr[8] = request.getParameter("bodyUneasy");
 		sarr[9] = request.getParameter("goal");
 		
-		System.out.println("UpdateFollowerHealthInfoServlet");
-		
 		ArrayList<HealthInfo> list = new ArrayList<HealthInfo>();
 		
 		for(int i = 0; i < sarr.length - 1; i++) {
-			HealthInfo hi = new HealthInfo(sarr[0], sarr[i + 1], i + 1 + "");
+			HealthInfo hi = new HealthInfo(sarr[0], sarr[i + 1], i + 1 + "");	//id, healthdata, healthcode
 			list.add(hi);
 		}
 		
-		System.out.println("InsertHealthHistoryServlet");
-		System.out.println("servlet list : " + list);
-		
 		int result = new HealthInfoService().insertHealthHistory(list);
 		
-		
-		
-		
-		
-		
-	}
 
-	
+		
+		String page = "";
+		if(result > 0) {
+			request.setAttribute("list", list);
+			response.sendRedirect(request.getContextPath() + "/healthInfo.hi");
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "건강정보 수정 실패");
+			request.getRequestDispatcher(page).forward(request, response);
+		}
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

@@ -25,9 +25,11 @@ public class HealthInfoService {
 	public int insertHealthHistory(ArrayList<HealthInfo> list) {
 		Connection con = getConncection();
 		
-		int result = new HealthInfoDao().insertHealthHistory(con, list);
+		int insertResult = new HealthInfoDao().insertHealthHistory(con, list);
 		
-		if(result > 0) {
+		int updateResult = new HealthInfoDao().updateHealthInfoNow(con, list);
+		
+		if(insertResult > 0 && updateResult > 0) {
 			commit(con);
 		} else {
 			rollback(con);
@@ -35,7 +37,7 @@ public class HealthInfoService {
 		
 		close(con);
 		
-		return result;
+		return insertResult;
 	}
 
 

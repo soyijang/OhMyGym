@@ -1,6 +1,7 @@
 package com.omg.jsp.followerHealth.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -34,14 +35,12 @@ public class HealthinfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		System.out.println("HealthinfoServlet");
-		
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		
 		ArrayList<HealthInfo> list = new HealthInfoService().selectHealthInfo(loginUser);
 
 		String page = "";
-		if(list != null) {
+		if(!list.isEmpty()) {
 			page = "views/follower/followerHealth/followerInsertHealthInfo.jsp";
 			request.setAttribute("list", list);
 		} else {

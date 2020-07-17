@@ -51,10 +51,10 @@ public class HealthInfoDao {
 				hi.setHealthInfoCode(rset.getString("HEALTH_INFO_CODE"));
 				hi.setMemberId(rset.getString("MEMBER_ID"));
 				hi.setHealthInfoNowManagecode(rset.getInt("HEALTH_INFO_NOW_MANAGECODE"));
-				
+					
 				list.add(hi);
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -71,8 +71,46 @@ public class HealthInfoDao {
 		
 		String query = prop.getProperty("insertHealthHistory");
 		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			for(int i = 0; i < list.size(); i++) {
+				pstmt.setString(1, list.get(i).getHealthData());
+				pstmt.setString(2, list.get(i).getHealthInfoCode());
+				pstmt.setString(3, list.get(i).getMemberId());
+				
+				result += pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateHealthInfoNow(Connection con, ArrayList<HealthInfo> list) {
+		PreparedStatement pstmt = null;
+		int result = 0;
 		
+		String query = prop.getProperty("updateHealthInfoNow");
 		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			for(int i = 0; i < list.size(); i++) {
+				pstmt.setString(1, list.get(i).getHealthData());
+				pstmt.setString(2, list.get(i).getMemberId());
+				pstmt.setString(3, list.get(i).getHealthInfoCode());
+				
+				result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		return result;
 	}
