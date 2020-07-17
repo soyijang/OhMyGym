@@ -1,4 +1,4 @@
-package com.omg.jsp.matching.member.vo;
+package com.omg.jsp.matching.model.vo;
 
 import java.io.Serializable;
 

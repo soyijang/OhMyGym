@@ -1,9 +1,9 @@
-package com.omg.jsp.matching.member.service;
+package com.omg.jsp.matching.model.service;
 
 import java.sql.Connection;
 
-import com.omg.jsp.matching.member.dao.MatchingDao;
-import com.omg.jsp.matching.member.vo.MatchingRequest;
+import com.omg.jsp.matching.model.dao.MatchingDao;
+import com.omg.jsp.matching.model.vo.MatchingRequest;
 
 import static com.omg.jsp.common.JDBCTemplate.*;
 

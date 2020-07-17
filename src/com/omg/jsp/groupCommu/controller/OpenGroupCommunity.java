@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.omg.jsp.matching.member.service.MatchingService;
-import com.omg.jsp.matching.member.vo.MatchingRequest;
+import com.omg.jsp.matching.model.service.MatchingService;
+import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.member.model.vo.Member;
 
 /**
