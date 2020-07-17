@@ -28,7 +28,7 @@
 							<div class="info-row">
 								<div class="info-form-label">아이디</div>
 								<div class="info-form-input">
-									<input readonly="" name="myid" type="text"
+									<input name="myid" type="text"
 										class="id-input input-box" disabled="" value="<%= loginUser.getMemberId()%>">
 								</div>
 							</div>

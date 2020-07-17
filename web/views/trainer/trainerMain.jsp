@@ -58,7 +58,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a id="myPage" class="link_text" href="" >
+                                <a id="myPage" class="link_text" href="trainerMypage/trainerMypageMain.jsp" >
                                     <img src="../../resources/img_icon/myIcon.png" style="width: 92px; height: 93;"><br>
                                 </a>
                             </td>
@@ -70,7 +70,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a id="myPage" class="link_text" href="/views/trainer/trainerMypage/trainerMypageMain.jsp" >
+                                <a id="myPage" class="link_text" href="trainerMypage/trainerMypageMain.jsp" >
                                     	마이페이지
                                 </a>
                             </td>
