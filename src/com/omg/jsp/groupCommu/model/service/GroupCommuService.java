@@ -1,9 +1,6 @@
 package com.omg.jsp.groupCommu.model.service;
 
-import static com.omg.jsp.common.JDBCTemplate.close;
-import static com.omg.jsp.common.JDBCTemplate.commit;
-import static com.omg.jsp.common.JDBCTemplate.getConncection;
-import static com.omg.jsp.common.JDBCTemplate.rollback;
+import static com.omg.jsp.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -14,13 +11,12 @@ import com.omg.jsp.groupCommu.model.vo.GroupCommuPost;
 
 public class GroupCommuService {
 
-	public int insertPost(GroupCommuPost requestPost) {
+	public int insertPost(GroupCommuPost requestPost, String roomId) {
 
 		Connection con = getConncection();
 		
-		int result = new GroupCommuDao().insertPost(con, requestPost);
+		int result = new GroupCommuDao().insertPost(con, requestPost, roomId);
 		if(result>0) {
-			System.out.println("커어밋");
 			commit(con);
 			String insertPostNum = new GroupCommuDao().selectCurrval(con);
 			requestPost.setGroupBoardNum(insertPostNum);
@@ -32,10 +28,10 @@ public class GroupCommuService {
 		return result;
 	}
 	
-	public ArrayList<GroupCommuPost> selectPost() {
+	public ArrayList<GroupCommuPost> selectPost(String roomId) {
 		Connection con = getConncection();
 		
-		ArrayList<GroupCommuPost> postList = new GroupCommuDao().selectPost(con);
+		ArrayList<GroupCommuPost> postList = new GroupCommuDao().selectPost(con, roomId);
 		
 		close(con);
 		
