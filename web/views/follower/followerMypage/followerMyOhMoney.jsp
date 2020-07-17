@@ -429,6 +429,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+     <%@ include file="../../common/followerNav.jsp" %>
    <div class="return_wrap" style="display: none;">
         <div class="dark_bg" onclick="jQuery('.return_wrap').fadeOut('slow')"></div>
         <div class="return_box">
@@ -482,7 +483,6 @@
     </script>
 
 
-
   <div class="buy_wrap" style="display: none;">
         <div class="dark_bg" onclick="jQuery('.buy_wrap').fadeOut('slow')"></div>
         <div class="buy_box">
@@ -510,7 +510,7 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <td id="have_OhMoney">1,000원
+                                    <td id="have_OhMoney">0원
                                     </td>
                                     <td id="add_OhMoney">0원
                                     </td>
@@ -567,10 +567,10 @@
                                     pg : 'html5_inicis',
                                     pay_method : 'card',
                                     merchant_uid : 'merchant_' + new Date().getTime(),
-                                    name : '주문명:결제테스트',
+                                    name : 'OH MONEY (오 머니)',
                                     amount : money,
                                     buyer_email : 'iamport@siot.do',
-                                    buyer_name : '김윤기',
+                                    buyer_name : '<%=loginUser.getName()%>',
                                     buyer_tel : '010-1234-5678',
                                     buyer_addr : '서울특별시 강남구 삼성동',
                                     buyer_postcode : '123-456',
@@ -596,7 +596,7 @@
         </div>
     </div>
     
-     <%@ include file="../../common/followerNav.jsp" %>
+
     
      <section>
 <!--         <nav id="side_nav">
