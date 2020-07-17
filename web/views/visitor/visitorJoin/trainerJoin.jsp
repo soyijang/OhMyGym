@@ -7,6 +7,91 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"> </script>
 <script>
+
+	function checks() {
+		var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+		var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+		var getName = RegExp(/^[가-힣]+$/);
+		
+		//아이디 공백확인
+		if($("#memberId").val() == ""){ 
+			alert("아이디 입력바람"); 
+			$("#memberId").focus(); return false; 
+		}
+		
+		//아이디 유효성검사
+		if(!getCheck.test($("#memberId").val())){
+			alert("형식에 맞게 입력해주세요");
+			$("#memberId").val("");
+			$("#memberId").focus(); 
+			return false; 
+		}
+		
+		//비밀번호 공백 확인
+		if($("#memberPwd").val() == ""){
+			alert("패스워드 입력바람");
+			$("#memberPwd").focus();
+			return false; 
+		}
+		
+		//아이디 비밀번호 같음 확인 
+		if($("#memberId").val() == $("#memberPwd1").val()){
+			alert("아이디와 비밀번호가 같습니다");
+			$("#memberPwd1").val("");
+			$("#memberPwd1").focus();
+			return false; 
+		}
+		
+		//비밀번호 유효성검사 
+		if(!getCheck.test($("#memberPwd1").val())){ 
+			alert("형식에 맞게 입력해주세요");
+			$("#memberPwd1").val("");
+			$("#memberPwd1").focus(); 
+			return false; 
+		}
+		
+		//비밀번호 확인란 공백 확인
+		if($("#memberPwd2").val() == ""){
+			alert("패스워드 확인란을 입력해주세요");
+			$("#memberPwd2").focus();
+			return false; 
+		}
+		
+		//이메일 공백 확인 
+		if($("#email1").val() == ""){
+			alert("이메일을 입력해주세요");
+			$("#email1").focus(); 
+			return false; 
+		}
+		
+		//이메일 유효성 검사
+		if(!getMail.test($("#email1").val())){
+			alert("이메일형식에 맞게 입력해주세요"); 
+			$("#email1").val("");
+			$("#email1").focus(); 
+			return false; 
+		}
+		
+		//이름 공백 검사 
+		if($("#memberName").val() == ""){
+			alert("이름을 입력해주세요"); 
+			$("#memberName").focus(); 
+			return false; 
+		}
+		
+		//이름 유효성 검사 
+		if(!getCheck.test($("#memberName").val())){
+			alert("이름형식에 맞게 입력해주세요");
+			$("#memberName").val(""); $("#memberName").focus(); 
+			return false; 
+		}
+
+	}
+	
+	
+	
+	
+	
 	function passwordCheckFunction() {
 		var password1 = $("#memberPwd1").val();
 		var password2 = $("#memberPwd2").val();
@@ -131,7 +216,7 @@ body {
 
 			<div class="container">
 				<form id="joinForm"
-					action="<%= request.getContextPath() %>/insert.me" method="post">
+					action="<%= request.getContextPath() %>/insert.me" method="post" onsubmit="return checks()">
 
 					<div id="main-center">
 
@@ -507,7 +592,7 @@ body {
 
 
 			<div class="confirm">
-				<button onclick="insertMember()"
+				<button type="submit" onclick="insertMember()"
 					style="width: 200px; height: 40px; background-color: orangered; color: white; border: none;">가입하기</button>
 
 			</div>
