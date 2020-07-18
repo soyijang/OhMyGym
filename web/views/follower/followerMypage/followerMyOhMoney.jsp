@@ -443,22 +443,23 @@
                     <br>
 
                     <div class="customer_ohMoney_return" style="text-align: center; margin: auto;">
-                        <div style="font-size: 1.3em; font-weight: bold;">환급가능금액: <a>0</a>원</div>
+                        <div style="font-size: 1.3em; font-weight: bold;">환급가능금액: <a id="canRefundMoney">0</a>원</div>
                     </div>
                     <br>
                     <div style="font-weight: bold; font-size: 0.8em;">원하시는 환급 금액을 입력해주세요</div>
-                    <form>
-                        <input type="text" id="returnOhmoney" value="0">원
-                        <br><br>
-                        <input type="checkbox" id="checkTerm"><label style="font-size: 0.9em; font-weight: bold;">환급이용약관(필수)</label><a id="termTxt" onclick="showTerm();" style="margin-left:20px; cursor: pointer; font-size: 0.8em;">약관보기</a>
-                    </form><br>
+                        <input type="text" id="returnOhmoney" onkeyup="checkRefund();" value="5000">원<br>
+                         <a style="font-size:0.8em; color:black;">환급가능한 최소 금액은 5000원 입니다.</a><br>
+                        <a id="warnMsg" style="font-size:0.8em; color:red; display: none;">환급가능 액수보다 큰 금액은 환급해드릴 수 없습니다.</a><br>
+                        <input type="checkbox" id="checkTerm" name="checkTerm" onclick="checkIsAbled();"><label style="font-size: 0.9em; font-weight: bold;">환급이용약관(필수)</label><a id="termTxt" onclick="showTerm();" style="margin-left:20px; cursor: pointer; font-size: 0.8em;">약관보기</a>
+                    <br>
                         <textarea id="returnTermTxt" readonly>- 제 1 장 총칙 -
-                            </textarea><br>
-                    <button onclick="" class="returnbtn">환급신청하기</button>
+                        </textarea><br><br>
+                    <button id="submitRefund" onclick="submitRefund();" class="returnbtn" style="color:lightgray;" disabled>환급신청하기</button>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
         var turnTerm = false;
 
@@ -478,6 +479,54 @@
                 txt.innerText = "약관보기";
                 turnTerm = false;
             }
+
+        }
+        
+        var canRefund = false;
+        
+        function checkRefund(){
+        	if(refundBalance < $('#returnOhmoney').val()){
+        		$('#warnMsg').css('display','block');
+        		canRefund = false;
+        	} else {
+        		if($('#returnOhmoney').val() < 5000 ){
+            		canRefund = false;
+        		} else {
+	        		$('#warnMsg').css('display','none');
+	        		canRefund = true;
+        		}
+        	}
+            checkIsAbled();
+        }
+        
+        function checkIsAbled(){
+        	if(canRefund && $("input:checkbox[name=checkTerm]").is(":checked")){
+				$('#submitRefund').css('color','black');
+				$('#submitRefund').attr('disabled','false');
+        	} else {
+				$('#submitRefund').css('color','lightgray');
+				$('#submitRefund').attr('disabled','false');
+        	}
+        }
+        
+        function submitRefund(){
+        	var userId =  "<%=loginUser.getMemberId()%>";
+        	var money = $('#returnOhmoney').val();
+   	 		$.ajax({
+   	 			url : "/omg/submitReFund.follower",
+   	 			data : {
+   	 				userId : userId,
+   	 				money : money
+   	 			},
+   	 			type : "post",
+   	 			success : function(data) {
+   					alert("환급신청되었습니다.");
+   					jQuery('.return_wrap').fadeOut('slow')
+   	 			},
+   	 			error : function() {
+   	 				console.log("실패!")
+   	 			}
+    		})
         }
 
     </script>
@@ -616,6 +665,7 @@
                        	 				$('#usableOhMoney').text(comma(data.balance) + "원");
                        	 				$('#returnOhMoney').text(comma(data.refundBal) + "원");
                        	 				$('#cantreturnOhMoney').text(comma(data.nofundBal) + "원");
+                       	 				$('#canRefundMoney').text(comma(data.refundBal));
                        	 				balance = data.balance;
                        	 				refundBalance = data.refundBal;
                        	 				nofundBalance = data.nofundBal;
