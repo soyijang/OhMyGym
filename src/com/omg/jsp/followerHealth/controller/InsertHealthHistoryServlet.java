@@ -58,14 +58,27 @@ public class InsertHealthHistoryServlet extends HttpServlet {
 		
 
 		
-		String page = "";
-		if(result > 0) {
-			request.setAttribute("list", list);
-			response.sendRedirect(request.getContextPath() + "/healthInfo.hi");
+		if(request.getAttribute("plag") != null) {
+			String page = "";
+			if(result > 0) {
+				response.sendRedirect(request.getContextPath() + "/views/visitor/login.jsp");
+			} else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "회원가입 실패");
+				request.getRequestDispatcher(page).forward(request, response);
+			}
+			
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "건강정보 수정 실패");
-			request.getRequestDispatcher(page).forward(request, response);
+		
+			String page = "";
+			if(result > 0) {
+				request.setAttribute("list", list);
+				response.sendRedirect(request.getContextPath() + "/healthInfo.hi");
+			} else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "건강정보 수정 실패");
+				request.getRequestDispatcher(page).forward(request, response);
+			}
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

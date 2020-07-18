@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*"%>
+<%
+	ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) request.getAttribute("list");
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,9 +119,10 @@ div.trainnerTxt ul li {
 
 div.trainerScore {
 	clear: both;
-	margin-top: -15px;
+	/* margin-top: -15px; */
 	font-weight: bold;
 	font-size: 0.9em;
+	height: 22px;
 }
 
 a.trainerName {
@@ -142,6 +146,16 @@ div.tariner_ability {
 	font-size: 0.9em;
 	border-radius: 25px;
 	background: orangered;
+	color: white;
+	font-weight: bold;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+div.tariner_subAbility {
+	margin-top: 10px;
+	font-size: 0.9em;
+	border-radius: 25px;
+	background: gray;
 	color: white;
 	font-weight: bold;
 	margin-left: 20px;
@@ -173,33 +187,29 @@ div.tariner_ability {
 				<hr style="width: 1250px">
 				<div id="trainnerList"
 					style="overflow: auto; clear: both; margin-left: auto; margin-right: auto; width: 1250px; height: 500px;">
-					<div
-						style="margin: auto; padding: 10px; padding-left: 30px; padding-right: 30px; text-align: center;">
+					<div style="margin: auto; padding: 10px; padding-left: 30px; padding-right: 30px; text-align: center;">
 						<!-- 리스트 시작 -->
-						<div class="trainer_Info" style="float: left;">
-							<div class="trainnerImg">
-								<img class="profileImg" width="100%" height="100%" src="">
+						<%for(int i = 0; i < list.size(); i++) {
+							HashMap<String, Object> hmap = list.get(i); %>
+							
+							<div class="trainer_Info" style="float: left;">
+								<input type="hidden" value="<%= hmap.get("trainerId") %>">
+								<div class="trainnerImg">
+									<img class="profileImg" width="100%" height="100%" src="">
+								</div>
+								<div class="trainnerTxt">
+									<a class="trainerName"><%= hmap.get("trainerId") %></a>
+									<div class="trainerScore" style="text-align: center;">
+										<img width="18px" height="18px" src="/omg/resources/img_icon/ohmystar_pull.png" style="vertical-align: middle;">&nbsp;&nbsp;
+										<%= hmap.get("gradeAvg") %>
+									</div>
+									<div class="tariner_comment"><%= hmap.get("trainerComment") %></div>
+									<div class="tariner_ability">#<%= hmap.get("mainField") %></div>
+									<div class="tariner_subAbility">#<%= hmap.get("subField") %></div>
+								</div>
 							</div>
-							<div class="trainnerTxt">
-								<a class="trainerName">트레이너 대길</a> <a class="trainerId">chaseNoBig</a>
-								<ul>
-<!-- 									<li><img width="20px" height="20px" -->
-<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
-<!-- 									<li><img width="20px" height="20px" -->
-<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
-<!-- 									<li><img width="20px" height="20px" -->
-<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
-<!-- 									<li><img width="20px" height="20px" -->
-<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
-<!-- 									<li><img width="20px" height="20px" -->
-<!-- 										src="../../resources/img_icon/ohmystar_pull.png"></li> -->
-								</ul>
-								<div class="trainerScore">5.0</div>
-								<div class="tariner_comment">추노질하는 것보다 팔로워 관리하는게 훨씬 더
-									힘들구만.</div>
-								<div class="tariner_ability">#운동습관형성</div>
-							</div>
-						</div>
+							
+						<% } %>
 
 						<!-- <div class="trainer_Info" style="float: left;">
 							<div class="trainnerImg">
@@ -225,57 +235,6 @@ div.tariner_ability {
 								<div class="tariner_ability">#식이요법</div>
 							</div>
 						</div>
-
-						<div class="trainer_Info" style="float: left;">
-							<div class="trainnerImg">
-								<img class="trainnerImg" width="100%" height="100%"
-									src="../../resources/img/trainer_jino.png">
-							</div>
-							<div class="trainnerTxt">
-								<a class="trainerName">진오</a> <a class="trainerId">onji777</a>
-								<ul>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_half.png"></li>
-								</ul>
-								<div class="trainerScore">4.6</div>
-								<div class="tariner_comment">아침을 상쾌하게 해드립니다!</div>
-								<div class="tariner_ability">#타바타</div>
-							</div>
-						</div>
-
-
-						<div class="trainer_Info" style="float: left;">
-							<div class="trainnerImg">
-								<img class="trainnerImg" width="100%" height="100%"
-									src="../../resources/img/trainer_kim.png">
-							</div>
-							<div class="trainnerTxt">
-								<a class="trainerName">김진우</a> <a class="trainerId">wooJinK</a>
-								<ul>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-									<li><img width="20px" height="20px"
-										src="../../resources/img_icon/ohmystar_pull.png"></li>
-								</ul>
-								<div class="trainerScore">5.0</div>
-								<div class="tariner_comment">호랑이 장관의 독한 운동법!</div>
-								<div class="tariner_ability">#체력관리 #다이어트</div>
-							</div>
-						</div> -->
 						<!-- 리스트 끝 -->
 
 					</div>
@@ -285,9 +244,15 @@ div.tariner_ability {
 	</section>
 	
 	<script>
-		
-	
-	
+	$(function() {
+		$(".trainer_Info").click(function() {
+			//var num = $(this).children().childred().eq(0).val();
+			var num = $(this).find("input").val();
+			console.log(num);
+			
+			location.href="<%= request.getContextPath()%>/selectOne.mc?num=" + num;
+		});
+	});
 	</script>
 	
 	

@@ -26,8 +26,10 @@ public class HealthInfoService {
 		Connection con = getConncection();
 		
 		int insertResult = new HealthInfoDao().insertHealthHistory(con, list);
-		
+		System.out.println("gg" + list.get(0).getMemberId());
 		int updateResult = new HealthInfoDao().updateHealthInfoNow(con, list);
+		
+		System.out.println(list.get(0).getHealthData().isEmpty());
 		
 		if(insertResult > 0 && updateResult > 0) {
 			commit(con);

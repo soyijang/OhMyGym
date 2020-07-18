@@ -1,5 +1,7 @@
 package com.omg.jsp.matching.model.dao;
 
+import static com.omg.jsp.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,11 +9,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.member.model.dao.MemberDao;
-import static com.omg.jsp.common.JDBCTemplate.*;
+import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
+import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
+import com.omg.jsp.trainerReview.model.vo.TrainerReview;
 
 public class MatchingDao {
 	
@@ -59,5 +67,52 @@ public class MatchingDao {
 		}
 		return matchResult;
 	}
+	public ArrayList<HashMap<String, Object>> selectTrainerList(Connection con) {
+		Statement stmt = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap<String, Object> hmap = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectTrainerList");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				hmap = new HashMap<>();
+				
+				hmap.put("trainerId", rset.getString("MEMBER_ID"));
+				hmap.put("gradeAvg", rset.getDouble("AVG(R.GRADE)"));
+				hmap.put("trainerComment", rset.getString("TRAINER_COMMENT"));
+				hmap.put("mainField", rset.getString("TRAINER_MAINFIELD"));
+				hmap.put("subField", rset.getString("TRAINER_SUBFIELD"));
+				
+				list.add(hmap);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+	public HashMap<String, Object> selectTrainerMap(Connection con, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String, Object> hmap = null;
+		Member trainer = null;
+		TrainerReview tr = null;
+		TrainerCareer tc = null;
+		TrainerEducation te = null;
+		
+		return hmap;
+	}
+	
 
 }

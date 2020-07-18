@@ -342,6 +342,30 @@ button#sendMsg{
 									</table>
 								</div>
 							</div>
+							
+							<div style="margin-top: 25px; text-align: center; clear: both; width: 800px; border: 1px solid rgb(179, 179, 179); border-radius: 10px;">
+								<div style="margin-top: 25px; font-size: 1.4em; font-weight: bold;">학력</div>
+								<div class="tabComment">트레이너의 학력을 확인하세요!</div>
+								<div style="margin-top: 30px;">
+									<table style="margin-left: 25px; width: 750px; border-collapse: collapse; margin-bottom: 25px;">
+										<tbody>
+											<tr>
+												<th>학교명</th>
+												<!-- <th>학과</th> -->
+												<th>입학일</th>
+												<th>상태</th>
+											</tr>
+											<tr>
+												<td>감자대학교</td>
+												<!-- <td>체육교육과</td> -->
+												<td>2012.03.02</td>
+												<td>졸업</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
 
 						<div style="margin-top: 25px; text-align: center; clear: both; width: 800px; border: 1px solid rgb(179, 179, 179); border-radius: 10px;">
 								<div style="margin-top: 25px; font-size: 1.4em; font-weight: bold;">경력사항</div>
@@ -366,23 +390,7 @@ button#sendMsg{
 									</table>
 								</div>
 							</div>
-
-							<div class="trainer_content" style="margin-top: 25px;">
-								<div
-									style="text-align: center; clear: both; width: 800px; height: 350px; border: 1px solid rgb(179, 179, 179); border-radius: 10px;">
-									<div
-										style="margin-top: 25px; font-size: 1.4em; font-weight: bold;">PT
-										미리보기</div>
-									<div class="tabComment">트레이너의 PT 스타일을 체험해 보세요</div>
-									<div style="margin-left: 40px;">
-										<div
-											style="margin-top: 15px; margin-left: 25px; width: 325px; height: 200px; border: 1px solid black; float: left;"></div>
-										<div
-											style="margin-top: 15px; margin-left: 25px; width: 325px; height: 200px; border: 1px solid black; float: left;"></div>
-									</div>
-								</div>
-							</div>
-
+							<br>
 							<div class="trainer_content">
 								<div
 									style="text-align: center; clear: both; width: 800px; height: 400px; border: 1px solid rgb(179, 179, 179); border-radius: 10px;">
