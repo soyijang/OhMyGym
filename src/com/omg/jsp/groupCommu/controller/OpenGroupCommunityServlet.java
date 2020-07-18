@@ -17,13 +17,13 @@ import com.omg.jsp.member.model.vo.Member;
  * Servlet implementation class OpenGroupCommunity
  */
 @WebServlet("/groupCommu.follower")
-public class OpenGroupCommunity extends HttpServlet {
+public class OpenGroupCommunityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OpenGroupCommunity() {
+    public OpenGroupCommunityServlet() {
         super();
     }
 

@@ -1,10 +1,11 @@
 package com.omg.jsp.notice.model.vo;
 
-public class Notice {
+public class Notice implements java.io.Serializable{
 	
 	private String boardCode;
 	private String boardNum;
 	private String writedate;
+	private String boardName;
 	private String boardContent;
 	private String boardCategory;
 	private String viewCount;
@@ -13,16 +14,21 @@ public class Notice {
 	private String boardFileCode;
 	private String writeTime;
 	private String managerId;
+	private String boardTitle;
+	private String status;
+	
+	
+	public Notice() {
+	}
 
-	public Notice() {}
-
-	public Notice(String boardCode, String boardNum, String writedate, String boardContent, String boardCategory,
-			String viewCount, String likeCount, String bookmarkCount, String boardFileCode, String writeTime,
-			String managerId) {
+	public Notice(String boardCode, String boardNum, String writedate, String boardName, String boardContent,
+			String boardCategory, String viewCount, String likeCount, String bookmarkCount, String boardFileCode,
+			String writeTime, String managerId, String boardTitle, String status) {
 		super();
 		this.boardCode = boardCode;
 		this.boardNum = boardNum;
 		this.writedate = writedate;
+		this.boardName = boardName;
 		this.boardContent = boardContent;
 		this.boardCategory = boardCategory;
 		this.viewCount = viewCount;
@@ -31,6 +37,8 @@ public class Notice {
 		this.boardFileCode = boardFileCode;
 		this.writeTime = writeTime;
 		this.managerId = managerId;
+		this.boardTitle = boardTitle;
+		this.status = status;
 	}
 
 	public String getBoardCode() {
@@ -55,6 +63,14 @@ public class Notice {
 
 	public void setWritedate(String writedate) {
 		this.writedate = writedate;
+	}
+
+	public String getBoardName() {
+		return boardName;
+	}
+
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
 	}
 
 	public String getBoardContent() {
@@ -121,13 +137,30 @@ public class Notice {
 		this.managerId = managerId;
 	}
 
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "Notice [boardCode=" + boardCode + ", boardNum=" + boardNum + ", writedate=" + writedate
-				+ ", boardContent=" + boardContent + ", boardCategory=" + boardCategory + ", viewCount=" + viewCount
-				+ ", likeCount=" + likeCount + ", bookmarkCount=" + bookmarkCount + ", boardFileCode=" + boardFileCode
-				+ ", writeTime=" + writeTime + ", managerId=" + managerId + "]";
+		return "Notice [boardCode=" + boardCode + ", boardNum=" + boardNum + ", writedate=" + writedate + ", boardName="
+				+ boardName + ", boardContent=" + boardContent + ", boardCategory=" + boardCategory + ", viewCount="
+				+ viewCount + ", likeCount=" + likeCount + ", bookmarkCount=" + bookmarkCount + ", boardFileCode="
+				+ boardFileCode + ", writeTime=" + writeTime + ", managerId=" + managerId + ", boardTitle=" + boardTitle
+				+ ", status=" + status + "]";
 	}
 	
+	
 }
-

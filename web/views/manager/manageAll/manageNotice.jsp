@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.omg.jsp.notice.model.vo.*" %>
+<% ArrayList <Notice> list = (ArrayList<Notice>)request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <style>
     section {
         width: 1220px;
@@ -91,7 +94,6 @@
 </head>
 <body>
     <%@ include file="../../common/managerNav.jsp" %>
-
     <section>
         <!--헤더 영역-->
         <article id="menuTitleArea">
@@ -101,7 +103,7 @@
 
         <!--검색영역-->
         <article id="searchArea">
-            <form action="" method="">
+            <form action="" method="post">
                 <select name="" id="">
                     <option value="">제목</option>
                 </select>
@@ -115,7 +117,8 @@
         <article id="alignmentArea">
             <select name="" id="">
                 <option value="">최신순</option>
-                <!--정렬옵션 추가해주세용^^-->
+                <option value="">등록일순</option>
+                <option value="">리뷰순</option>
             </select>
             <select name="" id="">
                 <option value="">10개씩 보기</option>
@@ -137,86 +140,18 @@
                     <th width="100px">게시일</th>
                     <th width="80px">공개상태</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>일반</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항수정</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>일반</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>일반</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>일반</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>일반</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>일반</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>일반</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>일반</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>일반</td>
-                    <td><a href="">제목test제목test제목test제목test제목test제목test제목test제목test제목test제목test</a></td>
-                    <td>12315</td>
-                    <td>2020-06-07</td>
-                    <td>Y</td>
-                </tr>
+               <% for(Notice n: list){ %>
+                	
+                	<tr>
+                		<td><%=n.getBoardNum() %></td>
+                		<td><%=n.getBoardCategory() %></td>
+                		<td><%=n.getBoardTitle() %></td>
+                		<td><%=n.getViewCount() %></td>
+                		<td><%=n.getWritedate() %></td>
+                		<td><%=n.getStatus() %></td>
+                	</tr>
+                <% } %> 
+              
             </table>
         </article>
         <!--공지 목록 출력 영역 종료-->
@@ -227,5 +162,22 @@
         </article>
         <!-- 공지사항 작성버튼 영역 종료 -->
     </section>
+     <script>
+
+     
+    $(function() {
+       $("#showNoticeList td").click(function(){
+          var num = $(this).parent().children().eq(0).text();
+         
+         location.href="<%=request.getContextPath()%>/selectOne.no?num="+num;
+         
+       });
+    }); 
+   
+    
+   </script>
+   
+    
+    
 </body>
 </html>

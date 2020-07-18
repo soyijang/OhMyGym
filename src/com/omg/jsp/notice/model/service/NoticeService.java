@@ -1,6 +1,6 @@
 package com.omg.jsp.notice.model.service;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.util.ArrayList;
 
 import com.omg.jsp.notice.model.dao.NoticeDao;
@@ -27,6 +27,7 @@ public class NoticeService {
 		
 		int result = new NoticeDao().insertNotice(con, newNotice);
 		
+		
 		if(result > 0) {
 			commit(con);
 		} else {
@@ -36,6 +37,29 @@ public class NoticeService {
 		
 		return result;
 		
+	}
+
+	public Notice selectOne(int nno) {
+		
+		Connection con = getConncection();
+		
+		int result = 0;
+		
+		Notice notice = new NoticeDao().selectOne(con, nno);
+		
+		if(notice != null) {
+			result = new NoticeDao().viewCount(con,nno);
+			
+			if(result > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+				notice=null;
+			}
+		}
+		close(con);
+		
+		return notice;
 	}
 
 }
