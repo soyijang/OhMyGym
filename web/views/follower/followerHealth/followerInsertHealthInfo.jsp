@@ -293,7 +293,7 @@ th {
 	              </script>
 
 				<form id="updateForm" action="<%= request.getContextPath() %>/insertHistory.hi" method="post">
-					<input type="hidden" value="<%= loginUser.getMemberId() %>" name="userId">
+					<input type="hidden" value="<%= loginUser.getMemberId() %>" name="memberId">
 					<table id="modifyHealthInfo" style="width: 90%;">
 						<tr>
 							<th colspan="4" style="height: 50px;"><h3>건강정보 수정</h3></th>

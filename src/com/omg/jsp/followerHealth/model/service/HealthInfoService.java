@@ -23,22 +23,31 @@ public class HealthInfoService {
 	}
 
 	public int insertHealthHistory(ArrayList<HealthInfo> list) {
-		Connection con = getConncection();
-		
-		int insertResult = new HealthInfoDao().insertHealthHistory(con, list);
-		
-		int updateResult = new HealthInfoDao().updateHealthInfoNow(con, list);
-		
-		if(insertResult > 0 && updateResult > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
-		
-		close(con);
-		
-		return insertResult;
-	}
+	      Connection con = getConncection();
+	      
+	      int insertResult = new HealthInfoDao().insertHealthHistory(con, list);
+	      commit(con);
+	      HealthInfo select = new HealthInfoDao().searchHealthInfoNow(con, list);  ////////////////////////////////
+	      System.out.println("select : " + select);
+	      System.out.println("list : " + list);
+	      
+	      if(select != null) {//
+	         int updateResult = new HealthInfoDao().updateHealthInfoNow(con, list);//
+	      } else {//
+	         //인서트 하는 로직 짜라..//
+	    	  System.out.println("else 왔냐");
+	      }//
+	      if(insertResult > 0) {
+	         commit(con);
+	      } else {
+	         rollback(con);
+	         
+	      }
+	      
+	      close(con);
+	      
+	      return insertResult;
+	   }
 
 
 

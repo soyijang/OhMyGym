@@ -40,9 +40,9 @@ public class MemberInsertServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String memberPwd = request.getParameter("memberPwd");
 		String gender = request.getParameter("gender");
-		String zip = request.getParameter("zipCode");
-		String add1 = request.getParameter("address1");
-		String add2 = request.getParameter("address2");
+		String zip = request.getParameter("zipNo");
+		String add1 = request.getParameter("haddress1");
+		String add2 = request.getParameter("haddress2");
 		String address = zip + "$" + add1 + "$" + add2;
 		String tel1 = request.getParameter("tel1");
 		String tel2 = request.getParameter("tel2");
@@ -61,7 +61,7 @@ public class MemberInsertServlet extends HttpServlet {
 		requestMember.setMemberId(memberId);
 		requestMember.setMemberPwd(memberPwd);
 		requestMember.setName(name);
-		requestMember.setGender("M");
+		requestMember.setGender(gender);
 		requestMember.setPhone(phone);
 		requestMember.setEmail(email);
 		requestMember.setAddress(address);
@@ -77,12 +77,13 @@ public class MemberInsertServlet extends HttpServlet {
 		System.out.println(email);
 		if(result > 0) {
 	         //page = "index.jsp";
-	         
-	         page = "views/common/successPage.jsp";
+	         request.setAttribute("plag", "1");
+	         page = "/insertHistory.hi";
 	         
 	         request.setAttribute("successCode", "insertMember");
 	         request.getRequestDispatcher(page).forward(request, response);
 	         //response.sendRedirect(page);
+	         
 	    } else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원가입실패!");

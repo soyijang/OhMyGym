@@ -63,14 +63,14 @@ function checks() {
 		$("#email1").focus(); 
 		return false; 
 	}
-	
+	/* 
 	//이메일 유효성 검사
 	if(!getMail.test($("#email1").val())){
 		alert("이메일형식에 맞게 입력해주세요"); 
 		$("#email1").val("");
 		$("#email1").focus(); 
 		return false; 
-	}
+	} */
 	
 	//이름 공백 검사 
 	if($("#memberName").val() == ""){
@@ -79,12 +79,12 @@ function checks() {
 		return false; 
 	}
 	
-	//이름 유효성 검사 
+	/* //이름 유효성 검사 
 	if(!getCheck.test($("#memberName").val())){
 		alert("이름형식에 맞게 입력해주세요");
 		$("#memberName").val(""); $("#memberName").focus(); 
 		return false; 
-	}
+	} */
 
 }
 
@@ -139,7 +139,7 @@ div#visitQuestion{
         }
 
     div#quesionMain{
-        width: 2000px;
+        width: 4200px;
         margin-top: 100px;
     }
 
@@ -155,6 +155,15 @@ div#visitQuestion{
         font-weight: bold;
         color: white;
     }
+    
+   #height, #weight, #motive, #goal, #bodyUneasy {
+   		height: 20px;
+   		width: 180px;
+   		background-color: navy;
+   		color: white;
+   		border: 2px solid white;
+   		
+   }
 
 </style>
 
@@ -254,7 +263,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 		<div id="content">
 			<%@ include file="../../common/nonNav.jsp"%>
 			<div class="container">
-				<form  id="joinForm" action="<%= request.getContextPath() %>/insert.me" method="post">
+				<form  id="joinForm" action="<%= request.getContextPath() %>/insert.me" method="post" onsubmit="return checks()">
 
 					<div id="main-center" style="margin-left: 450px">
 
@@ -590,46 +599,50 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			<div>
 			<div id="visitQuestion">
 				<div id="visitQuestionIn" class="questionBox">
-					<form>
+					 <form id="questionForm" action="<%= request.getContextPath() %>/insertHistory.hi" method="post" > 
 						<div id="quesionMain">
+						<input type="hidden" name="plag" value="1">
 							<div id="part1" class="questionPart" style="float: left;">
 								<label class="questionTitle">키를 알려주세요</label><br>
 								<div style="margin-top: 20px; font-size: 1.2em; color: white;">
-									<input type="text" value="" id="memberHeight" name="memberHeight" placeholder="cm단위로 입력해주세요">
+									<input type="text" value="" id="height" name="height" placeholder="cm단위로 입력해주세요">
 								</div>
 							</div>
 							<div id="part2" class="questionPart" style="float: left;">
 								<label class="questionTitle">몸무게를 알려주세요</label><br>
 								<div style="margin-top: 20px; font-size: 1.2em; color: white;">
-									<input type="text" value="" id="memberWeight" name="memberWeight" placeholder="kg단위로 입력해주세요">
+									<input type="text" value="" id="weight" name="weight" placeholder="kg단위로 입력해주세요">
 								</div>
 							</div>
 							<div id="part3" class="questionPart" style="float: left;">
 								<label class="questionTitle">가장 집중적으로 운동하고싶은 부위를 골라주세요</label><br>
 								<div
 									style="margin-top: 20px; text-align: left; padding-left: 110px; color: white; font-size: 1.2em;">
-									<input type="checkbox" id="arm" name="part" value="arm">
-									<label for="arm">팔/다리</label> &nbsp;<br> <input
-										type="checkbox" id="chest" name="part" value="chest">
-									<label for="chest">가슴 </label> &nbsp;<br> <input
-										type="checkbox" id="stomach" name="part" value="stomach">
-									<label for="stomach">배 </label> &nbsp;<br> <input
-										type="checkbox" id="hip" name="part" value="hip"> <label
+									<input type="checkbox" id="arm" name="focus" value="arm">
+									<label for="arm">팔/다리</label> &nbsp;<br> 
+									<input
+										type="checkbox" id="chest" name="focus" value="chest">
+									<label for="chest">가슴 </label> &nbsp;<br> 
+									<input
+										type="checkbox" id="stomach" name="focus" value="stomach">
+									<label for="stomach">배 </label> &nbsp;<br> 
+									<input
+										type="checkbox" id="hip" name="focus" value="hip"> <label
 										for="hip">엉덩이 </label> &nbsp;<br>
 								</div>
 							</div>
 							<div id="part4" class="questionPart" style="float: left;">
-								<label class="questionTitle">주간 운동양이<br> 얼마나 되시나요?
+								<label class="questionTitle">주간 운동량이<br> 얼마나 되시나요?
 								</label><br>
 								<div
 									style="margin-top: 20px; text-align: left; padding-left: 90px; color: white; font-size: 1.2em;">
-									<input type="radio" id="work1" " name="workweek" value="1">
+									<input type="radio" id="exercise1" name="exercise" value="1시간 미만">
 									<label for="work1">1시간 미만</label> &nbsp;<br> <input
-										type="radio" id="work2" name="workweek" value="2"> <label
+										type="radio" id="exercise2" name="exercise" value="1시간~2시"> <label
 										for="work2">1시간 ~ 2시간 </label> &nbsp;<br> <input
-										type="radio" id="work3" name="workweek" value="3"> <label
+										type="radio" id="exercise3" name="exercise" value="3시간~7시간"> <label
 										for="work3">3시간 ~ 7시간</label> &nbsp;<br> <input
-										type="radio" id="work4" name="workweek" value="4"> <label
+										type="radio" id="exercise4" name="exercise" value="7시간이상"> <label
 										for="work4">7시간 이상</label> &nbsp;<br>
 								</div>
 							</div>
@@ -637,8 +650,8 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 								<label class="questionTitle">가장 커다란 동기부여가<br>되는것은 무엇인가요?
 								</label><br>
 								<div
-									style="margin-top: 20px; text-align: left; padding-left: 90px; color: white; font-size: 1.2em;">
-									<input type="text" id="motivation" name="motivation" value="" placeholder="ex)다이어트 자극 사진을 봤을 때">
+									style="margin-top: 20px; text-align: left; padding-left: 90px; color: white; font-size: 1.2em; width: 500px; height: 20px">
+									<input type="text" id="motive" name="motive" value="" placeholder="ex)다이어트 자극 사진을 봤을 때">
 									
 								</div>
 							</div>
@@ -647,7 +660,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 								</label><br>
 								<div
 									style="margin-top: 20px; text-align: left; padding-left: 90px; color: white; font-size: 1.2em;">
-									<input type="text" id="hard" name="hard" value="" placeholder="ex)허리디스크">
+									<input type="text" id="bodyUneasy" name="bodyUneasy" value="" placeholder="ex)허리디스크">
 									
 								</div>
 							</div>
@@ -660,8 +673,36 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 									
 								</div>
 							</div>
+							<div id="part8" class="questionPart" style="float: left;">
+								<label class="questionTitle">현재 활동수준은 어떠신가요?
+								</label><br>
+								<div
+									style="margin-top: 20px; text-align: left; padding-left: 90px; color: white; font-size: 1.2em;">
+									<input type="radio" id="active1"  name="active" value="매우활동적">
+									<label for="work1">매우활동적</label> &nbsp;<br>
+									 <input
+										type="radio" id="active2" name="active" value="다소활동적"> <label
+										for="work2">다소활동적</label> &nbsp;<br> 
+									<input
+										type="radio" id="active3" name="active" value="조금활동적"> <label
+										for="work3">조금활동적</label> &nbsp;<br> 
+									<input
+										type="radio" id="active4" name="active" value="활동적이지않음"> <label
+										for="work4">활동적이지않음</label> &nbsp;<br>
+										
+								</div>
+							</div>
+							<div id="part9" class="questionPart" style="float: left;">
+								<label class="questionTitle">수면시</label><br>
+								<div style="margin-top: 20px; font-size: 1.2em; color: white;">
+									<input type="text" value="" id="weight" name="sleep" placeholder="kg단위로 입력해주세요">
+								</div>
+							</div>
+							<div>
+								<span></span>
+							</div>
 						</div>
-					</form>
+					</form> 
 				</div>
 				<img onclick="quest_clickNext();" class="contentNext_btn_quest"
 					src="/omg/resources/img_icon/next.png" width="70px" height="90px"
@@ -674,13 +715,13 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 		<script>
         var questPos = 0;
         function quest_clickNext(){
-            if(questPos >= 0 && questPos < 8){
-                if(questPos < 7) questPos = questPos + 1;
+            if(questPos >= 0 && questPos < 10){
+                if(questPos < 9) questPos = questPos + 1;
                 $('.questionBox').animate({scrollLeft : 390 * questPos}, 500);
             }
         }
         function quest_clickBack(){
-            if(questPos > 0 && questPos < 8){
+            if(questPos > 0 && questPos < 10){
                 if(questPos > 0) questPos = questPos - 1;
                 $('.questionBox').animate({scrollLeft : 390 * questPos}, 500);
             }
@@ -691,7 +732,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 
 			<div class="confirm" style="margin-left: 150px; margin-top: 15px;">
-				<button onclick="insertMember()"
+				<button type="submit" onclick="insertMember()"
 					style="width: 200px; height: 40px; background-color: orangered; color: white; border: none;">가입하기</button>
 
 			</div>
@@ -719,8 +760,11 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
    
          function insertMember(){
             $("#joinForm").submit();
+        
             
          }
+         
+         
          
       
     </script>

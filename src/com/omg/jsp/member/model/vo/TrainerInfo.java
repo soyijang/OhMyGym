@@ -10,11 +10,12 @@ public class TrainerInfo implements Serializable{
 	private String bankAccount;
 	private String bankCode;
 	private String memberId;
+	private String trainerComment;
 	
 	public TrainerInfo() {}
 
 	public TrainerInfo(String trainerType, String trainerMainField, String trainerSubField, String bankAccount,
-			String bankCode, String memberId) {
+			String bankCode, String memberId, String trainerComment) {
 		super();
 		this.trainerType = trainerType;
 		this.trainerMainField = trainerMainField;
@@ -22,6 +23,7 @@ public class TrainerInfo implements Serializable{
 		this.bankAccount = bankAccount;
 		this.bankCode = bankCode;
 		this.memberId = memberId;
+		this.trainerComment = trainerComment;
 	}
 
 	public String getTrainerType() {
@@ -71,12 +73,22 @@ public class TrainerInfo implements Serializable{
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+	
+	
+
+	public String getTrainerComment() {
+		return trainerComment;
+	}
+
+	public void setTrainerComment(String trainerComment) {
+		this.trainerComment = trainerComment;
+	}
 
 	@Override
 	public String toString() {
 		return "TrainerInfo [trainerType=" + trainerType + ", trainerMainField=" + trainerMainField
 				+ ", trainerSubField=" + trainerSubField + ", bankAccount=" + bankAccount + ", backCode=" + bankCode
-				+ ", memberId=" + memberId + "]";
+				+ ", memberId=" + memberId + ", trainerComment=" + trainerComment + "]";
 	}
 	
 	

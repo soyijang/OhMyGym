@@ -87,6 +87,7 @@ public class HealthInfoDao {
 		} finally {
 			close(pstmt);
 		}
+		System.out.println("dao 왔냐" + result);
 		return result;
 	}
 
@@ -114,5 +115,37 @@ public class HealthInfoDao {
 		
 		return result;
 	}
+
+	public HealthInfo searchHealthInfoNow(Connection con, ArrayList<HealthInfo> list) { /////////////////////////
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      HealthInfo m = new HealthInfo();
+	      System.out.println("daolist : " + list);
+	      String query = prop.getProperty("searchHealthInfoNow");
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+	         pstmt.setString(1, list.get(0).getMemberId());
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         while(rset.next()) {
+	            
+	            m.setHealthData("집에가고싶다");
+	            System.out.println("제발");
+	            m.setMemberId("아아악");
+	            m.setHealthInfoCode("infocode");
+	            m.setHealthInfoNowManagecode(1111111);
+	         }
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	         close(rset);
+	      }
+	      
+	      return m;
+	   }
 }
 
