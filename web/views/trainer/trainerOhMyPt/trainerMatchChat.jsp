@@ -303,7 +303,34 @@ button#sendMsg{
             })
         }
     </script>
+    
+	<script>
+	function addChat() {
+<%-- 		var matchingNum = "<%=selectTrainer.getRequestCode()%>"; --%>
+		var writerId =  "<%=loginUser.getMemberId()%>";
+		var content = $("#message").val();
+		$("#message").val('');
+		$.ajax({
+			url : "/omg/insertChat.follower",
+			data : {
+				matchingNum : matchingNum,
+				content : content,
+				writerId : writerId
+			},
+			type : "post",
+			success : function(data) {
+				var $addChatPart = $("#chattingDiv");
+				$addChatPart.append("<div class='talk_trainer'>"+data.writerId+"</div>"+
+				"<textarea class='talk_trainer_text' readonly>"+data.chatContent+"</textarea>");
+				updateChat();
+			},
+			error : function() {
+				console.log("실패!")
+			}
 
+		})	
+	}
+	</script>
 	<%@ include file="../../common/footer.jsp"%>
 </body>
 </html>

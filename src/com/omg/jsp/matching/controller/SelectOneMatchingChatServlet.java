@@ -35,15 +35,15 @@ public class SelectOneMatchingChatServlet extends HttpServlet {
 		//로그인한 유저의 id 와 클릭한 트레이너의 id를 가져와서 채팅방 선택
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("loginUser");
-		
-		MatchingRequest selectTrainer = new MatchingService().selectChatRoom(member.getMemberId());
-		
-		String page="";
-		if(selectTrainer != null) {
-    		page = "views/trainer/trainerOhMyPt/trainerMatchChat.jsp";
-    		request.setAttribute("selectTrainer", selectTrainer);
-    		request.getRequestDispatcher(page).forward(request, response);
-		}
+//		
+//		MatchingRequest selectTrainer = new MatchingService().selectChatRoom(member.getMemberId());
+//		
+//		String page="";
+//		if(selectTrainer != null) {
+//    		page = "views/trainer/trainerOhMyPt/trainerMatchChat.jsp";
+//    		request.setAttribute("selectTrainer", selectTrainer);
+//    		request.getRequestDispatcher(page).forward(request, response);
+//		}
 		
 	}
 

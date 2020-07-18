@@ -524,15 +524,17 @@
                     <a style="margin-right: 300px; font-weight: bold; font-size: 0.9em;">충전할 오머니 선택</a>
                     <form>
                         <hr style="width: 90%; height: 2px; background: black;">
-                        <input type="radio" value="5000" name="money" onclick="showMoney(5000)">5,000원&nbsp;
-                        <input type="radio" value="10000" name="money" onclick="showMoney(10000)">10,000원&nbsp;
-                        <input type="radio" value="15000" name="money" onclick="showMoney(15000)">15,000원&nbsp;
+                        <input type="radio" value="10" name="money" onclick="showMoney(10)">1
+                        0원&nbsp;
+                        <input type="radio" value="10000" name="money" onclick="showMoney(10000)">10000원&nbsp;
+                        <input type="radio" value="15000" name="money" onclick="showMoney(15000)">15000원&nbsp;
                         <hr style="width: 90%; height: 0.5px; background: black;">
                     </form><br>
                     <button onclick="startPay();" class="cashbtn">충전하기</button>
                     <script>
+                    	var balance = 0;
                         var money = 0;
-
+                  		checkMoney();
                         function removeComma(str){
                             return parseInt(str.replace(/,/g,""));
                         }
@@ -569,12 +571,12 @@
                                     merchant_uid : 'merchant_' + new Date().getTime(),
                                     name : 'OH MONEY (오 머니)',
                                     amount : money,
-                                    buyer_email : 'iamport@siot.do',
+                                    buyer_email : '<%=loginUser.getEmail()%>',
                                     buyer_name : '<%=loginUser.getName()%>',
-                                    buyer_tel : '010-1234-5678',
-                                    buyer_addr : '서울특별시 강남구 삼성동',
+                                    buyer_tel :'<%=loginUser.getPhone()%>',
+                                    buyer_addr : '<%=loginUser.getAddress()%>',
                                     buyer_postcode : '123-456',
-                                    m_redirect_url : ''//결제완료후 보낼 컨트롤러의 메소드명
+                                    m_redirect_url : '/omg/checkOhMoney.follower'//결제완료후 보낼 컨트롤러의 메소드명
                                 }, function(rsp) {
                                     if ( rsp.success ) {
                                         var msg = '결제가 완료되었습니다.';
@@ -582,6 +584,7 @@
                                         msg += '상점 거래ID : ' + rsp.merchant_uid;
                                         msg += '결제 금액 : ' + rsp.paid_amount;
                                         msg += '카드 승인번호 : ' + rsp.apply_num;
+                                        addMoney(money);
                                     } else {
                                         var msg = '결제에 실패하였습니다.';
                                         msg += '에러내용 : ' + rsp.error_msg;
@@ -590,37 +593,65 @@
                                 });
                             }
                         }
+                        
+                        
+                        function checkMoney(){
+                        		var userId =  "<%=loginUser.getMemberId()%>";
+                       	 		$.ajax({
+                       	 			url : "/omg/checkOhMoney.follower",
+                       	 			data : {
+                       	 				userId : userId,
+                       	 			},
+                       	 			type : "post",
+                       	 			success : function(data) {
+                       	 				$('#have_OhMoney').text(data.balance + "원");
+                       	 				$('#usableOhMoney').text(data.balance + "원");
+                       	 				$('#have_OhMoney').text(data.balance + "원");
+                       	 				balance = data.balance;
+                                   		console.log(balance);
+                       	 			},
+                       	 			error : function() {
+                       	 				console.log("실패!")
+                       	 			}
+                        		})
+                        }
+                        
+                        function addMoney(value){
+                     		var userId =  "<%=loginUser.getMemberId()%>";
+                     		var addmoney = value;
+                     		var content = "카드 결제로 인한 정상 충전";
+                     		var means = "카드";
+                     		var userBalance = balance;
+                     		console.log(userBalance);
+                   	 		$.ajax({
+                   	 			url : "/omg/addOhMoney.follower",
+                   	 			data : {
+                   	 				userId : userId,
+                   	 				addmoney : addmoney,
+                   	 				content : content,
+                   	 				means : means,
+                   	 				userBalance : userBalance
+                   	 			},
+                   	 			type : "post",
+                   	 			success : function(data) {
+                   	 				$('#have_OhMoney').text(data.balance + "원");
+                   	 				$('#usableOhMoney').text(data.balance + "원");
+                   	 				$('#have_OhMoney').text(data.balance + "원");
+                   	 			},
+                   	 			error : function() {
+                   	 				console.log("실패!")
+                   	 			}
+                    		})
+                        }
+                       	 		
+                       
                     </script>
                     </div>
                 </div>
         </div>
     </div>
     
-
-    
      <section>
-<!--         <nav id="side_nav">
-            <div class="side_container">
-                <ul class="side_menu">
-                    <li>
-                        <a style="font-size: 20px; font-weight: bold; margin-left: -10px;" class="select">마이페이지</a>
-                        <hr style="margin-left: -25px; border: 1.5px solid;">
-                    </li>
-                    <li>
-                        <a style="font-size: 14px; font-weight:normal;">트레이닝 룸</a>
-                        <hr>
-                    </li>
-                    <li>
-                        <a style="font-size: 14px; font-weight:normal;">그룹소통방</a>
-                        <hr>
-                    </li>
-                    <li>
-                        <a style="font-size: 14px; font-weight:normal;">챌린지</a>
-                        <hr>
-                    </li>
-                </ul>
-            </div>
-        </nav> -->
         <%@ include file="followerMypageAside.jsp" %>
         <article id="cash_article" style="position: absolute; left: 370px;">
             <div class="cash_content" style="border: 1px solid black; width: 1000px; height: 825px; border-radius: 9px; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
@@ -635,7 +666,7 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <td>1,000원</td>
+                                    <td id="usableOhMoney">1,000원</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -644,15 +675,15 @@
                                 <th>
                                     	환급가능 오머니
                                 </th>
-                                <td>
+                                <td id="returnOhMoney">
                                     1,000원
                                 </td>
                             </tr>
                             <tr>
-                                <th>
+                                <th >
                                     	환급불가 오머니
                                 </th>
-                                <td>
+                                <td id="cantreturnOhMoney">
                                     0원
                                 </td>
                             </tr>
