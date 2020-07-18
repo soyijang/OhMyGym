@@ -13,6 +13,9 @@ public class OhMoney implements Serializable{
 	private String ohmoneyDate;
 	private String ohmoneyTime;
 	private int balance;
+	private int nofundBal;
+	private int refundBal;
+	private String manageCode;
 	
 	public OhMoney() {}
 
@@ -117,6 +120,30 @@ public class OhMoney implements Serializable{
 				+ ", managerId=" + managerId + ", content=" + content + ", isRefund=" + isRefund + ", ohmoneyMean="
 				+ ohmoneyMean + ", ohmoneyDate=" + ohmoneyDate + ", ohmoneyTime=" + ohmoneyTime + ", balance=" + balance
 				+ "]";
+	}
+
+	public String getManageCode() {
+		return manageCode;
+	}
+
+	public void setManageCode(String manageCode) {
+		this.manageCode = manageCode;
+	}
+
+	public int getRefundBal() {
+		return refundBal;
+	}
+
+	public void setRefundBal(int refundBal) {
+		this.refundBal = refundBal;
+	}
+
+	public int getNofundBal() {
+		return nofundBal;
+	}
+
+	public void setNofundBal(int nofundBal) {
+		this.nofundBal = nofundBal;
 	}
 	
 	
