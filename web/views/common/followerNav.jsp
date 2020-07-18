@@ -166,7 +166,7 @@ a {
 						</ul></li>
 					<li><a><div class="NavLink" style="color: rgb(63, 63, 63);">매칭신청</div></a>
 						<ul>
-							<li><a style="color: white;" href="<%= request.getContextPath() %>/trainerList.mc">트레이너 목록</a>&nbsp;&nbsp;&nbsp;<a style="color: white;">트레이너별 후기</a></li>
+							<li><a style="color: white;">트레이너 목록</a>&nbsp;&nbsp;&nbsp;<a style="color: white;">트레이너별 후기</a></li>
 						</ul>
 					</li>
 					<li><a href="../fOhMyGym/fTrainingRoom.jsp">
