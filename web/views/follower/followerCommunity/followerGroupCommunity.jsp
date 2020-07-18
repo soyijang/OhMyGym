@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.omg.jsp.matching.member.vo.MatchingRequest"%>
+	pageEncoding="UTF-8" import="com.omg.jsp.matching.model.vo.MatchingRequest"%>
 <% MatchingRequest matchInfo  = (MatchingRequest) request.getAttribute("matchResult");%>	
 <!DOCTYPE html>
 <html>

@@ -36,7 +36,7 @@ public class InsertHealthHistoryServlet extends HttpServlet {
 		
 		String[] sarr = new String[10];
 		
-		sarr[0] = request.getParameter("memberId");
+		sarr[0] = request.getParameter("userId");
 		sarr[1] = request.getParameter("height");
 		sarr[2] = request.getParameter("weight");
 		sarr[3] = request.getParameter("sleep");
@@ -55,33 +55,31 @@ public class InsertHealthHistoryServlet extends HttpServlet {
 		}
 		
 		int result = new HealthInfoService().insertHealthHistory(list);
-		System.out.println("before");
 		
+
 		
+		if(request.getAttribute("plag") != null) {
+			String page = "";
+			if(result > 0) {
+				response.sendRedirect(request.getContextPath() + "/views/visitor/login.jsp");
+			} else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "회원가입 실패");
+				request.getRequestDispatcher(page).forward(request, response);
+			}
+			
+		} else {
 		
-		if(request.getAttribute("plag").equals("1")) {
-	         String page = "";
-	         System.out.println("dddddddd");
-	         if(result > 0) {
-	            response.sendRedirect(request.getContextPath() + "/views/visitor/login.jsp");
-	         } else {
-	            page = "views/common/errorPage.jsp";
-	            request.setAttribute("msg", "회원가입 실패");
-	            request.getRequestDispatcher(page).forward(request, response);
-	         }
-	         
-	      } else {
-	      
-	         String page = "";
-	         if(result > 0) {
-	            request.setAttribute("list", list);
-	            response.sendRedirect(request.getContextPath() + "/healthInfo.hi");
-	         } else {
-	            page = "views/common/errorPage.jsp";
-	            request.setAttribute("msg", "건강정보 수정 실패");
-	            request.getRequestDispatcher(page).forward(request, response);
-	         }
-	      }
+			String page = "";
+			if(result > 0) {
+				request.setAttribute("list", list);
+				response.sendRedirect(request.getContextPath() + "/healthInfo.hi");
+			} else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "건강정보 수정 실패");
+				request.getRequestDispatcher(page).forward(request, response);
+			}
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

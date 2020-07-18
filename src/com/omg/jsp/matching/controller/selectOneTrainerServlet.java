@@ -1,30 +1,29 @@
-package com.omg.jsp.groupCommu.controller;
+package com.omg.jsp.matching.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.omg.jsp.matching.model.service.MatchingService;
-import com.omg.jsp.matching.model.vo.MatchingRequest;
-import com.omg.jsp.member.model.vo.Member;
 
 /**
- * Servlet implementation class OpenGroupCommunity
+ * Servlet implementation class selectOneTrainerServlet
  */
-@WebServlet("/groupCommu.follower")
-public class OpenGroupCommunity extends HttpServlet {
+@WebServlet("/selectOne.mc")
+public class selectOneTrainerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OpenGroupCommunity() {
+    public selectOneTrainerServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -32,29 +31,18 @@ public class OpenGroupCommunity extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("loginUser");
+		String memberId = request.getParameter("num");
 		
-		System.out.println(member.getMemberId());
-
-		MatchingRequest matchResult = new MatchingService().checkMatch(member.getMemberId());
+		HashMap<String, Object> hmap = new MatchingService().selectTrainerMap(memberId);
 		
-		String page = "";
-		if(matchResult != null) {
-    		page = "views/follower/followerCommunity/followerGroupCommunity.jsp";
-    		request.setAttribute("matchResult", matchResult);
-    		request.getRequestDispatcher(page).forward(request, response);
-			
-		} else {
-			System.out.println("조회실패");
-		}
-
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*"%>
-<% Member loginUser = (Member) session.getAttribute("loginUser"); %>
+<% Member loginUser = (Member) session.getAttribute("loginUser");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,8 +129,8 @@ ul#header_bottom_sidemenu li ul li {
 <body>
 	<div class="container_top">
 		<ul class="header_top_menu" id="header_top">
-			<li id="webIntro">로그아웃</li>
-			<li id="webClasses"><a href="/views/trainer/trainerMypage/trainerMyInfo.jsp">마이페이지</a></li>
+			<li id="webIntro"><a onclick="logout();">로그아웃</a></li>
+			<li id="webClasses"><a href="/omg/views/trainer/trainerMypage/trainerMypageMain.jsp">마이페이지</a></li>
 		</ul>
 	</div>
 	<br>
@@ -165,5 +165,12 @@ ul#header_bottom_sidemenu li ul li {
 
 	<br>
 	<br>
+	<script type="text/javascript">
+		function logout() {
+			alert("<%= loginUser.getName()%>트레이너님 내일도 오마이짐에서 만나요!");
+			location.href= "<%= request.getContextPath()%>/logout.me";
+		}
+	
+	</script>
 </body>
 </html>

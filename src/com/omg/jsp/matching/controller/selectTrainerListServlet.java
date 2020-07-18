@@ -1,60 +1,57 @@
-package com.omg.jsp.groupCommu.controller;
+package com.omg.jsp.matching.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.omg.jsp.matching.model.service.MatchingService;
-import com.omg.jsp.matching.model.vo.MatchingRequest;
-import com.omg.jsp.member.model.vo.Member;
 
 /**
- * Servlet implementation class OpenGroupCommunity
+ * Servlet implementation class selectTrainerListServlet
  */
-@WebServlet("/groupCommu.follower")
-public class OpenGroupCommunity extends HttpServlet {
+@WebServlet("/trainerList.mc")
+public class selectTrainerListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OpenGroupCommunity() {
+    public selectTrainerListServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<HashMap<String, Object>> list = new MatchingService().selectTrainerList();
 		
-		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("loginUser");
-		
-		System.out.println(member.getMemberId());
-
-		MatchingRequest matchResult = new MatchingService().checkMatch(member.getMemberId());
+		System.out.println("controller trainer list : " + list);
 		
 		String page = "";
-		if(matchResult != null) {
-    		page = "views/follower/followerCommunity/followerGroupCommunity.jsp";
-    		request.setAttribute("matchResult", matchResult);
-    		request.getRequestDispatcher(page).forward(request, response);
-			
+		if(list != null) {
+			page = "views/follower/followerMatching/followerMatchList.jsp";
+			request.setAttribute("list", list);
 		} else {
-			System.out.println("조회실패");
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "트레이너 목록 조회 실패");
 		}
-
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -68,20 +68,17 @@
 										<button type="button" id="delete_personal_photo_btn"
 											class="btn_del img_spr" title="사진 삭제"
 											onclick="deletePhoto();"
-											onmousedown="try{n_trackEvent('myhome', 'profile' , 'photo-delete', '');}catch(e){};"
 											style="display: block;">삭제</button>
 										<button type="button" class="btn_regist img_spr" title="사진 등록"
-											onclick="insertPhoto('myhome');"
-											onmousedown="try{n_trackEvent('myhome', 'profile' , 'photo-manage', '');}catch(e){};">등록</button>
+											>등록</button>
 									</li>
 									<li class="name">장소이 <br> 트레이너님
 									</li>
 								</ul>
 								<div class="btn_wrap">
 									<a href="#"
-										onclick="viewResumePopup('10415774'); return false;"
 										class="btn_profile_view" title="내 이력서 보기"
-										onmousedown="try{n_trackEvent('myhome', 'profile' , 'resume-view', '');}catch(e){};">내
+									>내
 										계정 설정하기</a> <a href="/zf_user/member/svq/list?start_exam=1"
 										class="btn_profile_view mt7" title="인성검사 응시하기">자격정보 수정하기</a> <a
 										href="/zf_user/member/svq/list?start_exam=1"
@@ -90,34 +87,27 @@
 								<div class="txt_alram">
 									<p>
 										<a
-											href="/zf_user/notification/message/move/seq/901696560/date/2020-07-10/tc/notif"
-											onmousedown="try{n_trackEvent('myhome', 'profile' , 'center', '');}catch(e){};">
+											href="">
 											하루종일 책상에 앉아있는 회사원,개발자를 위한 자세교정 전문 트레이너!</a>
 									</p>
 								</div>
 								<a href="/zf_user/persons/person-update"
-									class="btn_setup_profile img_spr" title="설정"
-									onmousedown="try{n_trackEvent('myhome', 'profile' , 'person-info', '');}catch(e){};">설정</a>
+									class="btn_setup_profile img_spr" title="설정">설정</a>
 							</div>
 						</aside>
 						<div class="wrapper_narrow summary_wrap">
 							<div class="dashboard" align="center">
 								<ul class="activity_list" align="center">
 									<li><a href="#"
-										onclick="checkServiceActiveIcon('resume', '1524976787', '/zf_user/resume/resume-manage'); return false;"
-										onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
+										>
 											<span class="doing"><em>1</em> / 10</span> <span
 											class="sname">신청한 팔로워</span>
 									</a></li>
-									<li><a href="#"
-										onclick="checkServiceActiveIcon('apply', '', '/zf_user/persons/apply-status-list'); return false;"
-										onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'apply-status-list', '');}catch(e){};">
+									<li><a href="#">
 											<span class="doing"><em>0</em></span> <span class="sname">진행중
 												팔로워</span>
 									</a></li>
-									<li><a href="#"
-										onclick="checkServiceActiveIcon('suggest', '', '/zf_user/member/suggest/status-list'); return false;"
-										onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'status-list', '');}catch(e){};">
+									<li><a href="#">
 											<span class="doing"><em>0</em></span> <span class="sname">종료된
 												팔로워</span>
 									</a></li>
@@ -167,13 +157,6 @@
 					</div>
 					<div class="increase_high_career">
 
-						<!-- WMG-26592 -->
-						<img
-							src="//www.saraminimage.co.kr/sri/person/banner/high_banner_resume_review2.png"
-							alt="모든 기업에게 연락처 공개, 꺼려지시죠? 수락한 기업에게만 연락처가 공개되는 인재Pool 서비스를 이용해 보세요!">
-						<a href="/zf_user/member/resume-manage/block-setting"
-							onmousedown="try{dataLayer.push({'event': 'ga_lead','category': 'career_high','event-flow': 'nudge_career_high','event-label': 'myhome_banner'});}catch(e){};"
-							class="link"><span class="blind">이력서 상태 지금 바로 설정하기</span> </a>
 					</div>
 				</div>
 			</div>
