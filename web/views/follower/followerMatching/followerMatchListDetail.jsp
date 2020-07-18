@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" 
+	import="java.util.*, com.omg.jsp.trainerCeritificate.model.vo.*, com.omg.jsp.trainerCareer.model.vo.*, com.omg.jsp.trainerCeritificate.model.vo.*
+	, com.omg.jsp.trainerEducation.model.vo.*, com.omg.jsp.trainerReview.model.vo.*"%>
+<% 
+	HashMap<String, Object> hmap = (HashMap<String, Object>) request.getAttribute("information"); 
+	ArrayList<String> trainerInfo = (ArrayList<String>) hmap.get("trainerInfo");
+	ArrayList<TrainerCeritificate> ceritificateList = (ArrayList<TrainerCeritificate>) hmap.get("ceritificate");
+	ArrayList<TrainerEducation> educationList = (ArrayList<TrainerEducation>) hmap.get("education");
+	ArrayList<TrainerCareer> tcrList = (ArrayList<TrainerCareer>) hmap.get("career");
+	ArrayList<TrainerReview> trList = (ArrayList<TrainerReview>) hmap.get("review");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +19,7 @@
 <title>Insert title here</title>
 <style>
 
-body {
+* {
 	font-family: "Noto Sans KR";
 }
 
@@ -67,10 +77,19 @@ div.tabComment {
 
 div.review {
 	margin-top: 15px;
-	margin-left: 45px;
-	width: 625px;
-	height: 120px;
+	margin: 0 auto;
+	width: 300px;
+	height: 300px;
 	border: 1px solid black;
+	border-radius: 40px;
+	border-color: lightgray;
+	float: left;
+}
+div.review:first-child {
+	margin-left: 75px;
+}
+div.review:nth-child(2) {
+	margin-left: 50px;
 }
 
 button#doMatching {
@@ -101,7 +120,7 @@ div.profile_ability {
 	font-weight: bold;
 	margin-left: 20px;
 	margin-right: 20px;
-	margin-bottom: 25px;
+/* 	margin-bottom: 25px; */
 }
 
 div.profile_star ul {
@@ -232,6 +251,16 @@ button#sendMsg{
 	font-weight: bold;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+div.tariner_subAbility {
+	margin-top: 10px;
+	font-size: 0.9em;
+	border-radius: 25px;
+	background: gray;
+	color: white;
+	font-weight: bold;
+	margin-left: 20px;
+	margin-right: 20px;
+}
 
 </style>
 </head>
@@ -293,30 +322,29 @@ button#sendMsg{
 							style="margin: auto; margin-bottom: 30px; margin-top: 50px; width: 140px; height: 140px; border-radius: 70%; overflow: hidden;">
 							<img class="trainnerImg" width="100%" height="100%" src="../../resources/img/trainerJang.png">
 						</div>
-						<div class="profile_Name" style="font-size: 1.5em;">이대길</div>
-						<div class="profile_Id">chaseNoBig</div>
-						<div class="profile_star">
-							<ul>
-								<li><img width="20px" height="20px"
-									src="../../resources/img_icon/ohmystar_pull.png"></li>
-								<li><img width="20px" height="20px"
-									src="../../resources/img_icon/ohmystar_pull.png"></li>
-								<li><img width="20px" height="20px"
-									src="../../resources/img_icon/ohmystar_pull.png"></li>
-								<li><img width="20px" height="20px"
-									src="../../resources/img_icon/ohmystar_pull.png"></li>
-								<li><img width="20px" height="20px"
-									src="../../resources/img_icon/ohmystar_pull.png"></li>
-							</ul>
+						<div class="profile_Name" style="font-size: 1.5em;"><%= trainerInfo.get(0) %></div>
+						<div class="profile_Id"><%= trainerInfo.get(1) %></div>
+						<div class="profile_score" style="clear: both; font-weight: bold; font-size: 1.2em; color: orangered; margin-bottom: 30px;">
+							<img width="18px" height="18px" src="/omg/resources/img_icon/ohmystar_pull.png" style="vertical-align: middle;">&nbsp;&nbsp;
+							<%	double gradeAvg = 0;
+								double temp = 0;
+								if(trList.size() > 0){
+									for(int i = 0; i < trList.size(); i++) {
+										temp += trList.get(i).getGrade();
+									}
+									gradeAvg = temp / trList.size();
+								} else { 
+									gradeAvg = 0;
+								} %>
+							<div style=" display: inline-block; "><%= gradeAvg %></div>		
 						</div>
-						<div class="profile_score"
-							style="clear: both; font-weight: bold; color: orangered; margin-bottom: 30px;">5.0</div>
 
 						<div class="profile_comment">
 							<textarea
-								style="font-size: 1.1em; font-weight: bold; border: none; resize: none; width: 150px; height: 70px; overflow: hidden">  추노질하는 것보다  팔로워 관리하는게 훨씬 더 힘들구만</textarea>
+								style="font-size: 0.95em; text-align:center; font-weight: bold; border: none; resize: none; width: 200px; height: 70px; overflow: hidden"><%= trainerInfo.get(2) %></textarea>
 						</div>
-						<div class="profile_ability">#운동습관형성</div>
+						<div class="profile_ability">#<%= trainerInfo.get(3) %></div>
+						<div class="tariner_subAbility">#<%= trainerInfo.get(4) %></div>
 
 					</div>
 					<div id="trainerDetail" style="float: left; width: 800px;">
@@ -332,12 +360,20 @@ button#sendMsg{
 												<th>발급기관</th>
 												<th>발급일자</th>
 											</tr>
-											<tr>
-												<td>생활체육지도자2급</td>
-												<td>국민체육진흥공단</td>
-												<td>2014.02.04</td>
-											</tr>
-
+											
+											<% if(ceritificateList.size() > 0) {
+												for(int i = 0; i < ceritificateList.size(); i++) { %>
+													<tr>
+														<td><%= ceritificateList.get(i).getCertiName() %></td>
+														<td><%= ceritificateList.get(i).getCertiInstitution() %></td>
+														<td><%= ceritificateList.get(i).getCertiDate() %></td>
+													</tr>
+												<% } 
+												} else { %>
+													<tr>
+														<td colspan="3">등록된 자격증 정보가 없습니다.</td>
+													</tr>
+												<% } %>
 										</tbody>
 									</table>
 								</div>
@@ -355,12 +391,19 @@ button#sendMsg{
 												<th>입학일</th>
 												<th>상태</th>
 											</tr>
-											<tr>
-												<td>감자대학교</td>
-												<!-- <td>체육교육과</td> -->
-												<td>2012.03.02</td>
-												<td>졸업</td>
-											</tr>
+											<% if(educationList.size() > 0) {
+												for(int i = 0; i < educationList.size(); i++) { %>
+													<tr>
+														<td><%= educationList.get(i).getEduName() %></td>
+														<td><%= educationList.get(i).getEduEnrollDate() %></td>
+														<td><%= educationList.get(i).getEduState() %></td>
+													</tr>
+												<% } 
+											 } else { %>
+											 		<tr>
+														<td colspan="3">등록된 학력 정보가 없습니다.</td>
+													</tr>
+											 <% } %>
 
 										</tbody>
 									</table>
@@ -379,12 +422,20 @@ button#sendMsg{
 												<th>근무시작일</th>
 												<th>근무종료일</th>
 											</tr>
-											<tr>
-												<td>대길패 휘트니스</td>
-												<td>트레이너</td>
-												<td>2016.01.06</td>
-												<td>2018.03.25</td>
-											</tr>
+											<% if(tcrList.size() > 0) {
+												for(int i = 0; i < tcrList.size(); i++) { %>
+													<tr>
+														<td><%= tcrList.get(i).getCompName() %></td>
+														<td><%= tcrList.get(i).getCareerLevel() %></td>
+														<td><%= tcrList.get(i).getEnterDate() %></td>
+														<td><%= tcrList.get(i).getResignDate() %></td>
+													</tr>
+												<% } 
+											} else {%>
+													<tr>
+														<td colspan="4">등록된 경력 정보가 없습니다.</td>
+													</tr>
+											<% } %>
 
 										</tbody>
 									</table>
@@ -398,9 +449,33 @@ button#sendMsg{
 										style="margin-top: 25px; font-size: 1.4em; font-weight: bold;">트레이너
 										후기보기</div>
 									<div class="tabComment">트레이너와 매칭했던 팔로워들의 후기를 읽어보세요!</div>
-									<div style="margin-left: 40px;">
-										<div class="review"></div>
-										<div class="review"></div>
+									<div style="width: 800px; height: 350px; margin-top: 10px;">
+										<%
+										if(trList.size() > 1) {
+											for(int i = 0; i < 2; i++) { %>
+												<div class="review">
+													<div style="font-weight: bold; font-size: 1.15em; padding-top: 10px; padding-left: 25px; padding-right: 25px; text-align: left;">
+														<% String followerId = trList.get(i).getFollowerId();
+															for(int j = 0; j < followerId.length(); j++) { 
+																if(j < 3) {%>
+																	<%=followerId.charAt(j)%>
+																<% } else {%>
+																	<%="*"%>
+																<% } %>
+															<% } %>
+													</div>
+													<div style="color: orangered; font-weight: 600; text-align: right; vertical-align: middle; padding-right: 15px;">
+														<img width="18px" height="18px" src="/omg/resources/img_icon/ohmystar_pull.png" style="top:4px;">&nbsp;&nbsp;
+														<%= trList.get(i).getGrade() %>
+													</div>
+													<div style="padding: 20px; text-align: left;">
+														<%= trList.get(i).getRatingContent() %>
+													</div>
+												</div>
+											<% } 
+										} else {%>
+											등록된 후기가 아직 없습니다.
+										<% } %>
 									</div>
 								</div>
 							</div>

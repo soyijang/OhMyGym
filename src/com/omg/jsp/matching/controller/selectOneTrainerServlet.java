@@ -35,6 +35,15 @@ public class selectOneTrainerServlet extends HttpServlet {
 		
 		HashMap<String, Object> hmap = new MatchingService().selectTrainerMap(memberId);
 		
+		String page = "";
+		if(!hmap.isEmpty()) {
+			page = "views/follower/followerMatching/followerMatchListDetail.jsp";
+			request.setAttribute("information", hmap);
+			request.getRequestDispatcher(page).forward(request, response);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "트레이너 정보 상세보기 실패");
+		}
 		
 	}
 
