@@ -1,13 +1,18 @@
 package com.omg.jsp.matching.model.service;
 
+import static com.omg.jsp.common.JDBCTemplate.*;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.omg.jsp.matching.model.dao.MatchingDao;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
-
-import static com.omg.jsp.common.JDBCTemplate.*;
+import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
+import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
+import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
+import com.omg.jsp.trainerReview.model.vo.TrainerReview;
 
 public class MatchingService {
 
@@ -35,16 +40,21 @@ public class MatchingService {
 	public HashMap<String, Object> selectTrainerMap(String memberId) {
 		Connection con = getConncection();
 		
-		HashMap<String, Object> hmap = null;
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		
-		hmap = new MatchingDao().selectTrainerMap(con, memberId);
+		ArrayList<String> trainerInfo = new MatchingDao().selectTrainerInfo(con, memberId);		
+		ArrayList<TrainerCeritificate> tcList = new MatchingDao().selectTrainerCeritificate(con, memberId);
+		ArrayList<TrainerEducation> teList = new MatchingDao().selectTrainerEducation(con,memberId);
+		ArrayList<TrainerCareer> tcrList = new MatchingDao().selectTrainerCareer(con, memberId);
+		ArrayList<TrainerReview> trList = new MatchingDao().selectTrainerReview(con, memberId);
 		
-		if(hmap != null) {
-			commit(con);
-		} else {
-			rollback(con);
-			hmap = null;
-		}
+		hmap.put("trainerInfo", trainerInfo);
+		hmap.put("ceritificate", tcList);
+		hmap.put("education", teList);
+		hmap.put("career", tcrList);
+		hmap.put("review", trList);
+		
+		close(con);
 		
 		return hmap;
 	}

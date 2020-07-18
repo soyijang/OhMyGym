@@ -135,6 +135,7 @@ a.trainerId {
 }
 
 div.tariner_comment {
+	height: 45px;
 	margin-top: 10px;
 	font-size: 0.9em;
 	padding-left: 10px;
