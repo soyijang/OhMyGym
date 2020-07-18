@@ -24,16 +24,45 @@ public class AddOhMoney extends HttpServlet {
 		String content = request.getParameter("content");
 		String means = request.getParameter("means");
 		
-		OhMoney addMoney = new OhMoney();
-		addMoney.setUserId(userId);
-		addMoney.setContent(content);
-		addMoney.setOhmoneyMean(means);
+		String addMoney = request.getParameter("addmoney");
+		int moneyData = Integer.parseInt(addMoney);
+		
+		String nofundBal = request.getParameter("userNoBal");
+		int nofundMoney = Integer.parseInt(nofundBal);
+		
+		String refundBal = request.getParameter("userReBal");
+		int refundMoney = Integer.parseInt(refundBal);
+
+		String balance = request.getParameter("userBalance");
+		int balanceMoney  = Integer.parseInt(balance);
 		
 		
-		OhMoney userMoney = new OhMoneyService().checkMoney(userId);
+		refundMoney = refundMoney + moneyData;
+		
+		balanceMoney = refundMoney + nofundMoney;
+		
+		OhMoney userOhMoney = new OhMoney();
+		userOhMoney.setUserId(userId);
+		userOhMoney.setContent(content);
+		userOhMoney.setOhmoneyMean(means);
+		userOhMoney.setBalance(balanceMoney);
+		userOhMoney.setRefundBal(refundMoney);
+		userOhMoney.setNofundBal(nofundMoney);
+		userOhMoney.setIsRefund("Y");
+		userOhMoney.setOhmoneyAmount(addMoney);
+		
+		if(moneyData >= 0) {
+			userOhMoney.setOhmoneyType("충전");
+		} else {
+			userOhMoney.setOhmoneyType("사용");
+		}
+		
+		
+		int result = new OhMoneyService().updateMoney(userOhMoney);
+		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		new Gson().toJson(userMoney, response.getWriter());
+		new Gson().toJson(result, response.getWriter());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

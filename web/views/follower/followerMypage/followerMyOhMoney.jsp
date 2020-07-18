@@ -435,7 +435,7 @@
         <div class="return_box">
             <div style="width: 100%; height: 30px; background: orangered; border-radius: 8px;">
                 <div style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; margin-left: 200px; padding-top: 5px;">오머니 환급신청</div>
-                <img class="close" onclick="jQuery('.return_wrap').fadeOut('slow')" src="../../resources/img_icon/closeIcon.png" width="20px" height="20px">
+                <img class="close" onclick="jQuery('.return_wrap').fadeOut('slow')" src="/omg/resources/img_icon/closeIcon.png" width="20px" height="20px">
             </div>
                 <div class="buy_content" style="text-align: center;">
                     <div class="cash_have_Text">
@@ -488,7 +488,7 @@
         <div class="buy_box">
             <div style="width: 100%; height: 30px; background: orangered; border-radius: 8px;">
                 <div style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; margin-left: 200px; padding-top: 5px;">오머니 충전</div>
-                <img class="close" onclick="jQuery('.buy_wrap').fadeOut('slow')" src="../../resources/img_icon/closeIcon.png" width="20px" height="20px">
+                <img class="close" onclick="jQuery('.buy_wrap').fadeOut('slow')" src="/omg/resources/img_icon/closeIcon.png" width="20px" height="20px">
             </div>
                 <div class="buy_content" style="text-align: center;">
                     <div class="cash_have_Text">
@@ -524,15 +524,17 @@
                     <a style="margin-right: 300px; font-weight: bold; font-size: 0.9em;">충전할 오머니 선택</a>
                     <form>
                         <hr style="width: 90%; height: 2px; background: black;">
-                        <input type="radio" value="10" name="money" onclick="showMoney(10)">1
-                        0원&nbsp;
-                        <input type="radio" value="10000" name="money" onclick="showMoney(10000)">10000원&nbsp;
-                        <input type="radio" value="15000" name="money" onclick="showMoney(15000)">15000원&nbsp;
+                        <input type="radio" value="10" style="cursor: pointer" name="money" onclick="showMoney(10)">10원&nbsp;
+                        <input type="radio" value="10000" style="cursor: pointer" name="money" onclick="showMoney(10000)">10000원&nbsp;
+                        <input type="radio" value="15000" style="cursor: pointer" name="money" onclick="showMoney(15000)">15000원&nbsp;
                         <hr style="width: 90%; height: 0.5px; background: black;">
                     </form><br>
                     <button onclick="startPay();" class="cashbtn">충전하기</button>
                     <script>
                     	var balance = 0;
+                    	var refundBalance = 0;
+                    	var nofundBalance = 0;
+                    	
                         var money = 0;
                   		checkMoney();
                         function removeComma(str){
@@ -576,7 +578,7 @@
                                     buyer_tel :'<%=loginUser.getPhone()%>',
                                     buyer_addr : '<%=loginUser.getAddress()%>',
                                     buyer_postcode : '123-456',
-                                    m_redirect_url : '/omg/checkOhMoney.follower'//결제완료후 보낼 컨트롤러의 메소드명
+                                    m_redirect_url : ''//결제완료후 보낼 컨트롤러의 메소드명
                                 }, function(rsp) {
                                     if ( rsp.success ) {
                                         var msg = '결제가 완료되었습니다.';
@@ -585,6 +587,7 @@
                                         msg += '결제 금액 : ' + rsp.paid_amount;
                                         msg += '카드 승인번호 : ' + rsp.apply_num;
                                         addMoney(money);
+                                        jQuery('.buy_wrap').fadeOut('slow')
                                     } else {
                                         var msg = '결제에 실패하였습니다.';
                                         msg += '에러내용 : ' + rsp.error_msg;
@@ -592,6 +595,11 @@
                                     alert(msg);
                                 });
                             }
+                        }
+                        
+                        function comma(str) {
+                            str = String(str);
+                            return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
                         }
                         
                         
@@ -604,11 +612,16 @@
                        	 			},
                        	 			type : "post",
                        	 			success : function(data) {
-                       	 				$('#have_OhMoney').text(data.balance + "원");
-                       	 				$('#usableOhMoney').text(data.balance + "원");
-                       	 				$('#have_OhMoney').text(data.balance + "원");
+                       	 				$('#have_OhMoney').text(comma(data.balance) + "원");
+                       	 				$('#usableOhMoney').text(comma(data.balance) + "원");
+                       	 				$('#returnOhMoney').text(comma(data.refundBal) + "원");
+                       	 				$('#cantreturnOhMoney').text(comma(data.nofundBal) + "원");
                        	 				balance = data.balance;
+                       	 				refundBalance = data.refundBal;
+                       	 				nofundBalance = data.nofundBal;
                                    		console.log(balance);
+                                   		console.log(refundBalance);
+                                   		console.log(nofundBalance);
                        	 			},
                        	 			error : function() {
                        	 				console.log("실패!")
@@ -622,7 +635,9 @@
                      		var content = "카드 결제로 인한 정상 충전";
                      		var means = "카드";
                      		var userBalance = balance;
-                     		console.log(userBalance);
+                     		var userReBal = refundBalance;
+                     		var userNoBal = nofundBalance;
+                     		
                    	 		$.ajax({
                    	 			url : "/omg/addOhMoney.follower",
                    	 			data : {
@@ -630,13 +645,14 @@
                    	 				addmoney : addmoney,
                    	 				content : content,
                    	 				means : means,
-                   	 				userBalance : userBalance
+                   	 				userBalance : userBalance,
+                   	 				userReBal : userReBal,
+                   	 				userNoBal : userNoBal
                    	 			},
                    	 			type : "post",
                    	 			success : function(data) {
-                   	 				$('#have_OhMoney').text(data.balance + "원");
-                   	 				$('#usableOhMoney').text(data.balance + "원");
-                   	 				$('#have_OhMoney').text(data.balance + "원");
+                   	 			 	checkMoney();
+                                    callList();
                    	 			},
                    	 			error : function() {
                    	 				console.log("실패!")
@@ -666,7 +682,7 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <td id="usableOhMoney">1,000원</td>
+                                    <td id="usableOhMoney"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -675,17 +691,13 @@
                                 <th>
                                     	환급가능 오머니
                                 </th>
-                                <td id="returnOhMoney">
-                                    1,000원
-                                </td>
+                                <td id="returnOhMoney"> 0원</td>
                             </tr>
                             <tr>
                                 <th >
                                     	환급불가 오머니
                                 </th>
-                                <td id="cantreturnOhMoney">
-                                    0원
-                                </td>
+                                <td id="cantreturnOhMoney">0원</td>
                             </tr>
                         </table>
                     </div>
@@ -715,7 +727,7 @@
                     <br><br>
 
                     <div id="cash_list_div">
-                        <table class="cash_list">
+                        <table class="cash_list" id="cash_list">
                             <thead>
                                 <tr>          
                                     <th>
@@ -739,46 +751,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <!--리스트구분넘버-->2
-                                    </td>
-                                    <td>
-                                        <!--오머니 변동일시-->2020.07.03
-                                    </td>
-                                    <td>
-                                        <!--오머니 변동구분-->충전
-                                    </td>
-                                    <td>
-                                        <!--오머니 변동세부내역-->카드결제로 인한 오머니 충전
-                                    </td>
-                                    <td>
-                                        <!--오머니 변동액-->10000
-                                    </td>
-                                    <td>
-                                        <!--남은 오머니-->11000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <!--리스트구분넘버-->1
-                                    </td>
-                                    <td>
-                                        <!--오머니 변동일시-->2020.07.01
-                                    </td>
-                                    <td>
-                                        <!--오머니 변동구분-->환불
-                                    </td>
-                                    <td>
-                                        <!--오머니 변동세부내역-->환불신청을 통한 환불
-                                    </td>
-                                    <td>
-                                        <!--오머니 변동액-->10000
-                                    </td>
-                                    <td>
-                                        <!--남은 오머니-->0
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -847,6 +819,45 @@
                                    $(btn).attr('disabled','true');
                                 } 
                             }
+                        </script>
+                        
+                        <script>
+                        callList();
+                        function callList(){
+                     		var userId =  "<%=loginUser.getMemberId()%>";
+                   	 		$.ajax({
+                   	 			url : "/omg/listOhMoney.follower",
+                   	 			data : {
+                   	 				userId : userId
+                   	 			},
+                   	 			type : "post",
+                   	 			success : function(data) {
+                   	 				
+                   	 				var $listPos = $("#cash_list tbody");
+                                	$("#cash_list > tbody > tr").remove();
+                   	 				var listnum = data.length;
+                   	 				var listcount = 0;
+                   	 				for(var key in data){
+                   	 					$listPos.append("<tr class='ele'>"+
+                                        	"<td>"+listnum+"</td>"+
+                                        	"<td>"+data[key].ohmoneyDate+"</td>"+
+                                        	"<td>"+data[key].ohmoneyType+"</td>"+
+                                        	"<td>"+data[key].content+"</td>"+
+                                        	"<td>"+data[key].ohmoneyAmount+"</td>"+
+                                        	"<td>"+data[key].balance+"</td></tr>");
+                   	 					listnum = listnum - 1;
+                   	 					listcount = listcount + 1;
+                   	 					if(listcount > 10){
+                   	 						break;
+                   	 					}
+                   	 				}	
+                   	 			},
+                   	 			error : function() {
+                   	 				console.log("실패!")
+                   	 			}
+                    		})
+                        }
+                        
                         </script>
                     </div>
                 </div>
