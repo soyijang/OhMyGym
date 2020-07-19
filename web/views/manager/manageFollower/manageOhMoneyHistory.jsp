@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "java.util.*" import="com.omg.jsp.ohmoney.model.vo.OhMoney"%>
+<% ArrayList<OhMoney> list = (ArrayList<OhMoney>) request.getAttribute("ohMoneyList");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,7 +101,7 @@
     <section>
         <!--헤더 영역-->
         <article id="menuTitleArea">
-            <p style="font-weight: bold; font-size: 1.5em; padding-top: 30px; padding-left: 30px;">OH머니 지급/사용내역</p>
+            <p style="font-weight: bold; font-size: 1.5em; padding-top: 30px; padding-left: 30px;">OH머니 전체내역</p>
         </article>
         <!--헤더 영역 종료-->
 
@@ -148,35 +149,37 @@
                         <th width="70px;">금액</th>
                         <th width="80px;">날짜</th>
                         <th width="80px;">시간</th>
-                        <th width="100px;">관리자ID</th>
+                        <th width="70px;">관리자ID</th>
                         <th width="170px;">세부내용</th>
-                        <th width="60px;">환급가능여부</th>
+                        <th width="80px;">환급가능여부</th>
                         <th width="80px;">결제/취소 수단</th>
                         <th width="80px">상세정보</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>hlm1225</td>
-                        <td>충전</td>
-                        <td>50000</td>
-                        <td>2020-06-28</td>
-                        <td>18:23:27</td>
-                        <td>master</td>
-                        <td></td>
-                        <td>Y</td>
-                        <td>신용카드</td>
-                        <td><button class="btn" id="infoBtn" onclick="">상세정보</button></a></td>
-                    </tr>
+                    <% int listnum = list.size(); %>
+                    <% for(int i = 0; i < list.size(); i++) {%>
+	                    <tr>
+	                        <td><%=listnum%></td>
+	                        <td><%=list.get(i).getUserId()%></td>
+	                        <td><%=list.get(i).getOhmoneyType()%></td>
+	                        <td><%=list.get(i).getOhmoneyAmount()%></td>
+	                        <td><%=list.get(i).getOhmoneyDate()%></td>
+	                        <td><%=list.get(i).getOhmoneyTime()%></td>
+	                        <td><%=list.get(i).getManagerId() %></td>
+	                        <td><%=list.get(i).getContent() %></td>
+	                        <td><%=list.get(i).getIsRefund() %></td>
+	                        <td><%=list.get(i).getOhmoneyMean()%></td>
+	                        <td><button class="btn" id="infoBtn" onclick="">상세정보</button></td>
+	                    </tr>
+                    <% listnum = listnum - 1; } %>
                 </table>
             </div>
         </article>
         <!--테이블 표시 영역 종료-->
 
-        <!--버튼 처리 영역(임시)-->
-        <article id="pagingArea">
-            <div id="pageButtonTemp">임시버튼영역</div>
-        </article>
-        <!--버튼 처리 영역(임시) 종료-->
+		<script>
+		
+		
+		</script>
     </section>
 </body>
 </html>

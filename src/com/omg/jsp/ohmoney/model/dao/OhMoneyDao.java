@@ -210,4 +210,79 @@ public class OhMoneyDao {
 		return refundList;
 	}
 
+	public ArrayList<OhMoney> manageListOhMoney(Connection con) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<OhMoney> list = new ArrayList<OhMoney>();
+		
+		String query = prop.getProperty("manageListOhMoney");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				OhMoney moneyData = new OhMoney();
+				
+				moneyData.setManageCode(rset.getString("OMONEY_MANAGECODE"));
+				moneyData.setOhmoneyDate(rset.getString("OMONEY_DATE"));
+				moneyData.setOhmoneyType(rset.getString("OMONEY_TYPE"));
+				moneyData.setContent(rset.getString("OMONEY_CONTENT"));
+				moneyData.setOhmoneyAmount(rset.getString("OMONEY_AMOUNT"));
+				moneyData.setManagerId(rset.getString("MANAGER_ID"));
+				moneyData.setOhmoneyMean(rset.getString("OMONEY_MEANS"));
+				moneyData.setIsRefund(rset.getString("REFUND_YN"));
+				moneyData.setUserId(rset.getString("MEMBER_ID"));
+				moneyData.setOhmoneyTime(rset.getString("OMONEY_TIME"));
+				list.add(moneyData);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ReFundOhMoney> manageListRefund(Connection con) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<ReFundOhMoney> list = new ArrayList<ReFundOhMoney>();
+		
+		String query = prop.getProperty("manageListRefund");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				ReFundOhMoney moneyData = new ReFundOhMoney();
+				
+				moneyData.setRefundNum(rset.getString("RETURN_NUM"));
+				moneyData.setMemberId(rset.getString("MEMBER_ID"));
+				moneyData.setMemberName(rset.getString("MEMBER_NAME"));
+				moneyData.setManagerId(rset.getString("MANAGER_ID"));
+				moneyData.setMoney(rset.getInt("OHMONEY_VALUE"));
+				moneyData.setRefundDate(rset.getString("RETURN_DATE"));
+				moneyData.setRefundState(rset.getString("RETURN_STATE"));
+				list.add(moneyData);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+
 }

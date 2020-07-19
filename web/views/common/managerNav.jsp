@@ -129,7 +129,7 @@
         
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">
         <ul><details open><summary>그룹소통방 관리</summary>
-            <li><a href="#">그룹소통방 조회</a></li><br>
+            <li><a onclick="manageGroupList();" style="cursor: pointer;">그룹소통방 조회</a></li><br>
         </details></ul>
         
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">
@@ -160,7 +160,8 @@
         
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">
         <ul><details open><summary>OH머니 관리</summary>
-            <li><a href="../manager/ohmoneyHistory.jsp">지급/사용내역</a></li>
+            <li><a onclick="manageOhMoneyList();" style="cursor: pointer;">전체내역</a></li>
+            <li><a onclick="manageRefundList();" style="cursor: pointer;">환급내역</a>
             <li><a href="../manager/omoneyDirectPayment.jsp">수기지급</a></li>
             <li><a href="../manager/omoneyDirectPaymentHistory.jsp">수기지급내역관리</a></li>
         </details></ul>
@@ -172,7 +173,18 @@
 			location.href= "<%=request.getContextPath()%>/logout.mg";
 			alert("<%=loginManager.getManagerName()%>관리자님의 로그아웃이 성공적으로 완료되었습니다.");
 		}
-	
+		
+		function manageOhMoneyList(){
+			location.href= "<%=request.getContextPath()%>/listOhMoney.manager";
+		}
+		
+		function manageGroupList(){
+			location.href= "<%=request.getContextPath()%>/groupList.manager";
+		}
+		
+		function manageRefundList(){
+			location.href="<%=request.getContextPath()%>/refundList.manager";
+		}
 	</script>
 </body>
 </html>

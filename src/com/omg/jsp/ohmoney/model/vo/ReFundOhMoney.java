@@ -8,6 +8,7 @@ public class ReFundOhMoney {
 	private String managerId;
 	private String fileCode;
 	private String refundDate;
+	private String memberName;
 	
 	public ReFundOhMoney() {}
 
@@ -82,6 +83,14 @@ public class ReFundOhMoney {
 
 	public void setRefundDate(String refundDate) {
 		this.refundDate = refundDate;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	
 	

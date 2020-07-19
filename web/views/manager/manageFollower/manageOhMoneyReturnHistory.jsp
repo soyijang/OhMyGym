@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import = "java.util.*" import="com.omg.jsp.ohmoney.model.vo.ReFundOhMoney"%>
+<% ArrayList<ReFundOhMoney> list = (ArrayList<ReFundOhMoney>) request.getAttribute("refundList");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -242,10 +243,6 @@
             var followerNum = document.getElementById("followerNum");
             var fileIn = document.getElementById("returnReceipt");
 
-            
-
-            console.log("followerID"+num);
-
             returnid.value = id;
             returnmoney.value = money;
             followerNum.innerText = num;
@@ -264,7 +261,7 @@
 					style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; margin-left: 180px; padding-top: 5px;">오머니환급</div>
 				<img class="close"
 					onclick="jQuery('.checkReturn_wrap').fadeOut('slow')"
-					src="../../resources/img_icon/closeIcon.png" width="20px" height="20px">
+					src="/omg/resources/img_icon/closeIcon2.png"" width="20px" height="20px">
 			</div>
 			<div class="checkReturn_content" style="text-align: center; font-size: 0.9em;">
 			    <a id="followerNum" style="visibility: hidden;"></a>
@@ -306,6 +303,7 @@
 	</div>
 	<script>
         function checkRecepit(num){
+        	//환급페이지를 업데이트하는 ajax 구현
             var fileIn = document.getElementById("returnReceipt").value;
 
             var okText = document.getElementById("returnOk" + num);
@@ -313,7 +311,7 @@
             console.log(okText.innerText);
             if(fileIn != ""){
                 jQuery('.checkReturn_wrap').fadeOut('slow');
-                if(okText.innerText == '환급대기'){
+                if(okText.innerText == '대기'){
                     okText.innerText = '확인대기';
                     $("#returnOk"+num).css("color","navy");
                 }
@@ -364,8 +362,7 @@
 		<!--테이블 표시 영역-->
 
 		<article id="tableArea">
-			<div align="center"
-				style="padding-top: 25px; padding-bottom: 25px; width: 100%; background: white; border-radius: 8px;">
+			<div align="center" style="padding-top: 25px; padding-bottom: 25px; width: 100%; background: white; border-radius: 8px;">
 				<table>
 					<tr>
 						<th width="100px">No</th>
@@ -377,40 +374,19 @@
 						<th width="110px">상태</th>
 						<th width="100px">환급하기</th>
 					</tr>
-					<tr>
-						<td>3</td>
-						<td id="followerID1">hlm1225</td>
-						<td>이래림</td>
-						<td>OhMyGym</td>
-						<td id="followerReturn1">10,000</td>
-						<td>2020-06-28</td>
-						<td id="returnOk1" style="color: orangered; font-weight: bold;">환급대기</td>
-						<td><button class="btn" id="infoBtn" onclick="returnBtn(1)">확인하기</button>
-							</a></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td id="followerID2">kimchiGeng</td>
-						<td>김진우</td>
-						<td>OhUGym</td>
-						<td id="followerReturn2">20,000</td>
-						<td>2020-06-21</td>
-						<td id="returnOk1" style="color: navy; font-weight: bold;">확인대기</td>
-						<td><button class="btn" id="infoBtn" onclick="returnBtn(2)">확인하기</button>
-							</a></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td id="followerID3">kingyunking</td>
-						<td>김윤김</td>
-						<td>OhMyGym</td>
-						<td id="followerReturn3">12,000</td>
-						<!--id="followerReturn<%-- <%=indexNumber%> --%>-->
-						<td>2020-06-19</td>
-						<td id="returnOk3" style="color: black; font-weight: bold;">완료</td>
-						<td><button class="btn" id="infoBtn" onclick="returnBtn(3)">확인하기</button>
-							</a></td>
-					</tr>
+					<% int listnum = list.size(); %>
+                    <% for(int i = 0; i < list.size(); i++) {%>
+	                    <tr>
+	                        <td><%=listnum%></td>
+	                        <td id="followerID<%=listnum%>"><%=list.get(i).getMemberId()%></td>
+	                        <td><%=list.get(i).getMemberName()%></td>
+	                        <td><%=list.get(i).getManagerId()%></td>
+	                        <td id="followerReturn<%=listnum%>"><%=list.get(i).getMoney()%></td>
+	                        <td><%=list.get(i).getRefundDate()%></td>
+	                        <td id="returnOk<%=listnum%>" style="color: black; font-weight: bold;"><%=list.get(i).getRefundState() %></td>
+	                        <td><button class="btn" id="infoBtn" onclick="returnBtn(<%=listnum%>)">상세정보</button></td>
+	                    </tr>
+                    <% listnum = listnum - 1; } %>
 				</table>
 			</div>
 		</article>
