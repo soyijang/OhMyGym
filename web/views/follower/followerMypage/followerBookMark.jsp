@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.omg.jsp.followerBookMark.model.vo.*, java.util.*";%>
+<% ArrayList<BookMark> list = (ArrayList<BookMark>) request.getAttribute("bookmarklist"); 
+   
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,20 +54,15 @@
 
 				<div>
 					<ul class="news-article-list article-list list ui-area-article-list">
+						
+						<% for(BookMark b : list) { %>
 						<li class="listItem">
 							<div class="articleImg">
-
-								<a href="/?m=news&amp;uid=42666"> <img
-									class="lazy-load-image"
-									src="../../resources/img/OHmyGymLogo.png"><b
-									class="vamHelper"></b></a>
+								<a href="#"><img src="../../resources/img/OHmyGymLogo.png"><b class="vamHelper"></b></a>
 							</div>
 							<div class="articleInfo info">
-								<a href="/?m=news&amp;uid=42666">
-									<p class="title mu-icon mu-icon-new">
-										공지사항 | 오마이짐, 올 해를 빛낸 최고의 웹페이지 선정! <span class="creplyCnt new"></span>
-									</p>
-								</a>
+								<a href="/?m=news&amp;uid=42666"> 
+								<p class="title mu-icon mu-icon-new" value="<%= b.getBoardNum() %>"> <span class="creplyCnt new"></span></p></a>
 								<div class="subInfo info">
 									<span class="date division">2시간 전</span><span class="view">
 								</div>
@@ -76,31 +74,8 @@
 								</div>
 							</div>
 						</li>
-						<li class="listItem">
-							<div class="articleImg">
-
-								<a href="/?m=news&amp;uid=42666"> <img
-									class="lazy-load-image"
-									src="../../resources/img/체계적인 회원 관리 시스템.png"><b
-									class="vamHelper"></b></a>
-							</div>
-							<div class="articleInfo info">
-								<a href="/?m=news&amp;uid=42666">
-									<p class="title mu-icon mu-icon-new">
-										이벤트 | 오마이짐과 함께 운동한 운동영상 올리고, 하와이 가자! <span class="creplyCnt new"></span>
-									</p>
-								</a>
-								<div class="subInfo info">
-									<span class="date division">2시간 전</span><span class="view">
-								</div>
-								<div class="description">
-									<a href="/?m=news&amp;uid=42666"><p>최근 무서운 기세로 스니커즈의
-											자리를 노리는 뮬. 스니커즈냐 뮬이냐 그것이 문제로다! 무신사가 선별한 스니커즈와 뮬 중 마음에 드는 것에 한
-											표를 행사하고 댓글 이벤트에 참여해보자. 무신사 포인트를 얻는 가장 쉬운 방법 중 하나다. 지금 보고 있는
-											뉴스의 URL을 개인 SNS 계정에 공유하고 코멘트를 남기면 된다. 그런 ...</p></a>
-								</div>
-							</div>
-						</li>
+						<% } %>
+					
 						
 						
 					</ul>

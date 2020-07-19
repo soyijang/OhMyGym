@@ -8,9 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 import com.omg.jsp.member.model.dao.MemberDao;
+import com.omg.jsp.member.model.vo.Attachment;
 import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.member.model.vo.TrainerInfo;
 
@@ -220,5 +222,126 @@ private Properties prop = new Properties();
 		
 		return result2;
 	}
+
+
+
+	public Member findId(Connection con, Member findIdUser) {
+		
+		PreparedStatement pstmt = null;
+		Member findUser = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("findId");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, findIdUser.getName());
+			pstmt.setString(2, findIdUser.getPhone());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				findUser = new Member();
+				findUser.setMemberId(rset.getString("MEMBER_ID"));
+				findUser.setMemberDivision(rset.getString("MEMBER_TYPE"));
+				findUser.setName(rset.getString("MEMBER_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return findUser;
+	}
+	
+	//최근 발생한 시퀀스 조회용 메소드
+	public int selectCurrval(Connection con) {
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		int fid = 0;
+
+		String query = prop.getProperty("selectProfileCurrval");
+		
+		try {
+			
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				fid = rset.getInt("currval");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		
+		return fid;
+	}
+
+	//첨부파일 한 행을 insert할메소드
+	public int insertAttachment(Connection con, Attachment attachment) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertAttachment");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, attachment.getOriginName());
+			pstmt.setString(2, attachment.getChangeName());
+			pstmt.setString(3, attachment.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	public int updateMember(Connection con, Member m) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateMember");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, m.getMemberPwd());
+			pstmt.setString(2, m.getAddress());
+			pstmt.setString(3, m.getPhone());
+			pstmt.setString(4, m.getEmail());
+			pstmt.setString(5, m.getMemberAge());
+			pstmt.setString(6, m.getGender());
+			pstmt.setString(7, m.getMemberId());
+			
+			System.out.println("m : " + m);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		System.out.println("result : " + result);
+		return result;
+	}
+
+
 
 }
