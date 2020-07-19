@@ -43,6 +43,7 @@ public class SelectOneNoticeServlet extends HttpServlet {
 		Notice notice = new NoticeService().selectOne(nno);
 		
 		String page = "";
+		System.out.println("servlet notice : "+notice);
 		
 		if(notice != null) {
 			page="views/manager/manageAll/manageNoticeDetail.jsp";

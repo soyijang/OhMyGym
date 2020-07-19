@@ -103,7 +103,14 @@ public class NoticeDao {
 			pstmt.setInt(1, nno);
 			rset=pstmt.executeQuery();
 			
-			
+			if(rset.next()) {
+				notice = new Notice();
+				
+				notice.setWritedate(rset.getString("WRITE_DATE"));
+				notice.setStatus(rset.getString("BOARD_STATUS"));
+				notice.setBoardTitle(rset.getString("BOARD_TITLE"));
+				notice.setBoardContent(rset.getString("BOARD_CONTENT"));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -111,13 +118,8 @@ public class NoticeDao {
 			close(pstmt);
 			close(rset);
 		}
-		
+		System.out.println("notice : "+notice);
 		return notice;
-	}
-
-	public int viewCount(Connection con, int nno) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

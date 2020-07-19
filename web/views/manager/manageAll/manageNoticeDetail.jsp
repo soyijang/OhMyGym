@@ -3,6 +3,7 @@
 	<% 
 		Notice notice = (Notice) request.getAttribute("notice");
 		Member loginUser = (Member) request.getAttribute("loginUser");
+		System.out.println("jsp notice : "+notice);
 	%>
 <!DOCTYPE html>
 <html>
@@ -56,6 +57,10 @@ legend {
 	<tr>
 		<td width="300px" height="80px" style="text-align: left; background:#e3e3e3;"><a id="text">게시일</a></td>
 		<td width="850px" height="80px"><legend align="left"><input type="date" name="date" value="<%=notice.getWritedate() %>" readonly></legend></td>
+	</tr>
+	<tr>
+		<td width="300px" height="80px" style="text-align: left; background:#e3e3e3;"><a id="text">공개상태</a></td>
+		<td width="850px" height="80px"><legend align="left"><input type="text" name="text" value="<%=notice.getStatus()%>" readonly></legend></td>
 	</tr>
 	<tr>
 		<td width="300px" height="80px" style="text-align: left; background:#e3e3e3;"><a id="text">제목</a></td>

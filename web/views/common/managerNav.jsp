@@ -150,7 +150,7 @@
         
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">
         <ul><details open><summary>고객센터</summary>
-            <li><a href="#">공지사항</a></li>
+            <li><a href="<%= request.getContextPath()%>/selectList.no">공지사항</a></li>
             <li><a href="#">이벤트</a></li>
             <li><a href="#">자주묻는질문</a></li>
             <li><a href="#">직접묻는질문</a></li>

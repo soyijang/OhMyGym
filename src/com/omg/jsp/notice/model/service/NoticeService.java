@@ -47,6 +47,8 @@ public class NoticeService {
 		
 		Notice notice = new NoticeDao().selectOne(con, nno);
 		
+		System.out.println("service notice : "+notice);
+		
 		if(notice != null) {
 			result = new NoticeDao().viewCount(con,nno);
 			
