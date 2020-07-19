@@ -25,6 +25,7 @@ public class FileService {
 		Files myFile = new FileDao().getfile(con, getCode);
 		
 		close(con);
+		
 		return myFile;
 	}
 
