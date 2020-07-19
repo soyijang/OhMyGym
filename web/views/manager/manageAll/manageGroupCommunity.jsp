@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*"%>
+<% ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) request.getAttribute("list");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -265,24 +266,18 @@ td>a {
 						<th width="100px">참여회원 수</th>
 						<th width="110px">그룹소통방 이동</th>
 					</tr>
+					<% int listNum = list.size();%>
+					<% for(int i = 0; i < list.size(); i++){ HashMap<String, Object> hmap = list.get(i);%>
 					<tr>
-						<td>2</td>
-						<td>godsong77</td>
-						<td>장송이</td>
-						<td>godsong77@kh.or.kr</td>
-						<td>010-5546-6332</td>
-						<td>24</td>
+						<td><%=listNum%></td>
+						<td><%=hmap.get("trainerId")%></td>
+						<td><%=hmap.get("trainerName")%></td>
+						<td><%=hmap.get("trainerEmail")%></td>
+						<td><%=hmap.get("trainerPhone")%></td>
+						<td><%=hmap.get("matchedFollower")%></td>
 						<td><button class="movBtn">이동하기</button></td>
 					</tr>
-					<tr>
-						<td>1</td>
-						<td>soonkyung</td>
-						<td>양순경</td>
-						<td>soonkyung@kh.or.kr</td>
-						<td>010-3540-4756</td>
-						<td>18</td>
-						<td><button class="movBtn">이동하기</button></td>
-					</tr>
+					<%listNum= listNum-1; }%>
 				</table>
 			</div>
 		</article>

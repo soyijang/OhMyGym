@@ -4,6 +4,7 @@ import static com.omg.jsp.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.omg.jsp.groupCommu.model.dao.GroupCommuDao;
 import com.omg.jsp.groupCommu.model.vo.GroupComment;
@@ -115,6 +116,16 @@ public class GroupCommuService {
 		close(con);
 		
 		return resultNumber;
+	}
+
+	public ArrayList<HashMap<String, Object>> selectGroupList() {
+		Connection con = getConncection();
+		
+		ArrayList<HashMap<String, Object>> list = new GroupCommuDao().selectGroupList(con);
+		
+		close(con);
+		
+		return list;
 	}
 
 }

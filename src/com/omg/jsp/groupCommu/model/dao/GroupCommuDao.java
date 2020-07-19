@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import com.omg.jsp.groupCommu.model.vo.*;
@@ -297,6 +298,43 @@ public class GroupCommuDao {
 		}
 		
 		return resultNum;
+	}
+
+	public ArrayList<HashMap<String, Object>> selectGroupList(Connection con) {
+		Statement stmt = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap<String, Object> hmap = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectGroupList");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				hmap = new HashMap<>();
+				
+				hmap.put("trainerId", rset.getString("MEMBER_ID"));
+				hmap.put("trainerName", rset.getString("MEMBER_NAME"));
+				hmap.put("trainerEmail", rset.getString("EMAIL"));
+				hmap.put("trainerPhone", rset.getString("PHONE"));
+				hmap.put("matchedFollower", rset.getString("FOLLOWERNUM"));
+				hmap.put("groupNum", rset.getString("GROUP_CONTAINERNUM"));
+				
+				list.add(hmap);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return list;
+
 	}
 
 }

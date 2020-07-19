@@ -81,4 +81,24 @@ public class OhMoneyService {
 		return refundList;
 	}
 
+	public ArrayList<OhMoney> manageListOhMoney() {
+		Connection con = getConncection();
+		
+		ArrayList<OhMoney> list = new OhMoneyDao().manageListOhMoney(con);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public ArrayList<ReFundOhMoney> manageListRefund() {
+		Connection con = getConncection();
+		
+		ArrayList<ReFundOhMoney> list = new OhMoneyDao().manageListRefund(con);
+		
+		close(con);
+		
+		return list;
+	}
+
 }
