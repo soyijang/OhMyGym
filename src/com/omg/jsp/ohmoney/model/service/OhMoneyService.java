@@ -101,4 +101,19 @@ public class OhMoneyService {
 		return list;
 	}
 
+	public int refundSubmit(ReFundOhMoney update) {
+		Connection con = getConncection();
+		
+		int result = new OhMoneyDao().refundSubmit(con, update);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
 }

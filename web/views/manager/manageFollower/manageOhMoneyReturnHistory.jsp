@@ -230,6 +230,7 @@
 </style>
 </head>
 <body>
+	<%@ include file="../../common/managerNav.jsp"%>
 	<script>
         function returnBtn(num){
 
@@ -261,7 +262,7 @@
 					style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; margin-left: 180px; padding-top: 5px;">오머니환급</div>
 				<img class="close"
 					onclick="jQuery('.checkReturn_wrap').fadeOut('slow')"
-					src="/omg/resources/img_icon/closeIcon2.png"" width="20px" height="20px">
+					src="/omg/resources/img_icon/closeIcon2.png" width="20px" height="20px">
 			</div>
 			<div class="checkReturn_content" style="text-align: center; font-size: 0.9em;">
 			    <a id="followerNum" style="visibility: hidden;"></a>
@@ -290,7 +291,9 @@
 							영수증 업로드
 							</td>
 							<td>
-							<input type="file" id="returnReceipt" name="returnReceipt">
+							<form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+								<input type="file" id="returnReceipt" name="returnReceipt" onchange="uploadRecepit();">
+							</form>
 							</td>
 						</tr>	
 					</tbody>
@@ -302,25 +305,74 @@
 		</div>
 	</div>
 	<script>
+		var uploadfileCode = 0;
+	
+		function uploadRecepit(){
+    		var form = $('#fileUploadForm')[0];
+            
+            var data = new FormData(form);
+            
+            console.log(data);
+            
+            $.ajax({
+            	url : "/omg/upFile.all",
+                type : 'post',
+                data : data,
+                contentType : false,
+                processData : false, 
+               success : function(data) {
+ 	            	alert("업로드 되었습니다.");
+ 	            	uploadfileCode = data.fileCode;
+ 				},
+ 				error : function(){
+ 					alert("업로드 에 실패했습니다");
+ 				}
+            })
+		}
+
         function checkRecepit(num){
         	//환급페이지를 업데이트하는 ajax 구현
+        	//어느 부분의 환급요청인지 알아낼 코드 필요
+        	event.preventDefault();
+        	
             var fileIn = document.getElementById("returnReceipt").value;
 
             var okText = document.getElementById("returnOk" + num);
-
-            console.log(okText.innerText);
+            
+            
             if(fileIn != ""){
-                jQuery('.checkReturn_wrap').fadeOut('slow');
-                if(okText.innerText == '대기'){
-                    okText.innerText = '확인대기';
-                    $("#returnOk"+num).css("color","navy");
-                }
+            	
+     			var requsetNum = $("#listCode"+num).text();
+     			var fileCode = uploadfileCode;
+     			var managerId = '<%=loginManager.getManagerId()%>';
+ 
+     			$.ajax({
+     				url : "/omg/submitRefund.manager",
+     				data : {
+     					requsetNum : requsetNum,
+     					fileCode : fileCode,
+     					managerId: managerId
+     				},
+     				type : "post",
+     				success : function(data) {
+     	            	alert("환급처리 되었습니다.");
+     	                jQuery('.checkReturn_wrap').fadeOut('slow');
+     	                if(okText.innerText == '대기'){
+     	                    okText.innerText = '확인대기';
+     	                    $("#returnOk"+num).css("color","navy");
+     	                }
+     				},
+     				error : function(){
+     					alert("환급처리실패");
+     				}
+     			})
+
             } else{
                 alert("환급후 완료 영수증을 반드시 올려주세요!");
             }
         }
     </script>
-	<%@ include file="../../common/managerNav.jsp"%>
+
 	<section>
 		<!--헤더 영역-->
 		<article id="menuTitleArea">
@@ -378,7 +430,7 @@
                     <% for(int i = 0; i < list.size(); i++) {%>
 	                    <tr>
 	                        <td><%=listnum%></td>
-	                        <td id="followerID<%=listnum%>"><%=list.get(i).getMemberId()%></td>
+	                        <td id="followerID<%=listnum%>"><%=list.get(i).getMemberId()%> <a id="listCode<%=listnum%>" style="display: none;"><%=list.get(i).getRefundNum()%></a></td>
 	                        <td><%=list.get(i).getMemberName()%></td>
 	                        <td><%=list.get(i).getManagerId()%></td>
 	                        <td id="followerReturn<%=listnum%>"><%=list.get(i).getMoney()%></td>

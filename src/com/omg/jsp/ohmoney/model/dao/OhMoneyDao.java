@@ -285,4 +285,29 @@ public class OhMoneyDao {
 		return list;
 	}
 
+	public int refundSubmit(Connection con, ReFundOhMoney update) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("refundSubmit");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, update.getManagerId());
+			pstmt.setString(2, update.getFileCode());
+			pstmt.setString(3, update.getRefundNum());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
