@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,com.omg.jsp.notice.model.vo.*" %>
-<% ArrayList <Notice> list = (ArrayList<Notice>)request.getAttribute("list"); %>
+<% ArrayList <Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+System.out.println(list);
+%>
 <!DOCTYPE html>
 <html>
 <head>

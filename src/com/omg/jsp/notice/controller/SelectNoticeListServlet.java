@@ -36,6 +36,7 @@ public class SelectNoticeListServlet extends HttpServlet {
 		
 		
 		String page = "";
+		System.out.println("servlet list : "+list);
 		
 		if(list != null) {
 			page="views/manager/manageAll/manageNotice.jsp";
