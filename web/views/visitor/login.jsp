@@ -221,8 +221,7 @@ h4 {
 								</ul>
 							</div>
 							<div id="_findLoginArea" class="find_login_area">
-								<a href="//front.wemakeprice.com/user/find/id" class="find">아이디찾기</a>
-								<a href="//front.wemakeprice.com/user/find/pw" class="find">비밀번호찾기</a>
+								<a href="../follower/followerLogin/followerFindId.jsp" class="find">아이디/비밀번호 찾기</a>
 							</div>
 								<!-- 팔로워/트레이너 여부전송용-->
 					 	<input type="text" name="loginType" id="loginType" style="display: none;" value="trainer">

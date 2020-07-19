@@ -54,10 +54,10 @@
 	position: relative;
 	top: 25%;
 	width: 475px;
-	height: 300px;
+	height: 330px;
 	background: #fff;
 	margin: 0 auto;
-	border-radius: 8px;
+	border-radius: 4px;
 	background: #fff;
 	border: 1px solid #ccc
 }
@@ -97,7 +97,7 @@ img.close {
 	height: 340px;
 	background: #fff;
 	margin: 0 auto;
-	border-radius: 8px;
+	border-radius: 4px;
 	background: #fff;
 	border: 1px solid #ccc
 }
@@ -126,11 +126,15 @@ label.findText {
 	font-weight: bold;
 }
 
-a.sendNum {
-	border: 1px solid black;
-	border-radius: 10px;
+.sendNum {
+	margin-top : 10px;
 	padding: 5px;
 	cursor: pointer;
+	width: 140px;
+	height: 30px;
+	background-color: orangered;
+	color : white;
+	font-weight: bold;
 }
 </style>
 
@@ -147,18 +151,20 @@ a.sendNum {
 				<img class="close" onclick="jQuery('.findId_wrap').fadeOut('fast')" src="/omg/resources/img_icon/closeIcon.png" width="20px" height="20px">
 			</div>
 			
-			<div class="findId_content"
-				style="text-align: center; margin-top: 25px">
-				<form action="" method="post">
+			<div class="findId_content" style="text-align: center; margin-top: 25px">
+				
+				<form id="findIdForm" action="" method="post">
 					<label class="findText"> 가입시 입력하신 성명과 전화번호를 <br>정확히 입력후 인증번호를 입력하세요</label><br> <br>
 					<div style="text-align: left; margin-left: 167px;">
 						<input class="findInput" type="text" name="findId_Name" placeholder="이름"><br> <br> 
-						<input class="findInput" type="text" name="findId_Phone" placeholder="전화번호"> <a class="sendNum" onclick="" style="">인증번호 전송</a> <br> <input class="findInput"
-							type="text" name="findId_Num" style="margin-top: 10px" placeholder="인증번호">
+						<input class="findInput" type="text" name="findId_Phone" placeholder="전화번호"><br>
+						<button onclick="bonin(2);" class="sendNum">인증번호 전송</button><br> 
+						<input class="findInput" type="text" name="findId_Num" style="margin-top: 10px" placeholder="인증번호">
 					</div>
-					<br> <input class="findInputBtn" type="submit" value="아이디 찾기">
-					<!-- 문자보내기 API사용 -->
+					<br><button onclick="bonin(1);" class="findInputBtn" value="아이디 찾기"></button><br>
 				</form>
+				
+				
 			</div>
 		</div>
 	</div>
@@ -173,22 +179,17 @@ a.sendNum {
 				<div style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; margin-left: 200px; padding-top: 5px;">비밀번호 찾기</div>
 				<img class="close" onclick="jQuery('.findPass_wrap').fadeOut('fast')" src="/omg/resources/img_icon/closeIcon.png" width="20px" height="20px">
 			</div>
-			<div class="findPass_content"
-				style="text-align: center; margin-top: 25px">
-				<form action="" method="post">
+			<div class="findPass_content" style="text-align: center; margin-top: 25px">
+				<form id="findPassForm" action="<%=request.getContextPath()%>/findPass.me" method="post">
 					<label class="findText"> 가입시 입력하신 아이디와 이름, 전화번호를<br> 정확히 입력후 인증번호를 입력해주세요 </label><br> <br>
 					<div style="text-align: left; margin-left: 167px;">
-						<input class="findInput" type="text" name="findPass_Id"
-							placeholder="아이디"><br> <br> <input
-							class="findInput" type="text" name="findPass_Name"
-							placeholder="이름"><br> <br> <input
-							class="findInput" type="text" name="findPass_Phone"
-							placeholder="전화번호"> <a class="sendNum" onclick=""
-							style="">인증번호 전송</a> <br> <input class="findInput"
-							type="text" name="findId_Num" style="margin-top: 10px"
-							placeholder="인증번호">
+						<input class="findInput" type="text" name="findPass_Id" placeholder="아이디"><br> <br> 
+						<input class="findInput" type="text" name="findPass_Name" placeholder="이름"><br> <br> 
+						<input class="findInput" type="text" name="findPass_Phone" placeholder="전화번호"> 
+						<a class="sendNum" onclick="" style="">인증번호 전송</a> <br> 
+						<input class="findInput" type="text" name="findId_Num" style="margin-top: 10px" placeholder="인증번호">
 					</div>
-					<br> <input class="findInputBtn" type="submit" value="비밀번호 찾기">
+					<br><input class="findInputBtn" type="submit" value="비밀번호찾기버튼">
 					<!-- 문자보내기 API사용 -->
 				</form>
 			</div>
@@ -207,7 +208,7 @@ a.sendNum {
 							class="tab1"> <span>아이디 찾기</span>
 						</a></li>
 						<li id="pwdfind" onclick="doDisplay2();"><a class="tab2">
-								<span>비밀번호 찾기</span>
+								<span>비밀번호 변경하기</span>
 						</a></li>
 					</ul>
 					<div id="_tab1" class="tab_cont">
@@ -229,17 +230,17 @@ a.sendNum {
 						</div>
 					</div>
 					<div id="_tab2" class="tab_cont" style="display: none">
-						<h5 class="blind">비밀번호 찾기</h5>
+						<h5 class="blind">비밀번호 변경하기</h5>
 						<div class="find_gate">
 							<i class="ico ico_phone"></i>
-							<p class="title">등록된 휴대폰 번호로 비밀번호 찾기</p>
+							<p class="title">등록된 휴대폰 번호로 비밀번호 변경하기</p>
 							<p class="text_small">가입 당시 입력한 휴대폰 번호로 인증번호를 발송합니다.</p>
 							<a onclick="jQuery('.findPass_wrap').fadeIn('fast');"
 								class="btns_sys red_mid_d" data-find-btn="pwGatePhone"><span>확인</span></a>
 						</div>
 						<div class="find_gate">
 							<i class="ico ico_email"></i>
-							<p class="title">등록된 이메일로 찾기</p>
+							<p class="title">등록된 이메일로 변경하기</p>
 							<p class="text_small">가입 당시 입력한 이메일로 비밀번호 재설정 메일을 발송합니다.</p>
 							<a onclick=doDisplay3(); class="btns_sys red_mid_d"
 								data-find-btn="pwGateEmail"><span>확인</span></a>
@@ -328,6 +329,35 @@ a.sendNum {
 				con2.style.display = 'block';
 			}
 		
+	}
+	
+	function bonin(index){
+		
+		String page = "";
+		if(index == 1){
+			page= "findId.me";
+			<%-- document.getElementById('findIdForm').action="<%=request.getContextPath()%>/findId.me"; --%>
+		}
+		else if(index == 2){
+			page = "sendmail.me";
+			<%-- document.getElementById('findIdForm').action="<%=request.getContextPath()%>/sendmail.me"; --%>
+		}
+		/* $("#findIdForm").submit(); */
+		
+		$.ajax({
+			url: page,
+			type: "get",
+			data: {
+				findIdForm:findIdForm
+			},
+			success: function (data) {
+				console.log("성공!");
+			},
+			error: function (data) {
+				console.log("실패!");
+			}
+			
+		});
 	}
 	
 	</script>
