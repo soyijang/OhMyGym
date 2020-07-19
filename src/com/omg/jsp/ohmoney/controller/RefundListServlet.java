@@ -12,53 +12,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.omg.jsp.groupCommu.model.vo.GroupComment;
 import com.omg.jsp.ohmoney.model.service.OhMoneyService;
 import com.omg.jsp.ohmoney.model.vo.OhMoney;
+import com.omg.jsp.ohmoney.model.vo.ReFundOhMoney;
 
-/**
- * Servlet implementation class ListOhMoney
- */
-@WebServlet("/listOhMoney.follower")
-public class ListOhMoney extends HttpServlet {
+@WebServlet("/refundList.follower")
+public class RefundListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ListOhMoney() {
+    public RefundListServlet() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String userId = request.getParameter("userId");
 		
-		ArrayList<OhMoney> ohMoneyList = new OhMoneyService().listOhMoney(userId);
+		ArrayList<ReFundOhMoney> refundlist = new OhMoneyService().selectRefundList(userId);
 		
-		Collections.sort(ohMoneyList, new Comparator<OhMoney>() {
+		Collections.sort(refundlist, new Comparator<ReFundOhMoney>() {
 
 			@Override
-			public int compare(OhMoney o1, OhMoney o2) {
+			public int compare(ReFundOhMoney o1, ReFundOhMoney o2) {
 				
-				return o2.getManageCode().compareTo(o1.getManageCode());
+				return o2.getRefundNum().compareTo(o1.getRefundNum());
 			}
 			
 		});
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		new Gson().toJson(ohMoneyList, response.getWriter());
+		new Gson().toJson(refundlist, response.getWriter());
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 

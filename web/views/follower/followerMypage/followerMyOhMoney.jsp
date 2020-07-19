@@ -447,14 +447,14 @@
                     </div>
                     <br>
                     <div style="font-weight: bold; font-size: 0.8em;">원하시는 환급 금액을 입력해주세요</div>
-                        <input type="text" id="returnOhmoney" onkeyup="checkRefund();" value="5000">원<br>
+                        <input type="text" id="returnOhmoney" onkeyup="checkRefund();" placeholder="금액입력" style="font-size: 1em;">&nbsp;원<br>
                          <a style="font-size:0.8em; color:black;">환급가능한 최소 금액은 5000원 입니다.</a><br>
                         <a id="warnMsg" style="font-size:0.8em; color:red; display: none;">환급가능 액수보다 큰 금액은 환급해드릴 수 없습니다.</a><br>
                         <input type="checkbox" id="checkTerm" name="checkTerm" onclick="checkIsAbled();"><label style="font-size: 0.9em; font-weight: bold;">환급이용약관(필수)</label><a id="termTxt" onclick="showTerm();" style="margin-left:20px; cursor: pointer; font-size: 0.8em;">약관보기</a>
                     <br>
                         <textarea id="returnTermTxt" readonly>- 제 1 장 총칙 -
                         </textarea><br><br>
-                    <button id="submitRefund" onclick="submitRefund();" class="returnbtn" style="color:lightgray;" disabled>환급신청하기</button>
+                    <button id="submitRefund" onclick="submitRefund();" class="returnbtn" style="color:lightgray;">환급신청하기</button>
                 </div>
             </div>
         </div>
@@ -502,16 +502,17 @@
         function checkIsAbled(){
         	if(canRefund && $("input:checkbox[name=checkTerm]").is(":checked")){
 				$('#submitRefund').css('color','black');
-				$('#submitRefund').attr('disabled','false');
+				$('#submitRefund').removeAttr('disabled');
         	} else {
 				$('#submitRefund').css('color','lightgray');
-				$('#submitRefund').attr('disabled','false');
+				$('#submitRefund').attr('disabled');
         	}
         }
         
         function submitRefund(){
-        	var userId =  "<%=loginUser.getMemberId()%>";
+        	var userId = "<%=loginUser.getMemberId()%>";
         	var money = $('#returnOhmoney').val();
+        	 $('#returnOhmoney').val('');
    	 		$.ajax({
    	 			url : "/omg/submitReFund.follower",
    	 			data : {
@@ -521,6 +522,7 @@
    	 			type : "post",
    	 			success : function(data) {
    					alert("환급신청되었습니다.");
+                    checkRefundList();
    					jQuery('.return_wrap').fadeOut('slow')
    	 			},
    	 			error : function() {
@@ -528,6 +530,8 @@
    	 			}
     		})
         }
+        
+
 
     </script>
 
@@ -669,9 +673,6 @@
                        	 				balance = data.balance;
                        	 				refundBalance = data.refundBal;
                        	 				nofundBalance = data.nofundBal;
-                                   		console.log(balance);
-                                   		console.log(refundBalance);
-                                   		console.log(nofundBalance);
                        	 			},
                        	 			error : function() {
                        	 				console.log("실패!")
@@ -805,61 +806,27 @@
                         </table>
                     </div>
                     <div id="return_list_div">
-                        <table class="return_list">
+                        <table class="return_list" id="return_list">
                             <thead>
                                 <tr>          
                                     <th>
                                         NO.
                                     </th>
                                     <th>
-                                        	일시
+                                      	일시
                                     </th>
                                     <th>
-                                        	금액
+                                      	금액
                                     </th>
                                     <th>
-                                        	영수증파일
+                                      	영수증파일
                                     </th>
                                     <th>
-                                       	 환급완료
+                                       	 진행상태
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <!--리스트구분넘버-->2
-                                    </td>
-                                    <td>
-                                        <!--환급 일시-->2020.07.08
-                                    </td>
-                                    <td>
-                                        <!--환급액-->5000
-                                    </td>
-                                    <td>
-                                        <!--영수증 파일--><i class="fas fa-file"></i>
-                                    </td>
-                                    <td>
-                                        <button onclick="checkReturn(this);">확인</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <!--리스트구분넘버-->1
-                                    </td>
-                                    <td>
-                                        <!--환급 일시-->2020.07.03
-                                    </td>
-                                    <td>
-                                        <!--환급액-->10000
-                                    </td>
-                                    <td>
-                                        <!--영수증 파일--><i class="fas fa-file"></i>
-                                    </td>
-                                    <td>
-                                        <button onclick="checkReturn(this);">확인</button>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         <script>
@@ -888,7 +855,7 @@
                    	 				var listnum = data.length;
                    	 				var listcount = 0;
                    	 				for(var key in data){
-                   	 					$listPos.append("<tr class='ele'>"+
+                   	 					$listPos.append("<tr>"+
                                         	"<td>"+listnum+"</td>"+
                                         	"<td>"+data[key].ohmoneyDate+"</td>"+
                                         	"<td>"+data[key].ohmoneyType+"</td>"+
@@ -908,6 +875,39 @@
                     		})
                         }
                         
+                        checkRefundList();
+                        function checkRefundList(){
+                        	var userId = "<%=loginUser.getMemberId()%>";
+                        	$.ajax({
+                   	 			url : "/omg/refundList.follower",
+                   	 			data : {
+                   	 				userId : userId
+                   	 			},
+                   	 			type : "post",
+                   	 			success : function(data) {
+                   	 			var $ReturnlistPos = $("#return_list tbody");
+                            	$("#return_list > tbody > tr").remove();
+                	 				var Relistnum = data.length;
+                	 				var Relistcount = 0;
+                	 				for(var key in data){
+                	 					$ReturnlistPos.append("<tr>"+
+                                    	"<td>"+Relistnum+"</td>"+
+                                    	"<td>"+data[key].refundDate+"</td>"+
+                                    	"<td>"+data[key].money+"</td>"+
+                                    	"<td>"+"<i class='fas fa-file'></i>"+"</td>"+
+                                    	"<td><button onclick='checkReturn(this);'>"+data[key].refundState+"</button></td></tr>");
+                	 					Relistnum = Relistnum - 1;
+                	 					Relistcount = Relistcount + 1;
+                	 					if(Relistcount > 10){
+                	 						break;
+                	 					}
+                	 				}
+                   	 			},
+                   	 			error : function() {
+                   	 				console.log("실패!")
+                   	 			}
+                    		})
+                        }
                         </script>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.omg.jsp.ohmoney.model.dao.OhMoneyDao;
 import com.omg.jsp.ohmoney.model.vo.OhMoney;
+import com.omg.jsp.ohmoney.model.vo.ReFundOhMoney;
 
 public class OhMoneyService {
 
@@ -50,6 +51,34 @@ public class OhMoneyService {
 		close(con);
 		
 		return list;
+	}
+
+	public int applyRefund(ReFundOhMoney refund) {
+		
+		Connection con = getConncection();
+		
+		int result = new OhMoneyDao().applyRefund(con, refund);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<ReFundOhMoney> selectRefundList(String userId) {
+		
+		Connection con = getConncection();
+		
+		ArrayList<ReFundOhMoney> refundList = new OhMoneyDao().selectRefundList(con, userId);
+		
+		close(con);
+		
+		return refundList;
 	}
 
 }

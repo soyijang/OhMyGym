@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.omg.jsp.member.model.dao.MemberDao;
 import com.omg.jsp.ohmoney.model.vo.OhMoney;
+import com.omg.jsp.ohmoney.model.vo.ReFundOhMoney;
 
 public class OhMoneyDao {
 	private Properties prop = new Properties();
@@ -139,6 +140,74 @@ public class OhMoneyDao {
 		}
 		
 		return list;
+	}
+
+	public int applyRefund(Connection con, ReFundOhMoney refund) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("applyRefund");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, refund.getMemberId());
+			pstmt.setInt(2, refund.getMoney());
+			
+			result = pstmt.executeUpdate();
+					
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
+	}
+
+	public ArrayList<ReFundOhMoney> selectRefundList(Connection con, String userId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<ReFundOhMoney> refundList = null;
+		
+		String query = prop.getProperty("selectRefundList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			refundList = new ArrayList<ReFundOhMoney>();
+			
+			while(rset.next()) {
+				ReFundOhMoney refund = new ReFundOhMoney();
+				
+				refund.setRefundNum(rset.getString("RETURN_NUM"));
+				refund.setRefundState(rset.getString("RETURN_STATE"));
+				refund.setMoney(rset.getInt("OHMONEY_VALUE"));
+				refund.setMemberId(rset.getString("MEMBER_ID"));
+				refund.setManagerId(rset.getString("MANAGER_ID"));
+				refund.setFileCode(rset.getString("FILE_CODE"));
+				refund.setRefundDate(rset.getString("RETURN_DATE"));
+				
+				refundList.add(refund);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return refundList;
 	}
 
 }

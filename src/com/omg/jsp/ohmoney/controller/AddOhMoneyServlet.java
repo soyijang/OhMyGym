@@ -12,10 +12,10 @@ import com.omg.jsp.ohmoney.model.service.OhMoneyService;
 import com.omg.jsp.ohmoney.model.vo.OhMoney;
 
 @WebServlet("/addOhMoney.follower")
-public class AddOhMoney extends HttpServlet {
+public class AddOhMoneyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AddOhMoney() {
+    public AddOhMoneyServlet() {
         super();
     }
 
