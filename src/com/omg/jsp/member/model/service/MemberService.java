@@ -116,6 +116,7 @@ public int updateMember(Member requestMember) {
 	return result;
 }
 
+
 }
 
 

@@ -25,6 +25,7 @@ private Properties prop = new Properties();
 	
 	public MemberDao() {
 		String fileName = MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
+		 
 		
 		try {
 			prop.load(new FileReader(fileName));
