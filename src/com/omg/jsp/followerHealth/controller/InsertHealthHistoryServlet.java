@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.omg.jsp.followerHealth.model.service.HealthInfoService;
 import com.omg.jsp.followerHealth.model.vo.HealthInfo;
+import com.omg.jsp.member.model.vo.Member;
 
 /**
  * Servlet implementation class UpdateFollowerHealthInfo
@@ -34,9 +35,11 @@ public class InsertHealthHistoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		
 		String[] sarr = new String[10];
 		
-		sarr[0] = request.getParameter("userId");
+		sarr[0] = loginUser.getMemberId();
 		sarr[1] = request.getParameter("height");
 		sarr[2] = request.getParameter("weight");
 		sarr[3] = request.getParameter("sleep");
@@ -51,12 +54,15 @@ public class InsertHealthHistoryServlet extends HttpServlet {
 		
 		for(int i = 0; i < sarr.length - 1; i++) {
 			HealthInfo hi = new HealthInfo(sarr[0], sarr[i + 1], i + 1 + "");	//id, healthdata, healthcode
+			System.out.println("hi[" + i + "] : " + hi);
 			list.add(hi);
 		}
 		
+		System.out.println("insertHealthHistory servlet : " + list);
+		
 		int result = new HealthInfoService().insertHealthHistory(list);
 		
-
+		
 		
 		if(request.getAttribute("plag") != null) {
 			String page = "";

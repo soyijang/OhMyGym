@@ -1,0 +1,2 @@
+selectTrainerCurriculum=SELECT * FROM TRAINER_CURRICULUM WHERE MEMBER_ID = ?
+selectTrainerVideo=

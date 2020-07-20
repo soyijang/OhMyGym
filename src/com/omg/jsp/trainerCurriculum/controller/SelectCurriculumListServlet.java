@@ -1,8 +1,7 @@
-package com.omg.jsp.followerHealth.controller;
+package com.omg.jsp.trainerCurriculum.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.omg.jsp.followerHealth.model.service.HealthInfoService;
-import com.omg.jsp.followerHealth.model.vo.HealthInfo;
 import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.trainerCurriculum.model.service.TrainerCurriculumService;
 
 /**
- * Servlet implementation class HealthinfoServlet
+ * Servlet implementation class SelectCurriculumServlet
  */
-@WebServlet("/healthInfo.hi")
-public class HealthinfoServlet extends HttpServlet {
+@WebServlet("/selectCurriculumList.cu")
+public class SelectCurriculumListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HealthinfoServlet() {
+    public SelectCurriculumListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,18 +34,10 @@ public class HealthinfoServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-		ArrayList<HealthInfo> list = new HealthInfoService().selectHealthInfo(loginUser);
-
-		String page = "";
-		if(!list.isEmpty()) {
-			page = "views/follower/followerHealth/followerInsertHealthInfo.jsp";
-			request.setAttribute("list", list);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "HealthInfo 조회 실패");
-		}
+		System.out.println("curriculum loginUser : " + loginUser);
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		HashMap<String, Object> curriInfo = new TrainerCurriculumService().selectCurriculumList(loginUser);
+		
 		
 	}
 
