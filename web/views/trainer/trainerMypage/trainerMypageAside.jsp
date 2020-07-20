@@ -3,12 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="/omg/resources/css/daumcommon.css">
-<link rel="stylesheet" type="text/css"
-	href="/omg/resources/css/fmypageContainer.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/omg/resources/css/daumcommon.css">
+<link rel="stylesheet" type="text/css" href="/omg/resources/css/fmypageContainer.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <style type="">
 </style>
@@ -19,11 +16,11 @@
 		<div class="class_category_container">
 			<div class="title">TRAINER 마이페이지</div>
 			<ul class="class_category_list">
-				<li id="taside0" class="navi-item " onclick="on(0);"><a href="tmypage.jsp">프로필 설정</a></li>
-				<li id="taside1" class="navi-item " onclick="on(1);"><a href="tmyInfo.jsp">계정 설정</a></li>
-				<li id="taside2" class="navi-item " onclick="on(2);"><a href="tmyschool.jsp">자격정보/수상내역</a></li>
-				<li id="taside3" class="navi-item " onclick="on(3);"><a href="tmymoney.jsp">정산</a></li>
-				<li id="taside5" class="navi-item " onclick="on(5);"><a href="../fmypage/deleteMember.jsp">회원탈퇴</a></li>
+				<li id="taside0" class="navi-item " onclick="on(0);"><a href="<%=request.getContextPath()%>/trinerinfo.mp">프로필 설정</a></li>
+				<li id="taside1" class="navi-item " onclick="on(1);"><a href="/omg/views/trainer/trainerMypage/trainerMyInfo.jsp">계정 설정</a></li>
+				<li id="taside2" class="navi-item " onclick="on(2);"><a href="/omg/views/trainer/trainerMypage/trainerMyPrize.jsp">자격정보/수상내역</a></li>
+				<li id="taside3" class="navi-item " onclick="on(3);"><a href="/omg/views/trainer/trainerMypage/trainerMyMoney.jsp">정산</a></li>
+				<li id="taside5" class="navi-item " onclick="on(5);"><a href="/omg/views/follower/followerMypage/followerWithdraw.jsp">회원탈퇴</a></li>
 			</ul>
 		</div>
 	</div>

@@ -12,7 +12,6 @@
 </head>
 
 <body>
-	<%@ include file="../../common/followerNav.jsp"%>
 
 	<section style="height: 1500px;">
 		<div class="mypage-contents">
@@ -34,7 +33,8 @@
 							<div class="info-row">
 								<div class="info-form-label">아이디</div>
 								<div class="info-form-input">
-									<input name="userId" type="text" class="id-input input-box" disabled="" value="<%= loginUser.getMemberId()%>">
+									<input name="userId" type="text" class="id-input input-box" readonly="readonly" value="<%= loginUser.getMemberId()%>">
+								<p>※ 아이디는 변경 불가합니다.</p>
 								</div>
 							</div>
 							<div class="info-row">
@@ -57,10 +57,9 @@
 									<div class="info-form-input-name">
 										<input name="userName" type="text"
 											placeholder="성" class="first-name-input input-box"
-											disabled="" value="<%= loginUser.getName()%>">
+											readonly="readonly" value="<%= loginUser.getName()%>">
 									</div>
-									<p class="err-msg name-input">이름 변경이 필요하신 경우, 고객센터로 문의하여
-										주세요.</p>
+									<p class="err-msg name-input">※ 이름 변경이 필요하신 경우, 고객센터로 문의바랍니다.</p>
 								</div>
 							</div>
 							
@@ -74,14 +73,15 @@
 							<div class="info-row">
 								<div class="info-form-label">이메일</div>
 								<div class="info-form-input">
-									<% String [] emailsplit = loginUser.getEmail().split("@"); %>
+									<% String [] emailsplit = loginUser.getEmail().split("@"); 
+									%>
 									<input type="text" id="sendEmail1" name="sendEmail1" style="width: 150px;"
-									class="tf_inquiry" title="이메일 앞자리" value="<%= emailsplit[0] %>" disabled=""> <span
+									class="tf_inquiry" title="이메일 앞자리" value="<%= emailsplit[0] %>" readonly="readonly"> <span
 									class="txt_at">@</span> 
 									<input type="text" id="sendEmail2" style="width: 200px;"
-									name="sendEmail2" class="tf_inquiry" title="이메일 뒷자리" value="<%= emailsplit[1]%>" disabled="">
+									name="sendEmail2" class="tf_inquiry" title="이메일 뒷자리" value="<%= emailsplit[1]%>" readonly="readonly">
 									<button style="background-color:orangered; color: white; font-weight:bold;  width: 80px; height: 40px">수정하기</button>
-									<p>※ 휴대폰번호 수정을 위해서는 휴대폰 본인인증이 필요합니다.</p>	
+									<p>※ 메일수정을 위해서는 메일인증이 필요합니다.</p>	
 								</div>
 							</div>
 							
@@ -116,6 +116,7 @@
 										function () {
 											document.getElementById("genderFemale").checked = true;
 											document.getElementById("genderMale").checked = false;
+										}
 									<% } %>
 									</script>
 								</div>
@@ -124,9 +125,9 @@
 								<div class="info-form-label">휴대폰번호</div>
 								<div class="info-form-input">
 									<% String phone [] = loginUser.getPhone().split("-"); %>
-									<input name="phone1" type="text" style="width: 80px;" class="mobile-input input-box" disabled="" value="<%= phone[0]%>">-
-									<input name="phone2" type="text" style="width: 80px;" class="mobile-input input-box" disabled="" value="<%= phone[1]%>">-
-									<input name="phone3" type="text" style="width: 80px;" class="mobile-input input-box" disabled="" value="<%= phone[2]%>">
+									<input name="phone1" type="text" style="width: 80px;" class="mobile-input input-box" readonly="readonly" value="<%= phone[0]%>">-
+									<input name="phone2" type="text" style="width: 80px;" class="mobile-input input-box" readonly="readonly" value="<%= phone[1]%>">-
+									<input name="phone3" type="text" style="width: 80px;" class="mobile-input input-box" readonly="readonly" value="<%= phone[2]%>">
 									<button style="background-color:orangered; color: white; font-weight:bold;  width: 80px; height: 40px">수정하기</button>
 									<p>※ 휴대폰번호 수정을 위해서는 휴대폰 본인인증이 필요합니다.</p>
 								</div>
@@ -173,7 +174,6 @@
 				reader.readAsDataURL(value.files[0]);
 				
 		}
-		
 		
 	
 	</script>

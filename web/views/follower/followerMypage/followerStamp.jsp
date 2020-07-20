@@ -12,8 +12,7 @@
 </head>
 <body>
 
-	<%@ include file="../../common/followerNav.jsp"%>
-	<section style="height:800px;">
+	<section style="height:1200px;">
 	<%@ include file="followerMypageAside.jsp" %>
 	<div class="right-container">
 	
