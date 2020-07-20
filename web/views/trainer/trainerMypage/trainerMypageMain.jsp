@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*" %>
+<% 
+HashMap<String, Object> hmap = (HashMap<String, Object>) request.getAttribute("information"); 
+ArrayList<String> trainerInfo = (ArrayList<String>) hmap.get("trainerInfo"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +49,7 @@
 		<%@ include file="../../common/trainerNav.jsp"%>
 	</header>
 
-	<section style="height: 800px;">
+	<section style="height: 1000px;">
 		<div class="mypage-contents">
 			<%@ include file="trainerMypageAside.jsp"%>
 			<div class="right-container">
@@ -55,51 +58,36 @@
 					<div class="head_article">
 						<h3 class="info-header">프로필 설정</h3>
 					</div>
-
-					<div id="content" class="nolnb main" style="padding-top: 20px;">
-
-						<aside class="aside_wrap">
-							<div class="profile_wrap shadow_section">
-								<ul class="profile">
-									<li class="photo"><span class="thum"
-										id="myhome_profile_photo"> <img alt=""
-											src="https://pds.saramin.co.kr/person/photo/2018/04/p7xgy5_srvy-x8q8og_p7xgy4su8lx8q8ogp7xgxsbujnx8q8og.jpg">
-									</span>
-										<button type="button" id="delete_personal_photo_btn"
-											class="btn_del img_spr" title="사진 삭제"
-											onclick="deletePhoto();"
-											style="display: block;">삭제</button>
-										<button type="button" class="btn_regist img_spr" title="사진 등록"
-											>등록</button>
+					
+					<!-- 윗영역 -->
+					<div id="content" class="nolnb main" style="padding-top: 20px; text-align: center;" align="center">
+						<div class="aside_wrap" style="width: 800px;">
+							<div class="profile_wrap shadow_section" align="center">
+								<ul class="profile" >
+									<li class="photo" ><span class="thum" id="myhome_profile_photo"> 
+									<img  lt="" src=""> </span>
+										<button type="button" id="delete_personal_photo_btn" class="btn_del img_spr" title="사진 삭제"
+											onclick="deletePhoto();" style="display: block;">삭제</button>
+										<button type="button" class="btn_regist img_spr" title="사진 등록" >등록</button>
 									</li>
-									<li class="name">장소이 <br> 트레이너님
+									<li class="name"><%= loginUser.getName() %><br>트레이너님
 									</li>
 								</ul>
 								<div class="btn_wrap">
-									<a href="#"
-										class="btn_profile_view" title="내 이력서 보기"
-									>내
-										계정 설정하기</a> <a href="/zf_user/member/svq/list?start_exam=1"
-										class="btn_profile_view mt7" title="인성검사 응시하기">자격정보 수정하기</a> <a
-										href="/zf_user/member/svq/list?start_exam=1"
-										class="btn_profile_view mt7" title="정산 조회하기">정산조회</a>
+									<a href="#">내 계정 설정하기</a> 
+									<a href="" >자격정보 수정하기</a> 
+									<a href="" >정산조회</a>
 								</div>
 								<div class="txt_alram">
-									<p>
-										<a
-											href="">
-											하루종일 책상에 앉아있는 회사원,개발자를 위한 자세교정 전문 트레이너!</a>
-									</p>
+									<p><a href=""><%= trainerInfo.get(2) %></a></p>
 								</div>
-								<a href="/zf_user/persons/person-update"
-									class="btn_setup_profile img_spr" title="설정">설정</a>
+								<a href="" class="btn_setup_profile img_spr" title="설정">설정</a>
 							</div>
-						</aside>
-						<div class="wrapper_narrow summary_wrap">
-							<div class="dashboard" align="center">
-								<ul class="activity_list" align="center">
-									<li><a href="#"
-										>
+						
+						<div class="wrapper_narrow summary_wrap" style="width: 800px; margin-left:18%; text-align:center;">
+							<div class="dashboard" align="center" style="text-align: center;">
+								<ul class="activity_list" >
+									<li><a href="#">
 											<span class="doing"><em>1</em> / 10</span> <span
 											class="sname">신청한 팔로워</span>
 									</a></li>
@@ -117,10 +105,9 @@
 							<br>
 
 							<div id="settingField">
-								<label>주요분야 설정</label><br><br>
-
+								
 								<form action="" method="">
-									<table>
+									<table style="text-align: center;">
 										<tr>
 											<th>전문분야 선택</th>
 											<td>
@@ -149,14 +136,8 @@
 									</table>
 								</form>
 							</div>
-
-
-
 						</div>
-
-					</div>
-					<div class="increase_high_career">
-
+						</div>
 					</div>
 				</div>
 			</div>

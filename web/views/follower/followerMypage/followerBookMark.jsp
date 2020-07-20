@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.omg.jsp.followerBookMark.model.vo.*, java.util.*";%>
-<% ArrayList<BookMark> list = (ArrayList<BookMark>) request.getAttribute("bookmarklist"); 
-   
-%>
+	pageEncoding="UTF-8" import="com.omg.jsp.followerBookMark.model.vo.*, java.util.*" %>
+<% ArrayList<BookMark> list = (ArrayList<BookMark>) request.getAttribute("bookmarklist"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +9,8 @@
 	href="/omg/resources/css/fmypageContainer.css">
 <link rel="stylesheet" type="text/css"
 	href="/omg/resources/css/tjob.css">
+	
+	
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -44,8 +45,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="../../common/followerNav.jsp"%>
-	<section style="height: 800px;">
+	<section style="height: 1000px;">
 		<%@ include file="followerMypageAside.jsp"%>
 		<div class="right-container">
 			<div class="info-container">
@@ -56,57 +56,74 @@
 					<ul class="news-article-list article-list list ui-area-article-list">
 						
 						<% for(BookMark b : list) { %>
-						<li class="listItem">
-							<div class="articleImg">
-								<a href="#"><img src="../../resources/img/OHmyGymLogo.png"><b class="vamHelper"></b></a>
+						<li class="listItem" >
+							
+							<div class="articleImg" style="height: 150px;">
+								<a href="#" ><img src="../../resources/img/OHmyGymLogo.png"></a>
 							</div>
-							<div class="articleInfo info">
-								<a href="/?m=news&amp;uid=42666"> 
-								<p class="title mu-icon mu-icon-new" value="<%= b.getBoardNum() %>"> <span class="creplyCnt new"></span></p></a>
+							<div class="articleInfo info" style="height: 150px;">
+								
+							<!-- 헤드라인 -->
+							<a href="#"><b style="font-size: large;"><%= b.getBoardTitle() %></b></a>
+							
+							<!-- 삭제버튼 -->
+							<button onclick="deleteBookmark('<%=b.getBoardNum()%>', '<%=b.getMemberId()%>');" name="deleteImg" style="text-align: right; ">
+							 <img  src="/omg/resources/img_icon/delete.png" style="height: 20px; width: 20px; margin-bottom: 8px;"></button>
+								
+								<!-- 본문 -->
 								<div class="subInfo info">
-									<span class="date division">2시간 전</span><span class="view">
+									<% 
+										String boardcode = b.getBoardCode();
+										String boardname = "";
+										switch(boardcode){
+										case "10" : boardname = "공지사항"; break;
+										}
+									%>
+									<%= boardname %>
+									<span class="date division"><%= b.getWriteDate() %></span>
 								</div>
 								<div class="description">
-									<a href="/?m=news&amp;uid=42666"><p>최근 무서운 기세로 스니커즈의
-											자리를 노리는 뮬. 스니커즈냐 뮬이냐 그것이 문제로다! 무신사가 선별한 스니커즈와 뮬 중 마음에 드는 것에 한
-											표를 행사하고 댓글 이벤트에 참여해보자. 무신사 포인트를 얻는 가장 쉬운 방법 중 하나다. 지금 보고 있는
-											뉴스의 URL을 개인 SNS 계정에 공유하고 코멘트를 남기면 된다. 그런 ...</p></a>
+									<a href="/?m=news&amp;uid=42666"><p><%= b.getBoardContent() %></p></a>
 								</div>
 							</div>
 						</li>
 						<% } %>
-					
-						
-						
 					</ul>
-				<!-- 	<button><img src="../../resources/button/bookmarkfix.png"> </button>
-					<button><img src="../../resources/button/save.png"> </button> -->
-					
-						
 					<br>
-				<!-- 버튼영역 -->
-				<div>
-					<button style="background-color:gray; color: white; font-weight:bold;  width: 50px; height: 30px">수정</button>
-					<button style="background-color:orangered; color: white; font-weight:bold;  width: 50px; height: 30px">저장</button>
+
+				<!-- 삭제용 -->
+				<div style="display: none;">
+	      			<form id="deleteOneBookMark" method="post">
+						<input id="saveBoardNum" name="saveBoardNum" type="text" >
+						<input id="saveUserId" name="saveUserId" type="text">
+					</form>
 				</div>
 
 				</div>
-
-
-
-
-
-
-
-
-
-
 			</div>
 		</div>
 	</section>
-
 	<footer>
 		<%@ include file="../../common/footer.jsp"%>
 	</footer>
+	
+	<script type="text/javascript">
+	
+		function deleteBookmark(boardNum, userId) {
+			
+			var boardNum = boardNum;
+			var userId = userId;
+			
+			document.getElementById("saveBoardNum").value = boardNum;
+			document.getElementById("saveUserId").value = userId;
+			
+			$("#deleteOneBookMark").attr("action","<%= request.getContextPath() %>/update.bm");
+			$("#deleteOneBookMark").submit();
+			
+		}
+	
+	</script>
+	
+	
 </body>
 </html>

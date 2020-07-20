@@ -1,7 +1,7 @@
-package com.omg.jsp.followerBookMark.controller;
+package com.omg.jsp.member.controller;
 
-import java.io.IOException; 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.omg.jsp.followerBookMark.model.service.BookMarkService;
-import com.omg.jsp.followerBookMark.model.vo.BookMark;
+import com.omg.jsp.matching.controller.selectOneTrainerServlet;
+import com.omg.jsp.matching.model.service.MatchingService;
 import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.member.model.vo.TrainerInfo;
 
 /**
- * Servlet implementation class SelectFollowerBookMarkServlet
+ * Servlet implementation class TrainerMypageMainServlet
  */
-@WebServlet("/select.bm")
-public class SelectFollowerBookMarkServlet extends HttpServlet {
+@WebServlet("/trinerinfo.mp")
+public class TrainerMypageMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectFollowerBookMarkServlet() {
+    public TrainerMypageMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,20 +39,18 @@ public class SelectFollowerBookMarkServlet extends HttpServlet {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getMemberId();
 		
-		System.out.println("userId : " + userId);
-		
-		ArrayList<BookMark> list = new BookMarkService().selectList(userId);
-		System.out.println("list : " + list);
+		HashMap<String, Object> hmap = new MatchingService().selectTrainerMap(userId);
 		
 		String page = "";
-		if(list != null) {
-			page="views/follower/followerMypage/followerBookMark.jsp";
-			request.setAttribute("bookmarklist", list);
-		}else {
-			page="views/common/errorPage.jsp";
-			request.setAttribute("msg", "북마크조회실패!");
+		if(!hmap.isEmpty()) {
+			page = "views/trainer/trainerMypage/trainerMypageMain.jsp";
+			request.setAttribute("information", hmap);
+			request.getRequestDispatcher(page).forward(request, response);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "트레이너 정보 상세보기 실패");
 		}
-		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

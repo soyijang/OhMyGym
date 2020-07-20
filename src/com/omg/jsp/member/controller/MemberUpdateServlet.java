@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.omg.jsp.member.model.service.MemberService;
 import com.omg.jsp.member.model.vo.Member;
@@ -31,47 +32,57 @@ public class MemberUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String userId = loginUser.getMemberId();
+		
+		
 		String page = "";
-		String userId = request.getParameter("userId");
 		String password = "";
 		String password1 = request.getParameter("password");
 		String password2 = request.getParameter("repassword");
 		if(password1.equals(password2)) {
+		
 			password = password1;
+			
+			String address = request.getParameter("address");
+			String email = request.getParameter("sendEmail1") + "@" + request.getParameter("sendEmail2");
+			String birth = request.getParameter("birth_year") + "-" + request.getParameter("birth_month") + "-" + request.getParameter("birth_day");
+			String gender = request.getParameter("gender");
+			String phone = (request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-"+ request.getParameter("phone3"));
+			
+			Member requestMember = new Member();
+			requestMember.setMemberId(userId);
+			requestMember.setMemberPwd(password);
+			requestMember.setAddress(address);
+			requestMember.setPhone(phone);
+			requestMember.setEmail(email);
+			requestMember.setMemberAge(birth);
+			requestMember.setGender(gender);
+			System.out.println("userId : "+ userId);
+			System.out.println("email : "+ email);
+			System.out.println("phone : "+ phone);
+			
+			System.out.println("requestMember : " + requestMember);
+			
+			int result = new MemberService().updateMember(requestMember);
+			
+		     if(result > 0) {
+		     	page = "views/follower/followerMypage/followerMyInfo.jsp";
+				request.setAttribute("successMessage", "updateMember");
+				request.getRequestDispatcher(page).forward(request, response);
+		      } else {
+		         page = "views/common/errorPage.jsp";
+		         request.setAttribute("msg", "정보 수정 실패");
+		         request.getRequestDispatcher(page).forward(request, response);
+		      }
+		     
 		}else {
 			 page = "views/common/errorPage.jsp";
 	         request.setAttribute("msg", "비밀번호가 일치하지 않습니다!");
 	         request.getRequestDispatcher(page).forward(request, response);
 		}
-		String address = request.getParameter("address");
-		String email = request.getParameter("sendEmail1") + "@" + request.getParameter("sendEmail2");
-		String birth = request.getParameter("birth_year") + "-" + request.getParameter("birth_month") + "-" + request.getParameter("birth_day");
-		String gender = request.getParameter("gender");
-		String phone = (request.getParameter("phone1") + request.getParameter("phone2") + request.getParameter("phone3"));
-		
-		Member requestMember = new Member();
-		requestMember.setMemberId(userId);
-		requestMember.setMemberPwd(password);
-		requestMember.setAddress(address);
-		requestMember.setPhone(phone);
-		requestMember.setEmail(email);
-		requestMember.setMemberAge(birth);
-		requestMember.setGender(gender);
-		System.out.println("userId : "+ userId);
-		System.out.println("requestMember : " + requestMember);
-		
-		int result = new MemberService().updateMember(requestMember);
-		
-	     if(result > 0) {
-	     	page = "views/follower/followerMypage/followerMyInfo.jsp";
-			request.setAttribute("successMessage", "updateMember");
-			request.getRequestDispatcher(page).forward(request, response);
-	      } else {
-	         page = "views/common/errorPage.jsp";
-	         request.setAttribute("msg", "정보 수정 실패");
-	         request.getRequestDispatcher(page).forward(request, response);
-	      }
-		
 	}
 	
 	

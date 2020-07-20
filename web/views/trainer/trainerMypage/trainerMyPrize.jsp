@@ -32,9 +32,9 @@
 					<div class="step" id="rcvStep">
 						<table class="list02">
 							<tr>
-							<td><a href="tmyschool.jsp"><img src="/omg/resources/button/job/1_n.png" alt=""></a></td>
-								<td><a href="tmyjob.jsp"><img src="/omg/resources/button/job/2_n.png" alt=""></a></span></td>
-								<td><a href="tmyprize.jsp"><img src="/omg/resources/button/job/3_y.png" alt=""></a></td>
+								<td><a href="trainerMyEducation.jsp"><img src="/omg/resources/button/job/1_n.png" alt=""></a></td>
+								<td><a href="trainerInsertMyCareer.jsp"><img src="/omg/resources/button/job/2_n.png" alt=""></a></span></td>
+								<td><a href="trainerMyPrize.jsp"><img src="/omg/resources/button/job/3_y.png" alt=""></a></td>
 								<td><a href=""><img src="/omg/resources/button/job/4_n.png" alt=""></a></td>
 							</tr>
 
@@ -51,7 +51,6 @@
 
 					<!-- 자격증  -->
 					<form name="form1" id="form1" method="post">
-
 
 						<p style="margin-top: 80px; margin-bottom: 10px;">자격증</p>
 						<hr>

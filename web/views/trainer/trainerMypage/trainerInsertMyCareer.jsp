@@ -31,9 +31,9 @@
 					<div class="step" id="rcvStep">
 						<table class="list02">
 							<tr>
-								<td><a href="tmyschool.jsp"><img src="/omg/resources/button/job/1_n.png" alt=""></a></td>
-								<td><a href="tmyjob.jsp"><img src="/omg/resources/button/job/2_y.png" alt=""></a></span></td>
-								<td><a href="tmyprize.jsp"><img src="/omg/resources/button/job/3_n.png" alt=""></a></td>
+								<td><a href="trainerMyEducation.jsp"><img src="/omg/resources/button/job/1_n.png" alt=""></a></td>
+								<td><a href="trainerInsertMyCarrer.jsp"><img src="/omg/resources/button/job/2_y.png" alt=""></a></span></td>
+								<td><a href="trainerMyPrize.jsp"><img src="/omg/resources/button/job/3_n.png" alt=""></a></td>
 								<td><a href=""><img src="/omg/resources/button/job/4_n.png" alt=""></a></td>
 							</tr>
 

@@ -19,7 +19,6 @@
 </head>
 <body>
 	<section style="height: 1900px">
-		<%@ include file="../../common/followerNav.jsp"%>
 		<%@ include file="followerMypageAside.jsp"%>
 
 		<div class="right-container">
