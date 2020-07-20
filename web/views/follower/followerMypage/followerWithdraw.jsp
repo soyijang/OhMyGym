@@ -11,7 +11,11 @@
 </head>
 
 <body>
-	<%@ include file="../../common/followerNav.jsp"%>
+
+	<div style="display:none; ">
+		<%@ include file="followerMypageAside.jsp" %>
+	</div>
+
 	<div id="cMain" align="center" class="">
 		<div id="mArticle" class="">
 			<div class="dimmed_layer" style="display: none"></div>
