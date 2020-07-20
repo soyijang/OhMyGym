@@ -404,7 +404,6 @@ div.tariner_subAbility {
 														<td colspan="3">등록된 학력 정보가 없습니다.</td>
 													</tr>
 											 <% } %>
-
 										</tbody>
 									</table>
 								</div>
@@ -451,11 +450,11 @@ div.tariner_subAbility {
 									<div class="tabComment">트레이너와 매칭했던 팔로워들의 후기를 읽어보세요!</div>
 									<div style="width: 800px; height: 350px; margin-top: 10px;">
 										<%
-										if(trList.size() > 1) {
-											for(int i = 0; i < 2; i++) { %>
-												<div class="review">
+										if(trList.size() > 0) { %>
+											<% if(trList.size() == 1) { %>
+												<div class="review" style="margin-left: 250px;">
 													<div style="font-weight: bold; font-size: 1.15em; padding-top: 10px; padding-left: 25px; padding-right: 25px; text-align: left;">
-														<% String followerId = trList.get(i).getFollowerId();
+														<% String followerId = trList.get(0).getFollowerId();
 															for(int j = 0; j < followerId.length(); j++) { 
 																if(j < 3) {%>
 																	<%=followerId.charAt(j)%>
@@ -466,13 +465,35 @@ div.tariner_subAbility {
 													</div>
 													<div style="color: orangered; font-weight: 600; text-align: right; vertical-align: middle; padding-right: 15px;">
 														<img width="18px" height="18px" src="/omg/resources/img_icon/ohmystar_pull.png" style="top:4px;">&nbsp;&nbsp;
-														<%= trList.get(i).getGrade() %>
+														<%= trList.get(0).getGrade() %>
 													</div>
 													<div style="padding: 20px; text-align: left;">
-														<%= trList.get(i).getRatingContent() %>
+														<%= trList.get(0).getRatingContent() %>
 													</div>
 												</div>
-											<% } 
+											<% } else { %>
+												<% for(int i = 0; i < 2; i++) { %>
+													<div class="review">
+														<div style="font-weight: bold; font-size: 1.15em; padding-top: 10px; padding-left: 25px; padding-right: 25px; text-align: left;">
+															<% String followerId = trList.get(i).getFollowerId();
+																for(int j = 0; j < followerId.length(); j++) { 
+																	if(j < 3) {%>
+																		<%=followerId.charAt(j)%>
+																	<% } else {%>
+																		<%="*"%>
+																	<% } %>
+																<% } %>
+														</div>
+														<div style="color: orangered; font-weight: 600; text-align: right; vertical-align: middle; padding-right: 15px;">
+															<img width="18px" height="18px" src="/omg/resources/img_icon/ohmystar_pull.png" style="top:4px;">&nbsp;&nbsp;
+															<%= trList.get(i).getGrade() %>
+														</div>
+														<div style="padding: 20px; text-align: left;">
+															<%= trList.get(i).getRatingContent() %>
+														</div>
+													</div>
+												<% }
+											}
 										} else {%>
 											등록된 후기가 아직 없습니다.
 										<% } %>

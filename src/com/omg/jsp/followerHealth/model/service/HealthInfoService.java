@@ -25,21 +25,34 @@ public class HealthInfoService {
 	public int insertHealthHistory(ArrayList<HealthInfo> list) {
 		Connection con = getConncection();
 		
-		int insertResult = new HealthInfoDao().insertHealthHistory(con, list);
-		System.out.println("gg" + list.get(0).getMemberId());
-		int updateResult = new HealthInfoDao().updateHealthInfoNow(con, list);
+		int updateHealthInfoNowResult = 0;
 		
-		System.out.println(list.get(0).getHealthData().isEmpty());
+		int healthInfoNow = new HealthInfoDao().selectHealthInfoNow(con, list);
 		
-		if(insertResult > 0 && updateResult > 0) {
-			commit(con);
+		System.out.println("healthInfoNow result : " + healthInfoNow);
+		
+		if(healthInfoNow == 9) {
+			int insertHealthInfoResult = new HealthInfoDao().insertHealthHistory(con, list);
+			updateHealthInfoNowResult = new HealthInfoDao().updateHealthInfoNow(con, list);
+			
+			if(insertHealthInfoResult > 0 && updateHealthInfoNowResult > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
 		} else {
-			rollback(con);
+			int insertHealthInfoNow = new HealthInfoDao().insertHealthInfoNow(con, list);
+			
+			if(insertHealthInfoNow > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
 		}
 		
 		close(con);
 		
-		return insertResult;
+		return updateHealthInfoNowResult;
 	}
 
 
