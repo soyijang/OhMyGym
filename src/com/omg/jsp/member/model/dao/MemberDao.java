@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.omg.jsp.member.model.dao.MemberDao;
@@ -25,15 +26,12 @@ private Properties prop = new Properties();
 	
 	public MemberDao() {
 		String fileName = MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
-		 
-		
+				
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -342,6 +340,122 @@ private Properties prop = new Properties();
 		System.out.println("result : " + result);
 		return result;
 	}
+
+
+//	public int getListCount(Connection con) {
+//	
+//
+//	Statement stmt = null;
+//	int listCount = 0;
+//	ResultSet rset = null;
+//	
+//	String query = prop.getProperty("listCount");
+//	
+//	try {
+//		stmt = con.createStatement();
+//		rset = stmt.executeQuery(query);
+//		
+//		if(rset.next()) {
+//			listCount = rset.getInt(1);
+//		}
+//	} catch (SQLException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//	
+//	
+//	
+//	
+//	return listCount;
+//}
+
+
+
+//public ArrayList<Member> selectList(Connection con, PageInfo pi) {
+//	
+//	
+//
+//	PreparedStatement pstmt = null;
+//	ResultSet rset = null;
+//	ArrayList<Member> list = null;
+//	
+//	String query = prop.getProperty("selectList");
+//	
+//	try {
+//		pstmt = con.prepareStatement(query);
+//		
+//		
+//		
+//		rset = pstmt.executeQuery();
+//		
+//		list = new ArrayList<>();
+//		
+//		while(rset.next()) {
+//            Member m = new Member();
+//            
+//            
+//            m.setMemberId(rset.getString("MEMBER_ID"));
+//            m.setName(rset.getString("MEMBER_NAME"));
+//			m.setEmail(rset.getString("EMAIL"));
+//			m.setPhone(rset.getString("PHONE"));
+//			m.setEnrollDate(rset.getString("ENROLL_DATE"));
+//			m.setRequestType(rset.getString("REQUEST_TYPE"));
+//            
+//            list.add(m);
+//		}
+//		
+//	} catch (SQLException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	} finally {
+//		close(rset);
+//		close(pstmt);
+//	}
+//	
+//	return null;
+//}
+
+
+
+//페이징처리 전 게시물 목록 조회용 메소드
+public ArrayList<Member> selectList(Connection con) {
+	
+	Statement stmt = null;
+	ResultSet rset = null;
+	ArrayList<Member> list = null;
+	
+	String query = prop.getProperty("selectList");
+	
+	try {
+		stmt = con.createStatement();
+		rset = stmt.executeQuery(query);
+		
+		list = new ArrayList<Member>();
+		
+		while(rset.next()) {
+            Member m = new Member();
+            m.setMemberId(rset.getString("MEMBER_ID"));
+            m.setName(rset.getString("MEMBER_NAME"));
+			m.setEmail(rset.getString("EMAIL"));
+			m.setPhone(rset.getString("PHONE"));
+			m.setEnrollDate(rset.getString("ENROLL_DATE"));
+			m.setRequestType(rset.getString("REQUEST_TYPE"));
+            
+            list.add(m);
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		close(stmt);
+		close(rset);
+	}
+	
+	return list;
+	
+	
+}
+	
 
 
 

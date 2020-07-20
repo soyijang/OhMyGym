@@ -438,7 +438,6 @@ div#return_list_div {
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="../../common/followerNav.jsp"%>
 	<div class="return_wrap" style="display: none;">
 		<div class="dark_bg" onclick="jQuery('.return_wrap').fadeOut('slow')"></div>
 		<div class="return_box">
@@ -541,9 +540,8 @@ div#return_list_div {
 			</div>
 		</div>
 	</div>
-
-	<section>
 		<%@ include file="followerMypageAside.jsp"%>
+	<section>
 		<article id="cash_article" style="position: absolute; left: 370px;">
 			<div class="cash_content"
 				style="border: 1px solid black; width: 1000px; height: 825px; border-radius: 9px; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">

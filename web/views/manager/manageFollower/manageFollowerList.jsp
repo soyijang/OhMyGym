@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*, java.util.*, com.omg.jsp.matching.member.vo.*"%>
+    pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*, java.util.*, com.omg.jsp.matching.model.vo.*"%>
 <% 
 	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list"); 
 	/* PageInfo pi = (PageInfo) request.getAttribute("pi"); */
