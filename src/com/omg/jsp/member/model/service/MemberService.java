@@ -1,11 +1,15 @@
 package com.omg.jsp.member.model.service;
 
+import static com.omg.jsp.common.JDBCTemplate.close;
+import static com.omg.jsp.common.JDBCTemplate.getConncection;
 import static com.omg.jsp.common.JDBCTemplate.*; 
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.omg.jsp.member.model.dao.MemberDao;
 import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.member.model.vo.PageInfo;
 import com.omg.jsp.member.model.vo.TrainerInfo;
 
 public class MemberService {
@@ -51,6 +55,47 @@ public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
 	
 	return result;
 }
+
+
+//	public int getListCount() {
+//	
+//
+//		Connection con = getConncection();
+//		int listCount = new MemberDao().getListCount(con);
+//	
+//		close(con);
+//	
+//		return listCount;
+//	}
+
+
+//	public ArrayList<Member> selectList(PageInfo pi) {
+//		
+//		
+//
+//		Connection con = getConncection();
+//		
+//		ArrayList<Member> list = new MemberDao().selectList(con, pi);
+//		
+//		close(con);
+//		
+//		return list;
+//		
+//		
+//	}
+
+
+	//페이징처리 전 게시물 목록 조회용 메소드
+	public ArrayList<Member> selectList() {
+
+		Connection con = getConncection();
+		
+		ArrayList<Member> list = new MemberDao().selectList(con);
+		
+		close(con);
+		
+		return list;
+	}
 
 }
 

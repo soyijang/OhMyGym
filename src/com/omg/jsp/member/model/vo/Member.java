@@ -18,6 +18,7 @@ public class Member implements Serializable{
 	private String enrollDate;
 	private String enrollTime;
 	private String memberAge;
+	private String requestType;
 	
 	public Member() {}
 
@@ -39,10 +40,32 @@ public class Member implements Serializable{
 		this.enrollTime = enrollTime;
 		this.memberAge = memberAge;
 	}
+	
+	
 
 	
 	
 	
+	public Member(String name, String memberId, String memberPwd, String memberDivision, String memberStatus,
+			String gender, String address, String email, String phone, String profileAttachmentCode, String enrollDate,
+			String enrollTime, String memberAge, String requestType) {
+		super();
+		this.name = name;
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberDivision = memberDivision;
+		this.memberStatus = memberStatus;
+		this.gender = gender;
+		this.address = address;
+		this.email = email;
+		this.phone = phone;
+		this.profileAttachmentCode = profileAttachmentCode;
+		this.enrollDate = enrollDate;
+		this.enrollTime = enrollTime;
+		this.memberAge = memberAge;
+		this.requestType = requestType;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -146,14 +169,27 @@ public class Member implements Serializable{
 	public void setMemberAge(String memberAge) {
 		this.memberAge = memberAge;
 	}
+	
+	
+
+	public String getRequestType() {
+		return requestType;
+	}
+
+	public void setRequestType(String requestType) {
+		this.requestType = requestType;
+	}
 
 	@Override
 	public String toString() {
 		return "Member [name=" + name + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberDivision="
 				+ memberDivision + ", memberStatus=" + memberStatus + ", gender=" + gender + ", address=" + address
 				+ ", email=" + email + ", phone=" + phone + ", profileAttachmentCode=" + profileAttachmentCode
-				+ ", enrollDate=" + enrollDate + ", enrollTime=" + enrollTime + ", memberAge=" + memberAge + "]";
+				+ ", enrollDate=" + enrollDate + ", enrollTime=" + enrollTime + ", memberAge=" + memberAge
+				+ ", requestType=" + requestType + "]";
 	}
+	
+	
 
 	
 	
