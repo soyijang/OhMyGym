@@ -5,6 +5,7 @@ import java.sql.Date;
 
 public class Member implements Serializable{
 	
+	
 	private String name;
 	private String memberId;
 	private String memberPwd;

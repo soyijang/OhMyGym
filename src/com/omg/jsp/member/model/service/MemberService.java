@@ -97,6 +97,7 @@ public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
 		return list;
 	}
 
+
 }
 
 
