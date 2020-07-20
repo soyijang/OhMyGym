@@ -154,7 +154,7 @@ ul#header_bottom_sidemenu li ul li {
                             </ul> --></li>
 					<li><a><div class="NavLink">OH 마이피티</div></a>
 						<ul>
-							<li><a>매칭신청 목록</a>&nbsp;&nbsp;&nbsp;<a>커리큘럼 관리</a>
+							<li><a>매칭신청 목록</a>&nbsp;&nbsp;&nbsp;<a href="<%= request.getContextPath() %>/selectCurriculumList.cu">커리큘럼 관리</a>
 								&nbsp;&nbsp;&nbsp;<a>나의 경력</a>&nbsp;&nbsp;&nbsp;<a>그룹소통방</a></li>
 						</ul></li>
 					<li><a><div class="NavLink">팔로워관리</div></a></li>
