@@ -119,4 +119,41 @@ public class FileDao {
 		return myFile;
 	}
 
+
+	public Files selectOneFiles(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Files file = null;
+		
+		String query = prop.getProperty("selectOneFiles");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, Integer.toString(num));
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				file = new Files();
+				
+				file.setFileCode(rset.getString("FILE_CODE"));
+				file.setFileOriginName(rset.getString("FILE_ORIGIN_NAME"));
+				file.setFileManageName(rset.getString("FILE_MANAGE_NAME"));
+				file.setFilePath(rset.getString("FILE_PATH"));
+				file.setFileUploadDate(rset.getString("FILE_UPLOAD_DATE"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+			close(rset);
+		}
+		
+		return file;
+	}
+
 }

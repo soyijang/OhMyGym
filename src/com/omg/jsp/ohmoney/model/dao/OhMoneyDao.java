@@ -310,4 +310,28 @@ public class OhMoneyDao {
 		return result;
 	}
 
+	public int checkOkReturn(Connection con, String returnNum) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("checkOkReturn");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, returnNum);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

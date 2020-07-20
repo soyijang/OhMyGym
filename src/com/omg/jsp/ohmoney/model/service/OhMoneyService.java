@@ -116,4 +116,18 @@ public class OhMoneyService {
 		return result;
 	}
 
+	public int checkOkReturn(String returnNum) {
+		Connection con = getConncection();
+		
+		int result = new OhMoneyDao().checkOkReturn(con, returnNum);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
 }

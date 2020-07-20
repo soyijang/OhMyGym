@@ -638,19 +638,35 @@ div#return_list_div {
 						</table>
 						<script>
 						
-                            function checkReturn(btn){
-                                var isOk = confirm("환급을 완료하셨다면 확인해주세요!");
-                                if(isOk){
-                                	//확인으로 변경하는 ajax 구현
-                                	//해당 ajax에서는 환급가능 오머니 액수를 깎아야 한다.
-                                	//영수증을 받아볼수 있는 기능도 구현해야함
-                                	
-                                   $(btn).attr('disabled','true');
-                                } 
-                            }
-                            
-                            
-                            
+                            function checkReturn(number){
+                            	if($("#btn"+number).text()=="확인대기"){
+	                                var isOk = confirm("환급을 완료하셨다면 확인해주세요!");
+	                                
+	                                var numberVal = number;
+	                                console.log(numberVal);
+	                                if(isOk){
+	                                	$.ajax({
+	                           	 			url : "/omg/checkOkReturn.follower",
+	                           	 			data : {
+	                           	 				numberVal : numberVal
+	                           	 			},
+	                           	 			type : "post",
+	                           	 			success : function(data) {
+	                                            $("#btn"+numberVal).attr('disabled','true');
+	                                            $("#btn"+numberVal).text("최종확인");
+	                           	 			},
+	                           	 			error : function() {
+	                           	 				console.log("실패!")
+	                           	 			}
+	                            		})
+	                                	//확인으로 변경하는 ajax 구현
+	                                	//해당 ajax에서는 환급가능 오머니 액수를 깎아야 한다.
+	                                	//영수증을 받아볼수 있는 기능도 구현해야함      	
+	                                }
+                            	} else {
+                            		console.log("대기중이 아님");
+                            	}
+                            }                   
                         </script>
 
 						<script>
@@ -709,8 +725,8 @@ div#return_list_div {
                                     	"<td>"+Relistnum+"</td>"+
                                     	"<td>"+data[key].refundDate+"</td>"+
                                     	"<td>"+data[key].money+"</td>"+
-                                    	"<td>"+"<i class='fas fa-file'></i>"+"</td>"+
-                                    	"<td><button onclick='checkReturn(this);'>"+data[key].refundState+"</button></td></tr>");
+                                    	"<td>"+"<a style='cursor: pointer;' onclick='Download("+data[key].fileCode+")'><i class='fas fa-file'></i></a>"+"</td>"+
+                                    	"<td><button id=btn"+data[key].refundNum+" onclick='checkReturn("+data[key].refundNum+");'>"+data[key].refundState+"</button></td></tr>");
                 	 					Relistnum = Relistnum - 1;
                 	 					Relistcount = Relistcount + 1;
                 	 					if(Relistcount > 10){
@@ -722,6 +738,10 @@ div#return_list_div {
                    	 				console.log("실패!")
                    	 			}
                     		})
+                        }
+                        
+                        function Download(val){
+                    		location.href = "<%=request.getContextPath()%>/downFile.all?num="+val;                    	
                         }
                         </script>
 					</div>
