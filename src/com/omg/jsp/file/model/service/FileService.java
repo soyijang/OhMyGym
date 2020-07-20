@@ -29,4 +29,16 @@ public class FileService {
 		return myFile;
 	}
 
+	public Files selectOneFiles(int num) {
+		
+		Connection con = getConncection();
+		
+		Files file = new FileDao().selectOneFiles(con, num);
+		
+		close(con);
+		
+		return file;
+		
+	}
+
 }

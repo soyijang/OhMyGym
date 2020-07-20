@@ -30,6 +30,7 @@ public class Files {
 		this.fileCode = fileCode;
 	}
 	public String getFileOriginName() {
+
 		return fileOriginName;
 	}
 	public void setFileOriginName(String fileOriginName) {

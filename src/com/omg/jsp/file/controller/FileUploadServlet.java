@@ -46,7 +46,7 @@ public class FileUploadServlet extends HttpServlet {
 			
 			System.out.println(root);
 			
-			String savePath = root + "resources/test";
+			String savePath = root + "resources/test";//루트와 같이 저장할게 아니라 경로만 저장하면 어떻게 됨?
 			
 			System.out.println(savePath);
 			
