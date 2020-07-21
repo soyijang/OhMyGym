@@ -65,9 +65,6 @@ public class NoticeDao {
 				
 				list.add(n);
 			}
-				
-				
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,11 +79,29 @@ public class NoticeDao {
 
 	public int insertNotice(Connection con, Notice newNotice) {
 		
+		PreparedStatement pstmt = null;
 		
+		int result = 0;
 		
+		String query = prop.getProperty("insertNorice");
 		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, newNotice.getBoardCategory());
+			pstmt.setString(2, newNotice.getWritedate());
+			pstmt.setString(3, newNotice.getStatus());
+			pstmt.setString(4, newNotice.getBoardTitle());
+			pstmt.setString(5, newNotice.getBoardContent());
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
-		return 0;
+		return result;
 	}
 
 	public Notice selectOne(Connection con, int nno) {
@@ -103,7 +118,16 @@ public class NoticeDao {
 			pstmt.setInt(1, nno);
 			rset=pstmt.executeQuery();
 			
-			
+			if(rset.next()) {
+				notice=new Notice();
+				
+				notice.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+				notice.setWritedate(rset.getString("WRITE_TIME"));
+				notice.setStatus(rset.getString("BOARD_STATUS"));
+				notice.setBoardTitle(rset.getString("BOARD_TITLE"));
+				notice.setBoardContent(rset.getString("BOARD_CONTENT"));
+				
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -111,11 +135,10 @@ public class NoticeDao {
 			close(pstmt);
 			close(rset);
 		}
+		System.out.println("NoticeDao : "+notice);
 		
 		return notice;
 	}
-
-
 
 	public Notice FollowSelectOne(Connection con, int nno) {
 
@@ -154,7 +177,7 @@ public class NoticeDao {
 		return notice;
 	}
 
-	public int viewCount(Connection con, int nno) {
+	/*public int viewCount(Connection con, int nno) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -201,6 +224,6 @@ public class NoticeDao {
 
 		return viewCount;
 	}
-
+*/
 
 }
