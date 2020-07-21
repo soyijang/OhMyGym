@@ -11,19 +11,12 @@ public class TrainerCareer {
 	private String proofYn;		//증빙확인여부
 	private String memberId;
 	private String careerType;	//근무분야
+	private String careerField;
 	
 	public TrainerCareer() {}
 
-	public TrainerCareer(String compName, String enterDate, String resignDate, String careerLevel) {
-		super();
-		this.compName = compName;
-		this.enterDate = enterDate;
-		this.resignDate = resignDate;
-		this.careerLevel = careerLevel;
-	}
-
 	public TrainerCareer(String compName, String enterDate, String resignDate, String careerLevel, String careerId,
-			String careerProof, String proofYn, String memberId, String careerType) {
+			String careerProof, String proofYn, String memberId, String careerType, String careerField) {
 		super();
 		this.compName = compName;
 		this.enterDate = enterDate;
@@ -34,6 +27,16 @@ public class TrainerCareer {
 		this.proofYn = proofYn;
 		this.memberId = memberId;
 		this.careerType = careerType;
+		this.careerField = careerField;
+	}
+
+	
+	public String getCareerField() {
+		return careerField;
+	}
+
+	public void setCareerField(String careerField) {
+		this.careerField = careerField;
 	}
 
 	public String getCompName() {
