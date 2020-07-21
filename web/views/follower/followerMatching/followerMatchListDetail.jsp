@@ -573,10 +573,16 @@ div.tariner_subAbility {
             		data: insertMatchRequest,
             		type: "get",
             		success: function(data) {
-            			console.log("매칭신청 성공");
+            			if(data == 0) {
+            				alert("매칭 신청 실패");
+            			} else {
+            				alert("매칭 신청 성공");
+            			}
             		},
-            		error: function(date) {
-            			console.log("매칭신청 실패;");
+            		error: function(data) {
+            			if(data == 0) {
+            				alert("매칭 신청이 실패했습니다.");
+            			}
             		}
             });
             

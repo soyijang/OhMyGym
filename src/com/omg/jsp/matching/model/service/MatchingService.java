@@ -63,21 +63,28 @@ public class MatchingService {
 		return hmap;
 	}
 
-	public int insertMatchRequest(HashMap<String, String> matchingInfo) {
+	public HashMap<String, Integer> insertMatchRequest(HashMap<String, String> matchingInfo) {
 		Connection con = getConncection();
 		
 		int insertRequestResult = new MatchingDao().insertMatchRequest(con, matchingInfo);
+		System.out.println("requestResult : " + insertRequestResult);
+		
 		int insertMatchChatResult = new MatchingDao().insertMatchChat(con, matchingInfo);
+		System.out.println("MatchChatResult : " + insertMatchChatResult);
 		
-		int totalResult = insertRequestResult + insertMatchChatResult;
+//		int totalResult = insertRequestResult + insertMatchChatResult;
+		HashMap<String, Integer> checkInsert = new HashMap<String, Integer>();
 		
-		if(totalResult > 1) {
+		checkInsert.put("request", insertRequestResult);
+		checkInsert.put("matchChat", insertMatchChatResult);
+		
+		if(insertRequestResult > 0 && insertMatchChatResult > 0) {
 			commit(con);
 		} else {
 			rollback(con);
 		}
 				
-		return totalResult;
+		return checkInsert;
 	}
 
 

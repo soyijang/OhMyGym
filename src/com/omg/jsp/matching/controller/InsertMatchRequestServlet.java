@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.omg.jsp.matching.model.service.MatchingService;
 
 /**
@@ -40,9 +41,18 @@ public class InsertMatchRequestServlet extends HttpServlet {
 		matchingInfo.put("followerId", followerId);
 		matchingInfo.put("trainerId", trainerId);
 		
-		int result = new MatchingService().insertMatchRequest(matchingInfo);
+		HashMap<String, Integer> checkInsert = new MatchingService().insertMatchRequest(matchingInfo);
 		
-
+		if(checkInsert.get("request") > 0 && checkInsert.get("matchChat") > 0) {
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			
+			new Gson().toJson(checkInsert, response.getWriter());
+		} else {
+			String page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "매칭신청 실패");
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 	}
 
 	/**
