@@ -12,7 +12,7 @@
 </head>
 
 <body>
-\
+
 	<section style="height: 1500px;">
 		<div class="mypage-contents">
 			<%@ include file="followerMypageAside.jsp"%>

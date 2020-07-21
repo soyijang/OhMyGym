@@ -422,7 +422,7 @@ div.post_commentback{
 								<div class="add_part">
 									<!-- 사용자 프로필 -->
 									<div class="user_img" style="display: inline-block;">
-										<img src="" width="50px" height="50px" style="border-radius: 70%; overflow: hidden;">
+										<img class="<%=loginUser.getMemberId()%>"src="" width="50px" height="50px" style="border-radius: 70%; overflow: hidden;">
 									</div>
 									<div id="user_profile" class="post_userprofile">
 										<em class="user_name"><%=loginUser.getName()%>
@@ -552,7 +552,7 @@ div.post_commentback{
 					$addPostPart.prepend("<div id='postcontainer'>" +
 						"<div class='post_part' id='postcontent'>"+
 						"<div class='user_img' style='display: inline-block;'>"+
-						"<img src='' width='50px' height='50px'></div>"+
+						"<img class='"+data[key].groupUserId+"' width='50px' height='50px'></div>"+
 						"<div id='user_profile' class='user_profile'>"+
 						"<em class='user_name'>"+data[key].groupUserId+"</em><br>"+ 
 						"<span class='upload_time'>"+data[key].groupDate+" "+data[key].groupDateTime+"</span></div><hr>"+
@@ -576,6 +576,7 @@ div.post_commentback{
 											"<button id='add_comment_btn' onclick='addReply("+data[key].groupBoardNum+");'>입력하기</button>"+
 											"</div></div></div></div></details></div></div>");
 					selectLikes(data[key].groupBoardNum);
+			        profileload(data[key].groupUserId);
 				}
 				updatePosts();
 				selectAllComment();
@@ -597,7 +598,7 @@ div.post_commentback{
 						var $addCommentPart = $("#post_comments"+data[key].groupBoardNum);
 						$addCommentPart.prepend("<div class='post_part_comment' style='padding: 5px;'>"+
 							"<div class='user_img' style='display: block; float: left; margin-top: 10px;'>"+
-								"<img src='' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
+								"<img class='"+data[key].commentUserId+"' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
 							"<div id='user_profile' style='display: block; float: left; margin-left: 15px; margin-top: 10px;'>"+
 								"<em class='user_name_comment' style='font-size: 10px; display: block; float: left;'>"+
 								data[key].commentUserId+
@@ -606,6 +607,7 @@ div.post_commentback{
 							data[key].commentContent+"</textarea></div>");
 						
 						updateReplys();
+				        profileload(data[key].commentUserId);
 					}
 				},
 				error : function(){
@@ -654,6 +656,7 @@ div.post_commentback{
 	
 		function onInputPost() {
 			$(".add_part").css("display", "block");
+			profileload(<%=loginUser.getMemberId()%>);
 		}
 
 		function offInputPost() {
@@ -697,7 +700,7 @@ div.post_commentback{
 					$addPostPart.prepend("<div id='postcontainer'>" +
 						"<div class='post_part' id='postcontent'>"+
 						"<div class='user_img' style='display: inline-block;'>"+
-						"<img src='' width='50px' height='50px'></div>"+
+						"<img class='"+data.groupUserId+"' width='50px' height='50px'></div>"+
 						"<div id='user_profile' class='user_profile'>"+
 						"<em class='user_name'>"+data.groupUserId+"</em><br>"+ 
 						"<span class='upload_time'>"+"</span></div><hr>"+
@@ -723,6 +726,7 @@ div.post_commentback{
 			        $(".post_box").each(function(index,item){
 			               $(item).height(1).height( $(item).prop('scrollHeight'));
 			               $(item).css("height", $(item).height());
+			        profileload(data.groupUserId);
 			        })
 				},
 				error : function() {
@@ -758,14 +762,14 @@ div.post_commentback{
  					var $addCommentPart = $("#post_comments"+data.groupBoardNum);
  					$addCommentPart.prepend("<div class='post_part_comment' style='padding: 5px;'>"+
 							"<div class='user_img' style='display: block; float: left; margin-top: 10px;'>"+
-								"<img src='' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
+								"<img class='"+data.commentUserId+"' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
 							"<div id='user_profile' style='display: block; float: left; margin-left: 15px; margin-top: 10px;'>"+
 								"<em class='user_name_comment' style='font-size: 10px; display: block; float: left;'>"+
 								data.commentUserId+
 								"</em><br> <span class='upload_time_comment' style='font-size: 10px;'>"+"5분전"+"</span>	</div>"+
 							"<textarea class='comments_box' cols='55' name='post_comments_content' style='display: block; height: 60px; float: left;' readonly>"+
 							data.commentContent+"</textarea></div>");
- 					
+ 					 profileload(data.commentUserId);
  					updateReplys();
  				},
  				error : function(){
@@ -850,7 +854,29 @@ div.post_commentback{
 		}
 	
 	</script>
+	<script>
+	var profileManageCode;
 
+	function profileload(userId){   
+	     $.ajax({
+			 url : "/omg/loadProfile.all",
+		     type : 'post',
+		     data : {
+		          	userId : userId
+			       },
+			       success : function(data) {
+			          profileManageCode = data.fileManageName;
+			          console.log(profileManageCode);
+			          $("."+userId).attr("src", "<%=request.getContextPath()%>/resources/test/"+profileManageCode); 
+			 		},
+			 		error : function(){
+						profileManageCode = "";
+			 		}
+	     })
+	}		
+	profileload();
+	
+	</script>
 	<div style="position: absolute; top: 1100px; margin-left: 0px; margin-right: 0px;">
 		<%@ include file="../../common/footer.jsp"%>
 	</div>
