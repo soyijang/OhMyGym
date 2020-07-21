@@ -321,6 +321,43 @@ public class MatchingDao {
 		
 		return avgMap;
 	}
+	public int insertMatchRequest(Connection con, HashMap<String, String> matchingInfo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertMatchRequest");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, matchingInfo.get("trainerId"));
+			pstmt.setString(2, matchingInfo.get("followerId"));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	public int insertMatchChat(Connection con, HashMap<String, String> matchingInfo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertMatchChat");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, matchingInfo.get("matchingChatContent"));
+			pstmt.setString(2, matchingInfo.get("followerId"));
+			pstmt.setString(3, matchingInfo.get("trainerId"));
+			pstmt.setString(4, matchingInfo.get("followerId"));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	
 	

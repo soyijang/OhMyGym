@@ -290,15 +290,15 @@ div.tariner_subAbility {
 					</div>
 					<div
 						style="margin-top: 10px; font-size: 0.9em; font-weight: bold; margin-bottom: 10px;">희망하시는
-						요일 및 시간대를 입력해주세요</div>
-					<textarea style="width: 300px; height: 55px; resize: none;"
+						요일 및 시간대를 입력해주세요.</div>
+					<textarea id="insertMatchChat" style="width: 300px; height: 55px; resize: none;"
 						placeholder="예시) 수, 금 오후 8시~9시"></textarea>
 
 					<div style="font-size: 0.8em; font-weight: bold; color: red;">특정
 						사유가 있는경우 트레이너측에서 매칭을 거절할 수 있습니다. 이점 유의해주세요</div>
 				</div>
 				<div style="margin-top: 15px; margin-left: 165px;">
-					<button onclick="completeMatching();"
+					<button onclick="completeMatching();" id="completeMatchingBtn"
 						style="width: 100px; height: 30px; border: none; cursor: pointer; background: orangered; color: white; font-weight: bold;">매칭신청하기</button>
 					<a onclick="jQuery('.matching_wrap').fadeOut('slow')"
 						style="margin-left: 10px; padding: 6.5px; font-size: 0.8em; width: 100px; height: 30px; border: none; cursor: pointer; background: navy; color: white; font-weight: bold;">신청취소</a>
@@ -553,6 +553,34 @@ div.tariner_subAbility {
             $("#follower_Match_Main").css("height",900);
             $("#tarinerWait").css("display","block");
             updateChat();
+            
+            //ajax
+            var matchingChatContent = $("#insertMatchChat").val();
+            var followerId = "<%= loginUser.getMemberId() %>";
+            var trainerId = $('.profile_Name').text();
+            console.log(matchingChatContent);
+            console.log(followerId);
+            console.log(trainerId);
+            
+            var insertMatchRequest = {
+            		matchingChatContent: matchingChatContent,
+            		followerId: followerId,
+            		trainerId: trainerId
+            };
+            
+            $.ajax({
+            		url:"insertMatchRequest.mc",
+            		data: insertMatchRequest,
+            		type: "get",
+            		success: function(data) {
+            			console.log("매칭신청 성공");
+            		},
+            		error: function(date) {
+            			console.log("매칭신청 실패;");
+            		}
+            });
+            
+            
         }
 
         function submitMatching(){

@@ -63,5 +63,22 @@ public class MatchingService {
 		return hmap;
 	}
 
+	public int insertMatchRequest(HashMap<String, String> matchingInfo) {
+		Connection con = getConncection();
+		
+		int insertRequestResult = new MatchingDao().insertMatchRequest(con, matchingInfo);
+		int insertMatchChatResult = new MatchingDao().insertMatchChat(con, matchingInfo);
+		
+		int totalResult = insertRequestResult + insertMatchChatResult;
+		
+		if(totalResult > 1) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+				
+		return totalResult;
+	}
+
 
 }
