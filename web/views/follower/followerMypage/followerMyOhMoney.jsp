@@ -223,24 +223,6 @@ table.cash_list th, table.cash_list td {
 }
 
 /*푸터*/
-footer {
-	background: rgb(245, 245, 245);
-	font-family: "Noto Sans KR";
-	font-size: 11px;
-	font-weight: 400;
-}
-
-p {
-	color: rgb(116, 116, 116);
-}
-
-img.footer_logo {
-	margin-right: 80px;
-}
-
-img.footer-icon {
-	margin-right: 0px;
-}
 
 .buy_wrap {
 	display: none;
@@ -437,6 +419,8 @@ div#return_list_div {
 </style>
 <title>Insert title here</title>
 </head>
+
+
 <body>
 	<div class="return_wrap" style="display: none;">
 		<div class="dark_bg" onclick="jQuery('.return_wrap').fadeOut('slow')"></div>
@@ -541,6 +525,9 @@ div#return_list_div {
 		</div>
 	</div>
 		<%@ include file="followerMypageAside.jsp"%>
+		<script>
+			var userId ="<%=loginUser.getMemberId()%>";
+		</script>
 	<section>
 		<article id="cash_article" style="position: absolute; left: 370px;">
 			<div class="cash_content"
@@ -634,43 +621,12 @@ div#return_list_div {
 							<tbody>
 							</tbody>
 						</table>
-						<script>
 						
-                            function checkReturn(number){
-                            	if($("#btn"+number).text()=="확인대기"){
-	                                var isOk = confirm("환급을 완료하셨다면 확인해주세요!");
-	                                
-	                                var numberVal = number;
-	                                console.log(numberVal);
-	                                if(isOk){
-	                                	$.ajax({
-	                           	 			url : "/omg/checkOkReturn.follower",
-	                           	 			data : {
-	                           	 				numberVal : numberVal
-	                           	 			},
-	                           	 			type : "post",
-	                           	 			success : function(data) {
-	                                            $("#btn"+numberVal).attr('disabled','true');
-	                                            $("#btn"+numberVal).text("최종확인");
-	                           	 			},
-	                           	 			error : function() {
-	                           	 				console.log("실패!")
-	                           	 			}
-	                            		})
-	                                	//확인으로 변경하는 ajax 구현
-	                                	//해당 ajax에서는 환급가능 오머니 액수를 깎아야 한다.
-	                                	//영수증을 받아볼수 있는 기능도 구현해야함      	
-	                                }
-                            	} else {
-                            		console.log("대기중이 아님");
-                            	}
-                            }                   
-                        </script>
 
 						<script>
                         callList();
                         function callList(){
-                     		var userId =  "<%=loginUser.getMemberId()%>";
+
                    	 		$.ajax({
                    	 			url : "/omg/listOhMoney.follower",
                    	 			data : {
@@ -693,7 +649,7 @@ div#return_list_div {
                                         	"<td>"+data[key].balance+"</td></tr>");
                    	 					listnum = listnum - 1;
                    	 					listcount = listcount + 1;
-                   	 					if(listcount > 10){
+                   	 					if(listcount > 8){
                    	 						break;
                    	 					}
                    	 				}	
@@ -705,8 +661,9 @@ div#return_list_div {
                         }
                         
                         checkRefundList();
+                        var managerId;
                         function checkRefundList(){
-                        	var userId = "<%=loginUser.getMemberId()%>";
+                        	
                         	$.ajax({
                    	 			url : "/omg/refundList.follower",
                    	 			data : {
@@ -720,14 +677,14 @@ div#return_list_div {
                 	 				var Relistcount = 0;
                 	 				for(var key in data){
                 	 					$ReturnlistPos.append("<tr>"+
-                                    	"<td>"+Relistnum+"</td>"+
+                                    	"<td>"+"<a style='display:none;' id=RefundManager"+data[key].refundNum+">"+data[key].managerId +"</a>"+Relistnum+"</td>"+
                                     	"<td>"+data[key].refundDate+"</td>"+
-                                    	"<td>"+data[key].money+"</td>"+
+                                    	"<td id=Refundmoney"+data[key].refundNum+">"+data[key].money+"</td>"+
                                     	"<td>"+"<a style='cursor: pointer;' onclick='Download("+data[key].fileCode+")'><i class='fas fa-file'></i></a>"+"</td>"+
                                     	"<td><button id=btn"+data[key].refundNum+" onclick='checkReturn("+data[key].refundNum+");'>"+data[key].refundState+"</button></td></tr>");
                 	 					Relistnum = Relistnum - 1;
                 	 					Relistcount = Relistcount + 1;
-                	 					if(Relistcount > 10){
+                	 					if(Relistcount > 8){
                 	 						break;
                 	 					}
                 	 				}
@@ -797,7 +754,7 @@ div#return_list_div {
         }
         
         function submitRefund(){
-        	var userId = "<%=loginUser.getMemberId()%>";
+
         	var money = $('#returnOhmoney').val();
         	 $('#returnOhmoney').val('');
    	 		$.ajax({
@@ -825,7 +782,6 @@ div#return_list_div {
                     	var nofundBalance = 0;
                     	
                         var money = 0;
-                  		checkMoney();
                         function removeComma(str){
                             return parseInt(str.replace(/,/g,""));
                         }
@@ -893,7 +849,6 @@ div#return_list_div {
                         
                         
                         function checkMoney(){
-                        		var userId =  "<%=loginUser.getMemberId()%>";
                        	 		$.ajax({
                        	 			url : "/omg/checkOhMoney.follower",
                        	 			data : {
@@ -909,15 +864,18 @@ div#return_list_div {
                        	 				balance = data.balance;
                        	 				refundBalance = data.refundBal;
                        	 				nofundBalance = data.nofundBal;
+                       	 				console.log(refundBalance);
+                       	 				console.log(balance);
+                       	 				console.log(nofundBalance);
                        	 			},
                        	 			error : function() {
                        	 				console.log("실패!")
                        	 			}
                         		})
                         }
-                        
+                        checkMoney();
                         function addMoney(value){
-                     		var userId =  "<%=loginUser.getMemberId()%>";
+
                      		var addmoney = value;
                      		var content = "카드 결제로 인한 정상 충전";
                      		var means = "카드";
@@ -949,7 +907,73 @@ div#return_list_div {
                        	 		
                        
                     </script>
+					<script>
 
+                            function checkReturn(number){
+                            	if($("#btn"+number).text()=="확인대기"){
+	                                var isOk = confirm("환급을 완료하셨다면 확인해주세요!");
+	                                
+	                 
+	                                var numberVal = number;
+	                                
+	                                
+	                                console.log(numberVal);
+	                                if(isOk){
+	                                	
+	                                	var returnMoney = $("#Refundmoney"+numberVal).text();
+	                                	var returnManager = $("#RefundManager"+numberVal).text();
+	                                	
+	                                	console.log(returnMoney);
+	                                	
+	                                	$.ajax({
+	                           	 			url : "/omg/checkOkReturn.follower",
+	                           	 			data : {
+	                           	 				numberVal : numberVal
+	                           	 			},
+	                           	 			type : "post",
+	                           	 			success : function(data) {
+		                           	 			
+	                                    		var content = "사용자 요청에 의한 환급";
+	                                     		var userBalance = balance;
+	                                     		var userReBal = refundBalance;
+	                                     		var userNoBal = nofundBalance;
+	                           	 				
+		                           	 			$.ajax({
+		                               	 			url : "/omg/returnMoney.follower",
+		                               	 			data : {
+		                               	 				returnMoney : returnMoney,
+		                               	 				returnManager : returnManager,
+		                               	 				userId : userId,
+		                               	 				content : content,
+		                               	 				userBalance : userBalance,
+		                               	 				userReBal : userReBal,
+		                               	 				userNoBal : userNoBal
+		                               	 			},
+		                               	 			type : "post",
+		                               	 			success : function(data) {
+		                               	 				checkMoney();
+		                               	 			},
+		                               	 			error : function() {
+		                               	 				console.log("실패!")
+		                               	 			}
+		                                		})
+		                           	 				
+		                                            $("#btn"+numberVal).attr('disabled','true');
+		                                            $("#btn"+numberVal).text("최종확인");
+		                           	 			},
+		                           	 			error : function() {
+		                           	 				console.log("실패!")
+		                           	 			}
+	                            		})
+	                                	//확인으로 변경하는 ajax 구현
+	                                	//해당 ajax에서는 환급가능 오머니 액수를 깎아야 한다.
+	                                	//영수증을 받아볼수 있는 기능도 구현해야함      	
+	                                }
+                            	} else {
+                            		console.log("대기중이 아님");
+                            	}
+                            }                   
+                        </script>
 
 	<div
 		style="position: absolute; top: 1100px; margin-left: 0px; margin-right: 0px;">

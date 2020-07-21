@@ -12,25 +12,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.omg.jsp.groupCommu.model.vo.GroupComment;
 import com.omg.jsp.ohmoney.model.service.OhMoneyService;
 import com.omg.jsp.ohmoney.model.vo.OhMoney;
 
-@WebServlet("/listOhMoney.follower")
-public class ListOhMoneyServlet extends HttpServlet {
+/**
+ * Servlet implementation class ListDirectMoneyServlet
+ */
+@WebServlet("/directList.manager")
+public class ListDirectMoneyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ListOhMoneyServlet() {
+    public ListDirectMoneyServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+		ArrayList<OhMoney> directMoneyList = new OhMoneyService().listDirectMoney();
 		
-		String userId = request.getParameter("userId");
-		
-		ArrayList<OhMoney> ohMoneyList = new OhMoneyService().listOhMoney(userId);
-		
-		Collections.sort(ohMoneyList, new Comparator<OhMoney>() {
+		Collections.sort(directMoneyList, new Comparator<OhMoney>() {
 
 			@Override
 			public int compare(OhMoney o1, OhMoney o2) {
@@ -40,11 +40,18 @@ public class ListOhMoneyServlet extends HttpServlet {
 			
 		});
 		
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		new Gson().toJson(ohMoneyList, response.getWriter());
+		String page = "";
+		if(directMoneyList != null) {
+			page = "views/manager/manageFollower/manageOhMoneyDirectHistory.jsp";
+			request.setAttribute("directMoneyList", directMoneyList);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "오머니 결제 기록 조회 실패");
+		}
 		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

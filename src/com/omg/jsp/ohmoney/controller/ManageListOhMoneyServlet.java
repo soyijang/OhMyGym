@@ -33,7 +33,7 @@ public class ManageListOhMoneyServlet extends HttpServlet {
 				@Override
 				public int compare(OhMoney o1, OhMoney o2) {
 					
-					return o2.getManageCode().compareTo(o1.getManageCode());
+					return Integer.parseInt(o2.getManageCode()) - Integer.parseInt(o1.getManageCode());
 				}
 				
 			});

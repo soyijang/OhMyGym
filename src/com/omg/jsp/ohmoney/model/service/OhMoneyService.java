@@ -126,8 +126,64 @@ public class OhMoneyService {
 		} else {
 			rollback(con);
 		}
+		close(con);
 		
 		return result;
+	}
+
+	public int refundUpdate(String getId, OhMoney userOhMoney) {
+		
+		Connection con = getConncection();
+		
+		int result = new OhMoneyDao().refundUpdate(con, getId, userOhMoney);
+		
+		if(result > 0) {
+			commit(con);
+		}  else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
+	public OhMoney searchUser(String searchId) {
+		
+		Connection con = getConncection();
+		
+		OhMoney resultUser = new OhMoneyDao().searchUser(con, searchId);
+		
+		close(con);
+		
+		return resultUser;
+	}
+
+	public int directUser(OhMoney inputOhMoney) {
+		
+		Connection con = getConncection();
+		
+		int result = new OhMoneyDao().directUser(con, inputOhMoney);
+		
+		if(result > 0 ) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<OhMoney> listDirectMoney() {
+		
+		Connection con = getConncection();
+		
+		ArrayList<OhMoney> directList = new OhMoneyDao().listDirectMoney(con);
+		
+		close(con);
+		
+		return directList;
 	}
 
 }

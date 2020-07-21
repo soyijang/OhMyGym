@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>오마이짐 관리자 페이지</title>
     <style>
+    
         section {
             position: absolute;
             display:inline-block;

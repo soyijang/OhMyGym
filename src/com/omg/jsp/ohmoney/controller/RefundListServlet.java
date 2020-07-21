@@ -35,7 +35,8 @@ public class RefundListServlet extends HttpServlet {
 			@Override
 			public int compare(ReFundOhMoney o1, ReFundOhMoney o2) {
 				
-				return o2.getRefundNum().compareTo(o1.getRefundNum());
+				//return o2.getRefundNum().compareTo(o1.getRefundNum());
+				return Integer.parseInt(o2.getRefundNum()) - Integer.parseInt(o1.getRefundNum());
 			}
 			
 		});
