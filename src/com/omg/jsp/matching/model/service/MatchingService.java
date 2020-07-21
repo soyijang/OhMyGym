@@ -31,6 +31,10 @@ public class MatchingService {
 		Connection con = getConncection();
 		
 		ArrayList<HashMap<String, Object>> list = new MatchingDao().selectTrainerList(con);
+		HashMap<String, Object> gradeAvg = new MatchingDao().selectGradeAvg(con);
+		list.add(gradeAvg);
+		
+		System.out.println(list);
 		
 		close(con);
 		

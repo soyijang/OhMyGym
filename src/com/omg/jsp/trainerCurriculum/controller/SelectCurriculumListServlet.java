@@ -39,6 +39,16 @@ public class SelectCurriculumListServlet extends HttpServlet {
 		HashMap<String, Object> curriInfo = new TrainerCurriculumService().selectCurriculumList(loginUser);
 		
 		
+		String page = "";
+		if(!curriInfo.isEmpty()) {
+			page = "views/trainer/trainerOhMyPt/trainerCurriculum.jsp";
+			request.setAttribute("curriInfo", curriInfo);
+			request.getRequestDispatcher(page).forward(request, response);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "커리큘럼 관리페이지 로드 실패");
+		}
+		
 	}
 
 	/**

@@ -8,11 +8,12 @@ public class TrainerVideo {
 	private String trainerUploadTime;	//업로드 시간
 	private String bookmarkCount;
 	private String trainerVideoFileCode;	//영상첨부코드
+	private String videoTitle;
 	
 	public TrainerVideo() {}
 
 	public TrainerVideo(String trainerVideoCode, String curriculumCode, String trainerUploadDate,
-			String trainerUploadTime, String bookmarkCount, String trainerVideoFileCode) {
+			String trainerUploadTime, String bookmarkCount, String trainerVideoFileCode, String videoTitle) {
 		super();
 		this.trainerVideoCode = trainerVideoCode;
 		this.curriculumCode = curriculumCode;
@@ -20,6 +21,7 @@ public class TrainerVideo {
 		this.trainerUploadTime = trainerUploadTime;
 		this.bookmarkCount = bookmarkCount;
 		this.trainerVideoFileCode = trainerVideoFileCode;
+		this.videoTitle = videoTitle;
 	}
 
 	public String getTrainerVideoCode() {
@@ -70,12 +72,21 @@ public class TrainerVideo {
 		this.trainerVideoFileCode = trainerVideoFileCode;
 	}
 
+	public String getVideoTitle() {
+		return videoTitle;
+	}
+
+	public void setVideoTitle(String videoTitle) {
+		this.videoTitle = videoTitle;
+	}
+
 	@Override
 	public String toString() {
 		return "TrainerVideo [trainerVideoCode=" + trainerVideoCode + ", curriculumCode=" + curriculumCode
 				+ ", trainerUploadDate=" + trainerUploadDate + ", trainerUploadTime=" + trainerUploadTime
-				+ ", bookmarkCount=" + bookmarkCount + ", trainerVideoFileCode=" + trainerVideoFileCode + "]";
+				+ ", bookmarkCount=" + bookmarkCount + ", trainerVideoFileCode=" + trainerVideoFileCode
+				+ ", videoTitle=" + videoTitle + "]";
 	}
-	
+
 	
 }
