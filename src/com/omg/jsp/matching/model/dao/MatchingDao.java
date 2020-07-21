@@ -71,7 +71,7 @@ public class MatchingDao {
 	public ArrayList<HashMap<String, Object>> selectTrainerList(Connection con) {
 		Statement stmt = null;
 		ArrayList<HashMap<String, Object>> list = null;
-		HashMap<String, Object> hmap = null;
+		HashMap<String, Object> hmap = null;                         
 		ResultSet rset = null;
 
 		String query = prop.getProperty("selectTrainerList");
@@ -87,7 +87,6 @@ public class MatchingDao {
 				hmap = new HashMap<>();
 				
 				hmap.put("trainerId", rset.getString("MEMBER_ID"));
-				hmap.put("gradeAvg", rset.getDouble("AVG(R.GRADE)"));
 				hmap.put("trainerComment", rset.getString("TRAINER_COMMENT"));
 				hmap.put("mainField", rset.getString("TRAINER_MAINFIELD"));
 				hmap.put("subField", rset.getString("TRAINER_SUBFIELD"));
@@ -287,6 +286,30 @@ public class MatchingDao {
 			close(rset);
 		}
 		return trList;
+	}
+	public HashMap<String, Object> selectGradeAvg(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		HashMap<String, Object> avgMap = new HashMap<String, Object>();
+		
+		String query = prop.getProperty("selectGradeAvg");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				avgMap.put(rset.getString("TRAINER_ID"), (Object) rset.getDouble("AVG(GRADE)"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return avgMap;
 	}
 	
 	

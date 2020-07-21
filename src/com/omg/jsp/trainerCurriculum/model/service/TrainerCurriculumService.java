@@ -18,10 +18,13 @@ public class TrainerCurriculumService {
 		
 		HashMap<String, Object> curriInfo = new HashMap<String, Object>();
 		
-		ArrayList<TrainerCurriculum> curriculumn = new TrainerCurriculumDao().selectTrainerCurriculum(con, loginUser);
+		ArrayList<TrainerCurriculum> curriculum = new TrainerCurriculumDao().selectTrainerCurriculum(con, loginUser);
 		ArrayList<TrainerVideo> video = new TrainerCurriculumDao().selectTrainerVideo(con, loginUser);
 		
-		return null;
+		curriInfo.put("curriculum", curriculum);
+		curriInfo.put("video", video);
+		
+		return curriInfo;
 	}
 
 }

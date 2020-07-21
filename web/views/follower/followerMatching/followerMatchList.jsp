@@ -190,7 +190,7 @@ div.tariner_subAbility {
 					style="overflow: auto; clear: both; margin-left: auto; margin-right: auto; width: 1250px; height: 500px;">
 					<div style="margin: auto; padding: 10px; padding-left: 30px; padding-right: 30px; text-align: center;">
 						<!-- 리스트 시작 -->
-						<%for(int i = 0; i < list.size(); i++) {
+						<%for(int i = 0; i < list.size() - 1; i++) {
 							HashMap<String, Object> hmap = list.get(i); %>
 							
 							<div class="trainer_Info" style="float: left;">
@@ -202,7 +202,7 @@ div.tariner_subAbility {
 									<a class="trainerName"><%= hmap.get("trainerId") %></a>
 									<div class="trainerScore" style="text-align: center;">
 										<img width="18px" height="18px" src="/omg/resources/img_icon/ohmystar_pull.png" style="vertical-align: middle;">&nbsp;&nbsp;
-										<%= hmap.get("gradeAvg") %>
+										<%= list.get(list.size() - 1).get(hmap.get("trainerId")) %>
 									</div>
 									<div class="tariner_comment"><%= hmap.get("trainerComment") %></div>
 									<div class="tariner_ability">#<%= hmap.get("mainField") %></div>

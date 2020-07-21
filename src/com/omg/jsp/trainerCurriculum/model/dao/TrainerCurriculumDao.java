@@ -21,7 +21,7 @@ public class TrainerCurriculumDao {
 	private Properties prop = new Properties();
 	
 	public TrainerCurriculumDao() {
-		String fileName = HealthInfoDao.class.getResource("/sql/healthInfo/curriculum-query.propreties").getPath();
+		String fileName = HealthInfoDao.class.getResource("/sql/trainerCurriculum/curriculum-query.propreties").getPath();
 		
 		try {
 			prop.load(new FileReader(fileName));
@@ -72,13 +72,37 @@ public class TrainerCurriculumDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, loginUser.getMemberId());
+//			pstmt.setString(2, x);
 			
+			/*TRAINER_VIDEOCODE	VARCHAR2(50 BYTE)	No		1	트레이너영상번호
+			CURRICULUM_CODE	VARCHAR2(50 BYTE)	No		2	커리큘럼코드
+			TRAINER_UPLOADDATE	VARCHAR2(50 BYTE)	No		3	트레이너영상업로드일자
+			BOOKMARK_COUNT	VARCHAR2(500 BYTE)	No		4	북마크수
+			TRAINER_VIDEO_FILECODE	VARCHAR2(200 BYTE)	No		5	트레이너영상첨부코드
+			TRAINER_UPLOADTIME	VARCHAR2(50 BYTE)	No		6	트레이너영상업로드시간
+			VIDEO_TITLE	VARCHAR2(1000 BYTE)	Yes		7	비디오게시글제목*/
 			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				v = new TrainerVideo();
+				
+				v.setBookmarkCount(rset.getString("BOOKMARK_COUNT"));
+				v.setCurriculumCode(rset.getString("CURRICULUM_CODE"));
+				v.setTrainerUploadDate(rset.getString("TRAINER_UPLOADDATE"));
+				v.setTrainerUploadTime(rset.getString("TRAINER_UPLOADTIME"));
+				v.setTrainerVideoCode(rset.getString("TRAINER_VIDEOCODE"));
+				v.setTrainerVideoFileCode(rset.getString("TRAINER_VIDEO_FILECODE"));
+				v.setVideoTitle(rset.getString("VIDEO_TITLE"));
+				
+				vList.add(v);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return vList;
 	}
 
 }
