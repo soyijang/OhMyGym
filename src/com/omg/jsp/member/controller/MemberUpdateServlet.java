@@ -36,7 +36,7 @@ public class MemberUpdateServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getMemberId();
-		
+		String userType = loginUser.getMemberDivision();
 		
 		String page = "";
 		String password = "";
@@ -69,7 +69,14 @@ public class MemberUpdateServlet extends HttpServlet {
 			int result = new MemberService().updateMember(requestMember);
 			
 		     if(result > 0) {
-		     	page = "views/follower/followerMypage/followerMyInfo.jsp";
+		    	switch (userType) {
+				case "trainer":
+					page = "views/trainer/trainerMypage/trainerMyInfo.jsp";
+					break;
+				case "follower":
+					page = "views/follower/followerMypage/followerMyInfo.jsp";
+					break;
+				}
 				request.setAttribute("successMessage", "updateMember");
 				request.getRequestDispatcher(page).forward(request, response);
 		      } else {

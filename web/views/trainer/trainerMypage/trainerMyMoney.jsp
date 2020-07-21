@@ -21,10 +21,6 @@
 </head>
 <body>
 
-	<header>
-		<%@ include file="../../common/trainerNav.jsp"%>
-	</header>
-
 	<section style="height: 1500px;">
 		<div class="mypage-contents">
 			<%@ include file="trainerMypageAside.jsp"%>
