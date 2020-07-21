@@ -112,19 +112,19 @@
     <nav>
         <div><img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup" ></div>
         <ul><details open><summary>회원관리</summary>
-            <li><a href="#">고객조회/수정</a></li><br>
+            <li><a href="<%=request.getContextPath()%>/SelectFollowerListServlet">고객조회/수정</a></li><br>
         </details></ul>
 
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">
         <ul><details open><summary>트레이너 관리</summary>
-            <li><a href="#">트레이너조회/수정</a></li>
+            <li><a href="<%=request.getContextPath()%>/SelectTrainerListServlet">트레이너조회/수정</a></li>
             <li><a href="#">트레이너 승인요청관리</a></li>
             <li><a href="../managerAboutMypage/manageMoney.jsp">비용지급관리</a></li><br>
         </details></ul>
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">
         <ul><details open><summary>트레이닝룸 관리</summary>
             <li><a href="#">트레이닝룸 조회</a></li>
-            <li><a href="../manager/trainingHistory.jsp">트레이닝 진행 이력 관리</a></li><br>
+            <li><a href="">트레이닝 진행 이력 관리</a></li><br>
         </details></ul>
         
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">

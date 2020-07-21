@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*, java.util.*, com.omg.jsp.matching.model.vo.*" %>
+    pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*, java.util.*" %>
 <% ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");%>
 <!DOCTYPE html>
 <html>
@@ -32,7 +32,7 @@
             left: 0;
             top : 0;
             display: inline;
-            z-index: -100;
+            z-index: -100px;
         }
         #logo {
             position: absolute;
@@ -50,39 +50,7 @@
             font: bold 13px "Noto Sans KR Thin";
             color: white;
         }
-        nav {
-            position: absolute;
-            display: inline-block; 
-            top: 63px;
-            font-size: 15px;
-        }
-        #nav_background {
-            position: absolute;
-            z-index: -100;
-            top: 0;
-            height: 100%;
-            width: 200px;
-        }
-        nav ul {
-            background-color: 000532;
-            position: relative;
-            font-weight: bold;
-            color: white;
-            /* left: 30px;*/
-            top: 3px;
-            list-style: none;
-            width: 160px;
-            padding-left: 25px;
-        }
-        nav li {
-            color: black;
-            font-weight: normal;
-            margin: 8px;
-        }
-        nav a {
-            color: white;
-            font-size: 13px;
-        }
+        
         .menuGroup {
             display: inline-block;
             width: 200px;
@@ -156,7 +124,7 @@
         }
         #alignmentArea {
             margin: 0;
-            margin-top: 10;
+            margin-top: 10px;
             display: inline-block;
             position: relative;
             left: 958px;
@@ -192,18 +160,19 @@
             cursor: pointer;
         }
         #manyPeople {
-            margin-left: 30;
+            margin-left: 30px;
         }
     </style>
 
 </head>
 <body>
- <%@ include file="../../common/managerNav.jsp"%>
+    <%@ include file="../../common/managerNav.jsp"%>
     <section>
         <!--헤더 영역-->
         <article id="menuTitleArea">
+        <% int count = list.size();	%> 
             <p style="font-weight: bold; font-size: 1.5em; padding-top: 30px; padding-left: 30px;">트레이너 조회/수정</p><br>
-            <a id="manyPeople">검색 <a style="color: orangered;">5</a>명/</a><a>전체 <a style="color: orangered;">5</a>명</a>
+            <a id="manyPeople">검색 <a style="color: orangered;"><%= count %></a>명/</a><a>전체 <a style="color: orangered;"><%= count %></a>명</a>
         </article>
         <!--헤더 영역 종료-->
 
@@ -246,10 +215,9 @@
                 <table>
                     <tr>
                         <th width="30px;">No</th>
-                        <th width="80px;">ID</th>
-                        <th width="150x">닉네임</th>
+                        <th width="200px;">ID</th>
                         <th width="70px;">회원명</th>
-                        <th width="120px;">이메일</th>
+                        <th width="300px;">이메일</th>
                         <th width="120px;">연락처</th>
                         <th width="100px;">가입일</th>
                         <th width="60px;">회원상태</th>
@@ -257,86 +225,21 @@
                         <th width="80px">수강관리</th>
                     </tr>
                     
-                    <tr>
-                        <td>5</td>
-                        <td>brojin77</td>
-                        <td>3대700</td>
-                        <td>김형진</td>
-                        <td>brojin77@gmail.com</td>
-                        <td>010-2020-4949</td>
-                        <td>2020-07-01</td>
-                        <td>승인</td>
-                        <td>
-                            <button class="btn1" id="infoBtn" onclick="">상세정보</button>
-                        </td>
-                        <td>
-                            <button class="btn2" id="riverBtn" onclick="">수강관리</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>bumbum5</td>
-                        <td>역삼마동석</td>
-                        <td>김범근</td>
-                        <td>bumbum5@gmail.com</td>
-                        <td>010-5555-1717</td>
-                        <td>2020-06-29</td>
-                        <td>승인</td>
-                        <td>
-                            <button class="btn1" id="infoBtn" onclick="">상세정보</button>
-                        </td>
-                        <td>
-                            <button class="btn2" id="riverBtn" onclick="">수강관리</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>leelee22</td>
-                        <td>미스터리</td>
-                        <td>이재형</td>
-                        <td>leelee22@gmail.com</td>
-                        <td>010-2222-2222</td>
-                        <td>2020-06-28</td>
-                        <td>승인</td>
-                        <td>
-                            <button class="btn1" id="infoBtn" onclick="">상세정보</button>
-                        </td>
-                        <td>
-                            <button class="btn2" id="riverBtn" onclick="">수강관리</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>sbucks</td>
-                        <td>스벅</td>
-                        <td>최스벅</td>
-                        <td>sbucks76@gmail.com</td>
-                        <td>010-1122-3113</td>
-                        <td>2020-06-27</td>
-                        <td>승인대기</td>
-                        <td>
-                            <button class="btn1" id="infoBtn" onclick="">상세정보</button>
-                        </td>
-                        <td>
-                            <button class="btn2" id="riverBtn" onclick="">수강관리</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>window1</td>
-                        <td>애플짱</td>
-                        <td>빌게이츠</td>
-                        <td>window1@gmail.com</td>
-                        <td>010-1313-3131</td>
-                        <td>2020-07-25</td>
-                        <td>승인</td>
-                        <td>
-                            <button class="btn1" id="infoBtn" onclick="">상세정보</button>
-                        </td>
-                        <td>
-                            <button class="btn2" id="riverBtn" onclick="">수강관리</button>
-                        </td>
-                    </tr>
+                    <% int listnum = list.size(); %>
+                    <% for(Member m : list) { %>
+				<tr>
+					<td><%= listnum %></td>
+					<td><%= m.getMemberId() %></td>
+					<td><%= m.getName() %></td>
+					<td><%= m.getEmail() %></td>
+					<td><%= m.getPhone() %></td>
+					<td><%= m.getEnrollDate() %></td>
+					<td><%= m.getTrainerType() %></td>
+					<td><button onclick="" class="btn1" id="infoBtn">상세정보</button></td>
+					<td><button onclick="" class="btn2" id="riverBtn">수강관리</button></td>
+					
+				</tr>
+				<% listnum -= 1;} %>
 
                 </table>
             </div>

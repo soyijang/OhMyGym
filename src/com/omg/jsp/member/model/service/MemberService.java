@@ -156,6 +156,18 @@ public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
 		   
 		   return member;
 		}
+
+
+	public ArrayList<Member> selectTrainer() {
+
+		Connection con = getConncection();
+		
+		ArrayList<Member> list = new MemberDao().selectTrainer(con);
+		
+		close(con);
+		
+		return list;
+	}
 }
 
 
