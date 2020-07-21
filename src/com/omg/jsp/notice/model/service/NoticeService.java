@@ -59,7 +59,7 @@ public class NoticeService {
 		Notice notice = new NoticeDao().selectOne(con, nno);
 		
 		if(notice != null) {
-			//result = new NoticeDao().viewCount(con,nno);
+			result = new NoticeDao().viewCount(con,nno);
 			
 			if(result > 0) {
 				commit(con);
@@ -84,10 +84,10 @@ public class NoticeService {
 		Connection con = getConncection();
 		
 		Notice notice = null;
-		//int result = 0;
+		int result = 0;
 		
 		notice = new NoticeDao().FollowSelectOne(con, nno);
-		//result = new NoticeDao().viewCount(con, nno);
+		result = new NoticeDao().viewCount(con, nno);
 		
 		if(notice != null) {
 				commit(con);

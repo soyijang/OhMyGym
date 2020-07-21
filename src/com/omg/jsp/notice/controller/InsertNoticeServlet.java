@@ -32,6 +32,9 @@ public class InsertNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		String managerId=request.getParameter("managerId");
 		String category=request.getParameter("category");
 		String writedate=request.getParameter("writedate");
 		String status=request.getParameter("status");
@@ -43,17 +46,10 @@ public class InsertNoticeServlet extends HttpServlet {
 		System.out.println("status : "+status);
 		System.out.println("title : "+title);
 		System.out.println("content : "+content);
-		
-		java.sql.Date day = null;
-		
-		if(writedate != "") {
-			java.sql.Date.valueOf(writedate);
-		} else {
-			day = new java.sql.Date(new GregorianCalendar().getTimeInMillis());
-		}
-		
+
 		Notice newNotice = new Notice();
 		
+		newNotice.setManagerId(managerId);
 		newNotice.setBoardCategory(category);
 		newNotice.setWritedate(writedate);
 		newNotice.setStatus(status);
@@ -65,7 +61,7 @@ public class InsertNoticeServlet extends HttpServlet {
 		int result = new NoticeService().insertNotice(newNotice);
 		
 		if(result > 0) {
-			response.sendRedirect("/omg/jsp/selectList.no");
+			response.sendRedirect("selectList.no");
 		} else {
 			request.setAttribute("msg", "공지사항 등록 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

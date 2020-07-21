@@ -83,15 +83,17 @@ public class NoticeDao {
 		
 		int result = 0;
 		
-		String query = prop.getProperty("insertNorice");
+		String query = prop.getProperty("insertNotice");
 		
 		try {
 			pstmt=con.prepareStatement(query);
-			pstmt.setString(1, newNotice.getBoardCategory());
-			pstmt.setString(2, newNotice.getWritedate());
-			pstmt.setString(3, newNotice.getStatus());
-			pstmt.setString(4, newNotice.getBoardTitle());
-			pstmt.setString(5, newNotice.getBoardContent());
+			pstmt.setString(1, newNotice.getWritedate());
+			pstmt.setString(2, newNotice.getBoardContent());
+			pstmt.setString(3, newNotice.getBoardCategory());
+			pstmt.setString(4, newNotice.getManagerId());
+			pstmt.setString(5, newNotice.getBoardTitle());
+			pstmt.setString(6, newNotice.getStatus());
+			
 			
 			result=pstmt.executeUpdate();
 			
@@ -177,7 +179,7 @@ public class NoticeDao {
 		return notice;
 	}
 
-	/*public int viewCount(Connection con, int nno) {
+	public int viewCount(Connection con, int nno) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -186,8 +188,7 @@ public class NoticeDao {
 		
 		try {
 			pstmt=con.prepareStatement(query);
-			pstmt.setInt(1, nno);
-			pstmt.setInt(2, nno);
+			pstmt.setString(1, Integer.toString(nno));
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -199,7 +200,7 @@ public class NoticeDao {
 		return result;
 	}
 
-	public int getViewCount(Connection con) {
+	/*public int getViewCount(Connection con) {
 		
 		Statement stmt = null;
 		int viewCount = 0;
@@ -223,7 +224,7 @@ public class NoticeDao {
 		}
 
 		return viewCount;
-	}
-*/
+	}*/
+
 
 }
