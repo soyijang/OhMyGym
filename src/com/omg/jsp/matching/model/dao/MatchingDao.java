@@ -251,6 +251,7 @@ public class MatchingDao {
 				tcr.setCareerProof(rset.getString("CAREER_PROOF"));
 				tcr.setProofYn(rset.getString("PROOF_YN"));
 				tcr.setCareerType(rset.getString("CAREER_TYPE"));
+				tcr.setCareerField(rset.getString("CAREER_FIELD"));
 				
 				tcrList.add(tcr);
 			}

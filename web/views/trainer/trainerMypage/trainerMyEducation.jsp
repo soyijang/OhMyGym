@@ -37,15 +37,15 @@
 						<table class="list02">
 							<tr>
 								<td><a href="<%=request.getContextPath()%>/select.ti"><img src="/omg/resources/button/job/1_y.png" alt=""></a></td>
-								<td><a href="<%=request.getContextPath()%>/select.career.ti"><img src="/omg/resources/button/job/2_n.png" alt=""></a></span></td>
-								<td><a href="/omg/views/trainer/trainerMypage/trainerMyPrize.jsp"><img src="/omg/resources/button/job/3_n.png" alt=""></a></td>
+								<td><a href="<%=request.getContextPath()%>/select.career.ti"><img src="/omg/resources/button/job/2_n.png" alt=""></a></td>
+								<td><a href="<%=request.getContextPath()%>/select.prize.ti"><img src="/omg/resources/button/job/3_n.png" alt=""></a></td>
 								<td><a href=""><img src="/omg/resources/button/job/4_n.png" alt=""></a></td>
 							</tr>
 
 							<tr>
 								<td><span><a href="<%=request.getContextPath()%>/select.ti">학력정보</a></span></td>
 								<td><span><a href="<%=request.getContextPath()%>/select.career.ti">경력정보</a></span></td>
-								<td><span><a href="/omg/views/trainer/trainerMypage/trainerMyPrize.jsp">자격증/수상경력</a></span></td>
+								<td><span><a href="<%=request.getContextPath()%>/select.prize.ti">자격증/수상경력</a></span></td>
 								<td><span><a href="">인증신청결과</a></span></td>
 							</tr>
 						</table>
@@ -55,12 +55,15 @@
 					<!-- 수정 form -->
 					<form name="form1" id="form1" method="post">
 						<div class="tbl_normal diagnosis_step3 mb5" id="tblCrerInfo_1">
-							<p style="margin-top: 80px; margin-bottom: 10px;">학력정보</p>
+							<h1 style="margin-top: 80px; margin-bottom: 10px;">학력정보</h1>
 							<hr>
 							<p>※학력정보는 최대 3개만 노출됩니다.</p>
 							<% 
 							int num = 0;
-							for(TrainerEducation b : educationList) { %>
+							for(int i=0; i<3; i++){
+							/* for(TrainerEducation b : educationList) {  */
+							if(i < educationList.size()){
+							%>
 							
 							<div id="schoolOne">
 							<hr>
@@ -96,13 +99,13 @@
 
 										<tr>
 											<th scope="row"><label for="compNm_1">학교명<br>(기관명)</label></th>
-											<td><input type="text" name="compNm" id="compNm_1" style="width: 200px" value="<%= b.getEduName()%>" >
+											<td><input type="text" name="compNm" id="compNm_1" style="width: 200px" value="<%= educationList.get(i).getEduName()%>" >
 										</tr>
 
 										<tr>
 											<th scope="row"><span id="titleworkStartDt_1">입학일</span></th>
 											<td>
-												<input type="text" name="workStartDt" id="workStartDt_1" value="<%= b.getEduEnrollDate()%>">
+												<input type="text" name="workStartDt" id="workStartDt_1" value="<%= educationList.get(i).getEduEnrollDate()%>">
 												<button type="button" class="ui-datepicker-trigger">
 												<img src="/omg/resources/img_icon/calendar.png" alt="날짜 선택" title="날짜 선택">
 												</button>
@@ -110,7 +113,7 @@
 											
 											<th scope="row"><span id="titleworkEndDt_1">졸업일 </span></th>
 											<td>
-												<input type="text" name="workEndDt" id="workEndDt_1" value="<%= b.getGraduateDate()%>">
+												<input type="text" name="workEndDt" id="workEndDt_1" value="<%= educationList.get(i).getGraduateDate()%>">
 												<button type="button" class="ui-datepicker-trigger">
 												<img src="/omg/resources/img_icon/calendar.png" alt="날짜 선택" title="날짜 선택">
 												</button>
@@ -122,33 +125,18 @@
 										</tr>
 									</tbody>
 								</table>
-						<!-- 버튼영역 -->
-						<div class="float_box" style="margin-top: 30px;" align="right">
-							<div class="right">
-								<button type="button" class="btn3_type2" onclick="deleteCrer(0)"> <img src="/omg/resources/button/job/deletejob.png">
-								</button>
-							</div>
-						</div>
-							</div><br>
-								<script>
-									$("#eduType<%= num %>").val("<%= b.getEduType() %>").prop("selected", true);
-									$("#eduState<%= num %>").val("<%= b.getEduState() %>").prop("selected", true);
-								</script>  
-								<% num = num+1;
-								} %>
+						</div><br>
+						<script>
+							$("#eduType<%= num %>").val("<%= educationList.get(i).getEduType() %>").prop("selected", true);
+							$("#eduState<%= num %>").val("<%= educationList.get(i).getEduState() %>").prop("selected", true);
+						</script>  
+						<%  num = num+1; } 
+							else { %>
 						
 						<!-- 새로 받는 영역 -->
 						<div id="schoolSecond" style="display: block;">
 							<hr>
 								<table style="margin-top: 20px;">
-									<colgroup>
-										<col width="12%">
-										<col width="22%">
-										<col width="12%">
-										<col width="22%">
-										<col width="12%">
-										<col width="*">
-									</colgroup>
 									<tbody>
 										<tr>
 											<th scope="row"><label for="jmObligCd_1"> 학력구분 </label></th>
@@ -197,47 +185,39 @@
 										</tr>
 									</tbody>
 								</table>
-							</div><br>
-							
-							<div id="schoolThird" style="display: none;"></div>
-							<div id="schoolLast" style="display: none;"></div>
-							
-							</div>
-						<!-- 버튼영역 -->
-						<div class="float_box" style="margin-top: 30px;" align="right">
-							<div class="right">
-								<button type="button" class="btn3_type2" onclick="deleteCrer(0)"> <img src="/omg/resources/button/job/deletejob.png">
-								</button>
-							</div>
-						</div>
-						</form>
-						
+					</div><br>
+				<%}} %>
+				<!-- 버튼영역 -->
+				<div class="float_box" style="margin-top: 30px;" align="right">
+					<div align="right">
+						<button onclick="save();" style="background-color:orangered; color: white; font-weight:bold;  width: 50px; height: 30px">저장</button>
 					</div>
 				</div>
+			</div>
+		</form>
+	</div>		
+	</div>
+	</div>
 	</section>
 	<footer id="foot">
 		<%@ include file="../../common/footer.jsp"%>
 	</footer>
+		
+	<script type="text/javascript">
 	
-	<script>
-/* 
-		function() {
+		function save() {
+			/* submit */
 			
-			var now = educationList.size(); 
-			
-			if(now == null){
-				document.getElementById("schoolSecond").style.display = 'block';
-				document.getElementById("schoolThird").style.display = 'block';
-				document.getElementById("schoolLast").style.display = 'block';
-			}else if(now == 1){
-				document.getElementById("schoolSecond").style.display = 'block';
-				document.getElementById("schoolThird").style.display = 'block';
-			}else if(now == 2){
-				document.getElementById("schoolSecond").style.display = 'block';
+			    var result = confirm("저장완료! 경력정보를 이어서 입력하시겠습니까?");
+        
+		        if(result) {
+		            location.href="<%=request.getContextPath()%>/select.career.ti";
+		        }
+		        else {
+		            location.href="#";
+		        }
 			}
-			
-		}
-		 */
+	
 	</script>
 
 </body>
