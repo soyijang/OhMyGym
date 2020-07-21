@@ -32,7 +32,7 @@ public class ManageGroupListServlet extends HttpServlet {
 			@Override
 			public int compare(HashMap<String, Object> o1, HashMap<String, Object> o2) {
 				
-				return ((String) o1.get("groupNum")).compareTo((String) o2.get("groupNum"));
+				return Integer.parseInt((String) o1.get("groupNum")) - Integer.parseInt((String) o2.get("groupNum"));
 			}
 		});
 

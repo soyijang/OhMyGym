@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class OhMoney implements Serializable{
 	private String userId;
+	private String userName;
 	private String ohmoneyType;
 	private String ohmoneyAmount;
 	private String managerId;
@@ -13,6 +14,7 @@ public class OhMoney implements Serializable{
 	private String ohmoneyDate;
 	private String ohmoneyTime;
 	private int balance;
+
 	private int nofundBal;
 	private int refundBal;
 	private String manageCode;
@@ -40,6 +42,14 @@ public class OhMoney implements Serializable{
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getOhmoneyType() {

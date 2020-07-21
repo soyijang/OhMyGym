@@ -31,10 +31,9 @@ public class ManageListReFundServlet extends HttpServlet {
 
 			@Override
 			public int compare(ReFundOhMoney r1, ReFundOhMoney r2) {
-				
-				return r2.getRefundNum().compareTo(r1.getRefundNum());
+				return Integer.parseInt(r2.getRefundNum()) - Integer.parseInt(r1.getRefundNum());
 			}
-			
+		
 		});
 	
 		String page = "";

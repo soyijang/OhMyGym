@@ -40,7 +40,7 @@ public class SelectGroupCommunityServlet extends HttpServlet {
 			@Override
 			public int compare(GroupCommuPost o1, GroupCommuPost o2) {
 				
-				return o1.getGroupBoardNum().compareTo(o2.getGroupBoardNum());
+				return Integer.parseInt(o1.getGroupBoardNum()) - Integer.parseInt(o2.getGroupBoardNum());
 			}
 			
 		});

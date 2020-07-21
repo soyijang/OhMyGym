@@ -162,7 +162,7 @@
         <ul><details open><summary>OH머니 관리</summary>
             <li><a onclick="manageOhMoneyList();" style="cursor: pointer;">전체내역</a></li>
             <li><a onclick="manageRefundList();" style="cursor: pointer;">환급내역</a>
-            <li><a href="../manager/omoneyDirectPayment.jsp">수기지급</a></li>
+            <li><a onclick="manageDirectList();" style="cursor: pointer;">수기지급</a></li>
             <li><a href="../manager/omoneyDirectPaymentHistory.jsp">수기지급내역관리</a></li>
         </details></ul>
         <img src="/omg/resources/imageManager/menu_bar.png" id="nav_background">
@@ -184,6 +184,10 @@
 		
 		function manageRefundList(){
 			location.href="<%=request.getContextPath()%>/refundList.manager";
+		}
+		
+		function manageDirectList(){
+			location.href="<%=request.getContextPath()%>/directList.manager";
 		}
 	</script>
 </body>

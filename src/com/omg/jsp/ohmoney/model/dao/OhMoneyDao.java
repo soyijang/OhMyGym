@@ -43,7 +43,6 @@ public class OhMoneyDao {
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, userId);
-			pstmt.setString(2, userId);
 			
 			rset = pstmt.executeQuery();
 			
@@ -61,6 +60,9 @@ public class OhMoneyDao {
 				resultMoney.setRefundBal(rset.getInt("REFUNDBAL"));
 				resultMoney.setBalance(rset.getInt("BALANCE"));
 			}
+			
+			System.out.println(resultMoney.getNofundBal());
+			System.out.println(resultMoney.getBalance());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -332,6 +334,136 @@ public class OhMoneyDao {
 		}
 		
 		return result;
+	}
+
+	public int refundUpdate(Connection con, String getId, OhMoney userOhMoney) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("refundUpdate");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, userOhMoney.getUserId());
+			pstmt.setString(2, userOhMoney.getOhmoneyType());
+			pstmt.setString(3, userOhMoney.getOhmoneyAmount());
+			pstmt.setString(4, userOhMoney.getManagerId());
+			pstmt.setString(5, userOhMoney.getContent());
+			pstmt.setString(6, userOhMoney.getOhmoneyMean());
+			pstmt.setInt(7, userOhMoney.getNofundBal());
+			pstmt.setInt(8, userOhMoney.getRefundBal());
+			pstmt.setInt(9, userOhMoney.getBalance());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public OhMoney searchUser(Connection con, String searchId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("searchUser");
+		OhMoney resultUser = null;
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, searchId);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				resultUser = new OhMoney();
+	
+				resultUser.setBalance(rset.getInt("BALANCE"));
+				resultUser.setUserId(rset.getString("MEMBER_ID"));
+				resultUser.setUserName(rset.getString("MEMBER_NAME"));
+				resultUser.setNofundBal(rset.getInt("NOFUNDBAL"));
+				resultUser.setRefundBal(rset.getInt("REFUNDBAL"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultUser;
+	}
+
+	public int directUser(Connection con, OhMoney inputOhMoney) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateMoney");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, inputOhMoney.getUserId());
+			pstmt.setString(2, "수기지급");
+			pstmt.setString(3, inputOhMoney.getOhmoneyAmount());
+			pstmt.setString(4, inputOhMoney.getContent());
+			pstmt.setString(5, "자동");
+			pstmt.setInt(6, inputOhMoney.getNofundBal());
+			pstmt.setInt(7, inputOhMoney.getRefundBal());
+			pstmt.setInt(8, inputOhMoney.getBalance());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<OhMoney> listDirectMoney(Connection con) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<OhMoney> directList = null;
+		
+		String query = prop.getProperty("listDirectMoney");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			directList = new ArrayList<OhMoney>();
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				OhMoney moneyData = new OhMoney();
+				
+				moneyData.setManageCode(rset.getString("OMONEY_MANAGECODE"));
+				moneyData.setUserId(rset.getString("MEMBER_ID"));
+				moneyData.setOhmoneyAmount(rset.getString("OMONEY_AMOUNT"));
+				moneyData.setOhmoneyDate(rset.getString("OMONEY_DATE"));
+				moneyData.setOhmoneyTime(rset.getString("OMONEY_TIME"));
+				moneyData.setManagerId(rset.getString("MANAGER_ID"));
+				moneyData.setContent(rset.getString("OMONEY_CONTENT"));
+				moneyData.setIsRefund(rset.getString("REFUND_YN"));
+				
+				directList.add(moneyData);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return directList;
 	}
 
 }
