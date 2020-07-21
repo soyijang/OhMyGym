@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.omg.jsp.notice.model.vo.*"%>
+    <%
+    Notice notice = (Notice) request.getAttribute("notice");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +38,7 @@
         background: orangered;
         font-weight: 500;
     }
+   
 </style>
 </head>
 <body>
@@ -59,20 +63,23 @@
             <table id="showNotice">
                 <tr>
                     <th>제목</th>
-                    <td>제목test제목test제목test제목test제목test제목test제목test제목test</td>
+                    <td><input type="text" name="text" value="<%=notice.getBoardTitle()%>" style="width: 300px;"></td>
                 </tr>
                 <tr>
                     <th>작성일</th>
-                    <td>2020-06-08</td>
+                    <td><%=notice.getWritedate()%></td>
+                    <th>조회수</th>
+                    <td><%=notice.getViewCount() %></td>
                 </tr>
                 <tr>
                     <th style="border-bottom: 5px double gray;">첨부파일</th>
-                    <td style="border-bottom: 5px double gray;">첨부파일명</td>
+                    <td style="border-bottom: 5px double gray;"><input type="file"></td>
                 </tr>
                 <tr>
                     <td colspan="4" style="padding: 20px;">
-                        공지내용<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+                    <textarea id="noticeContent" rows="20px" cols="120px" style="resize: none;"><%=notice.getBoardContent()%>
+					</textarea>
+                        
                     </td>
                 </tr>
             </table>
@@ -83,7 +90,7 @@
     </section>
 
     <br style="clear: both;"><br><br><br>
-    
+    	
     <footer>
     	<%@ include file="../../common/footer.jsp" %>
     </footer>

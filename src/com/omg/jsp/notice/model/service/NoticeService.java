@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.omg.jsp.notice.model.dao.NoticeDao;
+import com.omg.jsp.notice.model.vo.Attachment;
 import com.omg.jsp.notice.model.vo.Notice;
 import static com.omg.jsp.common.JDBCTemplate.*;
 
@@ -38,6 +39,16 @@ public class NoticeService {
 		return result;
 		
 	}
+	public int getViewCount() {
+		
+		Connection con = getConncection();
+		
+		int viewCount = new NoticeDao().getViewCount(con);
+		
+		close(con);
+		
+		return viewCount;
+	}
 
 	public Notice selectOne(int nno) {
 		
@@ -46,8 +57,6 @@ public class NoticeService {
 		int result = 0;
 		
 		Notice notice = new NoticeDao().selectOne(con, nno);
-		
-		System.out.println("service notice : "+notice);
 		
 		if(notice != null) {
 			result = new NoticeDao().viewCount(con,nno);
@@ -64,4 +73,36 @@ public class NoticeService {
 		return notice;
 	}
 
+	public Attachment selectOneAttachment(int num) {
+		
+		
+		
+		return null;
+	}
+
+	public Notice FollowSelectOne(int nno) {
+		
+		Connection con = getConncection();
+		
+		Notice notice = null;
+		int result = 0;
+		
+		notice = new NoticeDao().FollowSelectOne(con, nno);
+		result = new NoticeDao().viewCount(con, nno);
+		
+		System.out.println("notice Service notice : "+notice);
+		
+		if(result > 0 && notice != null) {
+				commit(con);
+			} else {
+				rollback(con);
+				notice=null;
+			}
+		
+		close(con);
+		
+		return notice;
+		
+	}
+	
 }
