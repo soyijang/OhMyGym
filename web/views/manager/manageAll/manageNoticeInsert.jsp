@@ -63,7 +63,8 @@ legend {
 	<table>
 	<tr>
 		<td width="300px" height="50px" style="text-align: left; background:#e3e3e3;"><a id="text">항복구분</a></td>
-		<td width="850px" height="50px"><legend align="left"><%=notice.getBoardCategory() %></legend></td>
+		<td width="850px" height="50px"><legend align="left"><input type="radio" value="<%=notice.getBoardCategory() %>"></legend></td>
+		
 	</tr>
 	<tr>
 		<td width="300px" height="80px" style="text-align: left; background:#e3e3e3;"><a id="text">게시일</a></td>
@@ -101,7 +102,7 @@ legend {
 		<button id="btn1" onclick="history.back(-1)">취소</button>
 		&nbsp;&nbsp;&nbsp;
 		<%-- <%if(loginUser != null && loginUser.getMemberId().equals("admin01")) {%> --%>
-		<button id="btn1" onclick="location.href='<%=request.getContextPath()%>/selectNotice.no?num=<%=notice.getBoardNum()%>'">저장</button>
+		<button id="btn1" onclick="location.href='<%=request.getContextPath()%>/insertNotice.no?num=<%=notice.getBoardNum()%>'">저장</button>
 		<%-- <%} %> --%>
 	</div>
 

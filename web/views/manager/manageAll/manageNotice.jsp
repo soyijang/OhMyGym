@@ -158,7 +158,7 @@
 
         <!--공지사항 작성버튼-->
         <article id="inputNotice">
-            <button>글 작성하기</button>
+            <button onclick="location.href='<%=request.getContextPath()%>/views/manager/manageAll/manageNoticeInsert.jsp'">글 작성하기</button>
         </article>
         <!-- 공지사항 작성버튼 영역 종료 -->
     </section>

@@ -39,7 +39,7 @@ public class NoticeService {
 		return result;
 		
 	}
-	public int getViewCount() {
+	/*public int getViewCount() {
 		
 		Connection con = getConncection();
 		
@@ -48,7 +48,7 @@ public class NoticeService {
 		close(con);
 		
 		return viewCount;
-	}
+	}*/
 
 	public Notice selectOne(int nno) {
 		
@@ -59,13 +59,12 @@ public class NoticeService {
 		Notice notice = new NoticeDao().selectOne(con, nno);
 		
 		if(notice != null) {
-			result = new NoticeDao().viewCount(con,nno);
+			//result = new NoticeDao().viewCount(con,nno);
 			
 			if(result > 0) {
 				commit(con);
 			} else {
 				rollback(con);
-				notice=null;
 			}
 		}
 		close(con);
@@ -85,18 +84,15 @@ public class NoticeService {
 		Connection con = getConncection();
 		
 		Notice notice = null;
-		int result = 0;
+		//int result = 0;
 		
 		notice = new NoticeDao().FollowSelectOne(con, nno);
-		result = new NoticeDao().viewCount(con, nno);
+		//result = new NoticeDao().viewCount(con, nno);
 		
-		System.out.println("notice Service notice : "+notice);
-		
-		if(result > 0 && notice != null) {
+		if(notice != null) {
 				commit(con);
 			} else {
 				rollback(con);
-				notice=null;
 			}
 		
 		close(con);
