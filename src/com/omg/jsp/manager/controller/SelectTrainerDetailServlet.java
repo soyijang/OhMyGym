@@ -1,6 +1,7 @@
 package com.omg.jsp.manager.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.omg.jsp.manager.model.service.ManagerService;
 import com.omg.jsp.matching.model.service.MatchingService;
+import com.omg.jsp.member.model.service.MemberService;
 import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.member.model.vo.TrainerInfo;
 
 /**
  * Servlet implementation class SelectTrainerDetail
@@ -37,11 +41,14 @@ public class SelectTrainerDetailServlet extends HttpServlet {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String memberId = loginUser.getMemberId();
 		
-		HashMap<String, Object> hmap = new MatchingService().selectTrainerMap(memberId);
+		ArrayList<TrainerInfo> list = new ManagerService().selectTrainerDetail(memberId);
+		
+		System.out.println("select board list controller : " + list);
+		
 		String page = "";
-		if(!hmap.isEmpty()) {
+		if(!list.isEmpty()) {
 			page = "views/manager/manageTrainer/manageTrainerDetail.jsp";
-			request.setAttribute("information", hmap);
+			request.setAttribute("information", list);
 			request.getRequestDispatcher(page).forward(request, response);
 		} else {
 			page = "views/common/errorPage.jsp";

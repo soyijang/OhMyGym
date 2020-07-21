@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" 
+    import="java.util.*, com.omg.jsp.trainerCeritificate.model.vo.*, com.omg.jsp.trainerCareer.model.vo.*, com.omg.jsp.trainerCeritificate.model.vo.*
+	, com.omg.jsp.trainerEducation.model.vo.*, com.omg.jsp.trainerReview.model.vo.*, com.omg.jsp.member.model.vo.*" %>
+<% 
+	HashMap<String, Object> hmap = (HashMap<String, Object>) request.getAttribute("information"); 
+	ArrayList<String> trainerInfo = (ArrayList<String>) hmap.get("trainerInfo");
+	ArrayList<TrainerCeritificate> ceritificateList = (ArrayList<TrainerCeritificate>) hmap.get("ceritificate");
+	ArrayList<TrainerEducation> educationList = (ArrayList<TrainerEducation>) hmap.get("education");
+	ArrayList<TrainerCareer> tcrList = (ArrayList<TrainerCareer>) hmap.get("career");
+	ArrayList<TrainerReview> trList = (ArrayList<TrainerReview>) hmap.get("review");
+	ArrayList<TrainerInfo> tiList = (ArrayList<TrainerInfo>) hmap.get("info");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -265,7 +276,20 @@
         <article id="tableArea">
             <div align="center">
                 <table class="tg" style="undefined;table-layout: fixed; width: 1000px; height: 960px;">
+                <% for (TrainerInfo ti : list) { %>
                     <colgroup>
+                    
+                    <%-- <% for(Member m : list) { %>
+				<tr>
+					<td><%= listnum %></td>
+					<td><%= m.getMemberId() %></td>
+					<td><%= m.getName() %></td>
+					<td><%= m.getEmail() %></td>
+					<td><%= m.getPhone() %></td>
+					<td><%= m.getRequestType() %></td>
+					<td><%= m.getEnrollDate() %></td>
+					<td><button onclick="" class="btn1" id="infoBtn">상세정보</button></td>
+					<td><button onclick="" class="btn2" id="riverBtn">수강관리</button></td> --%>
                         <col style="width: 65px">
                         <col style="width: 65px">
                         <col style="width: 65px">
@@ -280,38 +304,42 @@
                         <tr style="border-top: 4px solid gray;">
                             <th class="tg-0pky" colspan="2" style="background-color: rgb(172, 172, 172)">프로필</th>
                             <th class="tg-0pky" style="background-color: rgb(172, 172, 172)">아이디</th>
-                            <th class="tg-0pky" colspan="3">j_noo11</th>
+                            <th class="tg-0pky" colspan="3"><%= ti.getMemberId() %></th>
                             <th class="tg-cly1" style="background-color: rgb(172, 172, 172)">회원상태</th>
-                            <th class="tg-0lax" colspan="2">임시트레이너</th>
+                            <% if (ti.getTrainerType().equals("대기") || ti.getTrainerType().equals("미신청") || ti.getTrainerType().equals("거절"))  {
+                            %><th class="tg-0lax" colspan="2">임시트레이너</th>
+                            <%} else { %><th class="tg-0lax" colspan="2">정식트레이너</th>
+                            <% } %>
+                            
                         </tr>
-                    </thead>
+                    </thead> 
                     <tbody>
                         <tr>
                             <td class="tg-0pky" colspan="2" rowspan="4"><img style="width: 200px; height: 240px;" src="img/jino.jpeg"></td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">연락처</td>
-                            <td class="tg-0lax" colspan="6">010-6342-7777</td>
+                            <td class="tg-0lax" colspan="6"><%= ti.getPhone() %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">회원명</td>
-                            <td class="tg-0lax" colspan="3">김진우</td>
+                            <td class="tg-0lax" colspan="3"><%= ti.getName() %></td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">가입일</td>
-                            <td class="tg-0lax" colspan="2">2020/06/15</td>
+                            <td class="tg-0lax" colspan="2"><%= ti.getEnrollDate() %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">이메일</td>
-                            <td class="tg-0lax" colspan="6">j_noo1@h.or.kr</td>
+                            <td class="tg-0lax" colspan="6"><%= ti.getEmail() %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">주소</td>
-                            <td class="tg-0lax" colspan="6">경기도 남양주시 부내동 1256-1</td>
+                            <td class="tg-0lax" colspan="6"><%= ti.getAddress() %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">학력</td>
-                            <td class="tg-0lax" colspan="2">용인대체육교육학과<button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
+                            <td class="tg-0lax" colspan="2"><%= ti.getEduName() %><button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">주요분야</td>
-                            <td class="tg-0lax" colspan="2">재활PT/근력향상</td>
+                            <td class="tg-0lax" colspan="2"><%= ti.getTrainerMainField() %></td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">계좌정보</td>
-                            <td class="tg-0lax" colspan="2">우리은행 1002-752-665441</td>
+                            <td class="tg-0lax" colspan="2"><%= ti.getBankAccount() %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" colspan="3" style="background-color: rgb(172, 172, 172)">자격증/워크샵</td>
@@ -321,7 +349,7 @@
                         </tr>
                         <tr>
                             
-                            <td class="tg-0lax" colspan="3" >생확체육지도사2급</td>
+                            <td class="tg-0lax" colspan="3">생확체육지도사2급</td>
                             <td class="tg-0lax" colspan="2">2014.02.14</td>
                             <td class="tg-0lax" colspan="2">국민체육진흥공단</td>
                             <td class="tg-0lax" colspan="2"><button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
@@ -377,7 +405,9 @@
                         <tr style="height: 60px;">
                             <td class="tg-0pky" style="background-color: rgb(172, 172, 172)">메모</td>
                             <td class="tg-0pky" colspan="8"></td>
+                            
                         </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
