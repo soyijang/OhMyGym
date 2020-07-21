@@ -168,6 +168,22 @@ public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
 		
 		return list;
 	}
+	
+	public int updateProfile(String fileCode, String userId) {
+		Connection con = getConncection();
+		
+		int result = new MemberDao().updateProfile(con, fileCode, userId);
+		
+		
+		if(result> 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		} close(con);
+		
+		return result;
+	}
+
 }
 
 

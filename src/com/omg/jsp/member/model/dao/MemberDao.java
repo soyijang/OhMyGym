@@ -499,6 +499,29 @@ public ArrayList<Member> selectTrainer(Connection con) {
 }
 	
 
+public int updateProfile(Connection con, String fileCode, String userId) {
+	
+	PreparedStatement pstmt = null;
+	
+	int result = 0;
+	
+	String query = prop.getProperty("updateProfile");
+	
+	try {
+		pstmt = con.prepareStatement(query);
+		
+		pstmt.setString(1, fileCode);
+		pstmt.setString(2, userId);
+		
+		result = pstmt.executeUpdate();
 
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	
+	return result;
+}
 
 }
