@@ -96,37 +96,6 @@ public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
 		return list;
 	}
 
-	//프로필사진 등록용
-	public int insertProfile(ArrayList<Attachment> fileList) {
-	   
-	   Connection con = getConncection();
-	   int result = 0;
-	   
-	   //데이터베이스에 가서 하나씩 담아올애들
-	   int result1 = 0;
-	   int result2 = 0;
-	   
-//	      int fid = new MemberDao().selectCurrval(con);
-	      int fid = 0;
-	      
-	      for(int i = 0; i < fileList.size(); i++) {
-	         fileList.get(i).setFid(fid);
-	         result2 += new MemberDao().insertAttachment(con, fileList.get(i));
-	      }
-	      
-	      //리턴받은 result2의 개수와 파일사이즈가 같으면 다 가져온거임. 커밋.
-	      if(result2 == fileList.size()) {
-	         commit(con);
-	         result = 1;
-	      }else {
-	         rollback(con);
-	   }
-	   close(con);
-	   System.out.println("result1 : " + result1);
-	   System.out.println("result2 : " + result2);
-	   return result;
-	}
-
 	//회원정보 수정용
 	public int updateMember(Member requestMember) {
 	   
@@ -156,6 +125,22 @@ public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
 		   
 		   return member;
 		}
+
+
+	public int updateProfile(String fileCode, String userId) {
+		Connection con = getConncection();
+		
+		int result = new MemberDao().updateProfile(con, fileCode, userId);
+		
+		
+		if(result> 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		} close(con);
+		
+		return result;
+	}
 }
 
 

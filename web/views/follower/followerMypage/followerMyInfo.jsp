@@ -12,23 +12,100 @@
 </head>
 
 <body>
-
+\
 	<section style="height: 1500px;">
 		<div class="mypage-contents">
 			<%@ include file="followerMypageAside.jsp"%>
+			<script>
+				var uploadfileCode;
+				var userId ="<%=loginUser.getMemberId()%>";
+				var profileManageCode;
+
+				function profileload(){   
+				     $.ajax({
+						 url : "/omg/loadProfile.all",
+					     type : 'post',
+					     data : {
+					          	userId : userId
+						       },
+						       success : function(data) {
+						          profileManageCode = data.fileManageName;
+						          console.log(profileManageCode);
+						          $("#profileImg").attr("src", "<%=request.getContextPath()%>/resources/test/"+profileManageCode); 
+						 		},
+						 		error : function(){
+									profileManageCode = "";
+						 		}
+				     })
+				}		
+				profileload();
+			</script>
+			<script>
+								function changeProfile(code){
+									var imgCode = code;
+									
+									$.ajax({
+										 url : "/omg/changeProfile.follower",
+									     type : 'post',
+									     data : {
+									          	userId : userId,
+									          	imgCode : imgCode
+										       },
+										       	success : function(data) {
+													alert("프로필이미지가 변경되었습니다.");
+													profileload();
+										 		},
+										 		error : function(){
+										 			alert()
+										 		}
+								     })
+									
+								}	
+							
+							
+								function profileImg(){
+									var form = $('#profileUploadForm')[0];
+						            
+						            var data = new FormData(form);
+						            
+						            console.log(data);
+						            
+						            $.ajax({
+						            	url : "/omg/upFile.all",
+						                type : 'post',
+						                data : data,
+						                contentType : false,
+						                processData : false, 
+						               success : function(data) {
+						 	            	alert("업로드 되었습니다.");
+						 	            	uploadfileCode = data.fileCode;
+						 	            	changeProfile(uploadfileCode);
+						 				},
+						 				error : function(){
+						 					alert("업로드 에 실패했습니다");
+						 				}
+						            })
+								}
+								
+								
+							
+							</script>
+
 			<div class="right-container">
 				<div class="info-container">
 
 					<h3 class="info-header">회원 정보 수정</h3>
-
+					
 					<div class="info-body">
-						<form action="<%=request.getContextPath()%>/insert.pf" method = "post" encType="multipart/form-data">
+ 						<form enctype="multipart/form-data" id="profileUploadForm">
 							<div align="center" id="profile-area">
-								<img id="titleImg" width="350" height="200">
-								<input type="file" id="profile" name="profile" onchange="loadImg(this);">
+								<img id="profileImg" width="350" height="200">
+								<input type="file" id="profile" name="profile">
 							</div>
-							<button type="submit">저장</button>
 						</form>
+						<button onclick="profileImg();">저장</button>
+		
+					
 						<form action="<%=request.getContextPath()%>/update.pf" method = "post">
 							<div class="info-row">
 								<div class="info-form-label">아이디</div>
@@ -163,20 +240,6 @@
 		<%@ include file="../../common/footer.jsp"%>
 	</footer>
 	
-	<script type="text/javascript">
-	
-		function loadImg(value) {
-			
-				var reader = new FileReader();
-				reader.onload = function (e) {
-					 $("#profile").attr("src", e.target.result); 
-				}
-				reader.readAsDataURL(value.files[0]);
-				
-		}
-		
-	
-	</script>
 	
 	
 </body>
