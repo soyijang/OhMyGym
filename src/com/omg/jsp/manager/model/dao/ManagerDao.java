@@ -7,10 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.omg.jsp.manager.model.vo.Manager;
 import com.omg.jsp.member.model.dao.MemberDao;
+import com.omg.jsp.member.model.vo.TrainerInfo;
+
 import static com.omg.jsp.common.JDBCTemplate.*; 
 
 public class ManagerDao {
@@ -66,6 +70,52 @@ private Properties prop = new Properties();
 		
 		System.out.println("loginuser dao: "+loginUser);
 		return loginUser;
+	}
+	
+public ArrayList<TrainerInfo> selectTrainerDetail(Connection con, String memberId) {
+		
+
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<TrainerInfo> list = null;
+		
+		String query = prop.getProperty("selectTrainerDetail");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			list = new ArrayList<TrainerInfo>();
+			
+			while(rset.next()) {
+	            TrainerInfo ti = new TrainerInfo();
+	            ti.setMemberId(memberId);
+	            ti.setName(rset.getString("MEMBER_NAME"));
+				ti.setEmail(rset.getString("EMAIL"));
+				ti.setPhone(rset.getString("PHONE"));
+				ti.setTrainerComment(rset.getString("TRAINER_COMMENT"));
+				ti.setTrainerMainField(rset.getString("TRAINER_MAINFIELD"));
+				ti.setTrainerSubField(rset.getString("TRAINER_SUBFIELD"));
+				ti.setTrainerType(rset.getString("TRAINER_TYPE"));
+				ti.setEnrollDate(rset.getString("ENROLL_DATE"));
+				ti.setAddress(rset.getString("ADDRESS"));
+				ti.setBankCode(rset.getString("BANK_CODE"));
+				ti.setBankAccount(rset.getString("BANK_ACCOUNT"));
+				
+				
+	            
+				list.add(ti);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return list;
+		
 	}
 
 }
