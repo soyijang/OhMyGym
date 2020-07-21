@@ -729,11 +729,11 @@ div#return_list_div {
         var canRefund = false;
         
         function checkRefund(){
-        	if(refundBalance < $('#returnOhmoney').val()){
+        	if(Number(refundBalance) < Number($('#returnOhmoney').val())){
         		$('#warnMsg').css('display','block');
         		canRefund = false;
         	} else {
-        		if($('#returnOhmoney').val() < 5000 ){
+        		if(Number($('#returnOhmoney').val()) < 5000 ){
             		canRefund = false;
         		} else {
 	        		$('#warnMsg').css('display','none');
@@ -754,25 +754,26 @@ div#return_list_div {
         }
         
         function submitRefund(){
-
         	var money = $('#returnOhmoney').val();
-        	 $('#returnOhmoney').val('');
-   	 		$.ajax({
-   	 			url : "/omg/submitReFund.follower",
-   	 			data : {
-   	 				userId : userId,
-   	 				money : money
-   	 			},
-   	 			type : "post",
-   	 			success : function(data) {
-   					alert("환급신청되었습니다.");
-                    checkRefundList();
-   					jQuery('.return_wrap').fadeOut('slow')
-   	 			},
-   	 			error : function() {
-   	 				console.log("실패!")
-   	 			}
-    		})
+        	if(money < Number(refundBalance)){
+        		 $('#returnOhmoney').val('');
+	   	 		$.ajax({
+	   	 			url : "/omg/submitReFund.follower",
+	   	 			data : {
+	   	 				userId : userId,
+	   	 				money : money
+	   	 			},
+	   	 			type : "post",
+	   	 			success : function(data) {
+	   					alert("환급신청되었습니다.");
+	                    checkRefundList();
+	   					jQuery('.return_wrap').fadeOut('slow')
+	   	 			},
+	   	 			error : function() {
+	   	 				console.log("실패!")
+	   	 			}
+	    		})
+        	}
         }
     </script>
 
