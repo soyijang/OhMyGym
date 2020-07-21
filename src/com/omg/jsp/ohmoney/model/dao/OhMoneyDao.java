@@ -466,4 +466,31 @@ public class OhMoneyDao {
 		return directList;
 	}
 
+	public int rejectReturn(Connection con, String managerId, String returnNum) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("rejectReturn");
+				
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, managerId);
+			pstmt.setString(2, returnNum);
+
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+			
+		return result;
+	}
+
 }

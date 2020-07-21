@@ -186,4 +186,19 @@ public class OhMoneyService {
 		return directList;
 	}
 
+	public int rejectReturn(String managerId, String returnNum) {
+		
+		Connection con = getConncection();
+		
+		int result = new OhMoneyDao().rejectReturn(con, managerId, returnNum);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		} close(con);
+		
+		return result;
+	}
+
 }

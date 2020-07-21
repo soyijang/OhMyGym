@@ -27,6 +27,8 @@ public class FileDownloadServlet extends HttpServlet {
 		int num = Integer.parseInt(request.getParameter("num"));
 		System.out.println("다운로드 넘" + num);
 		
+		String root = request.getSession().getServletContext().getRealPath("/");
+		
 		Files file = new FileService().selectOneFiles(num);
 		
 		System.out.println("컨트롤라 파일: " + file);
@@ -39,7 +41,7 @@ public class FileDownloadServlet extends HttpServlet {
 		downOut = response.getOutputStream();
 		
 		//스트림으로 전송할 파일 객체 생성
-		File downFile = new File(file.getFilePath() +"\\"+ file.getFileManageName());
+		File downFile = new File(root+file.getFilePath() +"\\"+ file.getFileManageName());
 		
 		response.setContentType("text/plain; charset=UTF-8");
 		
@@ -55,16 +57,13 @@ public class FileDownloadServlet extends HttpServlet {
 		
 		int readBytes = 0;
 		
-		System.out.println("팡리다운리ㅓㄴ미;런ㅇ러ㅣ;ㅁㄴㅇ러" + buf);
-		
 		while((readBytes = buf.read()) != -1) {
 			downOut.write(readBytes);
 		}
 		
 		downOut.close();
 		buf.close();
-		
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
