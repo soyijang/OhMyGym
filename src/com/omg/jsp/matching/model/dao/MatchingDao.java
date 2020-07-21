@@ -16,7 +16,6 @@ import java.util.Properties;
 
 import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.member.model.dao.MemberDao;
-import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -360,7 +359,42 @@ public class MatchingDao {
 		return result;
 	}
 	
-	
+	public ArrayList<MatchingRequest> selectApplyList(Connection con, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MatchingRequest mr = null;
+		ArrayList<MatchingRequest> matchRequest = new ArrayList<MatchingRequest>();
+		
+		String query = prop.getProperty("selectApplyList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				mr = new MatchingRequest();
+				
+				mr.setRequestCode(rset.getString("REQUEST_MANAGECODE"));
+				mr.setRequestDate(rset.getString("REQUEST_DATE"));
+				mr.setRequestTime(rset.getString("REQUEST_TIME"));
+				mr.setRequestType(rset.getString("REQUEST_TYPE"));
+				mr.setTrainerId(rset.getString("TRAINER_ID"));
+				mr.setFollowerId(rset.getString("FOLLOWER_ID"));
+			
+				matchRequest.add(mr);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return matchRequest;
+	}
 	
 
 }

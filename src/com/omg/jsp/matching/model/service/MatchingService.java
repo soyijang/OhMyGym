@@ -1,6 +1,9 @@
 package com.omg.jsp.matching.model.service;
 
-import static com.omg.jsp.common.JDBCTemplate.*;
+import static com.omg.jsp.common.JDBCTemplate.close;
+import static com.omg.jsp.common.JDBCTemplate.commit;
+import static com.omg.jsp.common.JDBCTemplate.getConncection;
+import static com.omg.jsp.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -8,7 +11,6 @@ import java.util.HashMap;
 
 import com.omg.jsp.matching.model.dao.MatchingDao;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
-import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -87,5 +89,14 @@ public class MatchingService {
 		return checkInsert;
 	}
 
-
+	public ArrayList<MatchingRequest> selectApplyList(String memberId) {
+		
+		Connection con = getConncection();
+		
+		ArrayList<MatchingRequest> matchRequestList = new MatchingDao().selectApplyList(con, memberId);
+		
+		close(con);
+		
+		return matchRequestList;
+	}
 }
