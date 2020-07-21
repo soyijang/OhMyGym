@@ -26,15 +26,18 @@ private Properties prop = new Properties();
 	
 	public MemberDao() {
 		String fileName = MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
+		String fileName2 = MemberDao.class.getResource("/sql/manager/manager-query.properties").getPath();
 				
 		try {
 			prop.load(new FileReader(fileName));
+			prop.load(new FileReader(fileName2));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
 
 	
 	

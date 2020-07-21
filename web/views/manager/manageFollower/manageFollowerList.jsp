@@ -212,17 +212,10 @@
     </style>
 </head>
 <body>
- <header>
-        <img src="img/top.png" id="top_background">
-        <a href="../common/managerMain.jsp" id="logo"><img src="img/logo.png" alt="logo"></a>
-        <div style="width: 800px; right: -600px;" align="right">
-            <a href="#">개발요청페이지</a> &nbsp;&nbsp;&nbsp;OhMyGym님 환영합니다. 
-            &nbsp;&nbsp;&nbsp;<a href="#">로그아웃</a>
-        </div>
-    </header>
-    <nav>
+ 
+
         <%@ include file="../../common/managerNav.jsp"%>
-    </nav>
+  
     <section>
         <!--헤더 영역-->
         <article id="menuTitleArea">
@@ -271,9 +264,9 @@
                 <table>
                     <tr>
                         <th width="30px;">No</th>
-                        <th width="80px;">ID</th>
+                        <th width="200px;">ID</th>
                         <th width="70px;">회원명</th>
-                        <th width="120px;">이메일</th>
+                        <th width="300px;">이메일</th>
                         <th width="120px;">연락처</th>
                         <th width="50px;">등록여부</th>
                         <th width="100px;">가입일</th>
@@ -290,7 +283,6 @@
 					<td><%= m.getPhone() %></td>
 					<td><%= m.getRequestType() %></td>
 					<td><%= m.getEnrollDate() %></td>
-					<td><%= m.getMemberStatus() %></td>
 					<td><button onclick="" class="btn1" id="infoBtn">상세정보</button></td>
 					<td><button onclick="" class="btn2" id="riverBtn">수강관리</button></td>
 					

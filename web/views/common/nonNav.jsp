@@ -126,7 +126,7 @@
         <ul class="header_top_menu" id="header_top">
             <li id="webIntro"><a href="/omg/views/manager/managerLogin.jsp" style="text-decoration: none;">관리자로그인</a></li>
             <li id="webIntro"><a href="/omg/views/visitor/login.jsp" style="text-decoration: none;">로그인</a></li>
-            <li id="webClasses"><a href="/omg/views/visitor/visitorJoin/followerJoin.jsp" style="text-decoration: none;" >회원가입</a></li>
+            <li id="webClasses"><a href="/omg/views/visitor/visitorJoin/terms.jsp" style="text-decoration: none;" >회원가입</a></li>
         </ul>
     </div>
     <br>
