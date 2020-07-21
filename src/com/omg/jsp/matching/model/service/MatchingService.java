@@ -1,6 +1,9 @@
 package com.omg.jsp.matching.model.service;
 
-import static com.omg.jsp.common.JDBCTemplate.*;
+import static com.omg.jsp.common.JDBCTemplate.close;
+import static com.omg.jsp.common.JDBCTemplate.commit;
+import static com.omg.jsp.common.JDBCTemplate.getConncection;
+import static com.omg.jsp.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -8,8 +11,6 @@ import java.util.HashMap;
 
 import com.omg.jsp.matching.model.dao.MatchingDao;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
-import com.omg.jsp.member.model.vo.Member;
-import com.omg.jsp.member.model.vo.TrainerInfo;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -52,9 +53,7 @@ public class MatchingService {
 		ArrayList<TrainerEducation> teList = new MatchingDao().selectTrainerEducation(con,memberId);
 		ArrayList<TrainerCareer> tcrList = new MatchingDao().selectTrainerCareer(con, memberId);
 		ArrayList<TrainerReview> trList = new MatchingDao().selectTrainerReview(con, memberId);
-		ArrayList<TrainerInfo> tiList = new MatchingDao().selectInfo(con, memberId);
 		
-		hmap.put("info", tiList);
 		hmap.put("trainerInfo", trainerInfo);
 		hmap.put("ceritificate", tcList);
 		hmap.put("education", teList);
@@ -89,8 +88,15 @@ public class MatchingService {
 				
 		return checkInsert;
 	}
-	
-	
 
-
+	public ArrayList<MatchingRequest> selectApplyList(String memberId) {
+		
+		Connection con = getConncection();
+		
+		ArrayList<MatchingRequest> matchRequestList = new MatchingDao().selectApplyList(con, memberId);
+		
+		close(con);
+		
+		return matchRequestList;
+	}
 }

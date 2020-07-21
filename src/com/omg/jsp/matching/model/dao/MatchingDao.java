@@ -16,8 +16,6 @@ import java.util.Properties;
 
 import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.member.model.dao.MemberDao;
-import com.omg.jsp.member.model.vo.Member;
-import com.omg.jsp.member.model.vo.TrainerInfo;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -139,13 +137,10 @@ public class MatchingDao {
 			
 			if(rset.next()) {
 				list.add(memberId);
-				list.add(rset.getString("PHONE"));
-				list.add(rset.getString("TRAINER_TYPE"));
-				list.add(rset.getString("ENROLL_DATE"));
-				list.add(rset.getString("EMAIL"));
-				list.add(rset.getString("ADDRESS"));
-				list.add(rset.getString("BANK_CODE"));
-				list.add(rset.getString("BANK_ACCOUNT"));
+				list.add(rset.getString("MEMBER_NAME"));
+				list.add(rset.getString("TRAINER_COMMENT"));
+				list.add(rset.getString("TRAINER_MAINFIELD"));
+				list.add(rset.getString("TRAINER_SUBFIELD"));
 
 				
 //				m.setMemberId(memberId);
@@ -364,13 +359,13 @@ public class MatchingDao {
 		return result;
 	}
 	
-	public ArrayList<TrainerInfo> selectInfo(Connection con, String memberId) {
+	public ArrayList<MatchingRequest> selectApplyList(Connection con, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<TrainerInfo> tiList = new ArrayList<TrainerInfo>();
-		TrainerInfo ti = null;
+		MatchingRequest mr = null;
+		ArrayList<MatchingRequest> matchRequest = new ArrayList<MatchingRequest>();
 		
-		String query = prop.getProperty("selectInfo");
+		String query = prop.getProperty("selectApplyList");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -378,25 +373,17 @@ public class MatchingDao {
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				ti = new TrainerInfo();
+			while(rset.next()) {
+				mr = new MatchingRequest();
 				
-				
-				ti.setMemberId(rset.getString("MEMBER_ID"));
-				ti.setName(rset.getString("MEMBER_NAME"));
-				ti.setEmail(rset.getString("EMAIL"));
-				ti.setPhone(rset.getString("PHONE"));
-				ti.setTrainerComment(rset.getString("TRAINER_COMMENT"));
-				ti.setTrainerMainField(rset.getString("TRAINER_MAINFIELD"));
-				ti.setTrainerSubField(rset.getString("TRAINER_SUBFIELD"));
-				ti.setTrainerType(rset.getString("TRAINER_TYPE"));
-				ti.setEnrollDate(rset.getString("ENROLL_DATE"));
-				ti.setAddress(rset.getString("ADDRESS"));
-				ti.setBankCode(rset.getString("BANK_CODE"));
-				ti.setBankAccount(rset.getString("BANK_ACCOUNT"));
-				ti.setBankName(rset.getString("BANK_NAME"));
-				
-				tiList.add(ti);
+				mr.setRequestCode(rset.getString("REQUEST_MANAGECODE"));
+				mr.setRequestDate(rset.getString("REQUEST_DATE"));
+				mr.setRequestTime(rset.getString("REQUEST_TIME"));
+				mr.setRequestType(rset.getString("REQUEST_TYPE"));
+				mr.setTrainerId(rset.getString("TRAINER_ID"));
+				mr.setFollowerId(rset.getString("FOLLOWER_ID"));
+			
+				matchRequest.add(mr);
 			}
 			
 		} catch (SQLException e) {
@@ -406,13 +393,8 @@ public class MatchingDao {
 			close(rset);
 		}
 		
-		return tiList;
+		return matchRequest;
 	}
-	
-	
-	
-	
-	
 	
 
 }
