@@ -41,4 +41,14 @@ public class FileService {
 		
 	}
 
+	public Files checkUserProfile(String userId) {
+		
+		Connection con = getConncection();
+		Files file = new FileDao().checkUserProfile(con, userId);
+		
+		close(con);
+		
+		return file;
+	}
+
 }

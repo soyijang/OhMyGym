@@ -156,4 +156,39 @@ public class FileDao {
 		return file;
 	}
 
+
+	public Files checkUserProfile(Connection con, String userId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Files resultFile = null;
+		
+		String query = prop.getProperty("checkUserProfile");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				resultFile = new Files();
+				resultFile.setFileCode(rset.getString("FILE_CODE"));
+				resultFile.setFileManageName(rset.getString("FILE_MANAGE_NAME"));
+				resultFile.setFileOriginName(rset.getString("FILE_ORIGIN_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return resultFile;
+	}
+
 }

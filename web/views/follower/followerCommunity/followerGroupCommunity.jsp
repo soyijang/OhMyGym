@@ -536,7 +536,7 @@ div.post_commentback{
 	</section>
 	
 	<script>
-
+<%-- 	<%=request.getContextPath()%>/resources/test/"+profileManageCode --%>
 	function selectAllPost(){
 		$("#add_postBox").val('');
 		var roomId = "<%=matchInfo.getGroupCommuNum()%>";
