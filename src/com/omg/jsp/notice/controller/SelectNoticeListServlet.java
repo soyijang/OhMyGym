@@ -32,11 +32,12 @@ public class SelectNoticeListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		response.setCharacterEncoding("UTF-8");
+		
 		ArrayList<Notice> list = new NoticeService().selectList();
 		
 		
 		String page = "";
-		System.out.println("servlet list : "+list);
 		
 		if(list != null) {
 			page="views/manager/manageAll/manageNotice.jsp";

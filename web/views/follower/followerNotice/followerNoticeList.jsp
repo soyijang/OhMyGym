@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.omg.jsp.notice.model.vo.*"%>
+     <% 
+     ArrayList <Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+/*  	ArrayList<Attachment> fileList = (ArrayList<Attachment>) request.getAttribute("fileList");
+ 	Attachment titleImg = fileList.get(0); */
+	System.out.println("notice list: "+list);
+	%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
     * {
         font-family: "Noto Sans KR";
@@ -103,81 +111,37 @@
                     <th width="60px">첨부파일</th>
                     <th width="100px">등록일</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>버그사항개선</td>
-                    <td><a href="">testtesttesttesttesttesttesttesttest</a></td>
-                    <td><img src="../../resources/img/noticeFile.png" alt=""></td>
-                    <td>2020-06-18</td>
-                </tr>
+               
+            	<% for(Notice n : list) { %>
+				 <tr>
+					<td><%=n.getBoardNum() %></td>
+					<td><%=n.getBoardCode() %></td>
+					<td><%=n.getBoardTitle()%></td>
+					<td><button>다운로드</button>
+				</td>
+					<td><%=n.getWritedate() %></td>
+				<% } %>
+				</tr>
+               
             </table>
         </article>
     </section>
 
     <br style="clear: both;"><br><br><br>
+    
+     <script>
+
+     $(function() {
+         $("#showNoticeList td").click(function(){
+            var num = $(this).parent().children().eq(0).text();
+           // console.log(num);
+           
+           location.href="<%=request.getContextPath()%>/followSelectOne.no?num="+num;
+           
+         });
+      });
+     
+   </script>
     
     <footer>
     	<%@ include file="../../common/footer.jsp" %>

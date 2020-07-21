@@ -1,6 +1,7 @@
 package com.omg.jsp.notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +13,16 @@ import com.omg.jsp.notice.model.service.NoticeService;
 import com.omg.jsp.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class SelectOneNoticeServlet
+ * Servlet implementation class FollowSelectNoticeListServlet
  */
-@WebServlet("/selectOne.no")
-public class SelectOneNoticeServlet extends HttpServlet {
+@WebServlet("/followNotice.no")
+public class FollowSelectNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneNoticeServlet() {
+    public FollowSelectNoticeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +34,18 @@ public class SelectOneNoticeServlet extends HttpServlet {
 		
 		response.setCharacterEncoding("UTF-8");
 		
-		String num=request.getParameter("num");
+		ArrayList<Notice> list = new NoticeService().selectList();
 		
-		
-		int nno = 0;
-		
-		if(num !=""&&num!=null) {
-			nno=Integer.parseInt(num);
-		}
-		
-		Notice notice = new NoticeService().selectOne(nno);
-		
+		System.out.println("followSelect Notice list : "+list);
 		String page = "";
 		
-		if(notice != null) {
-			page="views/manager/manageAll/manageNoticeDetail.jsp";
-			request.setAttribute("notice", notice);
+		if(list != null) {
+			page="views/follower/followerNotice/followerNoticeList.jsp";
+			request.setAttribute("list", list);
+			
 		} else {
 			page="views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시물 상세보기 실패!");
+			request.setAttribute("msg", "공지사항 조회 실패");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 		
