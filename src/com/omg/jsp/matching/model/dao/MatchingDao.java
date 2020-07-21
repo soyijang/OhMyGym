@@ -176,6 +176,8 @@ public class MatchingDao {
 				tc.setCertiDate(rset.getString("CERTI_DATE"));
 				tc.setCertiInstitution(rset.getString("CERTI_INSTITUTION"));
 				tc.setCertiName(rset.getString("CERTI_NAME"));
+				tc.setCertiFileCode(rset.getString("CERTI_FILECODE"));
+				tc.setCertiNum(rset.getString("CERTI_NUM"));
 				
 				tcList.add(tc);
 			}
@@ -206,8 +208,12 @@ public class MatchingDao {
 			while(rset.next()) {
 				te = new TrainerEducation();
 				
+				te.setEduManageCode(rset.getString("EDU_MANAGECODE"));
+				te.setEduType(rset.getString("EDU_TYPE"));
 				te.setEduName(rset.getString("EDU_NAME"));
 				te.setEduEnrollDate(rset.getString("EDU_ENROLLDATE"));
+				te.setGraduateDate(rset.getString("EDU_GRADUATEDATE"));
+				te.setEduFileCode("EDU_FILECODE");
 				te.setEduState(rset.getString("EDU_STATE"));
 				
 				teList.add(te);
@@ -237,10 +243,14 @@ public class MatchingDao {
 			while(rset.next()) {
 				tcr = new TrainerCareer();
 				
-				tcr.setCareerLevel(rset.getString("CAREER_LEVEL"));
 				tcr.setCompName(rset.getString("COMP_NAME"));
 				tcr.setEnterDate(rset.getString("ENTER_DATE"));
 				tcr.setResignDate(rset.getString("RESIGN_DATE"));
+				tcr.setCareerLevel(rset.getString("CAREER_LEVEL"));
+				tcr.setCareerId(rset.getString("CAREER_ID"));
+				tcr.setCareerProof(rset.getString("CAREER_PROOF"));
+				tcr.setProofYn(rset.getString("PROOF_YN"));
+				tcr.setCareerType(rset.getString("CAREER_TYPE"));
 				
 				tcrList.add(tcr);
 			}

@@ -14,9 +14,6 @@
 </head>
 
 <body>
-	<header>
-		<%@ include file="../../common/trainerNav.jsp"%>
-	</header>
 
 	<section style="height: 1500px;">
 		<div class="mypage-contents">
@@ -32,17 +29,17 @@
 					<div class="step" id="rcvStep">
 						<table class="list02">
 							<tr>
-								<td><a href="trainerMyEducation.jsp"><img src="/omg/resources/button/job/1_n.png" alt=""></a></td>
-								<td><a href="trainerInsertMyCareer.jsp"><img src="/omg/resources/button/job/2_n.png" alt=""></a></span></td>
-								<td><a href="trainerMyPrize.jsp"><img src="/omg/resources/button/job/3_y.png" alt=""></a></td>
+								<td><a href="<%=request.getContextPath()%>/select.ti"><img src="/omg/resources/button/job/1_n.png" alt=""></a></td>
+								<td><a href="<%=request.getContextPath()%>/select.career.ti"><img src="/omg/resources/button/job/2_n.png" alt=""></a></span></td>
+								<td><a href="<%=request.getContextPath()%>/select.prize.ti"><img src="/omg/resources/button/job/3_y.png" alt=""></a></td>
 								<td><a href=""><img src="/omg/resources/button/job/4_n.png" alt=""></a></td>
 							</tr>
 
 							<tr>
-								<td><span>학력정보</span></td>
-								<td><span>경력정보</span></td>
-								<td><span>자격증/수상경력</span></td>
-								<td><span>인증신청결과</span></td>
+								<td><span><a href="<%=request.getContextPath()%>/select.ti">학력정보</a></span></td>
+								<td><span><a href="<%=request.getContextPath()%>/select.career.ti">경력정보</a></span></td>
+								<td><span><a href="<%=request.getContextPath()%>/select.prize.ti">자격증/수상경력</a></span></td>
+								<td><span><a href="">인증신청결과</a></span></td>
 							</tr>
 
 

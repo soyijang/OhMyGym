@@ -45,7 +45,7 @@ button {overflow:visible; position:relative; margin:0; padding:0; border:0; back
 /* a {font-family:Malgun Gothic,'¸¼Àº°íµñ', 'µ¸¿ò',Dotum,'±¼¸²',Gulim,Helvetica,sans-serif; color:#666; text-decoration:none}
  */
 input[type="text"],
-input[type="password"] {height:15px; line-height:14px; padding:2px 5px; vertical-align:middle; border:1px solid #999; background:#f0f0f0; color:#666; font-size:12px}
+input[type="password"] {height:15px; line-height:14px; padding:2px 5px; vertical-align:middle; border:1px solid #999; color:#666; font-size:12px}
 /*input[type="radio"],
 input[type="checkbox"] {display: inline-block; width: 13px; height: 13px; vertical-align: middle; -webkit-appearance: none; border-radius: 0; border: 0; margin:0; padding:0; cursor: pointer}*/
 input[type="radio"],
