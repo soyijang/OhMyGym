@@ -219,9 +219,9 @@
     <section>
         <!--헤더 영역-->
         <article id="menuTitleArea">
-        	 <% int count = list.size();	%> 
+        	 <% int count = list.size();%> 
             <p style="font-weight: bold; font-size: 1.5em; padding-top: 30px; padding-left: 30px;">고객조회/수정</p><br>
-            <a id="manyPeople">검색 <a style="color: orangered;"><%= count %></a>명/</a><a>전체 <a style="color: orangered;"><%= count %></a>명</a>
+            <a id="manyPeople">검색 <a style="color: orangered;"><%=count%></a>명/</a><a>전체 <a style="color: orangered;"><%= count %></a>명</a>
         </article>
         <!--헤더 영역 종료-->
 

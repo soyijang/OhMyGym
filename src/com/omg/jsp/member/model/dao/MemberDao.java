@@ -458,6 +458,45 @@ public ArrayList<Member> selectList(Connection con) {
 	
 	
 }
+
+
+
+
+public ArrayList<Member> selectTrainer(Connection con) {
+	Statement stmt = null;
+	ResultSet rset = null;
+	ArrayList<Member> list = null;
+	
+	String query = prop.getProperty("selectTrainer");
+	
+	try {
+		stmt = con.createStatement();
+		rset = stmt.executeQuery(query);
+		
+		list = new ArrayList<Member>();
+		
+		while(rset.next()) {
+            Member m = new Member();
+            m.setMemberId(rset.getString("MEMBER_ID"));
+            m.setName(rset.getString("MEMBER_NAME"));
+			m.setEmail(rset.getString("EMAIL"));
+			m.setPhone(rset.getString("PHONE"));
+			m.setEnrollDate(rset.getString("ENROLL_DATE"));
+			m.setTrainerType(rset.getString("TRAINER_TYPE"));
+            
+            list.add(m);
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		close(stmt);
+		close(rset);
+	}
+	
+	return list;
+	
+}
 	
 
 

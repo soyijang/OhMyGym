@@ -288,10 +288,8 @@
                     <tbody>
                         <tr>
                             <td class="tg-0pky" colspan="2" rowspan="4"><img style="width: 200px; height: 240px;" src="img/jino.jpeg"></td>
-                            <td class="tg-0pky" style="background-color: rgb(172, 172, 172)">닉네임</td>
-                            <td class="tg-0pky" colspan="3">찐트</td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">연락처</td>
-                            <td class="tg-0lax" colspan="2">010-6342-7777</td>
+                            <td class="tg-0lax" colspan="6">010-6342-7777</td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">회원명</td>
