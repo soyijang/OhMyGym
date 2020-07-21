@@ -25,34 +25,23 @@ import com.oreilly.servlet.MultipartRequest;
 public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public FileUploadServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			int maxSize = 1024 * 1024 * 10;
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
 			
-			System.out.println(root);
-			
 			String savePath = root + "resources/test";//루트와 같이 저장할게 아니라 경로만 저장하면 어떻게 됨?
 			
-			System.out.println(savePath);
-			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			
-			
+	
 			ArrayList<String> saveFiles = new ArrayList<>();
 			ArrayList<String> originFiles = new ArrayList<>();
 
@@ -74,6 +63,7 @@ public class FileUploadServlet extends HttpServlet {
 			Files upfile = new Files();
 			
 			for(int i = originFiles.size() -1 ; i >= 0; i--) {
+				savePath =  "resources/test";
 				upfile.setFilePath(savePath);
 				upfile.setFileOriginName(originFiles.get(i));
 				upfile.setFileManageName(saveFiles.get(i));

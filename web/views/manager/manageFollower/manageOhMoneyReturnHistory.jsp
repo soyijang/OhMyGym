@@ -233,22 +233,24 @@
 	<%@ include file="../../common/managerNav.jsp"%>
 	<script>
         function returnBtn(num){
-
-            var id = document.getElementById("followerID"+num).innerText;
-            var money = $("#followerReturn"+num).text();
-
-            jQuery('.checkReturn_wrap').fadeIn('slow');
-
-            var returnid = document.getElementById("returnId");
-            var returnmoney = document.getElementById("returnmoney");
-            var followerNum = document.getElementById("followerNum");
-            var fileIn = document.getElementById("returnReceipt");
-
-            returnid.value = id;
-            returnmoney.value = money;
-            followerNum.innerText = num;
-            fileIn.value = "";
-
+			if( $("#returnOk"+num).text() == '대기' ){
+	            var id = document.getElementById("followerID"+num).innerText;
+	            var money = $("#followerReturn"+num).text();
+	
+	            jQuery('.checkReturn_wrap').fadeIn('slow');
+	
+	            var returnid = document.getElementById("returnId");
+	            var returnmoney = document.getElementById("returnmoney");
+	            var followerNum = document.getElementById("followerNum");
+	            var fileIn = document.getElementById("returnReceipt");
+	
+	            returnid.value = id;
+	            returnmoney.value = money;
+	            followerNum.innerText = num;
+	            fileIn.value = "";
+			}else{
+				alert("이미 처리완료 되었습니다.");
+			}
         }
 
     </script>
@@ -299,8 +301,12 @@
 					</tbody>
 				</table>
 				<a style="text-decoration: none; font-size: 0.7em; font-weight: bold; color: red;">*환급페이지에서 환급하신 다음 영수증을 캡쳐해서 업로드 하세요</a><br><br>
+				<button style="width:90px; height: 30px; border: none; cursor: pointer; font-weight: bold; color: white; background: orangered" onclick="checkRecepit($('#followerNum').text());">환급승인하기</button>				
+				<button style="width:90px; height: 30px; border: none; cursor: pointer; font-weight: bold; color: white; background: orangered" onclick="rejectRecepit($('#followerNum').text());">환급취소하기</button>
+				
+
 				<button style="width:90px; height: 30px; border: none; cursor: pointer; font-weight: bold; color: white; background: navy" onclick="window.open('https://admin.iamport.kr/users/login')">환급페이지</button>
-				<button style="width:90px; height: 30px; border: none; cursor: pointer; font-weight: bold; color: white; background: orangered" onclick="checkRecepit($('#followerNum').text());">환급승인하기</button>
+				
 			</div>
 		</div>
 	</div>
@@ -371,6 +377,36 @@
                 alert("환급후 완료 영수증을 반드시 올려주세요!");
             }
         }
+        
+        function rejectRecepit(num){
+        	//환급페이지를 업데이트하는 ajax 구현
+        	//어느 부분의 환급요청인지 알아낼 코드 필요
+        	var okText = document.getElementById("returnOk" + num);
+        	event.preventDefault();          
+     			var requsetNum = $("#listCode"+num).text();
+     			var managerId = '<%=loginManager.getManagerId()%>';
+ 
+     			$.ajax({
+     				url : "/omg/rejectRefund.manager",
+     				data : {
+     					requsetNum : requsetNum,
+     					managerId: managerId
+     				},
+     				type : "post",
+     				success : function(data) {
+     	            	alert("취소처리 되었습니다.");
+     	                jQuery('.checkReturn_wrap').fadeOut('slow');
+     	                if(okText.innerText == '대기'){
+     	                    okText.innerText = '취소';
+     	                    $("#returnOk"+num).css("color","navy");
+     	                }
+     				},
+     				error : function(){
+     					alert("환급처리실패");
+     				}
+     			})
+        }
+        
     </script>
 
 	<section>
