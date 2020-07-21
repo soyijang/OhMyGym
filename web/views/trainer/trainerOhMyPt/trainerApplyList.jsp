@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.matching.model.vo.*"%>
+<% 
+	ArrayList<MatchingRequest> matchingRequest = (ArrayList<MatchingRequest>) request.getAttribute("matchRequest");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -252,40 +255,67 @@ a#goTalkBtn{
 						<tr>
 							<th>번호</th>
 							<th>신청인ID</th>
-							<th>신청인</th>
 							<th>신청일자</th>
 							<th>상태</th>
 						</tr>
-						<tr>
+						
+						<% for(int i = 0; i < matchingRequest.size(); i++) { %>
+							<tr>
+								<td><%= matchingRequest.size() - i %></td>
+								<td><%= matchingRequest.get(i).getFollowerId() %></td>
+								<td><%= matchingRequest.get(i).getRequestDate() + " " + matchingRequest.get(i).getRequestTime() %></td>
+								<td>
+									<div class="checkApply" onclick="submitMatching('<%=matchingRequest.get(i).getFollowerId()%>');"><%= matchingRequest.get(i).getRequestType() %></div>
+								</td>
+							</tr>
+						<% } %>
+						<!-- <tr>
 							<td>2</td>
 							<td>hjh0621</td>
-							<td>한진희</td>
 							<td>2020-07-12</td>
 							<td><div class="checkApply" onclick="submitMatching();" >대기</div></td>
 						</tr>
 						<tr>
 							<td>1</td>
 							<td>onji677</td>
-							<td>김진오</td>
 							<td>2020-07-11</td>
 							<td><div class="checkApply" onclick="submitMatching();">거절</div></td>
-						</tr>
+						</tr> -->
 					</table>
 				</div>
 			</div>
 
 		</article>
 	</section>
+	
+	<br><br><br><br><br><br><br><br><br>
 	<script>
 
    		 $(".checkApply").each(function(index,item){
    		 	switch($(item).text()){
-   		 	case '대기': $(item).css("background","navy");
+   		 	case '대기': $(item).css("background","navy"); break;
+   		 	case '거절': $(item).css("background","gray"); break;
    		 	}
    		 })
    		 
-   		function submitMatching(){
+   		function submitMatching(followerId){
             jQuery('.matching_wrap').fadeIn('slow');
+            
+            console.log(followerId);
+            
+            $.ajax({
+            	url: "requestInfo.mc",
+            	data: {
+            		followerId: followerId
+            	},
+            	type: "get",
+            	success: function(data) {
+            		console.log(<%= request.getAttribute("requestInfo")%>);
+            	},
+            	error: function(data) {
+            		console.log("실패");
+            	}
+            });
         }
    		 
    		function inputReject(){

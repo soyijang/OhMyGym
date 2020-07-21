@@ -558,10 +558,6 @@ div.tariner_subAbility {
             var matchingChatContent = $("#insertMatchChat").val();
             var followerId = "<%= loginUser.getMemberId() %>";
             var trainerId = $('.profile_Name').text();
-            console.log(matchingChatContent);
-            console.log(followerId);
-            console.log(trainerId);
-            
             var insertMatchRequest = {
             		matchingChatContent: matchingChatContent,
             		followerId: followerId,

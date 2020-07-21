@@ -1,7 +1,7 @@
 package com.omg.jsp.matching.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.omg.jsp.matching.model.service.MatchingService;
-import com.omg.jsp.matching.model.vo.MatchingRequest;
-import com.omg.jsp.member.model.vo.Member;
 
 /**
- * Servlet implementation class SelectMatchingApplyListServlet
+ * Servlet implementation class SelectRequestFollowerInfoServlet
  */
-@WebServlet("/selectApplyList.pt")
-public class SelectApplyListServlet extends HttpServlet {
+@WebServlet("/requestInfo.mc")
+public class SelectRequestFollowerInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectApplyListServlet() {
+    public SelectRequestFollowerInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,23 +32,22 @@ public class SelectApplyListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		String followerId = request.getParameter("followerId");
 		
-		String memberId = loginUser.getMemberId();
+		HashMap<String, Object> requestInfo = new MatchingService().selectFollowerInfo(followerId);
 		
-		ArrayList<MatchingRequest> matchRequest = new MatchingService().selectApplyList(memberId);
-		
-		System.out.println(matchRequest);
+		System.out.println("controller requestInfo :" + requestInfo);
 		
 		String page = "";
-		if(!matchRequest.isEmpty()) {
+		if(!requestInfo.isEmpty()) {
 			page = "views/trainer/trainerOhMyPt/trainerApplyList.jsp";
-			request.setAttribute("matchRequest", matchRequest);
+			request.setAttribute("requestInfo", requestInfo);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "매칭리스트 조회 실패");
-		}	
+			request.setAttribute("msg", "매칭신청 상세정보 불러오기 실패");
+		}
 		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**
