@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.omg.jsp.matching.model.dao.MatchingDao;
 import com.omg.jsp.matching.model.vo.MatchingChat;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
+import com.omg.jsp.matching.model.vo.RequestInformation;
 import com.omg.jsp.member.model.vo.TrainerInfo;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;

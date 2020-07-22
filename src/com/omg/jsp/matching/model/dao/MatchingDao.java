@@ -16,6 +16,7 @@ import java.util.Properties;
 
 import com.omg.jsp.matching.model.vo.MatchingChat;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
+import com.omg.jsp.matching.model.vo.RequestInformation;
 import com.omg.jsp.member.model.dao.MemberDao;
 import com.omg.jsp.member.model.vo.TrainerInfo;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
@@ -562,6 +563,36 @@ public class MatchingDao {
 	      }
 	      return hi;
 	   }
-
-
+	
+	public RequestInformation selectFollowerInfo(Connection con, String followerId) {
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      RequestInformation requestInfo = new RequestInformation();
+	      String query = prop.getProperty("selectFollowerInfo");
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+	         pstmt.setString(1, followerId);
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         if(rset.next()) {
+	            requestInfo.setChatContent(rset.getString("CHAT_CONTENT"));
+	            requestInfo.setFollowerId(followerId);
+	            requestInfo.setFollowerName(rset.getString("MEMBER_NAME"));
+	            requestInfo.setMemberAge(rset.getString("MEMBER_AGE"));
+	         }
+	         System.out.println("matchingDao followerInfo : " + requestInfo);
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	         close(rset);
+	      }
+	      
+	      return requestInfo;
+	   }
 }
+
+
+
