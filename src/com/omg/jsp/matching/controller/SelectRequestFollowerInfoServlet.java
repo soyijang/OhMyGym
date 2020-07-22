@@ -1,7 +1,6 @@
 package com.omg.jsp.matching.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.omg.jsp.matching.model.service.MatchingService;
+import com.omg.jsp.matching.model.vo.RequestInformation;
 
 /**
  * Servlet implementation class SelectRequestFollowerInfoServlet
@@ -34,20 +35,12 @@ public class SelectRequestFollowerInfoServlet extends HttpServlet {
 		
 		String followerId = request.getParameter("followerId");
 		
-		HashMap<String, Object> requestInfo = new MatchingService().selectFollowerInfo(followerId);
+		RequestInformation requestInfo = new MatchingService().selectFollowerInfo(followerId);
 		
-		System.out.println("controller requestInfo :" + requestInfo);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		
-		String page = "";
-		if(!requestInfo.isEmpty()) {
-			page = "views/trainer/trainerOhMyPt/trainerApplyList.jsp";
-			request.setAttribute("requestInfo", requestInfo);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "매칭신청 상세정보 불러오기 실패");
-		}
-		request.getRequestDispatcher(page).forward(request, response);
-		
+		new Gson().toJson(requestInfo, response.getWriter());		
 	}
 
 	/**
