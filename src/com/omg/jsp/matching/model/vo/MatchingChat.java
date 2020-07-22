@@ -9,6 +9,7 @@ public class MatchingChat implements Serializable{
 	private String writerId;
 	private String chatDate;
 	private String requestCode;
+	private String memberType;
 	
 	public MatchingChat() {}
 
@@ -65,6 +66,14 @@ public class MatchingChat implements Serializable{
 	public String toString() {
 		return "MatchingChat [chatNum=" + chatNum + ", chatContent=" + chatContent + ", writerId=" + writerId
 				+ ", chatDate=" + chatDate + ", requestCode=" + requestCode + "]";
+	}
+
+	public String getMemberType() {
+		return memberType;
+	}
+
+	public void setMemberType(String memberType) {
+		this.memberType = memberType;
 	}
 	
 	

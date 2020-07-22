@@ -865,9 +865,7 @@ div#return_list_div {
                        	 				balance = data.balance;
                        	 				refundBalance = data.refundBal;
                        	 				nofundBalance = data.nofundBal;
-                       	 				console.log(refundBalance);
-                       	 				console.log(balance);
-                       	 				console.log(nofundBalance);
+   
                        	 			},
                        	 			error : function() {
                        	 				console.log("실패!")
