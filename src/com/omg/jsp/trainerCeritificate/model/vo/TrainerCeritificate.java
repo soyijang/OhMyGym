@@ -10,12 +10,12 @@ public class TrainerCeritificate {
 	private String certiDate;	//취득일
 	private String certiInstitution;	//발급기관
 	private String certiFileCode; //첨부코드
-	
+	private String certiConfirm;
 	
 	public TrainerCeritificate() {}
 
 	public TrainerCeritificate(String certiManageCode, String memberId, String certiCode, String certiName,
-			String certiNum, String certiDate, String certiInstitution, String certiFileCode) {
+			String certiNum, String certiDate, String certiInstitution, String certiFileCode, String certiConfirm) {
 		super();
 		this.certiManageCode = certiManageCode;
 		this.memberId = memberId;
@@ -25,6 +25,7 @@ public class TrainerCeritificate {
 		this.certiDate = certiDate;
 		this.certiInstitution = certiInstitution;
 		this.certiFileCode = certiFileCode;
+		this.certiConfirm = certiConfirm;
 	}
 
 	public String getCertiManageCode() {
@@ -91,10 +92,21 @@ public class TrainerCeritificate {
 		this.certiFileCode = certiFileCode;
 	}
 
+	public String getCertiConfirm() {
+		return certiConfirm;
+	}
+
+	public void setCertiConfirm(String certiConfirm) {
+		this.certiConfirm = certiConfirm;
+	}
+
 	@Override
 	public String toString() {
 		return "TrainerCeritificate [certiManageCode=" + certiManageCode + ", memberId=" + memberId + ", certiCode="
 				+ certiCode + ", certiName=" + certiName + ", certiNum=" + certiNum + ", certiDate=" + certiDate
-				+ ", certiInstitution=" + certiInstitution + ", certiFileCode=" + certiFileCode + "]";
+				+ ", certiInstitution=" + certiInstitution + ", certiFileCode=" + certiFileCode + ", certiConfirm="
+				+ certiConfirm + "]";
 	}
+
+	
 }

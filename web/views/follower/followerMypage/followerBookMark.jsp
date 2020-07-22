@@ -83,7 +83,7 @@
 									<span class="date division"><%= b.getWriteDate() %></span>
 								</div>
 								<div class="description">
-									<a href="/?m=news&amp;uid=42666"><p><%= b.getBoardContent() %></p></a>
+									<a href=""><p><%= b.getBoardContent() %></p></a>
 								</div>
 							</div>
 						</li>

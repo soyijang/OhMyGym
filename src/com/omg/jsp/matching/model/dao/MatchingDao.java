@@ -180,6 +180,8 @@ public class MatchingDao {
 				tc.setCertiName(rset.getString("CERTI_NAME"));
 				tc.setCertiFileCode(rset.getString("CERTI_FILECODE"));
 				tc.setCertiNum(rset.getString("CERTI_NUM"));
+				tc.setCertiCode(rset.getString("CERTI_CODE"));
+				tc.setCertiManageCode(rset.getString("CERTI_MANAGECODE"));
 				
 				tcList.add(tc);
 			}
