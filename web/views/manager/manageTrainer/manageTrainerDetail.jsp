@@ -16,6 +16,31 @@
 <head>
 <meta charset="UTF-8">
   <title>오마이짐 관리자 페이지</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+   var profileManageCode;
+
+   function profileload(userId){   
+        $.ajax({
+          url : "/omg/loadProfile.all",
+           type : 'post',
+           data : {
+                   userId : userId
+                },
+                success : function(data) {
+                   profileManageCode = data.fileManageName;
+                   console.log(profileManageCode);
+                   $("."+userId).attr("src", "<%=request.getContextPath()%>/resources/test/"+profileManageCode); 
+                },
+                error : function(){
+                  profileManageCode = "";
+                }
+        })
+   }      
+   profileload();
+   
+   
+   </script>
     <style>
         html {
             width: 1440px;
@@ -251,8 +276,12 @@
    
 </head>
 <body>
+	
   <%@ include file="../../common/managerNav.jsp"%>
     <section>
+    <script>
+      profileload("<%= tiList.get(0).getMemberId() %>")
+    </script>
         <!--헤더 영역-->
         <article id="menuTitleArea">
             <p style="font-weight: bold; font-size: 1.5em; padding-top: 30px; padding-left: 30px;">트레이너 조회/수정</p><br>
@@ -264,7 +293,7 @@
         <!--버튼 영역-->
         <article id="button-Area">
             <div style="float: right; margin-right: 100px;">
-                <button onclick="" style="cursor: pointer; border: none; background-color: navy; color: white; height: 30px; width: 70px">계약서작성</button>
+                <button onclick="location.href='https://app.modusign.co.kr/templates'" style="cursor: pointer; border: none; background-color: navy; color: white; height: 30px; width: 70px">계약서작성</button>
                 <button onclick="" style="cursor: pointer; border: none; background-color: navy; color: white; height: 30px; width: 120px">임시비밀번호발급</button>
                 <button onclick="" style="cursor: pointer; border: none; background-color: navy; color: white; height: 30px; width: 70px">edit</button>
             </div>
@@ -275,7 +304,7 @@
         <!--테이블 표시 영역-->
         <article id="tableArea">
             <div align="center">
-                <table class="tg" style="undefined;table-layout: fixed; width: 1000px; height: 960px;">
+                <table class="tg" style="undefined;table-layout: fixed; width: 1000px; height: 700px;">
                 
                     <colgroup>
                     
@@ -293,43 +322,56 @@
                         <tr style="border-top: 4px solid gray;">
                             <th class="tg-0pky" colspan="2" style="background-color: rgb(172, 172, 172)">프로필</th>
                             <th class="tg-0pky" style="background-color: rgb(172, 172, 172)">아이디</th>
-                            <th class="tg-0pky" colspan="3"><%= tiList.get(1) %></th>
+                            <th class="tg-0pky" colspan="3"><%= tiList.get(0).getMemberId() %></th>
                             <th class="tg-cly1" style="background-color: rgb(172, 172, 172)">회원상태</th>
-                            <% if (tiList.get(8).equals("대기") || tiList.get(8).equals("미신청") || tiList.get(8).equals("거절"))  {
-                            %>
-                            <th class="tg-0lax" colspan="2">임시트레이너</th>
-                            <%} else { %><th class="tg-0lax" colspan="2">정식트레이너</th>
+                            <% if (tiList.get(0).getTrainerType().equals("승인"))  {
+                            %> <th class="tg-0lax" colspan="2">정식트레이너</th> 
+                            <%} else { %><th class="tg-0lax" colspan="2">임시트레이너</th>
                             <% } %>
                             
                         </tr>
                     </thead> 
                     <tbody>
                         <tr>
-                            <td class="tg-0pky" colspan="2" rowspan="4"><img style="width: 200px; height: 240px;" src="img/jino.jpeg"></td>
+                            <td class="tg-0pky" colspan="2" rowspan="4"><img class="<%= tiList.get(0).getMemberId() %>" style="width: 200px; height: 240px;"></td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">연락처</td>
-                            <td class="tg-0lax" colspan="6"><%= tiList.get(4) %></td>
+                            <td class="tg-0lax" colspan="6"><%= tiList.get(0).getPhone() %></td>
                         </tr>
+                        
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">회원명</td>
-                            <td class="tg-0lax" colspan="3"><%= tiList.get(2) %></td>
+                            <td class="tg-0lax" colspan="3"><%= tiList.get(0).getName() %></td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">가입일</td>
-                            <td class="tg-0lax" colspan="2"><%= tiList.get(9) %></td>
+                            <td class="tg-0lax" colspan="2"><%= tiList.get(0).getEnrollDate() %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">이메일</td>
-                            <td class="tg-0lax" colspan="6"><%= tiList.get(3) %></td>
+                            <td class="tg-0lax" colspan="6"><%= tiList.get(0).getEmail() %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">주소</td>
-                            <td class="tg-0lax" colspan="6"><%= tiList.get(10) %></td>
+                            <td class="tg-0lax" colspan="6"><%= tiList.get(0).getAddress() %></td>
                         </tr>
                         <tr>
-                            <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">학력</td>
-                            <td class="tg-0lax" colspan="2"><%= educationList.get(3) %><button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
+                            <td class="tg-0lax" colspan="9" style="background-color: rgb(172, 172, 172)">학력</td>
+                            <% if(educationList.size() > 0) {
+                            	
+                             for(int i = 0; i < educationList.size(); i++) { %>
+													
+														<tr><td class="tg-0lax" colspan="9"><%= educationList.get(i).getEduName() %>
+														<button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
+														<tr>
+													
+												<% } 
+											 } else { %>
+											 		
+														<td class="tg-0lax" colspan="2">등록된 학력 정보가 없습니다.
+													
+											 <% } %>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">주요분야</td>
-                            <td class="tg-0lax" colspan="2"><%= tiList.get(6) %></td>
+                            <td class="tg-0lax" colspan="2"><%= tiList.get(0).getTrainerMainField() %></td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">계좌정보</td>
-                            <td class="tg-0lax" colspan="2"><%= tiList.get(12) %></td>
+                            <td class="tg-0lax" colspan="5"><%= tiList.get(0).getBankName() %> <%= tiList.get(0).getBankAccount() %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" colspan="3" style="background-color: rgb(172, 172, 172)">자격증/워크샵</td>
@@ -368,7 +410,7 @@
 												<% } 
 											} else {%>
 													<tr>
-														<td colspan="4">등록된 경력 정보가 없습니다.</td>
+														<td colspan="9">등록된 경력 정보가 없습니다.</td>
 													</tr>
 											<% } %>
                         
@@ -387,14 +429,6 @@
 
     </section>
     
-    <script>
-		$(function(){
-			$("#listArea td").click(function(){
-				var num = $(this).parent().children("input").val();
-				console.log(num);
-				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
-			});	
-		});
-	</script>
+    
 </body>
 </html>
