@@ -1,7 +1,6 @@
 package com.omg.jsp.trainerMyPage.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,17 +13,18 @@ import com.omg.jsp.trainerEducation.model.service.UpdateEduService;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
 
 /**
- * Servlet implementation class UpdateTrainerEduServlet
+ * Servlet implementation class InsertTrainerEduServlet
  */
-@WebServlet("/update.edu.ti")
-public class UpdateTrainerEduServlet extends HttpServlet {
+@WebServlet("/insert.edu.ti")
+public class InsertTrainerEduServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateTrainerEduServlet() {
+    public InsertTrainerEduServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -41,25 +41,28 @@ public class UpdateTrainerEduServlet extends HttpServlet {
 		System.out.println("eduStatenum : " + request.getParameter("eduState"));
 		System.out.println("eduNamenum : " + request.getParameter("eduName"));
 		
-		TrainerEducation updateEdu = new TrainerEducation();
-		updateEdu.setEduManageCode(request.getParameter("saveEduManageCode"));
-		updateEdu.setEduType(request.getParameter("eduType"));
-		updateEdu.setEduState(request.getParameter("eduState"));
-		updateEdu.setEduName(request.getParameter("eduName"));
-		updateEdu.setEduEnrollDate(request.getParameter("startDt"));
-		updateEdu.setGraduateDate(request.getParameter("endDt"));
-		System.out.println("updateEdu : " + updateEdu);
+		TrainerEducation insertEdu = new TrainerEducation();
+		insertEdu.setEduManageCode(request.getParameter("saveEduManageCode"));
+		insertEdu.setEduType(request.getParameter("eduType"));
+		insertEdu.setEduState(request.getParameter("eduState"));
+		insertEdu.setEduName(request.getParameter("eduName"));
+		insertEdu.setEduEnrollDate(request.getParameter("startDt"));
+		insertEdu.setGraduateDate(request.getParameter("endDt"));
+		System.out.println("insertEdu : " + insertEdu);
 		
 		String page = "";
-		int result = new UpdateEduService().updateEdu(updateEdu);
+		int result = new UpdateEduService().insertEdu(insertEdu, userId);
 		if(result > 0) {
-			System.out.println("학력정보 업데이트완료!");
+			System.out.println("학력정보 추가완료!");
 			page = "select.ti";
 		}else {
 			 page = "views/common/errorPage.jsp";
 	         request.setAttribute("msg", "학력정보 수정에 실패했습니다!");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
+		
+		
+		
 		
 		
 		
@@ -74,17 +77,6 @@ public class UpdateTrainerEduServlet extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

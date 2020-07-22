@@ -1,7 +1,6 @@
 package com.omg.jsp.trainerMyPage.controller;
 
-import java.io.IOException;
-
+import java.io.IOException; 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,21 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.omg.jsp.member.model.vo.Member;
-import com.omg.jsp.trainerEducation.model.service.UpdateEduService;
-import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
+import com.omg.jsp.trainerCareer.model.service.UpdateCarService;
+import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 
 /**
- * Servlet implementation class UpdateTrainerEduServlet
+ * Servlet implementation class InsertTrainerCareerServlet
  */
-@WebServlet("/update.edu.ti")
-public class UpdateTrainerEduServlet extends HttpServlet {
+@WebServlet("/insert.car.ti")
+public class InsertTrainerCareerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateTrainerEduServlet() {
+    public InsertTrainerCareerServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -37,30 +37,31 @@ public class UpdateTrainerEduServlet extends HttpServlet {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		
 		String userId = loginUser.getMemberId();
-		System.out.println("num : " +  request.getParameter("num"));
-		System.out.println("eduStatenum : " + request.getParameter("eduState"));
-		System.out.println("eduNamenum : " + request.getParameter("eduName"));
 		
-		TrainerEducation updateEdu = new TrainerEducation();
-		updateEdu.setEduManageCode(request.getParameter("saveEduManageCode"));
-		updateEdu.setEduType(request.getParameter("eduType"));
-		updateEdu.setEduState(request.getParameter("eduState"));
-		updateEdu.setEduName(request.getParameter("eduName"));
-		updateEdu.setEduEnrollDate(request.getParameter("startDt"));
-		updateEdu.setGraduateDate(request.getParameter("endDt"));
-		System.out.println("updateEdu : " + updateEdu);
+		TrainerCareer insertCar = new TrainerCareer();
+		insertCar.setMemberId(userId);
+		insertCar.setCareerId(request.getParameter("saveCarManageCode"));
+		insertCar.setCompName(request.getParameter("carName"));
+		insertCar.setEnterDate(request.getParameter("startDt"));
+		insertCar.setResignDate(request.getParameter("endDt"));
+		insertCar.setCareerType(request.getParameter("carType"));
+		insertCar.setCareerField(request.getParameter("carField"));
+		insertCar.setMemberId(userId);
+		insertCar.setCareerProof("EMPTY");
+		insertCar.setProofYn("N");
+
+		System.out.println("insertCar : " + insertCar);
 		
 		String page = "";
-		int result = new UpdateEduService().updateEdu(updateEdu);
+		int result = new UpdateCarService().insertCar(insertCar);
 		if(result > 0) {
-			System.out.println("학력정보 업데이트완료!");
-			page = "select.ti";
+			System.out.println("경력정보 입력완료!");
+			page = "/select.career.ti";
 		}else {
 			 page = "views/common/errorPage.jsp";
-	         request.setAttribute("msg", "학력정보 수정에 실패했습니다!");
+	         request.setAttribute("msg", "경력정보 저장에 실패했습니다!");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-		
 		
 		
 	}
@@ -74,24 +75,3 @@ public class UpdateTrainerEduServlet extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
