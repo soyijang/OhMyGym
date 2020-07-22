@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.omg.jsp.matching.model.dao.MatchingDao;
 import com.omg.jsp.matching.model.vo.MatchingChat;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
+import com.omg.jsp.member.model.vo.TrainerInfo;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -54,8 +55,11 @@ public class MatchingService {
 		ArrayList<TrainerEducation> teList = new MatchingDao().selectTrainerEducation(con,memberId);
 		ArrayList<TrainerCareer> tcrList = new MatchingDao().selectTrainerCareer(con, memberId);
 		ArrayList<TrainerReview> trList = new MatchingDao().selectTrainerReview(con, memberId);
+		ArrayList<TrainerInfo> tiList = new MatchingDao().selectInfo(con, memberId);
+
 		//Matching 테이블에서 데이터를 반환하면 채팅으로, 안반환하면 디테일 페이지로 
 		
+		hmap.put("info", tiList);
 		hmap.put("trainerInfo", trainerInfo);
 		hmap.put("ceritificate", tcList);
 		hmap.put("education", teList);
@@ -139,4 +143,22 @@ public class MatchingService {
 		return result;
 	}
 	
+	
+	public RequestInformation selectFollowerInfo(String followerId) {
+		 Connection con = getConncection();
+		      
+		 RequestInformation requestInfo = new MatchingDao().selectFollowerInfo(con, followerId);
+		 ArrayList<String> healthInfo = new MatchingDao().selectFollowerHealthInfo(con, followerId);
+
+		 requestInfo.setHeight(healthInfo.get(0));
+		 requestInfo.setWeight(healthInfo.get(1));
+		 requestInfo.setWishPart(healthInfo.get(2));
+		      
+		 System.out.println(requestInfo);
+		      
+		 close(con);
+		     
+		 return requestInfo;
+	}
+
 }

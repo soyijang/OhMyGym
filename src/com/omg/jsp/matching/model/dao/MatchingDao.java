@@ -17,6 +17,7 @@ import java.util.Properties;
 import com.omg.jsp.matching.model.vo.MatchingChat;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.member.model.dao.MemberDao;
+import com.omg.jsp.member.model.vo.TrainerInfo;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -495,5 +496,72 @@ public class MatchingDao {
 		return result;
 	}
 	
+	public ArrayList<TrainerInfo> selectInfo(Connection con, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<TrainerInfo> tiList = new ArrayList<TrainerInfo>();
+		TrainerInfo ti = null;
+		
+		String query = prop.getProperty("selectInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				ti = new TrainerInfo();
+				
+				
+				ti.setMemberId(rset.getString("MEMBER_ID"));
+				ti.setName(rset.getString("MEMBER_NAME"));
+				ti.setEmail(rset.getString("EMAIL"));
+				ti.setPhone(rset.getString("PHONE"));
+				ti.setTrainerComment(rset.getString("TRAINER_COMMENT"));
+				ti.setTrainerMainField(rset.getString("TRAINER_MAINFIELD"));
+				ti.setTrainerSubField(rset.getString("TRAINER_SUBFIELD"));
+				ti.setTrainerType(rset.getString("TRAINER_TYPE"));
+				ti.setEnrollDate(rset.getString("ENROLL_DATE"));
+				ti.setAddress(rset.getString("ADDRESS"));
+				ti.setBankCode(rset.getString("BANK_CODE"));
+				ti.setBankAccount(rset.getString("BANK_ACCOUNT"));
+				ti.setBankName(rset.getString("BANK_NAME"));
+				
+				tiList.add(ti);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return tiList;
+	}
+	
+	public ArrayList<String> selectFollowerHealthInfo(Connection con, String followerId) {
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      ArrayList<String> hi = new ArrayList<String>();
+	      
+	      String query = prop.getProperty("selectHealthInfo");
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+	         pstmt.setString(1, followerId);
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         while(rset.next()) {
+	            hi.add(rset.getString("HEALTH_DATA"));
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	      return hi;
+	   }
+
 
 }
