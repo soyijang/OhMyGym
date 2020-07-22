@@ -328,21 +328,13 @@ a#goTalkBtn{
             		$("#weight").text(result['weight']);
             		$("#followerComment").text(result['chatContent']);
             		
-            		
-            		
             	},
             	error: function(data) {
             		console.log("실패");
             	}
             });
             
-            $("#applyid").text("");
-    		$("#applyname").text("");
-    		$("#age").text("");
-    		$("#tpart").text("");
-    		$("#tall").text("");
-    		$("#weight").text("");
-    		$("#followerComment").text("");
+            
         }
    		 
    		 
