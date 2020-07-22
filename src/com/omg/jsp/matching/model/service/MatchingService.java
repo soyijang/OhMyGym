@@ -53,6 +53,7 @@ public class MatchingService {
 		ArrayList<TrainerEducation> teList = new MatchingDao().selectTrainerEducation(con,memberId);
 		ArrayList<TrainerCareer> tcrList = new MatchingDao().selectTrainerCareer(con, memberId);
 		ArrayList<TrainerReview> trList = new MatchingDao().selectTrainerReview(con, memberId);
+		//Matching 테이블에서 데이터를 반환하면 채팅으로, 안반환하면 디테일 페이지로 
 		
 		hmap.put("trainerInfo", trainerInfo);
 		hmap.put("ceritificate", tcList);

@@ -854,6 +854,7 @@ div.post_commentback{
 		}
 	
 	</script>
+	<!-- 프로필 사진을 불러오는 ajax 스크립트 -->
 	<script>
 	var profileManageCode;
 

@@ -166,6 +166,31 @@ div.tariner_subAbility {
 </head>
 <body>
 	<%@ include file="../../common/followerNav.jsp"%>
+	<script>
+		var profileManageCode;
+	
+		function profileload(userId){   
+		     $.ajax({
+				 url : "/omg/loadProfile.all",
+			     type : 'post',
+			     data : {
+			          	userId : userId
+				       },
+				       success : function(data) {
+				          profileManageCode = data.fileManageName;
+				          console.log(profileManageCode);
+				          $("."+userId).attr("src", "<%=request.getContextPath()%>/resources/test/"+profileManageCode); 
+				 		},
+				 		error : function(){
+							profileManageCode = "";
+				 		}
+		     })
+		}		
+		profileload();
+	
+	</script>
+	
+	
 	<section>
 		<article>
 			<div id="follower_Match_Main">
@@ -192,11 +217,11 @@ div.tariner_subAbility {
 						<!-- 리스트 시작 -->
 						<%for(int i = 0; i < list.size() - 1; i++) {
 							HashMap<String, Object> hmap = list.get(i); %>
-							
+							<script>profileload("<%= hmap.get("trainerId") %>")</script>
 							<div class="trainer_Info" style="float: left;">
 								<input type="hidden" value="<%= hmap.get("trainerId") %>">
 								<div class="trainnerImg">
-									<img class="profileImg" width="100%" height="100%" src="">
+									<img class="<%= hmap.get("trainerId") %>" width="100%" height="100%" style="border-radius: 15px;">
 								</div>
 								<div class="trainnerTxt">
 									<a class="trainerName"><%= hmap.get("trainerId") %></a>

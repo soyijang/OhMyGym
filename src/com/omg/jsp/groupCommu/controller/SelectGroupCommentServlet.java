@@ -39,7 +39,7 @@ public class SelectGroupCommentServlet extends HttpServlet {
 
 			@Override
 			public int compare(GroupComment o1, GroupComment o2) {
-				return Integer.parseInt(o1.getGroupBoardNum()) - Integer.parseInt(o2.getGroupBoardNum());
+				return Integer.parseInt(o1.getCommentNum()) - Integer.parseInt(o2.getCommentNum());
 			}
 			
 		});
