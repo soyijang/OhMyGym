@@ -83,6 +83,12 @@
 											<option value="기타">기타</option>
 										</select>
 										
+									<%-- 	<script type="text/javascript">
+										$(document).ready(function(){
+											$("input[type='radio'][name='carType'] option[value='<%= careerList.get(i).getCareerType() %>']").prop("selected", true);
+										})
+										</script>
+										 --%>
 										<p class="fieldSel">위 분야에 [ 
 										<input type="radio" name="carType" id="carType<%=i %>EMPLOYEE" value="EMPLOYEE"> 
 										<label for="carType">실무</label>
@@ -190,7 +196,7 @@
 							
 						<!-- 버튼영역 -->
 						<div align="right">
-							<div onclick="updatethis(<%= i %>)" style="background-color:orangered; color: white; font-weight:bold;  width: 50px; height: 30px">저장</div>
+							<div onclick="insertthis(<%= i %>)" style="background-color:orangered; color: white; font-weight:bold;  width: 50px; height: 30px">저장</div>
 						</div>
 						
 						<!-- 전송용 영역 -->	
