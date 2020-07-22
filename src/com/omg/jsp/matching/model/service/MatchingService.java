@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.omg.jsp.followerHealth.model.dao.HealthInfoDao;
 import com.omg.jsp.followerHealth.model.vo.HealthInfo;
 import com.omg.jsp.matching.model.dao.MatchingDao;
+import com.omg.jsp.matching.model.vo.MatchingChat;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
@@ -116,4 +117,42 @@ public class MatchingService {
 		
 		return requestInfo;
 	}
+
+	public MatchingRequest isMatched(String trainerId, String followerId) {
+		
+		Connection con = getConncection();
+		
+		MatchingRequest matchingCheck = new MatchingDao().isMatched(con, trainerId, followerId);
+		
+		close(con);
+		
+		return matchingCheck;
+	}
+
+	public ArrayList<MatchingChat> matchChatList(String roomNum) {
+		
+		Connection con = getConncection();
+		
+		ArrayList<MatchingChat> result = new MatchingDao().matchChatList(con, roomNum);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int insertChat(MatchingChat chat) {
+		
+		Connection con = getConncection();
+		
+		int result = new MatchingDao().insertChat(con, chat);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		} close(con);
+		
+		return result;
+	}
+	
 }

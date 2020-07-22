@@ -10,50 +10,33 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.omg.jsp.matching.model.service.MatchingService;
-import com.omg.jsp.matching.model.vo.MatchingChat;
+import com.omg.jsp.matching.model.vo.MatchingRequest;
 
-/**
- * Servlet implementation class InsertChatServlet
- */
-@WebServlet("/inputChat.follower")
-public class InsertChatServlet extends HttpServlet {
+
+@WebServlet("/checkMatched.follower")
+public class CheckMatchedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InsertChatServlet() {
+
+    public CheckMatchedServlet() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("followerId");
-		String content = request.getParameter("content");
-		String matchingNum = request.getParameter("matchingRoom");
-	
-		MatchingChat chat = new MatchingChat();
 		
-		chat.setChatContent(content);
-		chat.setWriterId(id);
-		chat.setRequestCode(matchingNum);
+		String trainerId = request.getParameter("trainerId");
+		String followerId = request.getParameter("followerId");
 		
-		System.out.println(chat);
-		
-		int result = new MatchingService().insertChat(chat);
+		MatchingRequest result = new MatchingService().isMatched(trainerId, followerId);
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(result, response.getWriter());
-		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 

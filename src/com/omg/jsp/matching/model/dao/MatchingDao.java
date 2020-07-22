@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
+import com.omg.jsp.matching.model.vo.MatchingChat;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.member.model.dao.MemberDao;
 import com.omg.jsp.member.model.vo.Member;
@@ -421,6 +422,104 @@ public class MatchingDao {
 		}
 		
 		return requestInfo;
+	}
+	public MatchingRequest isMatched(Connection con, String trainerId, String followerId) {
+		
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		
+		MatchingRequest match = null;
+		
+		String query = prop.getProperty("isMatched");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, followerId);
+			pstmt.setString(2, trainerId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				match = new MatchingRequest();
+				
+				match.setRequestCode(rset.getString("REQUEST_MANAGECODE"));
+				match.setFollowerId(rset.getString("FOLLOWER_ID"));
+				match.setTrainerId(rset.getString("TRAINER_ID"));
+				match.setRequestType(rset.getString("REQUEST_TYPE"));
+				
+			} 
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return match;
+	}
+	public ArrayList<MatchingChat> matchChatList(Connection con, String roomNum) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<MatchingChat> result = null;
+		
+		String query = prop.getProperty("matchChatList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, roomNum);
+			
+			rset = pstmt.executeQuery();
+			
+			result = new ArrayList<MatchingChat>();
+			
+			while(rset.next()) {
+				MatchingChat chat = new MatchingChat();
+				chat.setChatNum(rset.getString("CHAT_NUM"));
+				chat.setChatContent(rset.getString("CHAT_CONTENT"));
+				chat.setWriterId(rset.getString("CHAT_WRITERID"));
+				chat.setMemberType(rset.getString("MEMBER_TYPE"));
+				
+				result.add(chat);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
+	public int insertChat(Connection con, MatchingChat chat) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertMoreChat");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, chat.getChatContent());
+			pstmt.setString(2, chat.getWriterId());
+			pstmt.setString(3, chat.getRequestCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 	
 

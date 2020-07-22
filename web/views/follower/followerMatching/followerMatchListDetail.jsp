@@ -278,7 +278,6 @@ font-weight: bold;
 	<%@ include file="../../common/followerNav.jsp"%>
 	<script>
 		var profileManageCode;
-	
 		function profileload(userId){   
 		     $.ajax({
 				 url : "/omg/loadProfile.all",
@@ -296,9 +295,8 @@ font-weight: bold;
 				 		}
 		     })
 		}		
-		profileload();
-	
 	</script>
+	
 	<div class="matching_wrap" style="display: none;">
 		<div class="dark_bg"
 			onclick="jQuery('.matching_wrap').fadeOut('slow')"></div>
@@ -310,7 +308,7 @@ font-weight: bold;
 					매칭신청</div>
 				<img class="close"
 					onclick="jQuery('.matching_wrap').fadeOut('slow')"
-					src="../../resources/img_icon/closeIcon.png" width="20px"
+					src="/omg/resources/img_icon/closeIcon.png" width="20px"
 					height="20px">
 			</div>
 			<div class="matching_content">
@@ -352,7 +350,7 @@ font-weight: bold;
 					<div class="trainer_profile">
 						<div class="profile_img"
 							style="margin: auto; margin-bottom: 30px; margin-top: 50px; width: 140px; height: 140px; border-radius: 70%; overflow: hidden;">
-							<img class="<%= trainerInfo.get(0) %>" width="100%" height="100%" src="../../resources/img/trainerJang.png">
+							<img class="<%= trainerInfo.get(0) %>" width="100%" height="100%">
 							<script>profileload("<%= trainerInfo.get(0) %>")</script>
 						</div>
 						<div class="profile_Name" style="font-size: 1.5em;"><%= trainerInfo.get(0) %></div>
@@ -540,6 +538,7 @@ font-weight: bold;
 
 						</div>
 					</div>
+					
 					<div id="tarinerWait"
 						style="float: left; width: 800px; display: none;">
 						<div class="trainer_content" style="font-weight: bold; font-size: 1.6em; float: left;">
@@ -549,6 +548,7 @@ font-weight: bold;
 							<br>
 							<!--최종확인으로 바뀌면 클릭하여 매칭이 성사될수 있도록 구현 -->
 							<div id="chattingDiv" style="clear:both; margin-top: 20px; clear:both; overflow-y: auto; overflow-x: hidden; padding: 5px; margin-left: 200px; width: 500px; height: 500px; border: 1px solid rgb(179, 179, 179); border-radius: 10px; background: rgba(227, 227, 227, 0.47);">
+								
 								<div class="talk_follower">팔로워</div>
 								<textarea class="talk_follower_text" readonly>안녕하세요 이 시간대에 가능하신가요?안녕하세요 이 시간대에 가능하신가요?안녕하세요 이 시간대에 가능하신가요?안녕하세요 이 시간대에 가능하신가요?안녕하세요 이 시간대에 가능하신가요?</textarea>
 								<div class="talk_trainer">트레이너</div>
@@ -557,17 +557,19 @@ font-weight: bold;
 								<textarea class="talk_follower_text" readonly>그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요</textarea>
 								<div class="talk_trainer">트레이너</div>
 								<textarea class="talk_trainer_text" readonly>너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요</textarea>
+							
 							</div>
 							<div
 								style="padding: 5px; margin-left: 200px; width: 500px; height: 90px; border: 1px solid rgb(179, 179, 179); border-radius: 10px; background: rgba(227, 227, 227, 0.47);">
 								<div id="talk_input" style="float: left;">
 									<textarea id="message"></textarea>
 								</div>
-								<button id="sendMsg"
-									style="margin-top: 10px; margin-left: 5px; width: 70px; height: 70px;">전송</button>
+								<button id="sendMsg" onclick="insertChat();" style="margin-top: 10px; margin-left: 5px; width: 70px; height: 70px;">전송</button>
 							</div>
 						</div>
 					</div>
+					
+					
 				</div>
 			</div>
 		</article>
@@ -576,23 +578,22 @@ font-weight: bold;
 	
 	
 	<script>
+	
+		var mainMatchingNum;
+		var matchingType;
+		
+        var followerId = "<%= loginUser.getMemberId() %>";
+        var trainerId = $('.profile_Name').text();
+        checkMatched();
+
         function completeMatching(){
-            $('html').scrollTop(0);
-            jQuery('.matching_wrap').fadeOut('fast');
-
-            var mainTab = document.getElementById("mainName");
-
-            mainTab.innerText = "트레이너 매칭대기";
-
-            $("#trainerDetail").css("display","none");
-            $("#follower_Match_Main").css("height",900);
-            $("#tarinerWait").css("display","block");
             updateChat();
             
             //ajax
             var matchingChatContent = $("#insertMatchChat").val();
             var followerId = "<%= loginUser.getMemberId() %>";
             var trainerId = $('.profile_Name').text();
+            
             var insertMatchRequest = {
             		matchingChatContent: matchingChatContent,
             		followerId: followerId,
@@ -608,6 +609,7 @@ font-weight: bold;
             				alert("매칭 신청 실패");
             			} else {
             				alert("매칭 신청 성공");
+            		        checkMatched();
             			}
             		},
             		error: function(data) {
@@ -616,12 +618,80 @@ font-weight: bold;
             			}
             		}
             });
-            
-            
+
         }
 
+        function checkMatched(){
+            var isMatch;
+            
+    		$.ajax({
+ 				url : "/omg/checkMatched.follower",
+ 				data : {
+ 					followerId : followerId,
+ 					trainerId: trainerId
+ 				},
+ 				type : "post",
+ 				success : function(data) {
+		 			if(data != null){
+		 	            $('html').scrollTop(0);
+		 	            jQuery('.matching_wrap').fadeOut('fast');
+
+		 	            var mainTab = document.getElementById("mainName");
+
+		 	            mainTab.innerText = "트레이너 매칭대기";
+
+		 	            $("#trainerDetail").css("display","none");
+		 	            $("#follower_Match_Main").css("height",900);
+		 	            $("#tarinerWait").css("display","block");
+		 	            
+		 	           matchingNum = data.requestCode;
+		 	           matchingType = data.requestType;
+		 	       		openChat(matchingNum);
+		 	           updateChat();
+		 			}
+		    		
+ 				},
+ 				error : function(){
+ 					alert("매칭여부 확인 실패");
+ 				}
+ 			})
+        }
+ 			
         function submitMatching(){
             jQuery('.matching_wrap').fadeIn('slow');
+        }
+        
+        function openChat(matchingNumber){//대화페이지 오픈
+        	$("#chattingDiv").children().remove();
+        	mainMatchingNum = matchingNumber;
+        	var matchingRoom = matchingNumber;
+        	$.ajax({
+ 				url : "/omg/matchingChat.follower",
+ 				data : {
+ 					followerId : followerId,
+ 					trainerId : trainerId,
+ 					matchingRoom : matchingRoom
+ 				},
+ 				type : "post",
+ 				success : function(data) {
+ 					for(var key in data){
+		 				var $chatpos = $('#chattingDiv');
+                    	
+		 				if(data[key].memberType == 'follower'){
+		 					$chatpos.append("<div class='talk_follower'>팔로워</div>" +
+									"<textarea class='talk_follower_text' readonly>"+data[key].chatContent+"</textarea>");
+		 				} else {
+		 					$chatpos.append("<div class='talk_trainer'>트레이너</div>"+
+									"<textarea class='talk_trainer_text' readonly>"+data[key].chatContent+"</textarea>");
+		 				}
+ 					}
+ 					updateChat();
+ 					$("#chattingDiv").scrollTop($("#chattingDiv").scrollHeight);
+ 				},
+ 				error : function(){
+ 					alert("채팅창 오픈 실패");
+ 				}
+ 			})
         }
 
         function updateChat(){
@@ -637,6 +707,32 @@ font-weight: bold;
                $(item).css("height", $(item).height());
             })
         }
+    	
+        function insertChat(){
+
+        	var matchingRoom = mainMatchingNum;
+        	var content = $("#message").val();
+        	console.log("입력");
+         	$.ajax({
+ 				url : "/omg/inputChat.follower",
+ 				data : {
+ 					followerId : followerId,
+ 					matchingRoom : matchingRoom,
+ 					content : content
+ 				},
+ 				type : "post",
+ 				success : function(data) {
+ 					openChat(matchingRoom);
+ 					updateChat();		
+ 					$("#message").val('');
+ 				},
+ 				error : function(){
+ 					alert("채팅창 입력 실패");
+ 				}
+ 			})
+        }
+        
+        
     </script>
 
 	<%@ include file="../../common/footer.jsp"%>
