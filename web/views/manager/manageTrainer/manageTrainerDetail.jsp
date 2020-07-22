@@ -276,20 +276,9 @@
         <article id="tableArea">
             <div align="center">
                 <table class="tg" style="undefined;table-layout: fixed; width: 1000px; height: 960px;">
-                <% for (TrainerInfo ti : list) { %>
+                
                     <colgroup>
                     
-                    <%-- <% for(Member m : list) { %>
-				<tr>
-					<td><%= listnum %></td>
-					<td><%= m.getMemberId() %></td>
-					<td><%= m.getName() %></td>
-					<td><%= m.getEmail() %></td>
-					<td><%= m.getPhone() %></td>
-					<td><%= m.getRequestType() %></td>
-					<td><%= m.getEnrollDate() %></td>
-					<td><button onclick="" class="btn1" id="infoBtn">상세정보</button></td>
-					<td><button onclick="" class="btn2" id="riverBtn">수강관리</button></td> --%>
                         <col style="width: 65px">
                         <col style="width: 65px">
                         <col style="width: 65px">
@@ -304,10 +293,11 @@
                         <tr style="border-top: 4px solid gray;">
                             <th class="tg-0pky" colspan="2" style="background-color: rgb(172, 172, 172)">프로필</th>
                             <th class="tg-0pky" style="background-color: rgb(172, 172, 172)">아이디</th>
-                            <th class="tg-0pky" colspan="3"><%= ti.getMemberId() %></th>
+                            <th class="tg-0pky" colspan="3"><%= tiList.get(1) %></th>
                             <th class="tg-cly1" style="background-color: rgb(172, 172, 172)">회원상태</th>
-                            <% if (ti.getTrainerType().equals("대기") || ti.getTrainerType().equals("미신청") || ti.getTrainerType().equals("거절"))  {
-                            %><th class="tg-0lax" colspan="2">임시트레이너</th>
+                            <% if (tiList.get(8).equals("대기") || tiList.get(8).equals("미신청") || tiList.get(8).equals("거절"))  {
+                            %>
+                            <th class="tg-0lax" colspan="2">임시트레이너</th>
                             <%} else { %><th class="tg-0lax" colspan="2">정식트레이너</th>
                             <% } %>
                             
@@ -317,29 +307,29 @@
                         <tr>
                             <td class="tg-0pky" colspan="2" rowspan="4"><img style="width: 200px; height: 240px;" src="img/jino.jpeg"></td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">연락처</td>
-                            <td class="tg-0lax" colspan="6"><%= ti.getPhone() %></td>
+                            <td class="tg-0lax" colspan="6"><%= tiList.get(4) %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">회원명</td>
-                            <td class="tg-0lax" colspan="3"><%= ti.getName() %></td>
+                            <td class="tg-0lax" colspan="3"><%= tiList.get(2) %></td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">가입일</td>
-                            <td class="tg-0lax" colspan="2"><%= ti.getEnrollDate() %></td>
+                            <td class="tg-0lax" colspan="2"><%= tiList.get(9) %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">이메일</td>
-                            <td class="tg-0lax" colspan="6"><%= ti.getEmail() %></td>
+                            <td class="tg-0lax" colspan="6"><%= tiList.get(3) %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">주소</td>
-                            <td class="tg-0lax" colspan="6"><%= ti.getAddress() %></td>
+                            <td class="tg-0lax" colspan="6"><%= tiList.get(10) %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">학력</td>
-                            <td class="tg-0lax" colspan="2"><%= ti.getEduName() %><button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
+                            <td class="tg-0lax" colspan="2"><%= educationList.get(3) %><button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">주요분야</td>
-                            <td class="tg-0lax" colspan="2"><%= ti.getTrainerMainField() %></td>
+                            <td class="tg-0lax" colspan="2"><%= tiList.get(6) %></td>
                             <td class="tg-cly1" style="background-color: rgb(172, 172, 172)">계좌정보</td>
-                            <td class="tg-0lax" colspan="2"><%= ti.getBankAccount() %></td>
+                            <td class="tg-0lax" colspan="2"><%= tiList.get(12) %></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax" colspan="3" style="background-color: rgb(172, 172, 172)">자격증/워크샵</td>
@@ -347,67 +337,47 @@
                             <td class="tg-0lax" colspan="2" style="background-color: rgb(172, 172, 172)">발급기관</td>
                             <td class="tg-0lax" colspan="2" style="background-color: rgb(172, 172, 172)">증빙자료</td>
                         </tr>
-                        <tr>
-                            
-                            <td class="tg-0lax" colspan="3">생확체육지도사2급</td>
-                            <td class="tg-0lax" colspan="2">2014.02.14</td>
-                            <td class="tg-0lax" colspan="2">국민체육진흥공단</td>
-                            <td class="tg-0lax" colspan="2"><button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
-                        </tr>
-                        <tr>
-                            
-                            <td class="tg-0lax" colspan="3">휘트니스지도자</td>
-                            <td class="tg-0lax" colspan="2">2018.07.30</td>
-                            <td class="tg-0lax" colspan="2">사단법인 국제생활체육건강관리협회</td>
-                            <td class="tg-0lax" colspan="2"><button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
-                        </tr>
-                        <tr>
-                 
-                            <td class="tg-0lax" colspan="3">재활트레이너1급</td>
-                            <td class="tg-0lax" colspan="2">2018.07.30</td>
-                            <td class="tg-0lax" colspan="2">사단법인 국제생활체육건강관리협회</td>
-                            <td class="tg-0lax" colspan="2"><button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
-                        </tr>
-                        <tr>
+                        <% if(ceritificateList.size() > 0) {
+												for(int i = 0; i < ceritificateList.size(); i++) { %>
+													<tr>
+														<td class="tg-0lax" colspan="3"><%= ceritificateList.get(i).getCertiName() %></td>
+														<td class="tg-0lax" colspan="2"><%= ceritificateList.get(i).getCertiInstitution() %></td>
+														<td class="tg-0lax" colspan="2"><%= ceritificateList.get(i).getCertiDate() %></td>
+														<td class="tg-0lax" colspan="2"><button onclick="<%= ceritificateList.get(i).getCertiFileCode() %>" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
+													</tr>
+												<% } 
+												} else { %>
+													<tr>
+														<td colspan="9">등록된 자격증 정보가 없습니다.</td>
+													</tr>
+												<% } %>
                         
-                            <td class="tg-0lax" colspan="3">스포츠건강트레이너1급</td>
-                            <td class="tg-0lax" colspan="2">2018.07.30</td>
-                            <td class="tg-0lax" colspan="2">사단법인 국제생활체육건강관리협회</td>
-                            <td class="tg-0lax" colspan="2"><button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
-                        </tr>
                         <tr>
                             <td class="tg-0lax" colspan="3" style="background-color: rgb(172, 172, 172)">기관명</td>
                             <td class="tg-0lax" colspan="2" style="background-color: rgb(172, 172, 172)">직급</td>
                             <td class="tg-0lax" colspan="4" style="background-color: rgb(172, 172, 172)">근무기간</td>
                            
                         </tr>
-                        <tr>
-                            <td class="tg-0lax" rowspan="3" style="background-color: rgb(172, 172, 172)"><br><br><br>경력사항</td>
-                            <td class="tg-0lax" colspan="2">KH휘트니스 강남1호점</td>
-                            <td class="tg-0lax" colspan="2">트레이너</td>
-                            <td class="tg-0lax" colspan="4">2014. 03. 27 ~ 2016. 09. 30</td>
-                    
-                        </tr>
-                        <tr>
-                           
-                            <td class="tg-0lax" colspan="2">오지는휘트니스 청담점</td>
-                            <td class="tg-0lax" colspan="2">트레이너</td>
-                            <td class="tg-0lax" colspan="4">2016. 10. 01 ~ 2018. 05. 31</td>
-    
-                        </tr>
-                        <tr>
-                         
-                            <td class="tg-0pky" colspan="2">놋네호텔휘트니스센터</td>
-                            <td class="tg-0pky" colspan="2">트레이너</td>
-                            <td class="tg-0lax" colspan="4">2018 .06. 01 ~</td>
-       
-                        </tr>
+                        <% if(tcrList.size() > 0) {
+												for(int i = 0; i < tcrList.size(); i++) { %>
+													<tr>
+														<td class="tg-0lax" colspan="3"><%= tcrList.get(i).getCompName() %></td>
+														<td class="tg-0lax" colspan="2"><%= tcrList.get(i).getCareerLevel() %></td>
+														<td class="tg-0lax" colspan="4"><%= tcrList.get(i).getEnterDate() %> ~ <%= tcrList.get(i).getResignDate() %></td>
+													</tr>
+												<% } 
+											} else {%>
+													<tr>
+														<td colspan="4">등록된 경력 정보가 없습니다.</td>
+													</tr>
+											<% } %>
+                        
                         <tr style="height: 60px;">
                             <td class="tg-0pky" style="background-color: rgb(172, 172, 172)">메모</td>
                             <td class="tg-0pky" colspan="8"></td>
                             
                         </tr>
-                        <% } %>
+                        
                     </tbody>
                 </table>
             </div>
@@ -416,5 +386,15 @@
 
 
     </section>
+    
+    <script>
+		$(function(){
+			$("#listArea td").click(function(){
+				var num = $(this).parent().children("input").val();
+				console.log(num);
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
+			});	
+		});
+	</script>
 </body>
 </html>
