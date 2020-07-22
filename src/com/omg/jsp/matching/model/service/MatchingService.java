@@ -9,8 +9,11 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.omg.jsp.followerHealth.model.dao.HealthInfoDao;
+import com.omg.jsp.followerHealth.model.vo.HealthInfo;
 import com.omg.jsp.matching.model.dao.MatchingDao;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
+import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -91,13 +94,26 @@ public class MatchingService {
 	}
 
 	public ArrayList<MatchingRequest> selectApplyList(String memberId) {
-		
+		Connection con = getConncection();
+		ArrayList<MatchingRequest> matchingRequest = new MatchingDao().selectApplyList(con, memberId);
+		close(con);
+		return matchingRequest;
+	}
+
+	public HashMap<String, Object> selectFollowerInfo(String followerId) {
 		Connection con = getConncection();
 		
-		ArrayList<MatchingRequest> matchRequestList = new MatchingDao().selectApplyList(con, memberId);
+		Member m = new Member(followerId);
 		
-		close(con);
+		HashMap<String, Object> requestInfo = new MatchingDao().selectFollowerInfo(con, followerId);
+		ArrayList<HealthInfo> healthInfo = new HealthInfoDao().selectHealthInfo(con, m);
 		
-		return matchRequestList;
+		requestInfo.put("healthInfo", healthInfo);
+		
+		System.out.println("service requestInfo : " + requestInfo);
+		
+		System.out.println(healthInfo);
+		
+		return requestInfo;
 	}
 }

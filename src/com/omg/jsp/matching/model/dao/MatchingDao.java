@@ -16,6 +16,7 @@ import java.util.Properties;
 
 import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.member.model.dao.MemberDao;
+import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -363,7 +364,7 @@ public class MatchingDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		MatchingRequest mr = null;
-		ArrayList<MatchingRequest> matchRequest = new ArrayList<MatchingRequest>();
+		ArrayList<MatchingRequest> matchingRequest = new ArrayList<MatchingRequest>();
 		
 		String query = prop.getProperty("selectApplyList");
 		
@@ -383,9 +384,8 @@ public class MatchingDao {
 				mr.setTrainerId(rset.getString("TRAINER_ID"));
 				mr.setFollowerId(rset.getString("FOLLOWER_ID"));
 			
-				matchRequest.add(mr);
+				matchingRequest.add(mr);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -393,7 +393,34 @@ public class MatchingDao {
 			close(rset);
 		}
 		
-		return matchRequest;
+		return matchingRequest;
+	}
+	public HashMap<String, Object> selectFollowerInfo(Connection con, String followerId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String, Object> requestInfo = new HashMap<String, Object>();
+		
+		String query = prop.getProperty("selectFollowerInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, followerId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				requestInfo.put("followerName", rset.getString("MEMBER_NAME"));
+				requestInfo.put("age", rset.getString("MEMBER_AGE"));
+				requestInfo.put("chat", rset.getString("CHAT_CONTENT"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return requestInfo;
 	}
 	
 

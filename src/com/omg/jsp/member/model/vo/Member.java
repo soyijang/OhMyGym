@@ -25,6 +25,11 @@ public class Member implements Serializable{
 	
 	public Member() {}
 	
+	public Member(String memberId) {
+		super();
+		this.memberId = memberId;
+	}
+	
 	public Member(String name, String memberId) {
 		super();
 		this.name = name;
