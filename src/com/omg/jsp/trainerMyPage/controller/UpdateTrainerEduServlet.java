@@ -23,7 +23,6 @@ public class UpdateTrainerEduServlet extends HttpServlet {
      */
     public UpdateTrainerEduServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,6 +34,9 @@ public class UpdateTrainerEduServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getMemberId();
+		System.out.println("num : " +  request.getParameter("num"));
+		System.out.println("eduStatenum : " + request.getParameter("eduState"));
+		System.out.println("eduNamenum : " + request.getParameter("eduName"));
 		
 		TrainerEducation updateEdu = new TrainerEducation();
 		updateEdu.setEduManageCode(request.getParameter("saveEduManageCode"));
@@ -45,8 +47,6 @@ public class UpdateTrainerEduServlet extends HttpServlet {
 		updateEdu.setGraduateDate(request.getParameter("saveEduGraduateDate"));
 		updateEdu.setEduFileCode(request.getParameter("saveEduFileCode"));
 		System.out.println("updateEdu : " + updateEdu);
-		
-		
 		
 	}
 
