@@ -35,9 +35,7 @@ public class MyProfileUpdate extends HttpServlet {
 		String fileCode = request.getParameter("imgCode");
 		String userId = request.getParameter("userId");
 		
-		System.out.println(fileCode);
-		System.out.println(userId);
-		
+
 		int result = new MemberService().updateProfile(fileCode, userId);
 		
 	}

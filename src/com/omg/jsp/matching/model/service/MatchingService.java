@@ -162,4 +162,15 @@ public class MatchingService {
 		 return requestInfo;
 	}
 
+	public MatchingRequest selectChat(String trainerId, String userId) {
+		
+		Connection con = getConncection();
+		
+		MatchingRequest result = new MatchingDao().selectChat(con, trainerId, userId);
+		
+		close(con);
+		
+		return result;
+	}
+
 }
