@@ -9,12 +9,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.omg.jsp.followerHealth.model.dao.HealthInfoDao;
-import com.omg.jsp.followerHealth.model.vo.HealthInfo;
 import com.omg.jsp.matching.model.dao.MatchingDao;
 import com.omg.jsp.matching.model.vo.MatchingChat;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
-import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.member.model.vo.TrainerInfo;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -57,8 +55,11 @@ public class MatchingService {
 		ArrayList<TrainerEducation> teList = new MatchingDao().selectTrainerEducation(con,memberId);
 		ArrayList<TrainerCareer> tcrList = new MatchingDao().selectTrainerCareer(con, memberId);
 		ArrayList<TrainerReview> trList = new MatchingDao().selectTrainerReview(con, memberId);
+		ArrayList<TrainerInfo> tiList = new MatchingDao().selectInfo(con, memberId);
+
 		//Matching 테이블에서 데이터를 반환하면 채팅으로, 안반환하면 디테일 페이지로 
 		
+		hmap.put("info", tiList);
 		hmap.put("trainerInfo", trainerInfo);
 		hmap.put("ceritificate", tcList);
 		hmap.put("education", teList);
@@ -95,27 +96,14 @@ public class MatchingService {
 	}
 
 	public ArrayList<MatchingRequest> selectApplyList(String memberId) {
+		
 		Connection con = getConncection();
-		ArrayList<MatchingRequest> matchingRequest = new MatchingDao().selectApplyList(con, memberId);
+		
+		ArrayList<MatchingRequest> matchRequestList = new MatchingDao().selectApplyList(con, memberId);
+		
 		close(con);
-		return matchingRequest;
-	}
-
-	public HashMap<String, Object> selectFollowerInfo(String followerId) {
-		Connection con = getConncection();
 		
-		Member m = new Member(followerId);
-		
-		HashMap<String, Object> requestInfo = new MatchingDao().selectFollowerInfo(con, followerId);
-		ArrayList<HealthInfo> healthInfo = new HealthInfoDao().selectHealthInfo(con, m);
-		
-		requestInfo.put("healthInfo", healthInfo);
-		
-		System.out.println("service requestInfo : " + requestInfo);
-		
-		System.out.println(healthInfo);
-		
-		return requestInfo;
+		return matchRequestList;
 	}
 
 	public MatchingRequest isMatched(String trainerId, String followerId) {
@@ -155,4 +143,22 @@ public class MatchingService {
 		return result;
 	}
 	
+	
+	public RequestInformation selectFollowerInfo(String followerId) {
+		 Connection con = getConncection();
+		      
+		 RequestInformation requestInfo = new MatchingDao().selectFollowerInfo(con, followerId);
+		 ArrayList<String> healthInfo = new MatchingDao().selectFollowerHealthInfo(con, followerId);
+
+		 requestInfo.setHeight(healthInfo.get(0));
+		 requestInfo.setWeight(healthInfo.get(1));
+		 requestInfo.setWishPart(healthInfo.get(2));
+		      
+		 System.out.println(requestInfo);
+		      
+		 close(con);
+		     
+		 return requestInfo;
+	}
+
 }
