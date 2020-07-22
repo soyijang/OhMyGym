@@ -123,6 +123,7 @@ public class NoticeDao {
 			if(rset.next()) {
 				notice=new Notice();
 				
+				notice.setBoardNum(rset.getString("BOARD_NUM"));
 				notice.setBoardCategory(rset.getString("BOARD_CATEGORY"));
 				notice.setWritedate(rset.getString("WRITE_TIME"));
 				notice.setStatus(rset.getString("BOARD_STATUS"));
@@ -198,6 +199,31 @@ public class NoticeDao {
 		}
 		
 		return result;
+	}
+
+	public Notice deleteNotice(Connection con, int nno) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Notice notice = null;
+		
+		String query = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setInt(1, nno);
+			rset=pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		System.out.println("delete NoticeDao : "+notice);
+		
+		return notice;
 	}
 
 	/*public int getViewCount(Connection con) {

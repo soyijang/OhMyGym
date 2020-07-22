@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
 table {
@@ -58,7 +59,7 @@ legend {
 	<br>
 
 	<br><br>
-
+	<form id="updateForm" method="post">
 
 	<table>
 	<tr>
@@ -96,15 +97,12 @@ legend {
 	</tr>
 	</table>
 	<p style="margin-left: 20%;">※ 이미지는 png, jpg 확장자파일만 업로드 가능하며, 최대 100MB 까지만 업로드 가능합니다.</p>
-
+	</form>
 	<div style="text-align: right;">
-		<button id="btn1" onclick="history.back(-1)">취소</button>
+		<button id="btn1" onclick="location.href='<%=request.getContextPath()%>/deleteNotice.no?num=<%=notice.getBoardNum()%>'">삭제</button>
 		&nbsp;&nbsp;&nbsp;
-		<%-- <%if(loginUser != null && loginUser.getMemberId().equals("admin01")) {%> --%>
-		<button id="btn1" onclick="location.href='<%=request.getContextPath()%>/update.no?num=<%=notice.getBoardNum()%>'">수정</button>
-		<%-- <%} %> --%>
+		<button id="btn1" onclick="location.href='<%=request.getContextPath()%>/?num=<%=notice.getBoardNum()%>'">수정</button>
 	</div>
-
 
 
 </body>

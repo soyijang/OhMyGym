@@ -89,7 +89,7 @@ public class NoticeService {
 		notice = new NoticeDao().FollowSelectOne(con, nno);
 		result = new NoticeDao().viewCount(con, nno);
 		
-		if(notice != null) {
+		if(notice != null && result > 0) {
 				commit(con);
 			} else {
 				rollback(con);
@@ -99,6 +99,28 @@ public class NoticeService {
 		
 		return notice;
 		
+	}
+
+	public Notice deleteNotice(int nno) {
+		
+		Connection con = getConncection();
+		
+		int result = 0;
+		
+		Notice notice = new NoticeDao().deleteNotice(con, nno);
+		
+		if(notice != null) {
+			
+			if(result > 0) {
+				rollback(con);
+			} else {
+				commit(con);
+			}
+		}
+		close(con);
+		
+		System.out.println("noticeService notice : "+notice);
+		return notice;
 	}
 	
 }
