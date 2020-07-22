@@ -106,7 +106,7 @@
             <table>
                 <tr>
                     <th width="50px">No</th>
-                    <th width="110px">분류</th>
+                    <th width="110px">구분</th>
                     <th>제목</th>
                     <th width="60px">첨부파일</th>
                     <th width="100px">등록일</th>
@@ -115,7 +115,7 @@
             	<% for(Notice n : list) { %>
 				 <tr>
 					<td><%=n.getBoardNum() %></td>
-					<td><%=n.getBoardCode() %></td>
+					<td><%=n.getBoardCategory() %></td>
 					<td><%=n.getBoardTitle()%></td>
 					<td><button>다운로드</button>
 				</td>

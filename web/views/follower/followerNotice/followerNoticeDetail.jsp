@@ -86,7 +86,7 @@
             <div align="right">
                 <button onclick="history.back(-1)">목록으로</button>
             </div>
-        </article>
+        </article> 
     </section>
 
     <br style="clear: both;"><br><br><br>

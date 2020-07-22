@@ -150,7 +150,7 @@ a {
 				<ul id="header_bottom_sidemenu" class="sideMenu">
 					<li><a><div class="NavLink"style="color: rgb(63, 63, 63);">공지/이벤트</div></a>
 						<ul>
-							<li><a style="color: white;">이벤트</a>&nbsp;&nbsp;&nbsp;<astyle="color: white;">공지사항</a></li>
+							<li><a style="color: white;">이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/followNotice.no" style="color: white;">공지사항</a></li>
 						</ul>
 					</li>
 					<li><a><div class="NavLink" style="color: rgb(63, 63, 63);">문의하기</div></a>
