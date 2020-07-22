@@ -592,6 +592,38 @@ public class MatchingDao {
 	      
 	      return requestInfo;
 	   }
+	public MatchingRequest selectChat(Connection con, String trainerId, String userId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MatchingRequest result = null;
+		String query = prop.getProperty("selectChat");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, trainerId);
+			pstmt.setString(2, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = new MatchingRequest();
+				
+				result.setRequestCode(rset.getString("REQUEST_MANAGECODE"));
+				result.setTrainerId(rset.getString("TRAINER_ID"));
+				result.setFollowerId(rset.getString("FOLLOWER_ID"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
 }
 
 

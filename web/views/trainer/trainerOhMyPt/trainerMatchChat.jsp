@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.omg.jsp.matching.model.vo.*"%>
+<%  MatchingRequest matching = (MatchingRequest) request.getAttribute("result");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -262,7 +263,7 @@ button#sendMsg{
 		<article>
 			<div id="follower_Match_Main">
 				<div id="mainName" style="margin-top: 15px; margin-left: 250px; font-size: 1.8em; font-weight: bold;">
-					<a id="followerName">한진희</a> 직접상담 <button id="returnList">매칭신청 목록으로</button>
+					<a id="followerName"><%=matching.getFollowerId()%></a> 직접상담 <button id="returnList">매칭신청 목록으로</button>
 				</div>
 				<br>
 				<br>
@@ -270,17 +271,17 @@ button#sendMsg{
 						<div class="trainer_content" style="font-weight: bold; font-size: 1.6em; clear: both;">
 							<div id="chattingDiv"
 								style="overflow-y: auto; overflow-x: hidden; padding: 5px; margin-left: 200px; width: 500px; height: 500px; border: 1px solid rgb(179, 179, 179); border-radius: 10px; background: rgba(227, 227, 227, 0.47);">
-								<div class="talk_follower">팔로워</div>
-								<textarea class="talk_follower_text" readonly>안녕하세요 이 시간대에 가능하신가요?</textarea>
-								<div class="talk_trainer">트레이너</div>
-								<textarea class="talk_trainer_text" readonly>아니요</textarea>
+<!-- 								<div class="talk_follower">팔로워</div> -->
+<!-- 								<textarea class="talk_follower_text" readonly>안녕하세요 이 시간대에 가능하신가요?</textarea> -->
+<!-- 								<div class="talk_trainer">트레이너</div> -->
+<!-- 								<textarea class="talk_trainer_text" readonly>아니요</textarea> -->
 							</div>
 							<div
 								style="padding: 5px; margin-left: 200px; width: 500px; height: 90px; border: 1px solid rgb(179, 179, 179); border-radius: 10px; background: rgba(227, 227, 227, 0.47);">
 								<div id="talk_input" style="float: left;">
 									<textarea id="message"></textarea>
 								</div>
-								<button id="sendMsg">전송</button>
+								<button id="sendMsg" onclick="insertChat();">전송</button>
 							</div>
 						</div>
 					</div>
@@ -288,7 +289,7 @@ button#sendMsg{
 		</article>
 	</section>
 	<script>
-        updateChat()
+        updateChat();
         function updateChat(){
             $("#chattingDiv").scrollTop( $("#chattingDiv").prop('scrollHeight'));
 
@@ -305,31 +306,92 @@ button#sendMsg{
     </script>
     
 	<script>
-	function addChat() {
-<%-- 		var matchingNum = "<%=selectTrainer.getRequestCode()%>"; --%>
-		var writerId =  "<%=loginUser.getMemberId()%>";
-		var content = $("#message").val();
-		$("#message").val('');
-		$.ajax({
-			url : "/omg/insertChat.follower",
-			data : {
-				matchingNum : matchingNum,
-				content : content,
-				writerId : writerId
-			},
-			type : "post",
-			success : function(data) {
-				var $addChatPart = $("#chattingDiv");
-				$addChatPart.append("<div class='talk_trainer'>"+data.writerId+"</div>"+
-				"<textarea class='talk_trainer_text' readonly>"+data.chatContent+"</textarea>");
-				updateChat();
-			},
-			error : function() {
-				console.log("실패!")
-			}
+    
+	var trainerId = "<%=loginUser.getMemberId()%>";
+	var followerId = "<%=matching.getFollowerId()%>"
+	var matchingNumber = "<%=matching.getRequestCode()%>"
+	openChat();
+    function openChat(){//대화페이지 오픈
+    	$("#chattingDiv").children().remove();
+    	mainMatchingNum = matchingNumber;
+    	var matchingRoom = matchingNumber;
+    	$.ajax({
+				url : "/omg/matchingChat.follower",
+				data : {
+					followerId : followerId,
+					trainerId : trainerId,
+					matchingRoom : matchingRoom
+				},
+				type : "post",
+				success : function(data) {
+					for(var key in data){
+	 				var $chatpos = $('#chattingDiv');
+                	
+	 				if(data[key].memberType == 'follower'){
+	 					$chatpos.append("<div class='talk_follower'>팔로워</div>" +
+								"<textarea class='talk_follower_text' readonly>"+data[key].chatContent+"</textarea>");
+	 				} else {
+	 					$chatpos.append("<div class='talk_trainer'>트레이너</div>"+
+								"<textarea class='talk_trainer_text' readonly>"+data[key].chatContent+"</textarea>");
+	 				}
+					}
+					updateChat();
+					$("#chattingDiv").scrollTop($("#chattingDiv").scrollHeight);
+				},
+				error : function(){
+					alert("채팅창 오픈 실패");
+				}
+			})
+    }
+	
+    function insertChat(){
+		var followerId = trainerId;
+    	var matchingRoom = matchingNumber;
+    	var content = $("#message").val();
+    	console.log("입력");
+     	$.ajax({
+				url : "/omg/inputChat.follower",
+				data : {
+					followerId : followerId,
+					matchingRoom : matchingRoom,
+					content : content
+				},
+				type : "post",
+				success : function(data) {
+					openChat(matchingRoom);
+					updateChat();		
+					$("#message").val('');
+				},
+				error : function(){
+					alert("채팅창 입력 실패");
+				}
+			})
+    }
+// 	function addChat() {
+<%-- <%-- 		var matchingNum = "<%=selectTrainer.getRequestCode()%>"; --%> 
+<%-- 		var writerId =  "<%=loginUser.getMemberId()%>"; --%>
+// 		var content = $("#message").val();
+		
+// 		$.ajax({
+// 			url : "/omg/insertChat.follower",
+// 			data : {
+// 				matchingNum : matchingNumber,
+// 				content : content,
+// 				writerId : writerId
+// 			},
+// 			type : "post",
+// 			success : function(data) {
+// 				var $addChatPart = $("#chattingDiv");
+// 				$addChatPart.append("<div class='talk_trainer'>"+data.writerId+"</div>"+
+// 				"<textarea class='talk_trainer_text' readonly>"+data.chatContent+"</textarea>");
+// 				updateChat();
+// 			},
+// 			error : function() {
+// 				console.log("실패!")
+// 			}
 
-		})	
-	}
+// 		})	
+// 	}
 	</script>
 	<%@ include file="../../common/footer.jsp"%>
 </body>
