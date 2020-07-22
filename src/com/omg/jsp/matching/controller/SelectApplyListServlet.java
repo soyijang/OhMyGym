@@ -40,8 +40,6 @@ public class SelectApplyListServlet extends HttpServlet {
 		
 		ArrayList<MatchingRequest> matchRequest = new MatchingService().selectApplyList(memberId);
 		
-		System.out.println(matchRequest);
-		
 		String page = "";
 		if(!matchRequest.isEmpty()) {
 			page = "views/trainer/trainerOhMyPt/trainerApplyList.jsp";

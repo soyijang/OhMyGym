@@ -193,24 +193,24 @@ a#goTalkBtn{
 							<tbody>
 								<tr>
 									<th>신청인</th>
-									<td><div id="applyname">한진희</div></td>
+									<td><div id="applyname"></div></td>
 									<th>신청인 ID</th>
-									<td><div id="applyid">hjh9406</div></td>
+									<td><div id="applyid"></div></td>
 								</tr>
 								<tr>
 									<th>나이</th>
-									<td><div id="age">27</div></td>
+									<td><div id="age"></div></td>
 									<th>희망운동부위</th>
-									<td><div id="tpart">배</div></td>
+									<td><div id="tpart"></div></td>
 								</tr>
 								<tr>
 									<th>키</th>
-									<td><div id="tall">174cm</div></td>
+									<td><div id="tall"></div></td>
 									<th>몸무게</th>
-									<td><div id="weight">66kg</div></td>
+									<td><div id="weight"></div></td>
 								</tr>
 								<tr>
-									<td colspan="5"><textarea id="followerComment" readonly>화, 목 오후 7시 이후에  트레이닝 받고 싶습니다.</textarea><a id="goTalkBtn">직접상담하기</a><br>
+									<td colspan="5"><textarea id="followerComment" readonly></textarea><a id="goTalkBtn" onclick="goMatchChat()">직접상담하기</a><br>
 									
 									</td>
 								</tr>		
@@ -225,7 +225,7 @@ a#goTalkBtn{
 						style="margin-left: 10px; padding: 6.5px; font-size: 0.8em; width: 100px; height: 30px; border: none; cursor: pointer; background: navy; color: white; font-weight: bold;">매칭거절</a>
 				</div>
 				<div id="rejectArea">
-						<textarea id="rejectComment" placeholder="거절사유를 상세히 입력해 주세요"></textarea>
+						<textarea id="rejectComment" placeholder="거절	사유를 상세히 입력해 주세요"></textarea>
 						<input type="submit" id="rejectBtn" value="매칭거절 확정">
 				</div>
 				</form>
@@ -310,13 +310,41 @@ a#goTalkBtn{
             	},
             	type: "get",
             	success: function(data) {
-            		console.log(<%= request.getAttribute("requestInfo")%>);
+            		var result = data;
+            		var now = new Date();
+            		
+            		var temp = result['memberAge'].substring(0,2);
+            		if(temp.charAt(0) > 5 && temp.charAt(0) <= 9) {
+            			var ageYear = "19" + temp;
+            		} else {
+            			var ageYear = "20" + temp;
+            		}
+            		
+            		$("#applyid").text(result['followerId']);
+            		$("#applyname").text(result['followerName']);
+            		$("#age").text(now.getFullYear() - ageYear + 1);
+            		$("#tpart").text(result['wishPart']);
+            		$("#tall").text(result['height']);
+            		$("#weight").text(result['weight']);
+            		$("#followerComment").text(result['chatContent']);
+            		
+            		
+            		
             	},
             	error: function(data) {
             		console.log("실패");
             	}
             });
+            
+            $("#applyid").text("");
+    		$("#applyname").text("");
+    		$("#age").text("");
+    		$("#tpart").text("");
+    		$("#tall").text("");
+    		$("#weight").text("");
+    		$("#followerComment").text("");
         }
+   		 
    		 
    		function inputReject(){
    			$(".matching_box").css({"height":425,"top":"15%"});

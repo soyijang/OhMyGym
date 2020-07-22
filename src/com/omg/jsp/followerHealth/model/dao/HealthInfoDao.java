@@ -55,6 +55,8 @@ public class HealthInfoDao {
 				list.add(hi);
 			}
 			
+			System.out.println("healthInfoDao HealthInfo List: " + list);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

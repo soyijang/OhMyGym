@@ -322,7 +322,7 @@ font-weight: bold;
 						style="margin-top: 10px; font-size: 0.9em; font-weight: bold; margin-bottom: 10px;">희망하시는
 						요일 및 시간대를 입력해주세요.</div>
 					<textarea id="insertMatchChat" style="width: 300px; height: 55px; resize: none;"
-						placeholder="예시) 수, 금 오후 8시~9시"></textarea>
+						placeholder="예시) 수, 금 오후 8시~9시" readonly="readonly"></textarea>
 
 					<div style="font-size: 0.8em; font-weight: bold; color: red;">특정
 						사유가 있는경우 트레이너측에서 매칭을 거절할 수 있습니다. 이점 유의해주세요</div>
@@ -371,7 +371,7 @@ font-weight: bold;
 						</div>
 
 						<div class="profile_comment">
-							<textarea
+							<textarea readonly="readonly"
 								style="font-size: 0.95em; text-align:center; font-weight: bold; border: none; resize: none; width: 200px; height: 70px; overflow: hidden"><%= trainerInfo.get(2) %></textarea>
 						</div>
 						<div class="profile_ability">#<%= trainerInfo.get(3) %></div>
