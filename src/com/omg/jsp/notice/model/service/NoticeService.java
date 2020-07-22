@@ -122,5 +122,26 @@ public class NoticeService {
 		System.out.println("noticeService notice : "+notice);
 		return notice;
 	}
+
+	public Notice updateNotice(int nno) {
+		
+		Connection con=getConncection();
+		
+		int result = 0;
+		
+		Notice notice=new NoticeDao().updateNotice(con, nno);
+		
+		if(notice != null) {
+			
+			if(result > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+		}
+		close(con);
+		
+		return notice;
+	}
 	
 }

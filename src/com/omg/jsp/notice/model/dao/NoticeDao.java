@@ -125,7 +125,7 @@ public class NoticeDao {
 				
 				notice.setBoardNum(rset.getString("BOARD_NUM"));
 				notice.setBoardCategory(rset.getString("BOARD_CATEGORY"));
-				notice.setWritedate(rset.getString("WRITE_TIME"));
+				notice.setWritedate(rset.getString("WRITE_DATE"));
 				notice.setStatus(rset.getString("BOARD_STATUS"));
 				notice.setBoardTitle(rset.getString("BOARD_TITLE"));
 				notice.setBoardContent(rset.getString("BOARD_CONTENT"));
@@ -226,31 +226,30 @@ public class NoticeDao {
 		return notice;
 	}
 
-	/*public int getViewCount(Connection con) {
+	public Notice updateNotice(Connection con, int nno) {
 		
-		Statement stmt = null;
-		int viewCount = 0;
-		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
 		
-		String query = prop.getProperty("viewCount");
+		Notice notice = null;
+		
+		String query = prop.getProperty("updateNotice");
 		
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
-
-			if (rset.next()) {
-				viewCount = rset.getInt(1);
-			}
-
+			pstmt=con.prepareStatement(query);
+			pstmt.setInt(1, nno);
+			rset=pstmt.executeQuery();
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(stmt);
+			close(pstmt);
 			close(rset);
 		}
-
-		return viewCount;
-	}*/
-
+		System.out.println("delete NoticeDao : "+notice);
+		
+		return notice;
+	}
 
 }
