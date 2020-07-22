@@ -283,7 +283,7 @@
 					<td><%= m.getPhone() %></td>
 					<td><%= m.getRequestType() %></td>
 					<td><%= m.getEnrollDate() %></td>
-					<td><button onclick="" class="btn1" id="infoBtn">상세정보</button></td>
+					<td><button onclick="detail('<%= m.getMemberId() %>')" class="btn1" id="infoBtn">상세정보</button></td>
 					<td><button onclick="" class="btn2" id="riverBtn">수강관리</button></td>
 					
 				</tr>
@@ -297,5 +297,11 @@
 
        
     </section>
+    <script>
+    
+    function detail(memberId) {
+    	location.href = "<%= request.getContextPath()%>/SelectFollowerDetail?memberId="+memberId;
+    }
+    </script>
 </body>
 </html>

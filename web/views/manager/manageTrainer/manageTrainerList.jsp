@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>오마이짐 관리자 페이지</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         html {
             width: 1440px;
@@ -235,7 +236,7 @@
 					<td><%= m.getPhone() %></td>
 					<td><%= m.getEnrollDate() %></td>
 					<td><%= m.getTrainerType() %></td>
-					<td><button onclick="" class="btn1" id="infoBtn">상세정보</button></td>
+					<td><button onclick="detail('<%= m.getMemberId() %>')" class="btn1" id="infoBtn">상세정보</button></td>
 					<td><button onclick="" class="btn2" id="riverBtn">수강관리</button></td>
 					
 				</tr>
@@ -248,5 +249,17 @@
 
        
     </section>
+    <script>
+    
+    function detail(memberId) {
+    	location.href = "<%= request.getContextPath()%>/SelectTrainerDetail?memberId="+memberId;
+    }
+		<%-- $(function(){
+			$("#infoBtn").click(function(){
+				
+				location.href = "<%=request.getContextPath()%>/SelectTrainerDetail?memberId="+memberId;
+			});	
+		}); --%>
+	</script>
 </body>
 </html>
