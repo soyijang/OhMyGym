@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import com.omg.jsp.followerHealth.model.dao.HealthInfoDao;
@@ -73,15 +74,6 @@ public class TrainerCurriculumDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, loginUser.getMemberId());
-//			pstmt.setString(2, x);
-			
-			/*TRAINER_VIDEOCODE	VARCHAR2(50 BYTE)	No		1	트레이너영상번호
-			CURRICULUM_CODE	VARCHAR2(50 BYTE)	No		2	커리큘럼코드
-			TRAINER_UPLOADDATE	VARCHAR2(50 BYTE)	No		3	트레이너영상업로드일자
-			BOOKMARK_COUNT	VARCHAR2(500 BYTE)	No		4	북마크수
-			TRAINER_VIDEO_FILECODE	VARCHAR2(200 BYTE)	No		5	트레이너영상첨부코드
-			TRAINER_UPLOADTIME	VARCHAR2(50 BYTE)	No		6	트레이너영상업로드시간
-			VIDEO_TITLE	VARCHAR2(1000 BYTE)	Yes		7	비디오게시글제목*/
 			
 			rset = pstmt.executeQuery();
 			
@@ -103,6 +95,33 @@ public class TrainerCurriculumDao {
 		}
 		
 		return vList;
+	}
+
+	public HashMap<String, String> selectCurriTitle(Connection con, String curriculumCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String, String> curriTitle = new HashMap<String, String>();
+		
+		String query = prop.getProperty("selectCurriTitle");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, curriculumCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				curriTitle.put("curriTitle", rset.getString("CURRICULUM_TITLE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return curriTitle;
 	}
 
 }

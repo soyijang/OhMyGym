@@ -1,7 +1,6 @@
 package com.omg.jsp.trainerVideo.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.omg.jsp.trainerVideo.model.service.TrainerVideoService;
 import com.omg.jsp.trainerVideo.model.vo.TrainerVideo;
 
 /**
- * Servlet implementation class SelectVideoServlet
+ * Servlet implementation class SelectOneVideoServlet
  */
-@WebServlet("/selectVideo.cu")
-public class SelectVideoServlet extends HttpServlet {
+@WebServlet("/selectOne.vi")
+public class SelectOneVideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectVideoServlet() {
+    public SelectOneVideoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +32,19 @@ public class SelectVideoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String curriculumCode = request.getParameter("curriCode");
+		String videoCode = (String) request.getParameter("num");
 		
-		ArrayList<TrainerVideo> videoList = new TrainerVideoService().selectVideoInCurriculum(curriculumCode);
+		TrainerVideo video = new TrainerVideoService().selectOneVideo(videoCode);
 		
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		
-		new Gson().toJson(videoList, response.getWriter());
+		String page = "";
+		if(video != null) {
+			page = "views/trainer/trainerOhMyPt/trainerVideoDetail.jsp";
+			request.setAttribute("video", video);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "커리큘럼 관리페이지 로드 실패");
+		}
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
