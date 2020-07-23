@@ -228,7 +228,7 @@ td>a {
 		<!--검색 영역-->
 		<article id="searchArea">
 			<select name="search" id="searchSelect">
-				<option value="followerID"">트레이너명</option>
+				<option value="followerID">트레이너명</option>
 				<option value="date">트레이너ID</option>
 			</select> <input type="search" width="50"><input type="submit"
 				value="검색" id="searchBtn">
@@ -275,13 +275,22 @@ td>a {
 						<td><%=hmap.get("trainerEmail")%></td>
 						<td><%=hmap.get("trainerPhone")%></td>
 						<td><%=hmap.get("matchedFollower")%></td>
-						<td><button class="movBtn">이동하기</button></td>
+						<td><form id="selectDetail" action="<%= request.getContextPath() %>/groupCommu.manager" method="post" ><input type="text" name="trainerId" value="<%=hmap.get("trainerId")%>" style="display: none"></form><button class="movBtn" onclick="moveDetail();">이동하기</button></td>
 					</tr>
 					<%listNum= listNum-1; }%>
 				</table>
 			</div>
 		</article>
 		<!--테이블 표시 영역 종료-->
+		
+		
+		
+		<script>
+		
+   		function moveDetail(){
+   			$("#selectDetail").submit();
+   		}
+		</script>
 	</section>
 </body>
 </html>

@@ -449,83 +449,6 @@ div.post_commentback{
 
 								</div>
 								<div id="postcontainer">
-<!-- 									<div class="post_part"> -->
-<!-- 									사용자 프로필 -->
-<!-- 									<div class="user_img" style="display: inline-block;"> -->
-<!-- 										<img src="../../../resources/img/crush_ps.png" width="50px" -->
-<!-- 											height="50px" style="border-radius: 70%; overflow: hidden;"> -->
-<!-- 									</div> -->
-<!-- 									<div id="user_profile" -->
-<!-- 										style="display: inline-block; vertical-align: top;"> -->
-<!-- 										<em class="user_name"> -->
-<!-- 											업로드 유저명(DB에서 탐색)크러쉬 -->
-<!-- 										</em><br> <span class="upload_time">5분전</span> -->
-<!-- 									</div> -->
-<!-- 									<hr> -->
-<!-- 									<div class="post_Content"> -->
-<!-- 										<textarea class="post_box" cols="60" name="post_content" -->
-<!-- 											readonly>  이상하게도 말일은 뭐가 이리 바쁜지 모르겠어요.그냥 눈만 감았다 뜬것 같은데 어...</textarea> -->
-<!-- 									</div> -->
-<!-- 									<div id="post_Content_img" -->
-<!-- 										style="padding: 20px; text-align: center;"> -->
-<!-- 									</div> -->
-<!-- 									<div id="MarkAndLike" style="margin-top: 20px;"> -->
-<!-- 										<span class="like" -->
-<!-- 											style="margin-right: 10px; font-weight: bold;"> <a onclick="addLike();" style="cursor: pointer;"><i -->
-<!-- 											class="fas fa-thumbs-up" style="margin-right: 5px;"></i>좋아요</a><a>74</a> -->
-<!-- 										</span> <span class="mark" style="font-weight: bold;"> <i -->
-<!-- 											class="far fa-bookmark" style="margin-right: 5px;"></i>북마크 <a>20</a> -->
-<!-- 										</span> -->
-<!-- 									</div> -->
-<!-- 									<details id="open_comment" open style="margin-top: 15px;"> -->
-<!-- 										<summary style="font-weight: bold; font-size: 0.9em;">댓글</summary> -->
-<!-- 										<div -->
-<!-- 											style="background: rgb(245, 245, 245); width: 100%; height: 100%;"> -->
-											
-<!-- 											<div id="post_comments"> -->
-											
-<!-- 												<div class="post_part_comment" style="padding: 5px;"> -->
-<!-- 													<div class="user_img" -->
-<!-- 														style="display: block; float: left; margin-top: 10px;"> -->
-<!-- 														<img src="../../resources/img/crush_ps.png" width="30px" -->
-<!-- 															height="30px" -->
-<!-- 															style="border-radius: 70%; overflow: hidden;"> -->
-<!-- 													</div> -->
-<!-- 													<div id="user_profile" -->
-<!-- 														style="display: block; float: left; margin-left: 15px; margin-top: 10px;"> -->
-<!-- 														<em class="user_name_comment" -->
-<!-- 															style="font-size: 10px; display: block; float: left;"> -->
-<!-- 															업로드 유저명(DB에서 탐색)크러쉬 -->
-<!-- 														</em><br> <span class="upload_time_comment" -->
-<!-- 															style="font-size: 10px;">5분전</span> -->
-<!-- 													</div> -->
-<!-- 													<textarea class="comments_box" cols="55" -->
-<!-- 														name="post_comments_content" -->
-<!-- 														style="display: block; height: 60px; float: left;" -->
-<!-- 														readonly>동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시동http://ko/♚♚히어로즈 오♚♚가입시</textarea> -->
-<!-- 												</div> -->
-												
-<!-- 											</div> -->
-<!-- 											<form> -->
-											
-<!-- 											<div id="add_comments"> -->
-<!-- 												<div class="add_part_comment" -->
-<!-- 													style="padding: 5px; min-height: 40px;"> -->
-<!-- 													<div style="float: left;"> -->
-<!-- 														<textarea onclick="printData('히히헤헤호호');" placeholder="댓글을 입력해주세요." -->
-<!-- 															onkeydown="resize(this)" onkeyup="resize(this)" -->
-<!-- 															class="input_comments_box" cols="42" -->
-<!-- 															name="post_comments_content" -->
-<!-- 															style="float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;"></textarea> -->
-<!-- 														<button onclick="addReply();" id="add_comment_btn">입력하기</button> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-											
-<!-- 											</form> -->
-<!-- 											</div> -->
-<!-- 											</details> -->
-<!-- 											</div> -->
 								</div>
 							</div>
 						</div>
@@ -536,7 +459,7 @@ div.post_commentback{
 	</section>
 	
 	<script>
-<%-- 	<%=request.getContextPath()%>/resources/test/"+profileManageCode --%>
+
 	function selectAllPost(){
 		$("#add_postBox").val('');
 		var roomId = "<%=matchInfo.getGroupCommuNum()%>";
@@ -588,7 +511,7 @@ div.post_commentback{
 	}
 	
 	function selectAllComment(){
-		console.log("댓글로드");
+
 		$.ajax({
 				url : "/omg/selectGroupReply.follower",
 				data : {},
@@ -800,7 +723,7 @@ div.post_commentback{
  					}
  				},
  				error : function(){
- 					console.log("싈패ㅜㅜㅜㅜㅜ");
+ 					console.log("좋아요 스타일 불러오기 실패");
  				}
  			})
 		}
@@ -819,7 +742,7 @@ div.post_commentback{
  					checkLikes(value);
  				},
  				error : function(){
- 					console.log("싈패ㅜㅜㅜㅜㅜ");
+ 					console.log("좋아요 불러오기 실패");
  				}
  			})
 		}

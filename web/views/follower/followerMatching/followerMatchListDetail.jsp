@@ -287,7 +287,6 @@ font-weight: bold;
 				       },
 				       success : function(data) {
 				          profileManageCode = data.fileManageName;
-				          console.log(profileManageCode);
 				          $("."+userId).attr("src", "<%=request.getContextPath()%>/resources/test/"+profileManageCode); 
 				 		},
 				 		error : function(){
@@ -322,7 +321,7 @@ font-weight: bold;
 						style="margin-top: 10px; font-size: 0.9em; font-weight: bold; margin-bottom: 10px;">희망하시는
 						요일 및 시간대를 입력해주세요.</div>
 					<textarea id="insertMatchChat" style="width: 300px; height: 55px; resize: none;"
-						placeholder="예시) 수, 금 오후 8시~9시" readonly="readonly"></textarea>
+						placeholder="예시) 수, 금 오후 8시~9시" ></textarea>
 
 					<div style="font-size: 0.8em; font-weight: bold; color: red;">특정
 						사유가 있는경우 트레이너측에서 매칭을 거절할 수 있습니다. 이점 유의해주세요</div>
@@ -542,21 +541,12 @@ font-weight: bold;
 					<div id="tarinerWait"
 						style="float: left; width: 800px; display: none;">
 						<div class="trainer_content" style="font-weight: bold; font-size: 1.6em; float: left;">
-							트레이너 매칭 신청이 완료되었습니다!<br><div id="matchingState"  style="margin-top: 20px; margin-right: 10px; float: left;">대기</div> <div
+							트레이너 매칭 신청이 완료되었습니다!<br><div id="matchingState"  style="margin-top: 20px; margin-right: 10px; float: left;"><!-- 매칭상태 불러오기 -->대기</div> <div
 								style="margin-top: 20px;  font-size: 0.5em; font-weight: bold; color: rgb(167, 167, 167)">트레이너와
 								메세지를 통해 시간조율이 가능합니다. 트레이너에게 메세지를 보내보세요! <br> 트레이너가 매칭을 승인 했다면 최종 확인버튼을 눌러서 트레이너와 매칭하실수 있습니다.</div>
 							<br>
 							<!--최종확인으로 바뀌면 클릭하여 매칭이 성사될수 있도록 구현 -->
 							<div id="chattingDiv" style="clear:both; margin-top: 20px; clear:both; overflow-y: auto; overflow-x: hidden; padding: 5px; margin-left: 200px; width: 500px; height: 500px; border: 1px solid rgb(179, 179, 179); border-radius: 10px; background: rgba(227, 227, 227, 0.47);">
-								
-								<div class="talk_follower">팔로워</div>
-								<textarea class="talk_follower_text" readonly>안녕하세요 이 시간대에 가능하신가요?안녕하세요 이 시간대에 가능하신가요?안녕하세요 이 시간대에 가능하신가요?안녕하세요 이 시간대에 가능하신가요?안녕하세요 이 시간대에 가능하신가요?</textarea>
-								<div class="talk_trainer">트레이너</div>
-								<textarea class="talk_trainer_text" readonly>아니요</textarea>
-								<div class="talk_follower">팔로워</div>
-								<textarea class="talk_follower_text" readonly>그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요그럼언제되나요</textarea>
-								<div class="talk_trainer">트레이너</div>
-								<textarea class="talk_trainer_text" readonly>너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요너랑은안해요</textarea>
 							
 							</div>
 							<div
@@ -643,10 +633,22 @@ font-weight: bold;
 		 	            $("#trainerDetail").css("display","none");
 		 	            $("#follower_Match_Main").css("height",900);
 		 	            $("#tarinerWait").css("display","block");
+		 	            $("#matchingState").text(data.requestType);
 		 	            
 		 	           matchingNum = data.requestCode;
 		 	           matchingType = data.requestType;
+		 	           
+		 	           if(data.requestType == '최종확인'){
+		 	        	  $("#matchingState").css({"background":"orangered","cursor":"pointer","color":"white"});
+		 	        	  $("#matchingState").attr("onclick","submitfinal();")
+		 	           } else if(data.requestType == '수락'){
+		 	        	  $("#matchingState").css({"background":"navy","cursor":"default","color":"white"});
+		 	        	  $("#matchingState").removeAttr("onclick")
+		 	           }
+		 	           
+		 	           
 		 	       		openChat(matchingNum);
+		 	       		
 		 	           updateChat();
 		 			}
 		    		
@@ -657,6 +659,41 @@ font-weight: bold;
  			})
         }
  			
+        function submitfinal(){
+        
+        	$.ajax({
+ 				url : "/omg/endMatching.follower",
+ 				data : {
+ 					followerId : followerId,
+ 					trainerId: trainerId
+ 				},
+ 				type : "post",
+ 				success : function(data) {
+		 			if(data != null){
+// 		 	           matchingNum = data.requestCode;
+// 		 	           matchingType = data.requestType;
+		 	           
+// 		 	           if(data.requestType == '수락'){
+// 		 	        	  $("#matchingState").css({"background":"navy","cursor":"default","color":"white"});
+// 		 	        	  $("#matchingState").removeAttr("onclick")
+// 		 	           }
+		 	           
+		 	           
+// 		 	       		openChat(matchingNum);
+		 	       		
+// 		 	           updateChat();
+		 			}
+		    		
+ 				},
+ 				error : function(){
+ 					alert("매칭 확인 실패");
+ 				}
+ 			})
+        	
+        	
+        	
+        }
+        
         function submitMatching(){
             jQuery('.matching_wrap').fadeIn('slow');
         }
