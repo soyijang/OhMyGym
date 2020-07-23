@@ -53,11 +53,6 @@
         border-bottom-right-radius: 20%;
         border: 1px solid gray
     }
-    #showMediaArea th {
-        height: 42px;
-        font-size: 15px;
-        border-bottom: 5px double gray;
-    }
     #outline{
         display:inline-block; 
         border: 2px double gray; 
@@ -108,17 +103,34 @@
     	 text-align: center;
     	 border-collapse: collapse;
     	 border-bottom: 5px double gray;
+    	 border-top: 5px double gray;
+    }
+    #showMediaArea th {
+    	width: 80px;
+        height: 35px;
+        font-size: 15px;
+        background: lightgray;
+    }
+    #showVideoList tr {
+    	border-bottom: 1px solid gray;
     }
     #showVideoList td {
-    	height: 30px;
-    	font-size: 13px;
-    	border-bottom: 1px solid gray;
+    	/* height: 30px;
+    	font-size: 13px; 
+    	border-bottom: 1px solid gray;*/
     }
     #titleArea a:hover {
     	cursor: pointer;
     	color: orangered;
     }
-
+	 #backBtn, #modifyBtn {
+	 	width: 80px;
+	 	height: 30px;
+	 	background: orangered;
+	 	color: white;
+	 	border: 0px;
+	 	margin-top: 5px;
+	 }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
@@ -142,19 +154,39 @@
 
         <!--커리큘럼 출력-->
         <article id="showMediaArea">
-            <div style="overflow: auto;" id="outline">
+            <div style="overflow: auto; " id="outline">
+        	<div style="height: 40px;"></div>
                 <table id="showVideoList">
                     <tr>
-                        <th colspan="3" style="border-bottom: 5px double gray; text-align: left;">curriTitle</th>
+                        <th>커리큘럼</th>
+                        <td id="curriTitle" style="width: 280px;">temp</td>
+                        <th>업로드일</th>
+                        <td style="width: 200px;"><%= video.getTrainerUploadDate() + " " + video.getTrainerUploadTime() %></td>
+                        <th>북마크 수</th>
+                        <td><%= video.getBookmarkCount() %></td>
                     </tr>
                     <tr>
-	                	<th style="width: 70px;">No.</th>
-	                	<th style="width: 550px;">동영상 제목</th>
-	                	<th>업로드 시간</th>
+	                	<th>제목</th>
+	                	<td colspan="5" style="text-align: left; padding-left: 30px;"><%= video.getVideoTitle() %>
 	                </tr>
-                    
+	                <tr>
+                    	<th>첨부파일</th>
+                    	<td colspan="5" style="text-align: left; padding-left: 30px;">temp</td>
+                    </tr>
+                    <tr style="height: 400px;">
+                    	<td colspan="6">
+                    		<video src="" style="width:400px; height: 250px;" controls></video>
+                    	</td>
+                    </tr>
                 </table>
             </div>
+            <div style="text-align: right; width: 1240px;">
+				<button id="backBtn" onclick="history.back(-1)">돌아가기</button>
+				&nbsp;&nbsp;&nbsp;
+				<%-- <%if(loginUser != null && loginUser.getMemberId().equals("admin01")) {%> --%>
+				<button id="modifyBtn">수정</button>
+				<%-- <%} %> --%>
+			</div>
         </article>
         <!--커리큘럼 출력 종료-->
     </section>

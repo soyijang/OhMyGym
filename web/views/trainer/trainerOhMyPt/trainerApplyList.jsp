@@ -219,7 +219,7 @@ a#goTalkBtn{
 					</div>
 				</div>
 				<div style="margin-top: 15px; margin-left: 165px;">
-					<button onclick="completeMatching();"
+					<button onclick="completeMatching($('#applyname').val());"
 						style="width: 100px; height: 30px; border: none; cursor: pointer; background: orangered; color: white; font-weight: bold;">매칭승인</button>
 					<a onclick="inputReject();"
 						style="margin-left: 10px; padding: 6.5px; font-size: 0.8em; width: 100px; height: 30px; border: none; cursor: pointer; background: navy; color: white; font-weight: bold;">매칭거절</a>
@@ -337,6 +337,23 @@ a#goTalkBtn{
             
         }
    		 
+   		 function completeMatching(followerId) {
+   			 var followerId = followerId;
+   			 console.log(followerId);
+   			 
+   			 $.ajax({
+   				 url: "approval.mc",
+   				 data: {followerId: followerId},
+   				 type: "get",
+   				 success: function(data) {
+   					 console.log("성공");
+   					 //alert("승인이 완료되었습니다.");
+   				 },
+   				 error: function(data) {
+   					 console.log("실패");
+   				 }
+   			 });
+   		 }
    		 
    		function inputReject(){
    			$(".matching_box").css({"height":425,"top":"15%"});
