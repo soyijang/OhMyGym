@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,com.omg.jsp.notice.model.vo.*"%>
      <% 
-     ArrayList <Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+     ArrayList <Notice> list2 = (ArrayList<Notice>)request.getAttribute("list2");
 /*  	ArrayList<Attachment> fileList = (ArrayList<Attachment>) request.getAttribute("fileList");
  	Attachment titleImg = fileList.get(0); */
-	System.out.println("notice list: "+list);
 	%>
     
 <!DOCTYPE html>
@@ -112,7 +111,7 @@
                     <th width="100px">등록일</th>
                 </tr>
                
-            	<% for(Notice n : list) { %>
+            	<% for(Notice n : list2) { %>
 				 <tr>
 					<td><%=n.getBoardNum() %></td>
 					<td><%=n.getBoardCategory() %></td>

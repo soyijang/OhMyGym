@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.omg.jsp.notice.model.vo.Notice, com.omg.jsp.member.model.vo.*,java.sql.*"%>
-
+	<% 
+		Notice notice = (Notice) request.getAttribute("notice");
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,47 +83,34 @@ legend {
 			<input type="radio" name="status" value="N"><label>비공개</label>&nbsp;&nbsp;
 		</legend></td>
 	</tr>
-	
 	<tr>
 		<td width="300px" height="80px" style="text-align: left; background:#e3e3e3;"><a id="text">제목</a></td>
 		<td width="850px" height="90px"><legend align="left">
-		<textarea name="title" rows="3px" cols="120px" style="resize: none;"></textarea></td>
+		<textarea name="title" style="resize: none;width: 800px; height: 50px;"></textarea></td>
 		</legend>
 	</tr>
 	<tr>
 		<td width="300px" height="100px" style="text-align: left; background:#d1d1d1;"><a id="text">내용작성</a></td>
 		<td width="850px" height="100px"><legend align="left">
-		<textarea name="content" rows="20px" cols="120px" style="resize: none;">
-		
+		<textarea name="content" style="resize: none; width: 800px; height: 350px;">
 		</textarea> </legend>
 		</td>
-	
 	</tr>
 	<tr>
 		<td width="300px" height="80px" style="text-align: left; background:#e3e3e3;"><a id="text">첨부파일</a></td>
 		<td width="850px" height="80px"><legend align="left"><input type="file"></legend></td>
-	
 	</tr>
 	</table>
 	<p style="margin-left: 20%;">※ 이미지는 png, jpg 확장자파일만 업로드 가능하며, 최대 100MB 까지만 업로드 가능합니다.</p>
 
 		<div style="text-align: right;">
-		<button id="btn1" onclick="history.back(-1)">취소</button>
+		<button id="btn1" type="button" onclick="history.back(-1)">취소</button>
 		&nbsp;&nbsp;&nbsp;
-		<button id="btn1" onclick="">저장</button>
+		<button id="btn1" type="submit">저장</button>
 		</div>
 		</form>
 	
-	<script>
-	function writeCheck() {
-		var form = document.writeform; 
-		if( !form.title.value ) { 
-			alert( "제목을 적어주세요" ); form.title.focus(); return; } 
-		if( !form.memo.value ) { 
-			alert( "내용을 적어주세요" ); form.memo.focus(); return; } 
-		form.submit(); }
-		
-	</script>
+	
 
 
 </body>

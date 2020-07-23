@@ -56,15 +56,15 @@
 	<br>
 	<%@ include file="../../common/followerNav.jsp"%>
 
-
+	<form action="<%=request.getContextPath()%>/selectList.bo" method="post">
 	<div class="left-container">
 		<div class="class_category_container">
 			<div class="title">건강관리</div>
-			<ul class="class_category_list" style="height: 630px;">
+			<ul class="class_category_list" style="height: 230px;">
 				<li class="navi-item ">건강정보</li>
 				<li class="navi-item ">밥스타그램</li>
 			</ul>
-		</div>.......................................................0
+		</div>
 	</div>
 
 	<div class="left-container" style="width: 1080px; margin-left: 30px;">
@@ -92,14 +92,15 @@
 		</thead>
 		
 		<tbody>
-		<% for(FollowerDiet fd : list) {%>
+		<%-- <% for(FollowerDiet fd : list) {%>
 			<tr>
 				<td><%=fd.getIntakeDate() %></td>
 				<td><%=fd.getFoodCode() %></td>
 				<td><%=fd.getIntakeVolume() %></td>
 			</tr>
 			
-		<%} %>
+		<%} %> --%>
+		
 		</tbody>
 		
 		<tfoot></tfoot>
@@ -107,31 +108,18 @@
 		
 		
 		<!-- delete, upload block -->
-		<br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		
 		<div style="text-align: right; margin-right: 120px;">
 		<button id="delete"><label>삭제</label></button>
 		<button id="upload" onclick="location.href='views/follower/followerDiet/followerInsertTodayMeal.jsp'"><label>업로드</label></button>
 		</div>
 		<br><br><br>
+		</form>
 
 		<%@ include file="../../common/footer.jsp"%>
 		
 		
-		<script>
-		$(function() {
-			$("#listArea td").mouseenter(function() {
-				$(this).parent().css({"background":"gray","cursor":"pointer"});
-			}).mouseout(function() {
-				$(this).parent().css({"background":"black"});
-			}).click(function() {
-				var num=$(this).parent().children("input").val();
-				console.log(num);
-				location.href="<%=request.getContextPath()%>/selectOne.bo?num="+num;
-			});
-		});
-	
-	
-	</script>
+		
 </body>
 </html>
