@@ -224,7 +224,7 @@ div.tariner_subAbility {
 									<img class="<%= hmap.get("trainerId") %>" width="100%" height="100%" style="border-radius: 15px;">
 								</div>
 								<div class="trainnerTxt">
-									<a class="trainerName"><%= hmap.get("trainerId") %></a>
+									<a class="trainerName"><%= hmap.get("trainerName") %></a>
 									<div class="trainerScore" style="text-align: center;">
 										<img width="18px" height="18px" src="/omg/resources/img_icon/ohmystar_pull.png" style="vertical-align: middle;">&nbsp;&nbsp;
 										<%= list.get(list.size() - 1).get(hmap.get("trainerId")) %>

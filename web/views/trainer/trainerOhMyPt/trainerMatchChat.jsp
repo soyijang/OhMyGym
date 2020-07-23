@@ -279,9 +279,9 @@ button#sendMsg{
 							<div
 								style="padding: 5px; margin-left: 200px; width: 500px; height: 90px; border: 1px solid rgb(179, 179, 179); border-radius: 10px; background: rgba(227, 227, 227, 0.47);">
 								<div id="talk_input" style="float: left;">
-									<textarea id="message"></textarea>
+									<textarea id="message" <%if(matching.getRequestType().equals("수락")){ %> readonly <% }%> ></textarea>
 								</div>
-								<button id="sendMsg" onclick="insertChat();">전송</button>
+								<button id="sendMsg" onclick=" <%if(matching.getRequestType().equals("수락")){ %> <%} else { %>insertChat(); <%}%>">전송</button>
 							</div>
 						</div>
 					</div>
@@ -348,7 +348,6 @@ button#sendMsg{
 		var followerId = trainerId;
     	var matchingRoom = matchingNumber;
     	var content = $("#message").val();
-    	console.log("입력");
      	$.ajax({
 				url : "/omg/inputChat.follower",
 				data : {
