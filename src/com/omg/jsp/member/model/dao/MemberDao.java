@@ -445,12 +445,66 @@ public ArrayList<Member> selectList(Connection con) {
 			m.setRequestType(rset.getString("REQUEST_TYPE"));
             
             list.add(m);
+            System.out.println(list);
 		}
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} finally {
 		close(stmt);
+		close(rset);
+	}
+	
+	return list;
+	
+	
+}
+
+public ArrayList<Member> selectFollower(Connection con, String memberId) {
+	
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	ArrayList<Member> list = new ArrayList<Member>();
+	Member m = null;
+	
+	System.out.println("dao 오니?");
+	
+	String query = prop.getProperty("selectFollowerDetail");
+	System.out.println(memberId);
+	
+	try {
+		pstmt = con.prepareStatement(query);
+		
+		pstmt.setString(1, memberId);
+		rset = pstmt.executeQuery();
+		
+		while(rset.next()) {
+			System.out.println("in if");
+            m = new Member();
+            m.setMemberId(rset.getString("MEMBER_ID"));
+            m.setMemberDivision(rset.getString("MEMBER_TYPE"));
+            m.setName(rset.getString("MEMBER_NAME"));
+			m.setEmail(rset.getString("EMAIL"));
+			m.setPhone(rset.getString("PHONE"));
+			m.setAddress(rset.getString("ADDRESS"));
+			m.setProfileAttachmentCode(rset.getString("PROFILE_FILECODE"));
+			m.setEnrollDate(rset.getString("ENROLL_DATE"));
+			m.setMemberStatus(rset.getString("MEMBER_STATUS"));
+			m.setGender(rset.getString("GENDER"));
+			m.setEnrollTime(rset.getString("ENROLL_TIME"));
+			m.setMemberAge(rset.getString("MEMBER_AGE"));
+			m.setEventYn(rset.getString("EVENT_YN"));
+			m.setRequestType(rset.getString("REQUEST_TYPE"));
+			
+			
+            System.out.println("dao m : " + m);
+            list.add(m);
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
 		close(rset);
 	}
 	

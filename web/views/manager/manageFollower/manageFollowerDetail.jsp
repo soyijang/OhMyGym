@@ -1,13 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*, java.util.*, com.omg.jsp.matching.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.trainerCeritificate.model.vo.*, com.omg.jsp.trainerCareer.model.vo.*, com.omg.jsp.trainerCeritificate.model.vo.*
+	, com.omg.jsp.trainerEducation.model.vo.*, com.omg.jsp.trainerReview.model.vo.*, com.omg.jsp.member.model.vo.*, com.omg.jsp.followerHealth.model.vo.*"%>
 <% 
-	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list"); 
+HashMap<String, Object> hmap = (HashMap<String, Object>) request.getAttribute("information"); 
+  ArrayList<Member> fList = (ArrayList<Member>) hmap.get("fList");
+ ArrayList<HealthInfo> hInfo = (ArrayList<HealthInfo>) hmap.get("hInfo");  
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script>
+   var profileManageCode;
+
+   function profileload(userId){   
+        $.ajax({
+          url : "/omg/loadProfile.all",
+           type : 'post',
+           data : {
+                   userId : userId
+                },
+                success : function(data) {
+                   profileManageCode = data.fileManageName;
+                   console.log(profileManageCode);
+                   $("."+userId).attr("src", "<%=request.getContextPath()%>/resources/test/"+profileManageCode); 
+                },
+                error : function(){
+                  profileManageCode = "";
+                }
+        })
+   }      
+   profileload();
+   
+   
+   </script>
 <title>Insert title here</title>
  <style>
          html {
@@ -182,8 +209,12 @@
 </head>
 <body>
    <%@ include file="../../common/managerNav.jsp"%>
-
+    <script>
+      profileload("<%= fList.get(0).getMemberId() %>")
+    </script> 
+	
     <section style="position: absolute; left: 210px">
+    
         <div class="customer_content_container">
             <div class="customer_content_main">
                 <p style="font-weight: bold; font-size: 1.5em; display:block; float: left;">고객상세정보</p>
@@ -197,43 +228,47 @@
                             <tr>
                                 <th>프로필</th>
                                 <th>아이디</th>
-                                <td><input type="text" value="ID" style="outline: none; border: none; background: none;" readonly></td>
+                                <td><input type="text" value="<%= fList.get(0).getMemberId() %>" style="outline: none; border: none; background: none;" readonly></td>
                                 <th>회원상태</th>
-                                <td><input type="text" value="정상"  style="outline: none;  border: none;  background: none;" readonly></td>
+                                <td><input type="text" value="<%= fList.get(0).getMemberStatus() %>"  style="outline: none;  border: none;  background: none;" readonly></td>
                             </tr>
                             <tr>
                                 <td colspan="1" rowspan="4">
-                                    <img class="customer_profileImg" width="160px" height="180px" src="">
+                                    <img class="<%= fList.get(0).getMemberId() %>" width="160px" height="180px" src="">
                                 </td>
-                                <th>닉네임</th>
-                                <td><input type="text" value="감자" style="outline: none; border: none; background: none;" readonly></td>
+                                <th>생년월일</th>
+                                <td><input type="text" value="<%= fList.get(0).getMemberAge() %>" style="outline: none; border: none; background: none;" readonly></td>
                                 <th>등록여부</th>
-                                <td><input type="text" value="Y"  style="outline: none;  border: none;  background: none;" readonly></td>
+                                <td><input type="text" value="<%= fList.get(0).getRequestType() %>"  style="outline: none;  border: none;  background: none;" readonly></td>
                             </tr>   
                             <tr>
                                 <th>회원명</th>
-                                <td><input type="text" value="이해림" style="outline: none; border: none; background: none;" readonly></td>
+                                <td><input type="text" value="<%= fList.get(0).getName() %>" style="outline: none; border: none; background: none;" readonly></td>
                                 <th>가입일</th>
-                                <td><input type="text" value="2020/06/15"  style="outline: none;  border: none;  background: none;" readonly></td>
+                                <td><input type="text" value="<%= fList.get(0).getEnrollDate() %>"  style="outline: none;  border: none;  background: none;" readonly></td>
                             </tr>
                             <tr>
                                 <th>이메일</th>
-                                <td><input type="text" value="hlm1225@kh.or.kr" style="outline: none; border: none; background: none;" readonly></td>
+                                <td><input type="text" value="<%= fList.get(0).getEmail() %>" style="outline: none; border: none; background: none;" readonly></td>
                                 <th>연락처</th>
-                                <td><input type="text" value="010-1234-4156"  style="outline: none;  border: none;  background: none;" readonly></td>
+                                <td><input type="text" value="<%= fList.get(0).getPhone() %>"  style="outline: none;  border: none;  background: none;" readonly></td>
                             </tr>
                             <tr>
                                 <th>주소</th>
-                                <td colspan="3"><input type="text" value="경기도 용인시 기흥구 피로동 8234번지 편안한 아파트 128동 802호" style="width: 100%; outline: none; border: none; background: none;" readonly></td>
+                                <td colspan="3"><input type="text" value="<%= fList.get(0).getAddress() %>" style="width: 100%; outline: none; border: none; background: none;" readonly></td>
                             </tr>
                             <tr>
                                 <th>건강정보</th>
-                                <td colspan="4"></td>
+                                <td colspan="4">
+                               <% for(int i = 0; i < hInfo.size(); i++) { %>
+													
+														<%= hInfo.get(i).getHealthInfoCode() %> : <%= hInfo.get(i).getHealthData() %>
+													
+												<% } %> 
+								</td>
+                                
                             </tr>
-                            <tr>
-                                <th>메모</th>
-                                <td colspan="4"></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
 

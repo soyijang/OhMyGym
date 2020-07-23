@@ -18,7 +18,7 @@ import com.omg.jsp.member.model.vo.Member;
 /**
  * Servlet implementation class SelectFollowerDetail
  */
-@WebServlet("/SelectFollowerrDetail")
+@WebServlet("/SelectFollowerDetail")
 public class SelectFollowerDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,8 +37,9 @@ public class SelectFollowerDetailServlet extends HttpServlet {
 
 		String memberId = request.getParameter("memberId");
 		
-		HashMap<String, Object> hmap = new ManagerService().selectFollowerMap(memberId, null);
 		
+		HashMap<String, Object> hmap = new ManagerService().selectFollowerMap(memberId);
+		System.out.println("hmap : " + hmap);
 		String page = "";
 		if(!hmap.isEmpty()) {
 			page = "views/manager/manageFollower/manageFollowerDetail.jsp";
@@ -46,7 +47,7 @@ public class SelectFollowerDetailServlet extends HttpServlet {
 			request.getRequestDispatcher(page).forward(request, response);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "트레이너 정보 상세보기 실패");
+			request.setAttribute("msg", "팔로워 정보 상세보기 실패");
 		}
 		
 	

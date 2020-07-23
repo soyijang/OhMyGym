@@ -239,7 +239,7 @@ body {
 													value="" style="height: 40px" class="MS_input_txt w137"
 													size="50" maxlength="12" placeholder="아이디를 입력해주세요">
 													<a onclick="idCheckFunction()"
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">중복확인</a>
+														style="color: orangered; cursor: pointer;">중복확인</a>
 													<span class="idpw-info"><br>
 														<p style="font-size: 0.7em; color: orangered;">*
 															회원아이디는 영문/숫자만 사용가능합니다.</p> </span> </a></td>
@@ -440,8 +440,8 @@ body {
 															id="hpost" style="width: 100px; height: 40px;"
 															class="MS_input_txt" value="" size="7" maxlength="15"
 															readonly="">
-														<a onclick="goPopup()"
-															style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">주소검색</a>
+														<a onclick="openDaumZipAddress()"
+															style="color: orangered; cursor: pointer;">주소검색</a>
 													</div>
 												</td>
 											</tr>
@@ -518,7 +518,7 @@ body {
 													minlength="4">
 
 													<a onclick=""
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">본인인증</a>
+														style="color: orangered; cursor: pointer;">본인인증</a>
 												</td>
 
 

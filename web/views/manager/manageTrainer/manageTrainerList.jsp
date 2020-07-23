@@ -254,12 +254,7 @@
     function detail(memberId) {
     	location.href = "<%= request.getContextPath()%>/SelectTrainerDetail?memberId="+memberId;
     }
-		<%-- $(function(){
-			$("#infoBtn").click(function(){
-				
-				location.href = "<%=request.getContextPath()%>/SelectTrainerDetail?memberId="+memberId;
-			});	
-		}); --%>
+		
 	</script>
 </body>
 </html>

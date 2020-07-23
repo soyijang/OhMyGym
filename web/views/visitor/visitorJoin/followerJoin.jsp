@@ -10,7 +10,7 @@
 
 function checks() {
 	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-	var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+	var getCheck = RegExp(/^[a-zA-Z0-9]{8,12}$/);
 	var getName = RegExp(/^[가-힣]+$/);
 	
 	//아이디 공백확인
@@ -27,35 +27,9 @@ function checks() {
 		return false; 
 	}
 	
-	//비밀번호 공백 확인
-	if($("#memberPwd1").val() == ""){
-		alert("패스워드를 입력해주세요");
-		$("#memberPwd1").focus();
-		return false; 
-	}
 	
-	//아이디 비밀번호 같음 확인 
-	if($("#memberId").val() == $("#memberPwd1").val()){
-		alert("아이디와 비밀번호가 같습니다");
-		$("#memberPwd1").val("");
-		$("#memberPwd1").focus();
-		return false; 
-	}
 	
-	//비밀번호 유효성검사 
-	if(!getCheck.test($("#memberPwd1").val())){ 
-		alert("형식에 맞게 입력해주세요");
-		$("#memberPwd1").val("");
-		$("#memberPwd1").focus(); 
-		return false; 
-	}
 	
-	//비밀번호 확인란 공백 확인
-	if($("#memberPwd2").val() == ""){
-		alert("패스워드 확인란을 입력해주세요");
-		$("#memberPwd2").focus();
-		return false; 
-	}
 	
 	//이메일 공백 확인 
 	if($("#email1").val() == ""){
@@ -73,6 +47,30 @@ function checks() {
 	}
 
 }
+
+function chkPW(){
+
+	 var pw = $("#memberPwd1").val();
+	 var num = pw.search(/[0-9]/g);
+	 var eng = pw.search(/[a-z]/ig);
+	 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+	 if(pw.length < 8 || pw.length > 20){
+
+	  alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요.");
+	  return false;
+	 }else if(pw.search(/\s/) != -1){
+	  alert("비밀번호는 공백 없이 입력해주세요.");
+	  return false;
+	 }else if(num < 0 || eng < 0 || spe < 0 ){
+	  alert("비밀번호는 영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+	  return false;
+	 }else {
+		console.log("통과"); 
+	    return true;
+	 }
+
+	}
 
 	function passwordCheckFunction() {
 		var password1 = $("#memberPwd1").val();
@@ -108,7 +106,7 @@ function checks() {
 div#visitQuestion{
         width: 700px; 
         height: 600px; 
-        margin-left: -50px; 
+        margin-left: -80px; 
         margin-right: auto; 
         margin-top: 100px; 
         margin-bottom: 100px; 
@@ -266,7 +264,7 @@ body {
 													style="height: 40px" size="50"
 													maxlength="12" placeholder="아이디를 입력해주세요">
 													<a onclick="idCheckFunction()"
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">중복확인</a>
+														style="color: orangered; cursor: pointer;">중복확인</a>
 													<span class="idpw-info"><br>
 													<span id="result"></apan>
 													<p style="font-size: 0.7em; color: orangered;">* 회원아이디는
@@ -468,7 +466,7 @@ body {
 															class="MS_input_txt" value="" size="7" maxlength="15"
 														>
 														<a onclick="openDaumZipAddress()"
-															style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">주소검색</a>
+															style="color: orangered; cursor: pointer;"">주소검색</a>
 													</div>
 												</td>
 											</tr>
@@ -547,7 +545,7 @@ body {
 													minlength="4">
 
 													<a onclick=""
-														style="width: 100px; height: 40px; background-color: orangered; color: white; border: none;">본인인증</a>
+														style="color: orangered; cursor: pointer;">본인인증</a>
 												</td>
 
 
@@ -662,9 +660,9 @@ body {
 								</div>
 							</div>
 							<div id="part9" class="questionPart" style="float: left;">
-								<label class="questionTitle">수면시</label><br>
+								<label class="questionTitle">수면시간은 어떻게 되시나요?</label><br>
 								<div style="margin-top: 20px; font-size: 1.2em; color: white;">
-									<input type="text" value="" id="weight" name="sleep" placeholder="kg단위로 입력해주세요">
+									<input type="number" value="" id="sleep" name="sleep">
 								</div>
 							</div>
 							<div>
