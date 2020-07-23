@@ -173,4 +173,30 @@ public class MatchingService {
 		return result;
 	}
 
+	public MatchingRequest manageGroup(String trainerId) {
+		
+		Connection con = getConncection();
+		
+		MatchingRequest result = new MatchingDao().manageGroup(con, trainerId);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int endMatch(String trainerId, String followerId) {
+		Connection con = getConncection();
+		
+		int result = new MatchingDao().endMatch(con, trainerId, followerId);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
 }

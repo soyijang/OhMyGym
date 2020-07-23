@@ -624,6 +624,58 @@ public class MatchingDao {
 		
 		return result;
 	}
+	public MatchingRequest manageGroup(Connection con, String trainerId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MatchingRequest result = null;
+		
+		String query = prop.getProperty("manageGroup");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, trainerId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = new MatchingRequest();
+				
+				result.setGroupCommuNum(rset.getString("GROUP_CONTAINERNUM"));
+				result.setTrainerId(rset.getString("MEMBER_ID"));
+				result.setTrainerName(rset.getString("MEMBER_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
+	public int endMatch(Connection con, String trainerId, String followerId) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("endMatch");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, trainerId);
+			pstmt.setString(2, followerId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
 }
 
 
