@@ -118,7 +118,7 @@
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">
         <ul><details open><summary>트레이너 관리</summary>
             <li><a href="<%=request.getContextPath()%>/SelectTrainerListServlet">트레이너조회/수정</a></li>
-            <li><a href="#">트레이너 승인요청관리</a></li>
+            <li><a href="<%=request.getContextPath()%>/select.manager.apply.gd">트레이너 승인요청관리</a></li>
             <li><a href="../managerAboutMypage/manageMoney.jsp">비용지급관리</a></li><br>
         </details></ul>
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">

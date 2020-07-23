@@ -36,14 +36,14 @@
 								<td><a href="<%=request.getContextPath()%>/select.ti"><img src="/omg/resources/button/job/1_n.png" alt=""></a></td>
 								<td><a href="<%=request.getContextPath()%>/select.career.ti"><img src="/omg/resources/button/job/2_y.png" alt=""></a></span></td>
 								<td><a href="<%=request.getContextPath()%>/select.prize.ti"><img src="/omg/resources/button/job/3_n.png" alt=""></a></td>
-								<td><a href=""><img src="/omg/resources/button/job/4_n.png" alt=""></a></td>
+								<td><a href="<%=request.getContextPath()%>/select.apply.gd"><img src="/omg/resources/button/job/4_n.png" alt=""></a></td>
 							</tr>
 
 							<tr>
 								<td><span><a href="<%=request.getContextPath()%>/select.ti">학력정보</a></span></td>
 								<td><span><a href="<%=request.getContextPath()%>/select.career.ti">경력정보</a></span></td>
 								<td><span><a href="<%=request.getContextPath()%>/select.prize.ti">자격증/수상경력</a></span></td>
-								<td><span><a href="">인증신청결과</a></span></td>
+								<td><span><a href="<%=request.getContextPath()%>/select.apply.gd">인증신청/결과조회</a></span></td>
 							</tr>
 
 						</table>
