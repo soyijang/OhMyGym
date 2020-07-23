@@ -3,7 +3,6 @@
 	pageEncoding="UTF-8" import="com.omg.jsp.notice.model.vo.Notice, com.omg.jsp.member.model.vo.*"%>
 	<% 
 		Notice notice = (Notice) request.getAttribute("notice");
-		Member loginUser = (Member) request.getAttribute("loginUser");
 	%>
 <!DOCTYPE html>
 <html>
@@ -60,8 +59,11 @@ legend {
 	<br>
 
 	<br><br>
-	<form id="updateForm" method="post">
-
+	<form id="updateForm" action="<%=request.getContextPath()%>/updateNotice.no" method="post">
+	<input type="text" name="boardNum" value="<%=notice.getBoardNum()%>" style="display: none;">
+	<script>
+		console.log("<%=notice.getBoardNum()%>");
+	</script>
 	<table>
 	<tr>
 		<td width="300px" height="50px" style="text-align: left; background:#e3e3e3;"><a id="text">항복구분</a></td>
@@ -92,15 +94,13 @@ legend {
 	<tr>
 		<td width="300px" height="80px" style="text-align: left; background:#e3e3e3;"><a id="text">제목</a></td>
 		<td width="850px" height="90px"><legend align="left">
-		<textarea rows="3px" cols="120px" style="resize: none;"><%=notice.getBoardTitle()%></textarea></td>
+		<textarea rows="3px" cols="120px" style="resize: none;" name="title"><%=notice.getBoardTitle()%></textarea></td>
 		</legend>
 	</tr>
 	<tr>
 		<td width="300px" height="100px" style="text-align: left; background:#d1d1d1;"><a id="text">내용작성</a></td>
 		<td width="850px" height="100px"><legend align="left">
-		<textarea rows="20px" cols="120px" style="resize: none;"><%=notice.getBoardContent()%>
-		
-		</textarea> </legend>
+		<textarea rows="20px" cols="120px" style="resize: none;" name="content"><%=notice.getBoardContent()%></textarea> </legend>
 		</td>
 	
 	</tr>
@@ -111,18 +111,24 @@ legend {
 	</tr>
 	</table>
 	<p style="margin-left: 20%;">※ 이미지는 png, jpg 확장자파일만 업로드 가능하며, 최대 100MB 까지만 업로드 가능합니다.</p>
-	</form>
-	<div style="text-align: right;">
+		<div style="text-align: right;">
 		<button id="btn1" onclick="location.href='<%=request.getContextPath()%>/deleteNotice.no?num=<%=notice.getBoardNum()%>'">삭제</button>
 		&nbsp;&nbsp;&nbsp;
-		<button id="btn1" onclick="location.href='<%=request.getContextPath()%>/updateNotice.no?num=<%=notice.getBoardNum()%>'">수정</button>
+<%-- 		<button id="btn1" onclick="location.href='<%=request.getContextPath()%>/updateNotice.no?num=<%=notice.getBoardNum()%>'">수정</button> --%>
+		<input id="btn1" type="submit" value="수정">
 	</div>
+	</form>
+
 	
 	
 		
 	<script type="text/javascript">
      $(document).ready(function(){
      $("input[type='radio'][name='category'][value='<%=notice.getBoardCategory() %>']").prop("checked", true);
+      })
+      
+      $(document).ready(function(){
+     $("input[type='radio'][name='status'][value='<%=notice.getStatus() %>']").prop("checked", true);
       })
     </script>
 
