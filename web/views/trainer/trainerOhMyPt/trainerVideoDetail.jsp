@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.trainerCurriculum.model.vo.*, com.omg.jsp.trainerVideo.model.vo.*"%>
 <% 
-	HashMap<String, Object> videoListnCurriTitle = (HashMap<String, Object>) request.getAttribute("videoListnCurriTitle");
-	ArrayList<TrainerVideo> videoList = (ArrayList<TrainerVideo>) videoListnCurriTitle.get("videoList");
-	HashMap<String, String> curriTitle = (HashMap<String, String>) videoListnCurriTitle.get("curriTItle");
+	TrainerVideo video = (TrainerVideo) request.getAttribute("video");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -120,9 +118,6 @@
     	cursor: pointer;
     	color: orangered;
     }
-    .video-list:hover {
-    	cursor: pointer;
-    }
 
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -142,7 +137,7 @@
             <div>
                 <h1 style="margin-top: 6px;">&nbsp;&nbsp;&nbsp;<a href="<%= request.getContextPath() %>/selectCurriculumList.cu">커리큘럼 관리</a></h1>
             </div>
-        </article>
+        </article> 
         <!--커리큘럼 관리 타이틀 종료-->
 
         <!--커리큘럼 출력-->
@@ -150,75 +145,18 @@
             <div style="overflow: auto;" id="outline">
                 <table id="showVideoList">
                     <tr>
-                        <th colspan="3" style="border-bottom: 5px double gray; text-align: left;"><%= curriTitle.get("curriTitle") %></th>
+                        <th colspan="3" style="border-bottom: 5px double gray; text-align: left;">curriTitle</th>
                     </tr>
                     <tr>
 	                	<th style="width: 70px;">No.</th>
 	                	<th style="width: 550px;">동영상 제목</th>
 	                	<th>업로드 시간</th>
 	                </tr>
-                    <% for(int i = 0; i < videoList.size(); i++) { %>
-		                <tr class="video-list">
-		                	<td style="display:none;"><input type="hidden" name="videoCode" value="<%= videoList.get(i).getTrainerVideoCode() %>"></td>
-		                	<td><%= videoList.size() - i %></td>
-		                	<td style="padding-left: 30px; text-align: left;"><%= videoList.get(i).getVideoTitle() %></td>
-		                	<td><%= videoList.get(i).getTrainerUploadDate() + " " + videoList.get(i).getTrainerUploadTime() %></td>
-		                </tr>
-	            	<% } %>
+                    
                 </table>
-
-	           	<script>
-	           		/* function showCurri(curriculumCode) {
-	           			var curriCode = curriculumCode;
-	           			console.log(curriCode);
-	           			
-	           		 	$.ajax({
-	           				url: "selectVideo.cu",
-	           				data: {
-	           					curriCode: curriCode
-	           				},
-	           				type: "get",
-	           				success: function(data) {
-	           					console.log("성공");
-	           				},
-	           				error: function(data) {
-	           					console.log("실패");
-	           				}
-	           			}); }*/
-	           			
-	           			/* function videoDetail() {
-	           				console.log($(".video-list").find("input").val());
-	           			} */
-	           			
-	           			$(function() {
-	        				$(".video-list").click(function() {
-	        					//var num = $(this).children().childred().eq(0).val();
-	        					var num = $(this).find("input").val();
-	        					console.log(num);
-	        					location.href="<%= request.getContextPath()%>/selectOne.vi?num=" + num;
-	        				});
-	        			});
-	           			
-	           			<%-- $(function() {
-	           				$("#listArea td").mouseenter(function(){
-	           					$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
-	           				}).mouseout(function(){
-	           					$(this).parent().css({"background":"black"});
-	           				}).click(function(){
-	           					var num = $(this).parent().children().eq(0).text();
-	           					//console.log(num);
-	           					location.href="<%=request.getContextPath()%>/selectOne.no?num=" + num;
-	           				});
-	           			}); --%>
-	           			
-	           	</script>
-                
             </div>
         </article>
         <!--커리큘럼 출력 종료-->
-        <article id="addMediaBtnArea">
-            <button id="addMediaBtn">동영상 추가</button>
-        </article>
     </section>
     <br><br><br><br>
     <!--footer start-->

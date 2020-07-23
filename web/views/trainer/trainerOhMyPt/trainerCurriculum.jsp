@@ -44,9 +44,6 @@
         height: 40px;
         font-size: 14px;
     }
-    #curriculumMenu a:hover {
-        color: orangered;
-    }
     #curriculumMenu button {
         border-top-left-radius: 20%;
         border-top-right-radius: 20%;
@@ -113,6 +110,7 @@
     	 text-align: center;
     	 border-collapse: collapse;
     	 border-bottom: 5px double gray;
+    	 border-top: 5px double gray;
     }
     #showVideoList td {
     	height: 30px;
@@ -130,8 +128,12 @@
     }
     .curriArea:hover {
 		background: orangered;
-		color: white;
 		cursor: pointer;
+		color: white;
+	}
+	.cMenuCurrititle:hover {
+		color: orangered;
+        cursor: pointer;
 	}
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -149,7 +151,7 @@
         <!--커리큘럼 관리 타이틀-->
         <article id="titleArea">
             <div>
-                <h1 style="margin-top: 6px;">&nbsp;&nbsp;&nbsp;커리큘럼 관리</h1>
+                <h1 style="margin-top: 6px;">&nbsp;&nbsp;&nbsp;<a href="<%= request.getContextPath() %>/selectCurriculumList.cu">커리큘럼 관리</a></h1>
             </div>
         </article>
         <!--커리큘럼 관리 타이틀 종료-->
@@ -162,8 +164,7 @@
                     <% for(int i = 0; i < curriculum.size(); i++) { %>
 	                    <tr>
 	                    	<td>
-	                    		<a onclick="moveCurri();"><%= curriculum.get(i).getCurriculumTitle() %></a>
-	                    		<input type="hidden" value="<%= curriculum.get(i).getCurriculumCode() %>" id="curriCode">
+	                    		<div class="cMenuCurrititle" onclick="showCurri(<%=i%>);"><%= curriculum.get(i).getCurriculumTitle() %></div>
 	                    	</td>
 	                    </tr>
                     <% } %>
@@ -180,64 +181,50 @@
         <!--커리큘럼 출력-->
         <article id="showMediaArea">
             <div style="overflow: auto;" id="outline">
-                <%-- <table id="showVideoList">
-                    <tr>
-                        <th colspan="3" style="border-bottom: 5px double gray; text-align: left;">커리큘럼 전체 보기</th>
-                    </tr>
-                    <tr>
-	                	<th style="width: 70px;">No.</th>
-	                	<th style="width: 550px;">동영상 제목</th>
-	                	<th>업로드 시간</th>
-	                </tr>
-                    <% for(int i = 0; i < video.size(); i++) { %>
-	                <tr>
-	                	<td><%= video.size() - i %></td>
-	                	<td style="padding-left: 30px; text-align: left;"><%= video.get(i).getVideoTitle() %></td>
-	                	<td><%= video.get(i).getTrainerUploadDate() + " " + video.get(i).getTrainerUploadTime() %></td>
-	                </tr>
-	            	<% } %>
-                </table> --%>
+            	<%-- <div>
+	                 <table id="showVideoList">
+	                    <tr>
+		                	<th style="width: 70px;">No.</th>
+		                	<th style="width: 550px;">동영상 제목</th>
+		                	<th>업로드 시간</th>
+		                </tr>
+	                    <% for(int i = 0; i < video.size(); i++) { %>
+		                <tr>
+		                	<td><%= video.size() - i %></td>
+		                	<td style="padding-left: 30px; text-align: left;"><%= video.get(i).getVideoTitle() %></td>
+		                	<td><%= video.get(i).getTrainerUploadDate() + " " + video.get(i).getTrainerUploadTime() %></td>
+		                </tr>
+		            	<% } %>
+	                </table> 
+                </div> --%>
                 <% if(curriculum.size() > 0) { %>
                 
 	                <% for(int i = 0; i < curriculum.size(); i++) { %>
-	                
-	                	<div class="curriArea" style="vertical-align: middle; text-align: center;"  onclick="showCurri('<%= curriculum.get(i).getCurriculumCode() %>');">
+	                <form action="<%= request.getContextPath() %>/selectCurriculumDetail.cu" method="post" style="display: inline-block;">
+	                	<div class="curriArea" style="vertical-align: middle; text-align: center;" onclick="showCurri(<%=i%>);">
+	                		<input id="curriCode" name="curriCode" type="hidden" value="<%= curriculum.get(i).getCurriculumCode() %>">
 	                		<div style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 1.2em; margin-top: 65px;">
-	                			<%= curriculum.get(i).getCurriculumTitle() %>
+	                		<%= curriculum.get(i).getCurriculumTitle() %>
 	                		</div>
 <%-- 	                		<div style="height: 35px; font-size: 0.85em;">저장 된 영상 수 <b><%= video.get(i).getTrainerVideoCode() %></b>개</div>
- --%>	                	</div>
+ --%>	                </div>
+ 					</form>
 	                
 	                <% } %>
 	                
 	           	<% } %>
 	           	<script>
-	           		function showCurri(curriculumCode) {
-	           			var curriCode = curriculumCode;
-	           			console.log(curriCode);
-	           			
-	           		 	$.ajax({
-	           				url: "selectVideo.cu",
-	           				data: {
-	           					curriCode: curriCode
-	           				},
-	           				type: "get",
-	           				success: function(data) {
-	           					location.href="";
-	           				},
-	           				error: function(data) {
-	           					console.log("실패");
-	           				}
-	           			});
+	           		function showCurri(idx) {
+	           			document.forms[idx].submit();
 	           		}
 	           	</script>
                 
             </div>
         </article>
         <!--커리큘럼 출력 종료-->
-        <article id="addMediaBtnArea">
+<!--         <article id="addMediaBtnArea">
             <button id="addMediaBtn">동영상 추가</button>
-        </article>
+        </article> -->
     </section>
     <br><br><br><br>
     <!--footer start-->

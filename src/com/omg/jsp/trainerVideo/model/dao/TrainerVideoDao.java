@@ -64,4 +64,38 @@ private Properties prop = new Properties();
 		return vList;
 	}
 
+	public TrainerVideo selectOneVideo(Connection con, String videoCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		TrainerVideo video = new TrainerVideo();
+		
+		String query = prop.getProperty("selectOneVideo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, videoCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				video.setBookmarkCount(rset.getString("BOOKMARK_COUNT"));
+				video.setCurriculumCode(rset.getString("CURRICULUM_CODE"));
+				video.setTrainerUploadDate(rset.getString("TRAINER_UPLOADDATE"));
+				video.setTrainerUploadTime(rset.getString("TRAINER_UPLOADTIME"));
+				video.setTrainerVideoCode(rset.getString("TRAINER_VIDEOCODE"));
+				video.setTrainerVideoFileCode(rset.getString("TRAINER_VIDEO_FILECODE"));
+				video.setVideoTitle(rset.getString("VIDEO_TITLE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return video;
+	}
+
 }
