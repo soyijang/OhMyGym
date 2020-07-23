@@ -1,30 +1,23 @@
-package com.omg.jsp.trainerVideo.controller;
+package com.omg.jsp.matching.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.omg.jsp.trainerVideo.model.service.TrainerVideoService;
-import com.omg.jsp.trainerVideo.model.vo.TrainerVideo;
-
 /**
- * Servlet implementation class SelectVideoServlet
+ * Servlet implementation class UpdateMatchingApprovalServlet
  */
-@WebServlet("/selectVideo.cu")
-public class SelectVideoServlet extends HttpServlet {
+@WebServlet("/approval.mc")
+public class UpdateMatchingApprovalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectVideoServlet() {
+    public UpdateMatchingApprovalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +28,9 @@ public class SelectVideoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String curriculumCode = request.getParameter("curriCode");
+		String followerId = (String) request.getParameter("followerId");
 		
-		HashMap<String, Object> videoList = new TrainerVideoService().selectVideoInCurriculum(curriculumCode);
-		
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		
-		new Gson().toJson(videoList, response.getWriter());
+		System.out.println("servlet follwerId : " + followerId);
 	}
 
 	/**

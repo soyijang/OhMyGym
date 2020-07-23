@@ -212,6 +212,8 @@
 	                
 	                <% } %>
 	                
+	           	<% } else { %>
+	           		<div style="margin-top: 30px;height:30px; font-family: 'Noto Sans KR'; font-size: 15px; text-align: center; color: gray;">아직 등록 된 커리큘럼이 없습니다.</div>
 	           	<% } %>
 	           	<script>
 	           		function showCurri(idx) {

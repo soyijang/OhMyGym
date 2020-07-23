@@ -34,7 +34,6 @@
     }
     #curriculumMenu div table {
         text-align: center;
-        margin: 10px;
     }
     #curriculumMenu div table td {
         height: 40px;
@@ -54,8 +53,8 @@
         display:inline-block; 
         border: 2px double gray; 
         margin-top: 10px; 
-        margin-left: 10px;
-        width: 827px;
+        margin-left: 40px;
+        width: 1000px;
         height: 520px;
     }
     #cMenuButtonArea {
@@ -100,7 +99,7 @@
 
     #mediaTitle {
         border: none;
-        width: 750px;
+        width: 955px;
     } 
     #inputMediaArea .inputMediaTd {
         border-bottom: 1px solid gray; 
@@ -131,29 +130,12 @@
         </article>
         <!--커리큘럼 관리 타이틀 종료-->
 
-        <!--커리큘럼메뉴-->
-        <article id="curriculumMenu" style="float: left;">
-            <div id="cMenu">
-                <table>
-                    <tr><td style="font-size: 15px; font-weight: bold; border-bottom: 2px solid gray;"><a href="">커리큘럼 전체 보기</a></td></tr>
-                    <tr><td><a href="">다이어트 커리큘럼</a></td></tr>
-                    <tr><td><a href="">근력강화 커리큘럼</a></td></tr>
-                    <tr><td><a href="">체력강화 커리큘럼</a></td></tr>
-                </table>
-                <div id="cMenuButtonArea" align="center">
-                    <button class="button" style="font-size: 10px;">추가</button>
-                    <button class="button" style="margin-left: 10px; font-size: 10px;">삭제</button>
-                </div>
-            </div>
-        </article>
-        <!--커리큘럼메뉴 종료-->
-
         <!--커리큘럼 입력-->
         <article id="inputMediaArea">
             <div id="inputMedia">
-                <table style="margin: 20px; width:773px;">
+                <table style="margin: 20px; width:955px;" id="inputMediaTable">
                     <tr>
-                        <td class="inputMediaTd"><input type="text" id="mediaTitle" placeholder="동영상 제목을 입력하세요."></td>
+                        <td class="inputMediaTd"><input type="text" name="mediaTitle" id="mediaTitle" placeholder="동영상 제목을 입력하세요."></td>
                     </tr>
                     <tr>
                         <td class="inputMediaTd">
@@ -166,9 +148,6 @@
                             <!--select- option이 커리큘럼 추가일 때 display 속성값 변경-->
                             <input type="text" style="margin-left: 10px; border: none; width:300px; display: none;" placeholder="생성할 커리큘럼 제목을 입력하세요.">
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="inputMediaTd"><textarea name="" id="" rows="18" style="resize: none; width: 100%;"></textarea></td>
                     </tr>
                     <tr>
                         <td style="height: 25px; border: none;">
