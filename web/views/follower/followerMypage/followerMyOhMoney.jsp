@@ -454,7 +454,7 @@ div#return_list_div {
 						입니다.</a><br> <a id="warnMsg"
 						style="font-size: 0.8em; color: red; display: none;">환급가능 액수보다
 						큰 금액은 환급해드릴 수 없습니다.</a><br> <input type="checkbox" id="checkTerm"
-						name="checkTerm" onclick="checkIsAbled();"><label
+						name="checkTerm" onclick="checkRefund();"><label
 						style="font-size: 0.9em; font-weight: bold;">환급이용약관(필수)</label><a
 						id="termTxt" onclick="showTerm();"
 						style="margin-left: 20px; cursor: pointer; font-size: 0.8em;">약관보기</a>
@@ -730,49 +730,48 @@ div#return_list_div {
         
         function checkRefund(){
         	if(Number(refundBalance) < Number($('#returnOhmoney').val())){
+				$('#submitRefund').css('color','lightgray');
         		$('#warnMsg').css('display','block');
         		canRefund = false;
-        	} else {
-        		if(Number($('#returnOhmoney').val()) < 5000 ){
-            		canRefund = false;
-        		} else {
-	        		$('#warnMsg').css('display','none');
-	        		canRefund = true;
-        		}
-        	}
-            checkIsAbled();
-        }
-        
-        function checkIsAbled(){
-        	if(canRefund && $("input:checkbox[name=checkTerm]").is(":checked")){
-				$('#submitRefund').css('color','black');
-				$('#submitRefund').removeAttr('disabled');
-        	} else {
+        	}else if(Number($('#returnOhmoney').val()) < 5000 ){
+        		$('#warnMsg').css('display','none');
 				$('#submitRefund').css('color','lightgray');
-				$('#submitRefund').attr('disabled');
+        		canRefund = false;
+        	} else {
+        		$('#warnMsg').css('display','none');
+        		if($("input:checkbox[name=checkTerm]").is(":checked")){
+        			$('#submitRefund').css('color','black');
+            		canRefund = true;
+        		}else{
+    				$('#submitRefund').css('color','lightgray');
+            		canRefund = false;
+        		}
+
         	}
         }
         
         function submitRefund(){
-        	var money = $('#returnOhmoney').val();
-        	if(money < Number(refundBalance)){
-        		 $('#returnOhmoney').val('');
-	   	 		$.ajax({
-	   	 			url : "/omg/submitReFund.follower",
-	   	 			data : {
-	   	 				userId : userId,
-	   	 				money : money
-	   	 			},
-	   	 			type : "post",
-	   	 			success : function(data) {
-	   					alert("환급신청되었습니다.");
-	                    checkRefundList();
-	   					jQuery('.return_wrap').fadeOut('slow')
-	   	 			},
-	   	 			error : function() {
-	   	 				console.log("실패!")
-	   	 			}
-	    		})
+        	if(canRefund){
+	        	var money = $('#returnOhmoney').val();
+	        	if(money < Number(refundBalance)){
+	        		 $('#returnOhmoney').val('');
+		   	 		$.ajax({
+		   	 			url : "/omg/submitReFund.follower",
+		   	 			data : {
+		   	 				userId : userId,
+		   	 				money : money
+		   	 			},
+		   	 			type : "post",
+		   	 			success : function(data) {
+		   					alert("환급신청되었습니다.");
+		                    checkRefundList();
+		   					jQuery('.return_wrap').fadeOut('slow')
+		   	 			},
+		   	 			error : function() {
+		   	 				console.log("실패!")
+		   	 			}
+		    		})
+	        	}
         	}
         }
     </script>
@@ -832,6 +831,7 @@ div#return_list_div {
                                         msg += '상점 거래ID : ' + rsp.merchant_uid;
                                         msg += '결제 금액 : ' + rsp.paid_amount;
                                         msg += '카드 승인번호 : ' + rsp.apply_num;
+                                        money = money * 1000; 
                                         addMoney(money);
                                         jQuery('.buy_wrap').fadeOut('slow')
                                     } else {

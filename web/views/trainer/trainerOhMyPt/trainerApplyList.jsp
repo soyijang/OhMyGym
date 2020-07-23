@@ -183,7 +183,6 @@ a#goTalkBtn{
 				<img class="close" onclick="jQuery('.matching_wrap').fadeOut('slow')" src="../../resources/img_icon/closeIcon.png" width="20px" height="20px">
 			</div>
 			<div class="matching_content">
-				<form>
 				<div style="font-size: 1em; text-align: center;">
 					<div style="margin-top: 10px; font-size: 1.2em; font-weight: bold;">
 						신청내용
@@ -210,8 +209,9 @@ a#goTalkBtn{
 									<td><div id="weight"></div></td>
 								</tr>
 								<tr>
-									<td colspan="5"><textarea id="followerComment" readonly></textarea><a id="goTalkBtn" onclick="goMatchChat()">직접상담하기</a><br>
-									
+									<td colspan="5"><form id="selectUser" action="<%= request.getContextPath() %>/matchingChat.trainer" method="post">
+										<input type="text" id="userId" name="userId" style="display: none;"></form>
+									<textarea id="followerComment" readonly></textarea><a id="goTalkBtn" onclick="goMatchChat();">직접상담하기</a><br>
 									</td>
 								</tr>		
 							</tbody>
@@ -228,7 +228,6 @@ a#goTalkBtn{
 						<textarea id="rejectComment" placeholder="거절	사유를 상세히 입력해 주세요"></textarea>
 						<input type="submit" id="rejectBtn" value="매칭거절 확정">
 				</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -269,18 +268,6 @@ a#goTalkBtn{
 								</td>
 							</tr>
 						<% } %>
-						<!-- <tr>
-							<td>2</td>
-							<td>hjh0621</td>
-							<td>2020-07-12</td>
-							<td><div class="checkApply" onclick="submitMatching();" >대기</div></td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>onji677</td>
-							<td>2020-07-11</td>
-							<td><div class="checkApply" onclick="submitMatching();">거절</div></td>
-						</tr> -->
 					</table>
 				</div>
 			</div>
@@ -290,7 +277,12 @@ a#goTalkBtn{
 	
 	<br><br><br><br><br><br><br><br><br>
 	<script>
-
+		function goMatchChat(){
+			$('#selectUser').submit();
+		}
+	
+	
+	
    		 $(".checkApply").each(function(index,item){
    		 	switch($(item).text()){
    		 	case '대기': $(item).css("background","navy"); break;
@@ -301,7 +293,6 @@ a#goTalkBtn{
    		function submitMatching(followerId){
             jQuery('.matching_wrap').fadeIn('slow');
             
-            console.log(followerId);
             
             $.ajax({
             	url: "requestInfo.mc",
@@ -327,6 +318,8 @@ a#goTalkBtn{
             		$("#tall").text(result['height']);
             		$("#weight").text(result['weight']);
             		$("#followerComment").text(result['chatContent']);
+            		$("#userId").val(result['followerId']);
+            		
             		
             	},
             	error: function(data) {
@@ -334,7 +327,13 @@ a#goTalkBtn{
             	}
             });
             
-            
+            $("#applyid").text("");
+    		$("#applyname").text("");
+    		$("#age").text("");
+    		$("#tpart").text("");
+    		$("#tall").text("");
+    		$("#weight").text("");
+    		$("#followerComment").text("");
         }
    		 
    		 

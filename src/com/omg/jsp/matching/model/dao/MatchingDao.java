@@ -92,6 +92,7 @@ public class MatchingDao {
 				hmap.put("trainerComment", rset.getString("TRAINER_COMMENT"));
 				hmap.put("mainField", rset.getString("TRAINER_MAINFIELD"));
 				hmap.put("subField", rset.getString("TRAINER_SUBFIELD"));
+				hmap.put("trainerName", rset.getString("MEMBER_NAME"));
 				
 				list.add(hmap);
 			}
@@ -614,6 +615,7 @@ public class MatchingDao {
 				result.setRequestCode(rset.getString("REQUEST_MANAGECODE"));
 				result.setTrainerId(rset.getString("TRAINER_ID"));
 				result.setFollowerId(rset.getString("FOLLOWER_ID"));
+				result.setRequestType(rset.getString("REQUEST_TYPE"));
 				
 			}
 			

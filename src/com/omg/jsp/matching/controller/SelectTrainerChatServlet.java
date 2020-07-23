@@ -27,8 +27,10 @@ public class SelectTrainerChatServlet extends HttpServlet {
 		String trainerId = loginUser.getMemberId();
 		
 		String userId = request.getParameter("userId");
-		
+		System.out.println("유저아이디" + userId);
 		MatchingRequest result = new MatchingService().selectChat(trainerId, userId);
+		
+
 		
 		String page = "";
 		if(result != null) {
