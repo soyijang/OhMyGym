@@ -15,17 +15,17 @@ public class TrainerVideoService {
 		Connection con = getConncection();
 		
 		ArrayList<TrainerVideo> videoList = new TrainerVideoDao().selectVideoInCurriculum(con, curriculumCode);
-		HashMap<String, String> curriTitle = new TrainerCurriculumDao().selectCurriTitle(con, curriculumCode);
+		HashMap<String, String> curriculum = new TrainerCurriculumDao().selectCurriulum(con, curriculumCode);
 		
-		HashMap<String, Object> videoListnCurriTitle = new HashMap<String, Object>();
+		HashMap<String, Object> videoListnCurriculum = new HashMap<String, Object>();
 		
-		videoListnCurriTitle.put("videoList", videoList);
-		videoListnCurriTitle.put("curriTItle", curriTitle);
+		videoListnCurriculum.put("videoList", videoList);
+		videoListnCurriculum.put("curriculum", curriculum);
 		
 		close(con);
 		
 		
-		return videoListnCurriTitle;
+		return videoListnCurriculum;
 	}
 
 	public TrainerVideo selectOneVideo(String videoCode) {

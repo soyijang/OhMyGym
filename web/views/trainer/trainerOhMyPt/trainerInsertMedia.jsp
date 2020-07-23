@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.trainerCurriculum.model.vo.*"%>
+<% HashMap<String, Object> hmap = (HashMap<String, Object>) request.getAttribute("curriculum");
+	ArrayList<TrainerCurriculum> curriculum = (ArrayList<TrainerCurriculum>) hmap.get("curriculum");
+%>
 <!DOCTYPE html> 
 <html lang="ko">
 <head>
@@ -120,6 +123,32 @@
         <%@ include file="trainerOhMyPtAside.jsp" %>
         <!--OH마이피티 메뉴 종료-->
     </aside>
+    
+    <script>
+	    function uploadVideo(){
+			var form = $('#profileUploadForm')[0];
+	        
+	        var data = new FormData(form);
+	        
+	        console.log(data);
+	        
+	        $.ajax({
+	        	url : "insertVideo.vo",
+	            type : 'post',
+	            data : data,
+	            contentType : false,
+	            processData : false, 
+	           success : function(data) {
+	        	   		console.log("후..");
+		            	<%-- alert("업로드 되었습니다.");
+		            	location.href="<%= request.getContextPath() %>/selectVideo.cu"; --%>
+					},
+					error : function(){
+						alert("업로드 에 실패했습니다");
+					}
+	        })
+		}
+    </script>
 
     <section>
         <!--커리큘럼 관리 타이틀-->
@@ -130,6 +159,7 @@
         </article>
         <!--커리큘럼 관리 타이틀 종료-->
 
+        <form action="" method="post" id="uploadVideoForm">
         <!--커리큘럼 입력-->
         <article id="inputMediaArea">
             <div id="inputMedia">
@@ -139,11 +169,11 @@
                     </tr>
                     <tr>
                         <td class="inputMediaTd">
-                            <select name="" id="" style="height: 25px;">
-                                <option value="">다이어트 커리큘럼</option>
-                                <option value="">근력강화 커리큘럼</option>
-                                <option value="">체력강화 커리큘럼</option>
-                                <option value="">커리큘럼 추가</option>
+                            <select name="curriCode" id="curriCode" style="height: 25px;">
+                            	<% for(int i = 0; i < curriculum.size(); i++) { %>
+                                <option value="<%=curriculum.get(i).getCurriculumCode()%>"><%=curriculum.get(i).getCurriculumTitle()%></option>
+                                <% } %>
+                                <option value="other">커리큘럼 추가</option>
                             </select>
                             <!--select- option이 커리큘럼 추가일 때 display 속성값 변경-->
                             <input type="text" style="margin-left: 10px; border: none; width:300px; display: none;" placeholder="생성할 커리큘럼 제목을 입력하세요.">
@@ -159,8 +189,9 @@
         </article>
         <!--커리큘럼 입력 종료-->
         <article id="addMediaBtnArea">
-            <button id="addMediaBtn">동영상 추가</button>
+            <button onclick="uploadVideo();" id="addMediaBtn">동영상 추가</button>
         </article>
+        </form>
     </section>
     <br><br><br><br>
     <!--footer start-->

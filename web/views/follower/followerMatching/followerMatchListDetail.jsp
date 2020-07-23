@@ -638,10 +638,10 @@ font-weight: bold;
 		 	           matchingNum = data.requestCode;
 		 	           matchingType = data.requestType;
 		 	           
-		 	           if(data.requestType == '최종확인'){
+		 	           if(data.requestType == '수락'){
 		 	        	  $("#matchingState").css({"background":"orangered","cursor":"pointer","color":"white"});
 		 	        	  $("#matchingState").attr("onclick","submitfinal();")
-		 	           } else if(data.requestType == '수락'){
+		 	           } else if(data.requestType == '최종확인'){
 		 	        	  $("#matchingState").css({"background":"navy","cursor":"default","color":"white"});
 		 	        	  $("#matchingState").removeAttr("onclick")
 		 	           }
@@ -660,38 +660,24 @@ font-weight: bold;
         }
  			
         function submitfinal(){
+        	
+        	console.log("왔냐");
         
         	$.ajax({
- 				url : "/omg/endMatching.follower",
+ 				url : "endMatching.follower",
  				data : {
  					followerId : followerId,
  					trainerId: trainerId
  				},
  				type : "post",
  				success : function(data) {
-		 			if(data != null){
-// 		 	           matchingNum = data.requestCode;
-// 		 	           matchingType = data.requestType;
-		 	           
-// 		 	           if(data.requestType == '수락'){
-// 		 	        	  $("#matchingState").css({"background":"navy","cursor":"default","color":"white"});
-// 		 	        	  $("#matchingState").removeAttr("onclick")
-// 		 	           }
-		 	           
-		 	           
-// 		 	       		openChat(matchingNum);
-		 	       		
-// 		 	           updateChat();
-		 			}
-		    		
+		 				alert("매칭 최종 승인이 완료되었습니다.");
+		 				location.reload();
  				},
  				error : function(){
  					alert("매칭 확인 실패");
  				}
- 			})
-        	
-        	
-        	
+ 			});
         }
         
         function submitMatching(){

@@ -1,7 +1,6 @@
-package com.omg.jsp.trainerCurriculum.controller;
+package com.omg.jsp.trainerVideo.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -10,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.omg.jsp.trainerVideo.model.service.TrainerVideoService;
-import com.omg.jsp.trainerVideo.model.vo.TrainerVideo;
+import com.omg.jsp.member.model.vo.Member;
+import com.omg.jsp.trainerCurriculum.model.service.TrainerCurriculumService;
 
 /**
- * Servlet implementation class SelectCurriculumDetailServlet
+ * Servlet implementation class InsertVideoServlet
  */
-@WebServlet("/selectCurriculumDetail.cu")
-public class SelectCurriculumDetailServlet extends HttpServlet {
+@WebServlet({ "/InsertVideoServlet", "/insertVideoPage.vo" })
+public class InsertVideoPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectCurriculumDetailServlet() {
+    public InsertVideoPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +33,20 @@ public class SelectCurriculumDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String curriculumCode = (String) request.getParameter("curriCode");
-		System.out.println("도착 : " + curriculumCode);
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		
-		HashMap<String, Object> videoListnCurriculum = new TrainerVideoService().selectVideoInCurriculum(curriculumCode);
+		HashMap<String, Object> curriculum = new TrainerCurriculumService().selectCurriculumList(loginUser);
 		
 		String page = "";
-		if(!videoListnCurriculum.isEmpty()) {
-			page = "views/trainer/trainerOhMyPt/trainerCurriculumDetail.jsp";
-			request.setAttribute("videoListnCurriculum", videoListnCurriculum);
-			request.getRequestDispatcher(page).forward(request, response);
+		if(!curriculum.isEmpty()) {
+			page = "views/trainer/trainerOhMyPt/trainerInsertMedia.jsp";
+			request.setAttribute("curriculum", curriculum);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "커리큘럼 관리페이지 로드 실패");
+			request.setAttribute("msg", "동영상 등록페이지 출력 실패");
 		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

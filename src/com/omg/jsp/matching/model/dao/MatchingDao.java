@@ -585,7 +585,6 @@ public class MatchingDao {
 	            requestInfo.setFollowerName(rset.getString("MEMBER_NAME"));
 	            requestInfo.setMemberAge(rset.getString("MEMBER_AGE"));
 	         }
-	         System.out.println("matchingDao followerInfo : " + requestInfo);
 	      } catch (SQLException e) {
 	         e.printStackTrace();
 	      } finally {
@@ -659,7 +658,6 @@ public class MatchingDao {
 		return result;
 	}
 	public int endMatch(Connection con, String trainerId, String followerId) {
-		
 		PreparedStatement pstmt = null;
 		
 		int result = 0;
@@ -669,8 +667,8 @@ public class MatchingDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			
-			pstmt.setString(1, trainerId);
-			pstmt.setString(2, followerId);
+			pstmt.setString(1, followerId);
+			pstmt.setString(2, trainerId);
 			
 			result = pstmt.executeUpdate();
 			
@@ -678,7 +676,68 @@ public class MatchingDao {
 			e.printStackTrace();
 		}
 		
-		return 0;
+		return result;
+	}
+	public int MatchingApproval(Connection con, String followerId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("matchingApproval");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, followerId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		
+		return result;
+	}
+	public int requestReject(Connection con, HashMap<String, String> rejectInfo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateRequestTypeReject");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, rejectInfo.get("followerId"));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public int insertReject(Connection con, HashMap<String, String> rejectInfo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertReject");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, rejectInfo.get("trainerId"));
+			pstmt.setString(2, rejectInfo.get("followerId"));
+			pstmt.setString(3, rejectInfo.get("rejectReason"));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con);
+		}
+		
+		return result;
 	}
 }
 

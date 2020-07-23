@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.trainerCurriculum.model.vo.*, com.omg.jsp.trainerVideo.model.vo.*"%>
 <% 
-	HashMap<String, Object> videoListnCurriTitle = (HashMap<String, Object>) request.getAttribute("videoListnCurriTitle");
-	ArrayList<TrainerVideo> videoList = (ArrayList<TrainerVideo>) videoListnCurriTitle.get("videoList");
-	HashMap<String, String> curriTitle = (HashMap<String, String>) videoListnCurriTitle.get("curriTItle");
+	HashMap<String, Object> videoListnCurriculum = (HashMap<String, Object>) request.getAttribute("videoListnCurriculum");
+	ArrayList<TrainerVideo> videoList = (ArrayList<TrainerVideo>) videoListnCurriculum.get("videoList");
+	HashMap<String, String> curriculum = (HashMap<String, String>) videoListnCurriculum.get("curriculum");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -150,7 +150,7 @@
             <div style="overflow: auto;" id="outline">
                 <table id="showVideoList">
                     <tr>
-                        <th colspan="3" style="border-bottom: 5px double gray; text-align: left;"><%= curriTitle.get("curriTitle") %></th>
+                        <th colspan="3" style="border-bottom: 5px double gray; text-align: left;"><%= curriculum.get("title") %></th>
                     </tr>
                     <tr>
 	                	<th style="width: 70px;">No.</th>
@@ -168,28 +168,7 @@
                 </table>
 
 	           	<script>
-	           		/* function showCurri(curriculumCode) {
-	           			var curriCode = curriculumCode;
-	           			console.log(curriCode);
-	           			
-	           		 	$.ajax({
-	           				url: "selectVideo.cu",
-	           				data: {
-	           					curriCode: curriCode
-	           				},
-	           				type: "get",
-	           				success: function(data) {
-	           					console.log("성공");
-	           				},
-	           				error: function(data) {
-	           					console.log("실패");
-	           				}
-	           			}); }*/
-	           			
-	           			/* function videoDetail() {
-	           				console.log($(".video-list").find("input").val());
-	           			} */
-	           			
+
 	           			$(function() {
 	        				$(".video-list").click(function() {
 	        					//var num = $(this).children().childred().eq(0).val();
@@ -217,7 +196,11 @@
         </article>
         <!--커리큘럼 출력 종료-->
         <article id="addMediaBtnArea">
-            <button id="addMediaBtn">동영상 추가</button>
+        	<form action="<%= request.getContextPath() %>/insertVideo.vo" method="post">
+        		<input type="hidden" value="<%= curriculum.get("title") %>" name="title">
+        		<input type="hidden" value="<%= curriculum.get("code") %>" name="code">
+            	<button type="submit" id="addMediaBtn" onclick="addVideo();">동영상 추가</button>
+            </form>
         </article>
     </section>
     <br><br><br><br>

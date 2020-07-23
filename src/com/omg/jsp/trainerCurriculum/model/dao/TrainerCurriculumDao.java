@@ -97,10 +97,10 @@ public class TrainerCurriculumDao {
 		return vList;
 	}
 
-	public HashMap<String, String> selectCurriTitle(Connection con, String curriculumCode) {
+	public HashMap<String, String> selectCurriulum(Connection con, String curriculumCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		HashMap<String, String> curriTitle = new HashMap<String, String>();
+		HashMap<String, String> curriculum = new HashMap<String, String>();
 		
 		String query = prop.getProperty("selectCurriTitle");
 		
@@ -112,7 +112,8 @@ public class TrainerCurriculumDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				curriTitle.put("curriTitle", rset.getString("CURRICULUM_TITLE"));
+				curriculum.put("title", rset.getString("CURRICULUM_TITLE"));
+				curriculum.put("code", rset.getString("CURRICULUM_CODE"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -121,7 +122,7 @@ public class TrainerCurriculumDao {
 			close(rset);
 		}
 		
-		return curriTitle;
+		return curriculum;
 	}
 
 }
