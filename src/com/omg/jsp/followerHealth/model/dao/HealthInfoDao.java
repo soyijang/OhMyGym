@@ -201,5 +201,42 @@ public class HealthInfoDao {
 		
 		return result;
 	}
+	
+	public ArrayList<HealthInfo> selectHealthInfoList(Connection con, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HealthInfo> list = null;
+		
+		String query = prop.getProperty("selectHealthInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				HealthInfo hi = new HealthInfo();
+				
+				hi.setHealthData(rset.getString("HEALTH_DATA"));
+				hi.setHealthInfoCode(rset.getString("HEALTH_INFO_CODE"));
+				hi.setMemberId(rset.getString("MEMBER_ID"));
+				hi.setHealthInfoNowManagecode(rset.getInt("HEALTH_INFO_NOW_MANAGECODE"));
+					
+				list.add(hi);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return list;
+	}
+
 }
 

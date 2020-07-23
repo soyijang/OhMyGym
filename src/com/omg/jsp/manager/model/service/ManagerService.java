@@ -31,19 +31,21 @@ public class ManagerService {
 		return loginUser;
 	}
 	
-	public HashMap<String, Object> selectFollowerMap(String memberId, Member loginUser) {
+	public HashMap<String, Object> selectFollowerMap(String memberId) {
 		Connection con = getConncection();
 		
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		
-		ArrayList<Member> fList = new MemberDao().selectList(con);		
-		ArrayList<HealthInfo> hInfo = new HealthInfoDao().selectHealthInfo(con, loginUser);
+		ArrayList<Member> fList = new MemberDao().selectFollower(con, memberId);		
+		ArrayList<HealthInfo> hInfo = new HealthInfoDao().selectHealthInfoList(con, memberId);
+		System.out.println("fList : " + fList);
+		System.out.println("hInfo : " + hInfo);
 		
 
 		//Matching 테이블에서 데이터를 반환하면 채팅으로, 안반환하면 디테일 페이지로 
 		
-		hmap.put("followerList", fList);
-		hmap.put("HealthInfo", hInfo);
+		hmap.put("fList", fList);
+		hmap.put("hInfo", hInfo);
 		
 		
 		close(con);

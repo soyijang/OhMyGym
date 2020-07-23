@@ -183,6 +183,18 @@ public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
 		
 		return result;
 	}
+	
+	public ArrayList<Member> selectFollower(String memberId) {
+
+		Connection con = getConncection();
+		
+		ArrayList<Member> list = new MemberDao().selectFollower(con, memberId);
+		
+		close(con);
+		
+		return list;
+	}
+	
 
 }
 

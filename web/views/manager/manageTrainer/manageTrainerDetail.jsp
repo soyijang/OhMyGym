@@ -360,13 +360,13 @@
 													
 														<tr><td class="tg-0lax" colspan="9"><%= educationList.get(i).getEduName() %>
 														<button onclick="" style="border: none; background-color: gray;color: white; width: 70px; height: 20px;">확인하기</button></td>
-														<tr>
+														</tr>
 													
 												<% } 
 											 } else { %>
-											 		
-														<td class="tg-0lax" colspan="2">등록된 학력 정보가 없습니다.
-													
+											 		<tr>
+														<td class="tg-0lax" colspan="9">등록된 학력 정보가 없습니다.
+													</tr>
 											 <% } %>
                             <td class="tg-0lax" style="background-color: rgb(172, 172, 172)">주요분야</td>
                             <td class="tg-0lax" colspan="2"><%= tiList.get(0).getTrainerMainField() %></td>
@@ -414,11 +414,7 @@
 													</tr>
 											<% } %>
                         
-                        <tr style="height: 60px;">
-                            <td class="tg-0pky" style="background-color: rgb(172, 172, 172)">메모</td>
-                            <td class="tg-0pky" colspan="8"></td>
-                            
-                        </tr>
+                        
                         
                     </tbody>
                 </table>
