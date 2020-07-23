@@ -123,25 +123,23 @@ public class NoticeService {
 		return notice;
 	}
 
-	public Notice updateNotice(int nno) {
+	public int updateNotice(Notice notice2) {
 		
 		Connection con=getConncection();
 		
-		int result = 0;
+
 		
-		Notice notice=new NoticeDao().updateNotice(con, nno);
-		
-		if(notice != null) {
-			
+		int result=new NoticeDao().updateNotice(con, notice2);
+
 			if(result > 0) {
 				commit(con);
 			} else {
 				rollback(con);
 			}
-		}
+
 		close(con);
 		
-		return notice;
+		return result;
 	}
 	
 }

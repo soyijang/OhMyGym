@@ -32,6 +32,15 @@ public class UpdateNoticeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String num=request.getParameter("num");
+		/*String category=request.getParameter("category");
+		String writedate=request.getParameter("writedate");
+		String status=request.getParameter("status");
+		String title=request.getParameter("title");
+		String content=request.getParameter("content");
+		
+		System.out.println("status : "+status);
+		System.out.println("title : "+title);
+		System.out.println("content : "+content);*/
 		int nno = 0;
 		
 		if(num != ""&& num != null) {
@@ -52,7 +61,7 @@ public class UpdateNoticeServlet extends HttpServlet {
 		
 		request.getRequestDispatcher(page).forward(request, response);
 		
-		
+	
 		
 	}
 

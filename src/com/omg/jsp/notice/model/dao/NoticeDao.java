@@ -226,30 +226,33 @@ public class NoticeDao {
 		return notice;
 	}
 
-	public Notice updateNotice(Connection con, int nno) {
+	public int updateNotice(Connection con, Notice notice2) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		Notice notice = null;
-		
 		String query = prop.getProperty("updateNotice");
 		
+		System.out.println("query : "+query);
 		try {
 			pstmt=con.prepareStatement(query);
-			pstmt.setInt(1, nno);
-			rset=pstmt.executeQuery();
-			
-			
+			pstmt.setString(1, notice2.getBoardCategory());
+			pstmt.setString(2, notice2.getWritedate());
+			pstmt.setString(3, notice2.getStatus());
+			pstmt.setString(4, notice2.getBoardTitle());
+			pstmt.setString(5, notice2.getBoardContent());
+			pstmt.setString(6, notice2.getBoardNum());
+		System.out.println("notice2"+notice2.getBoardNum());
+			result = pstmt.executeUpdate();
+	
+			System.out.println("result : "+result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-			close(rset);
 		}
-		System.out.println("delete NoticeDao : "+notice);
 		
-		return notice;
+		return result;
 	}
 
 }
