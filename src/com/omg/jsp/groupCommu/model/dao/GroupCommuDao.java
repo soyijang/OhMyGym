@@ -116,6 +116,7 @@ public class GroupCommuDao {
 				post.setGroupType(rset.getString("GROUP_TYPE"));
 				post.setGroupDateTime(rset.getString("GROUP_TIME"));
 				post.setGroupBoardNum(rset.getString("GROUP_BOARDNUM"));
+				post.setGroupLikeCount(rset.getInt("GROUP_LIKECOUNT"));
 				list.add(post);
 				
 			}
@@ -247,7 +248,7 @@ public class GroupCommuDao {
 		return result;
 	}
 
-	public int removeLike(Connection con, String likedId) {
+	public int removeLike(Connection con, String likedId, String postId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -257,6 +258,7 @@ public class GroupCommuDao {
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, likedId);
+			pstmt.setString(2, postId);
 			
 			result = pstmt.executeUpdate();
 			
@@ -361,4 +363,54 @@ public class GroupCommuDao {
 		return result;
 	}
 
+	public int countUpLike(Connection con, String postId) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("countUpLike");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, postId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con);
+		}
+		
+		
+		return result;
+	}
+
+	
+	public int countDownLike(Connection con, String postId) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("countDownLike");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, postId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 }

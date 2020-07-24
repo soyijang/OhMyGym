@@ -81,8 +81,16 @@ public class GroupCommuService {
 		
 		int result = new GroupCommuDao().addLike(con, likedId, postId);
 		
+
+		
 		if(result > 0) {
 			commit(con);
+			int result2 = new GroupCommuDao().countUpLike(con, postId);
+				if(result2 > 0) {
+					commit(con);
+				} else {
+					rollback(con);
+				}
 		} else {
 			rollback(con);
 		}
@@ -92,13 +100,19 @@ public class GroupCommuService {
 		return result;
 	}
 
-	public int removeLike(String likedId) {
+	public int removeLike(String likedId, String postId) {
 		Connection con = getConncection();
 		
-		int result = new GroupCommuDao().removeLike(con, likedId);
+		int result = new GroupCommuDao().removeLike(con, likedId, postId);
 		
 		if(result > 0) {
 			commit(con);
+			int result2 = new GroupCommuDao().countDownLike(con, postId);
+				if(result2 > 0) {
+					commit(con);
+				} else {
+					rollback(con);
+				}
 		} else {
 			rollback(con);
 		}

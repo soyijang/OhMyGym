@@ -155,7 +155,7 @@ div.Board_side_container ul.side_menu li {
 	padding-bottom: 20px;;
 }
 
-div.Board_side_nav_btn {
+div.Board_side_nav_btn1, div.Board_side_nav_btn2, div.Board_side_nav_btn3, div.Board_side_nav_btn4 {
 	font-family: "Noto Sans KR";
 	text-align: center;
 	background: white;
@@ -163,6 +163,7 @@ div.Board_side_nav_btn {
 	height: 25px;
 	padding-top: 12px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
 }
 
 div#board_btn_select {
@@ -400,16 +401,16 @@ div.Board_side_nav_btn{
 					<div class="Board_side_container">
 						<ul class="side_menu">
 							<li style="padding-right: -20px;">
-								<div class="Board_side_nav_btn" id="board_btn_select" onclick="selectDiv('최신');">최신</div>
+								<div class="Board_side_nav_btn1" id="board_btn_select" onclick="selectDiv('최신');">최신</div>
 							</li>
 							<li>
-								<div class="Board_side_nav_btn"  onclick="selectDiv('인기');">인기</div>
+								<div class="Board_side_nav_btn2"  onclick="selectDiv('인기');">인기</div>
 							</li>
 							<li>
-								<div class="Board_side_nav_btn"  onclick="selectDiv('운동');">운동</div>
+								<div class="Board_side_nav_btn3"  onclick="selectDiv('운동');">운동</div>
 							</li>
 							<li>
-								<div class="Board_side_nav_btn"  onclick="selectDiv('식단');">식단</div>
+								<div class="Board_side_nav_btn4"  onclick="selectDiv('식단');">식단</div>
 							</li>
 						</ul>
 					</div>
@@ -484,7 +485,7 @@ div.Board_side_nav_btn{
 			success : function(data) {
 				for(var key in data){
 					var $addPostPart = $("#postcontainer");
-					if(value == '최신'){
+					if(value == '최신' || value== '인기'){
 						$addPostPart.prepend("<div id='postcontainer'>" +
 								"<div class='post_part' id='postcontent'>"+
 								"<div class='user_img' style='display: inline-block;'>"+
@@ -831,7 +832,32 @@ div.Board_side_nav_btn{
 	<script>
 	selectDiv("최신");
 		function selectDiv(value){
+			
+			
 			selectAllPost(value)
+			
+			if(value == '최신'){
+				$(".Board_side_nav_btn1").attr('id', 'board_btn_select');
+				$(".Board_side_nav_btn2").removeAttr('id');
+				$(".Board_side_nav_btn3").removeAttr('id');
+				$(".Board_side_nav_btn4").removeAttr('id');
+			} else if (value == '인기'){
+				$(".Board_side_nav_btn1").removeAttr('id');
+				$(".Board_side_nav_btn2").attr('id', 'board_btn_select');
+				$(".Board_side_nav_btn3").removeAttr('id');
+				$(".Board_side_nav_btn4").removeAttr('id');
+			} else if (value == '운동'){
+				$(".Board_side_nav_btn1").removeAttr('id');
+				$(".Board_side_nav_btn2").removeAttr('id');
+				$(".Board_side_nav_btn3").attr('id', 'board_btn_select');
+				$(".Board_side_nav_btn4").removeAttr('id');
+			} else if (value == '식단'){
+				$(".Board_side_nav_btn1").removeAttr('id');
+				$(".Board_side_nav_btn2").removeAttr('id');
+				$(".Board_side_nav_btn3").removeAttr('id');
+				$(".Board_side_nav_btn4").attr('id', 'board_btn_select');
+			}
+			
 		}
 	
 	

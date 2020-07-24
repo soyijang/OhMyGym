@@ -34,20 +34,19 @@ public class SelectGroupCommunityServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String roomId = request.getParameter("roomId");
 		String type = request.getParameter("type");
-		
+		System.out.println(type);
 		ArrayList<GroupCommuPost> postList = new GroupCommuService().selectPost(roomId);
-		
-		if(type.equals("최신")) {
+		if(type.equals("인기")) {
 			Collections.sort(postList, new Comparator<GroupCommuPost>() {
 				@Override
 				public int compare(GroupCommuPost o1, GroupCommuPost o2) {
 					
-					return Integer.parseInt(o1.getGroupBoardNum()) - Integer.parseInt(o2.getGroupBoardNum());
+					return o1.getGroupLikeCount() - o2.getGroupLikeCount();
 				}
 				
 			});
 		}
-		else {
+		else{
 			Collections.sort(postList, new Comparator<GroupCommuPost>() {
 				@Override
 				public int compare(GroupCommuPost o1, GroupCommuPost o2) {
