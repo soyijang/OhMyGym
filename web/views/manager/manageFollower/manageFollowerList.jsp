@@ -268,7 +268,6 @@
                         <th width="70px;">회원명</th>
                         <th width="300px;">이메일</th>
                         <th width="120px;">연락처</th>
-                        <th width="50px;">등록여부</th>
                         <th width="100px;">가입일</th>
                         <th width="80px;">상세정보</th>
                         <th width="80px">수강관리</th>
@@ -281,7 +280,6 @@
 					<td><%= m.getName() %></td>
 					<td><%= m.getEmail() %></td>
 					<td><%= m.getPhone() %></td>
-					<td><%= m.getRequestType() %></td>
 					<td><%= m.getEnrollDate() %></td>
 					<td><button onclick="detail('<%= m.getMemberId() %>')" class="btn1" id="infoBtn">상세정보</button></td>
 					<td><button onclick="" class="btn2" id="riverBtn">수강관리</button></td>
@@ -293,6 +291,17 @@
                 </table>
             </div>
         </article>
+        <br><br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <!--테이블 표시 영역 종료-->
 
        

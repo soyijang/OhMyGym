@@ -109,7 +109,7 @@ public class MemberInsertServlet extends HttpServlet {
 						if(result2 > 0) {
 							//page = "index.jsp";
 							int result3 = new MemberService().insertTrainerInfo(requestTrainer, memberId);
-							page = "views/common/successPage.jsp";
+							page = "views/visitor/login.jsp";
 							
 							request.setAttribute("successCode", "insertMember");
 							request.getRequestDispatcher(page).forward(request, response);

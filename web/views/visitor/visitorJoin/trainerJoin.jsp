@@ -7,6 +7,39 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"> </script>
 <script>
+	function IdCheckFunction(){
+		var memberId = $("#memberId").val();
+		$.ajax({
+			type : 'POST',
+			url : '/omg/IdCheckServlet',
+			data : {memberId : memberId},
+			success : function(result){
+				if(result == 1){
+					$("#result").html("사용할 수 있는 아이디입니다.");
+					} else {
+					$("#result").html("사용중인 아이디입니다. 다른 아이디를 입력해 주세요");
+					}
+				} 
+			}) 
+			}
+
+</script>
+<script>
+    $(function() {
+        $('#selectEmail').change(function() {
+            if ($('#selectEmail').val() == 'directly') {
+                $('#directly').attr("disabled", false);
+                $('#directly').val("");
+                $('#directly').focus();
+            } else {
+                $('#email2').val($('#selectEmail').val());
+            }
+        })
+    });
+</script>
+<script>
+
+
 
 	function checks() {
 		var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
@@ -17,6 +50,13 @@
 		if($("#memberId").val() == ""){ 
 			alert("아이디를 입력해주세요"); 
 			$("#memberId").focus(); return false; 
+		}
+		
+		
+		//계좌 공백확인
+		if($("#bankAccount").val() == ""){ 
+			alert("계좌번호를 입력해주세요"); 
+			$("#bankAccount").focus(); return false; 
 		}
 		
 		//아이디 유효성검사
@@ -96,8 +136,8 @@
 		}
 		
 	}
-	
-	function idCheckFunction() {
+	/* 
+	function IdCheckFunction() {
 		var memberId = $("#memberId").val();
 		$.ajax({
 			type: 'POST',
@@ -112,8 +152,23 @@
 				}
 			}
 		});
-	}
+	} */
 </script>
+
+<!-- <script> 
+$("#memberId").keyup(function(){ 
+	$.post("idcheck.do", //요청명령어
+			"memberId="+$("#memberId").val(), //서버 요청 전달값, id가 uid인 것의 val(ue)를 가져오라. 더 넣으려면 & 사용하여 추가 
+			function responseProc(){ //콜백 함수 
+			); //post() end, post방식 
+			}); //id → #, keyup 이라는 이벤트 
+			//post 방식의 callback 함수를 따로 생성 
+			$("#demo").empty(); 
+			$("#demo").html(result); 
+			$("#demo").show(); 
+			} //responseProc() end 
+			</script> -->
+
 <style>
 #main-center {
 	margin-left: 450px;
@@ -129,14 +184,17 @@
 }
 
 #fnt {
-	margin-left: 50px;
-	font-size: 4em;
+	margin-left: 100px;
+	font-size: 2em;
 	margin-bottom: 30px;
 	text-decoration: none;
 }
 
 .fnt1 {
 	color: lightgray;
+}
+.fnt1:hover {
+	color: orangered;
 }
 
 .fnt2 {
@@ -214,12 +272,6 @@ body {
 
 
 
-
-
-
-
-
-
 							<div class="margin-top10">
 
 								<div id="personInfo">
@@ -229,22 +281,25 @@ body {
 											<tr>
 												<th>이름</th>
 												<td><input type="text" name="memberName"
-													id="memberName" value="" class="MS_input_txt w137"
+													id="memberName" value="" 
 													size="50" maxlength="50" style="height: 40px"
 													placeholder="이름을 입력해주세요"></td>
 											</tr>
 											<tr>
 												<th>아이디</th>
 												<td><input type="text" name="memberId" id="memberId"
-													value="" style="height: 40px" class="MS_input_txt w137"
-													size="50" maxlength="12" placeholder="아이디를 입력해주세요">
-													<a onclick="idCheckFunction()"
+													value="" style="height: 40px" 
+													size="50" maxlength=12 placeholder="아이디를 입력해주세요">
+													<a onclick="IdCheckFunction()"
 														style="color: orangered; cursor: pointer;">중복확인</a>
-													<span class="idpw-info"><br>
-														<p style="font-size: 0.7em; color: orangered;">*
-															회원아이디는 영문/숫자만 사용가능합니다.</p> </span> </a></td>
-											</tr>
+														<br>
+													<p id="result" style="font-size: 0.7em; color: orangered;">* 회원아이디는
+															영문/숫자만 사용가능합니다.</p> 
+													 </td>
+													
 
+
+											</tr>
 
 											<tr>
 												<th>비밀번호</th>
@@ -261,7 +316,7 @@ body {
 												<th>비밀번호 확인</th>
 												<td><input type="password" name="memberPwd2"
 													id="memberPwd2" style="height: 40px"
-													class="MS_input_txt w137" value="" size="50" maxlength="20"
+													value="" size="50" maxlength="20"
 													onkeyup="passwordCheckFunction();"
 													placeholder="비밀번호를 한번 더 입력해주세요">
 													<sapn id="checkMessage" style="color:red; font-weigth:bold"></sapn></td>
@@ -269,9 +324,9 @@ body {
 
 											<tr>
 												<th>생일/성별</th>
-												<td class="select"><select name="memberAge"
-													id="memberAge" style="width: 100px; height: 40px;"
-													class="MS_select MS_birthday">
+												<td class="select"><select name="birthYear"
+													id="birthYear" style="width: 100px; height: 40px;"
+													>
 														<option value="">선택</option>
 														<option value="1920">1920</option>
 														<option value="1921">1921</option>
@@ -374,7 +429,7 @@ body {
 														<option value="2018">2018</option>
 														<option value="2019">2019</option>
 														<option value="2020">2020</option>
-												</select> 년 <select name="birthmonth" class="MS_select MS_birthday"
+												</select> 년 <select name="birthmonth" 
 													style="width: 100px; height: 40px;">
 														<option value="">선택</option>
 														<option value="01">1</option>
@@ -389,7 +444,7 @@ body {
 														<option value="10">10</option>
 														<option value="11">11</option>
 														<option value="12">12</option>
-												</select> 월 <select name="birthdate" class="MS_select MS_birthday"
+												</select> 월 <select name="birthdate"
 													style="width: 100px; height: 40px;">
 														<option value="">선택</option>
 														<option value="01">1</option>
@@ -423,9 +478,9 @@ body {
 														<option value="29">29</option>
 														<option value="30">30</option>
 														<option value="31">31</option>
-												</select> 일&nbsp;&nbsp;<input type="radio" name="gender" value="M"
-													class="MS_radio">남 <input type="radio" checked=""
-													name="gender" value="F" class="MS_radio" >여<br>
+												</select> 일&nbsp;&nbsp;<input type="radio" name="gender" value="M"  checked=""
+													>남 <input type="radio"
+													name="gender" value="F"  >여<br>
 												<br>
 											</tr>
 
@@ -436,10 +491,10 @@ body {
 												<td>
 													<div class="tb-l post">
 
-														<input type="text" name="zipCode" form="join_form"
-															id="hpost" style="width: 100px; height: 40px;"
-															class="MS_input_txt" value="" size="7" maxlength="15"
-															readonly="">
+														<input type="text" name="zipNo" 
+															id="zipNo" style="width: 100px; height: 40px;"
+															 value="" size="7" maxlength="15"
+															readonly="readonly">
 														<a onclick="openDaumZipAddress()"
 															style="color: orangered; cursor: pointer;">주소검색</a>
 													</div>
@@ -447,16 +502,16 @@ body {
 											</tr>
 											<tr>
 												<th>집주소</th>
-												<td><input type="text" name="address1" form="join_form"
-													id="address1" style="width: 360px; height: 40px;"
-													class="MS_input_txt w415" value="" size="50"
+												<td><input type="text" name="haddress1" 
+													id="haddress1" style="width: 360px; height: 40px;"
+													 value="" size="50"
 													maxlength="100" readonly="readonly"></td>
 											</tr>
 											<tr>
 												<th>상세주소</th>
-												<td><input type="text" name="address2" form="join_form"
-													id="address2" style="width: 360px; height: 40px;"
-													class="MS_input_txt w415" value="" size="50"
+												<td><input type="text" name="haddress2" 
+													id="haddress2" style="width: 360px; height: 40px;"
+													 value="" size="50"
 													maxlength="100"></td>
 											</tr>
 
@@ -475,7 +530,7 @@ body {
 											<select name="selectEmail" id="selectEmail"
 													style="width: 100px; height: 40px;"
 													style="margin-right:5px;" >
-														<option value="1">직접입력</option>
+														<option value="directly" id="directly">직접입력</option>
 														<option value="naver.com">naver.com</option>
 														<option value="hotmail.com">hotmail.com</option>
 														<option value="hanmail.net">hanmail.net</option>
@@ -497,7 +552,7 @@ body {
 											<tr>
 												<th>휴대폰</th>
 												<td><input type="hidden" name="tel"
-													form="join_form" value=""> 
+													 value=""> 
 													<select
 													name="tel1" id="etcphone1" 
 													style="width: 100px; height: 40px;"
@@ -510,10 +565,10 @@ body {
 														<option value="018">018</option>
 														<option value="019">019</option>
 												</select> - <input type="text" name="tel2" 
-													id="etcphone2" class="MS_input_tel" value="" size="4"
+													id="etcphone2"  value="" size="4"
 													maxlength="4" style="width: 115px; height: 40px;">
 													- <input type="text" name="tel3" 
-													id="etcphone3" class="MS_input_tel" value="" size="4"
+													id="etcphone3"  value="" size="4"
 													maxlength="4" style="width: 115px; height: 40px;"
 													minlength="4">
 
@@ -526,7 +581,7 @@ body {
 											</tr>
 											<tr>
 												<th>은행</th>
-												<td><input type="hidden" name="bankCode" form="join_form"
+												<td><input type="hidden" name="bankCode" 
 													value=""> <select name="bankCode" id="bankCode"
 												style="width: 100px; height: 40px;"
 													class="MS_bank">
@@ -573,6 +628,7 @@ body {
 					style="width: 200px; height: 40px; background-color: orangered; color: white; border: none;">가입하기</button>
 
 			</div>
+			
 			<br>
 			<div class="align-center margin-top40"></div>
 
@@ -604,24 +660,6 @@ body {
       
    </script>
    
-   <script type="text/javascript">
-		//이메일 입력방식 선택 
-		$('#selectEmail').change(function(){
-			$("#selectEmail option:selected").each(function () {
-				if($(this).val()== '1'){ 
-					//직접입력일 경우
-					$("#email2").val(''); 
-					//값 초기화 
-					$("#email2").attr("disabled",false); 
-					//활성화
-				}else{ 
-					//직접입력이 아닐경우
-					$("#email2").val($(this).text()); 
-					//선택값 입력 
-					$("#email2").attr("disabled",true); 
-					//비활성화
-					} }); });
-	</script>
 
 </body>
 </html>

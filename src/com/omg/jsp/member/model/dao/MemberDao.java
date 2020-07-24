@@ -442,7 +442,6 @@ public ArrayList<Member> selectList(Connection con) {
 			m.setEmail(rset.getString("EMAIL"));
 			m.setPhone(rset.getString("PHONE"));
 			m.setEnrollDate(rset.getString("ENROLL_DATE"));
-			m.setRequestType(rset.getString("REQUEST_TYPE"));
             
             list.add(m);
             System.out.println(list);
@@ -578,4 +577,57 @@ public int updateProfile(Connection con, String fileCode, String userId) {
 	return result;
 }
 
+
+
+
+public int duplecateID(String memberId) {
+	int cnt=0; 
+	try{
+		Connection con = getConncection();
+		StringBuilder sql=new StringBuilder(); //아이디 중복확인
+		sql.append(" SELECT count(MEMBER_ID) as cnt "); 
+		sql.append(" FROM MEMBER "); 
+		sql.append(" WHERE MEMBER_ID=? "); 
+		PreparedStatement pstmt=con.prepareStatement(sql.toString());
+		pstmt.setString(1, memberId); 
+		ResultSet rs=pstmt.executeQuery(); 
+		if(rs.next()){
+			cnt=rs.getInt("cnt");
+			}//if end
+		}catch(Exception e){
+			System.out.println("아이디 중복 확인 실패 : "+e);
+			}//try end 
+	return cnt; 
+	}//duplecateID() end
+
+
+
+
+public int userIdCheck(String memberId) {
+	
+	PreparedStatement pstmt = null;
+	Connection con = getConncection();
+	ResultSet rset = null;
+	String query = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
+	try {
+		pstmt = con.prepareStatement(query);
+		pstmt.setString(1, memberId); 
+		rset = pstmt.executeQuery();
+		if(rset.next()){ 
+			return 0; //이미 존재하는 회원 
+		} else {
+			return 1; //가입 가능 
+			} 
+		} catch (Exception e) {
+			e.printStackTrace(); 
+		} 
+	return -1; //데이터베이스 오류
+	}
+	
+
 }
+	
+
+
+
+

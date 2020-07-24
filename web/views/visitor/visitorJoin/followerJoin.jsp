@@ -6,7 +6,25 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"> </script>
 <title>Insert title here</title>
+
 <script>
+    $(function() {
+        $('#selectEmail').change(function() {
+            if ($('#selectEmail').val() == 'directly') {
+                $('#directly').attr("disabled", false);
+                $('#directly').val("");
+                $('#directly').focus();
+            } else {
+                $('#email2').val($('#selectEmail').val());
+            }
+        })
+    });
+</script>
+
+
+<script>
+
+
 
 function checks() {
 	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
@@ -83,22 +101,26 @@ function chkPW(){
 		
 	}
 	
-	function idCheckFunction() {
+
+
+</script>
+
+<script>
+	function IdCheckFunction(){
 		var memberId = $("#memberId").val();
 		$.ajax({
-			type: 'POST',
-			url: '/omg/IdCheckServlet',
-			success: function(result) {
-				if(result == 1) {
-					
-					alert("사용할 수 있는 아이디입니다.");
-				} else {
-					
-					alert("사용중인 아이디입니다. 다른 아이디를 입력해주세요");
-				}
+			type : 'POST',
+			url : '/omg/IdCheckServlet',
+			data : {memberId : memberId},
+			success : function(result){
+				if(result == 1){
+					$("#result").html("사용할 수 있는 아이디입니다.");
+					} else {
+					$("#result").html("사용중인 아이디입니다. 다른 아이디를 입력해 주세요");
+					}
+				} 
+			}) 
 			}
-		});
-	}
 
 </script>
 <!-- question -->
@@ -167,8 +189,8 @@ div#visitQuestion{
 }
 
 #fnt {
-	margin-left: 50px;
-	font-size: 4em;
+	margin-left: 100px;
+	font-size: 2em;
 	margin-bottom: 30px;
 	text-decoration: none;
 }
@@ -179,6 +201,9 @@ div#visitQuestion{
 
 .fnt2 {
 	color: lightgray;
+}
+.fnt2:hover {
+	color: orangered;
 }
 
 body {
@@ -260,17 +285,19 @@ body {
 											</tr>
 											<tr>
 												<th>아이디</th>
-												<td><input type="text" name="memberId" id="memberId" value=""
-													style="height: 40px" size="50"
-													maxlength="12" placeholder="아이디를 입력해주세요">
-													<a onclick="idCheckFunction()"
+												<td><input type="text" name="memberId" id="memberId"
+													value="" style="height: 40px" 
+													size="50" maxlength=12 placeholder="아이디를 입력해주세요">
+													<a onclick="IdCheckFunction()"
 														style="color: orangered; cursor: pointer;">중복확인</a>
-													<span class="idpw-info"><br>
-													<span id="result"></apan>
-													<p style="font-size: 0.7em; color: orangered;">* 회원아이디는
-															영문/숫자만 사용가능합니다.</p></span> </a></td>
-											</tr>
+														<br>
+													<p id="result" style="font-size: 0.7em; color: orangered;">* 회원아이디는
+															영문/숫자만 사용가능합니다.</p> 
+													 </td>
+													
 
+
+											</tr>
 
 											<tr>
 												<th>비밀번호</th>
@@ -463,10 +490,10 @@ body {
 
 														<input type="text" name="zipNo" 
 															id="zipNo" style="width: 100px; height: 40px;"
-															class="MS_input_txt" value="" size="7" maxlength="15"
+															 value="" size="7" maxlength="15"
 														>
 														<a onclick="openDaumZipAddress()"
-															style="color: orangered; cursor: pointer;"">주소검색</a>
+															style="color: orangered; cursor: pointer;">주소검색</a>
 													</div>
 												</td>
 											</tr>
@@ -498,11 +525,11 @@ body {
 													<span>@</span> <input
 														type="text" name="email2" id="email2"
 														style="width: 200px; height: 40px;"
-														value="" size="15" maxlength="25">
+														size="15" maxlength="25">
 											<select name="selectEmail" id="selectEmail"
 													style="width: 100px; height: 40px;"
 													style="margin-right:5px;" >
-														<option value="1">직접입력</option>
+														<option value="directly" id="directly">직접입력</option>
 														<option value="naver.com">naver.com</option>
 														<option value="hotmail.com">hotmail.com</option>
 														<option value="hanmail.net">hanmail.net</option>
@@ -562,8 +589,9 @@ body {
 								<!-- #personInfo -->
 
 			</div>
-			
+			<%-- , <%= request.getContextPath() %>InsertHealthNow --%>
 			<div>
+			
 			<div id="visitQuestion">
 				<div id="visitQuestionIn" class="questionBox">
 					 <form id="questionForm" action="<%= request.getContextPath() %>/insertHistory.hi" method="post" > 
@@ -736,7 +764,7 @@ body {
       
     </script>
 		
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		//이메일 입력방식 선택 
 		$('#selectEmail').change(function(){
 			$("#selectEmail option:selected").each(function () {
@@ -753,7 +781,7 @@ body {
 					$("#email2").attr("disabled",true); 
 					//비활성화
 					} }); });
-	</script>
+	</script> -->
 
 	
 </body>
