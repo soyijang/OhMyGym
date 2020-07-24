@@ -75,13 +75,13 @@ legend {
 	<tr>
 		<td width="300px" height="80px" style="text-align: left; background:#e3e3e3;"><a id="text">제목</a></td>
 		<td width="850px" height="90px"><legend align="left">
-		<textarea rows="3px" cols="120px" style="resize: none;"><%=notice.getBoardTitle()%></textarea></td>
+		<textarea style="resize: none; width: 800px; height: 50px;" readonly="readonly"><%=notice.getBoardTitle()%></textarea></td>
 		</legend>
 	</tr>
 	<tr>
 		<td width="300px" height="100px" style="text-align: left; background:#d1d1d1;"><a id="text">내용작성</a></td>
 		<td width="850px" height="100px"><legend align="left">
-		<textarea rows="20px" cols="120px" style="resize: none;"><%=notice.getBoardContent()%>
+		<textarea style="resize: none; width: 800px; height: 350px;" readonly="readonly"><%=notice.getBoardContent()%>
 		
 		</textarea> </legend>
 		</td>

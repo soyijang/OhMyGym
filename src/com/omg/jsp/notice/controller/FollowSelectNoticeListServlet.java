@@ -34,14 +34,14 @@ public class FollowSelectNoticeListServlet extends HttpServlet {
 		
 		response.setCharacterEncoding("UTF-8");
 		
-		ArrayList<Notice> list = new NoticeService().selectList();
+		ArrayList<Notice> list2 = new NoticeService().selectList2();
 		
-		System.out.println("followSelect Notice list : "+list);
+		System.out.println("followSelect Notice list2 : "+list2);
 		String page = "";
 		
-		if(list != null) {
+		if(list2 != null) {
 			page="views/follower/followerNotice/followerNoticeList.jsp";
-			request.setAttribute("list", list);
+			request.setAttribute("list2", list2);
 			
 		} else {
 			page="views/common/errorPage.jsp";

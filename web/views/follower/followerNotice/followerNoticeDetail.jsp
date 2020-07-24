@@ -56,30 +56,30 @@
         </article>
         <!--헤더 영역 종료-->
 
-        <br><br>
+        <br>
 
         <!--공지사항 출력영역-->
         <article>
             <table id="showNotice">
                 <tr>
                     <th>제목</th>
-                    <td><input type="text" name="text" value="<%=notice.getBoardTitle()%>" style="width: 300px;"></td>
+                    <td><%=notice.getBoardTitle()%></td>
                 </tr>
                 <tr>
                     <th>작성일</th>
-                    <td><%=notice.getWritedate()%></td>
-                    <th>조회수</th>
+                    <td><%=notice.getWritedate()%>&nbsp;&nbsp;&nbsp;[<%=notice.getWriteTime()%>]</td>
+                </tr>
+                <tr>
+                	 <th>조회수</th>
                     <td><%=notice.getViewCount() %></td>
                 </tr>
                 <tr>
                     <th style="border-bottom: 5px double gray;">첨부파일</th>
-                    <td style="border-bottom: 5px double gray;"><input type="file"></td>
+                    <td style="border-bottom: 5px double gray;"></td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="padding: 20px;">
-                    <textarea id="noticeContent" rows="20px" cols="120px" style="resize: none;"><%=notice.getBoardContent()%>
-					</textarea>
-                        
+                    <td colspan="4" style="padding: 20px; height: 320px; border: 1px solid gray;">
+                    <%=notice.getBoardContent()%>
                     </td>
                 </tr>
             </table>

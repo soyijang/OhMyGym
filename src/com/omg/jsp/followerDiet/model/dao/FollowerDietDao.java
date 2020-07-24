@@ -27,7 +27,7 @@ public class FollowerDietDao {
 		}
 	
 	}
-	//팔로워 밥스타그램 게시물 조회 메소드
+	
 	public ArrayList<FollowerDiet> selectList(Connection con) {
 		
 		Statement stmt = null;
@@ -46,13 +46,15 @@ public class FollowerDietDao {
 				
 				FollowerDiet fd = new FollowerDiet();
 				
-				
+				fd.setIntakeVolume(rset.getInt("INTAKE_VOLUME"));
+				fd.setIntakeDate(rset.getString("INTAKE_DATE"));
+				fd.setIntekeTime(rset.getString("INTAKE_TIME"));
+				fd.setDietManageCode(rset.getString("DIET_MANAGECODE"));
+				fd.setMemberId(rset.getString("MEMBER_ID"));
+				fd.setFoodCode(rset.getString("FOOD_CODE"));
 				
 				list.add(fd);
 			}
-			
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -65,7 +67,6 @@ public class FollowerDietDao {
 	}
 
 	
-	//팔로워 밥스타그램 등록 메소드
 	
 	public int insertFollowerDiet(Connection con, FollowerDiet fd) {
 		

@@ -30,7 +30,7 @@ public class NoticeDao {
 		
 	}
 
-	//공지사항 목록 조회용 메소드
+	//공지사항 목록 조회용 메소드 [관리자]
 	public ArrayList<Notice> selectList(Connection con) {
 		
 		ArrayList<Notice> list = null;
@@ -77,6 +77,53 @@ public class NoticeDao {
 		return list;
 	}
 
+	//공지사항 목록 조회용 메소드 [user]
+		public ArrayList<Notice> selectList2(Connection con) {
+			
+			ArrayList<Notice> list2 = null;
+			Statement stmt = null;
+			ResultSet rset = null;
+			String query = prop.getProperty("selectList2");
+			
+			try {
+				stmt=con.createStatement();
+				rset=stmt.executeQuery(query);
+				
+				
+				list2 = new ArrayList<Notice>();
+				
+				while(rset.next()) {
+					Notice n = new Notice();
+					
+					n.setBoardCode(rset.getString("BOARD_CODE"));
+					n.setBoardNum(rset.getString("BOARD_NUM"));
+					n.setWritedate(rset.getString("WRITE_DATE"));
+					n.setBoardContent(rset.getString("BOARD_CONTENT"));
+					n.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					n.setViewCount(rset.getString("VIEW_COUNT"));
+					n.setLikeCount(rset.getString("LIKE_COUNT"));
+					n.setBookmarkCount(rset.getString("BOOKMARK_COUNT"));
+					n.setBoardFileCode(rset.getString("BOARD_FILECODE"));
+					n.setWriteTime(rset.getString("WRITE_TIME"));
+					n.setManagerId(rset.getString("MANAGER_ID"));
+					n.setBoardTitle(rset.getString("BOARD_TITLE"));
+					n.setStatus(rset.getString("BOARD_STATUS"));
+					
+					
+					list2.add(n);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(stmt);
+				
+			}
+			
+			return list2;
+		}
+
 	public int insertNotice(Connection con, Notice newNotice) {
 		
 		PreparedStatement pstmt = null;
@@ -92,7 +139,6 @@ public class NoticeDao {
 			pstmt.setString(3, newNotice.getBoardCategory());
 			pstmt.setString(4, newNotice.getManagerId());
 			pstmt.setString(5, newNotice.getBoardTitle());
-			pstmt.setString(6, newNotice.getStatus());
 			
 			
 			result=pstmt.executeUpdate();
@@ -164,6 +210,7 @@ public class NoticeDao {
 				notice.setBoardTitle(rset.getString("BOARD_TITLE"));
 				notice.setBoardCategory(rset.getString("BOARD_CATEGORY"));
 				notice.setWritedate(rset.getString("WRITE_DATE"));
+				notice.setWriteTime(rset.getString("WRITE_TIME"));
 				notice.setViewCount(rset.getString("VIEW_COUNT"));
 				notice.setBoardContent(rset.getString("BOARD_CONTENT"));
 			}

@@ -10,7 +10,7 @@ import static com.omg.jsp.common.JDBCTemplate.*;
 
 public class NoticeService {
 	
-	//공지사항 목록 조회용 메소드
+	//공지사항 목록 조회용 메소드 [관리자]
 	public ArrayList<Notice> selectList(){
 		
 		Connection con = getConncection();
@@ -20,6 +20,18 @@ public class NoticeService {
 		
 		return list;
 	}
+	
+	//공지사항 목록 조회용 메소드 [user]
+		public ArrayList<Notice> selectList2(){
+			
+			Connection con = getConncection();
+			
+			ArrayList<Notice> list2 = new NoticeDao().selectList2(con);
+			close(con);
+			
+			return list2;
+		}
+	
 
 	//공지사항 등록용 메소드
 	public int insertNotice(Notice newNotice) {
