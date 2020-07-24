@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import com.omg.jsp.followerHealth.model.dao.HealthInfoDao;
 import com.omg.jsp.followerHealth.model.vo.HealthInfo;
+import com.omg.jsp.member.model.dao.MemberDao;
 import com.omg.jsp.member.model.vo.Member;
 
 public class HealthInfoService {
@@ -53,6 +54,22 @@ public class HealthInfoService {
 		close(con);
 		
 		return updateHealthInfoNowResult;
+	}
+	
+	public int insertHealthInfoNow(ArrayList<HealthInfo> list) {
+		
+		Connection con = getConncection();
+		
+		int result = new HealthInfoDao().insertHealthInfoNow(con, list);
+		
+		if(result > 0) {
+			commit(con);
+		}
+		close(con);
+		
+		return result;
+		
+		
 	}
 
 

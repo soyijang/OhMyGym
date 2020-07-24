@@ -32,14 +32,18 @@ public class IdCheckServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF8");
 		String memberId = request.getParameter("memberId");
-		response.getWriter().write(memberIdCheck(memberId) + "");
+		response.getWriter().write(userIdCheck(memberId)+"");
+
 	
 	}
 	
-	public int memberIdCheck(String memberId) {
+	
+	
+	public int userIdCheck(String memberId){
 		MemberDao md = new MemberDao();
-		return md.memberIdCheck(memberId);
-	}
+		return md.userIdCheck(memberId);
+		}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

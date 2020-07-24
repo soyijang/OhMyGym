@@ -180,6 +180,7 @@ public class HealthInfoDao {
 		String query = prop.getProperty("insertHealthInfoNow");
 		
 		try {
+			pstmt = con.prepareStatement(query);
 			for(int i = 0; i < list.size(); i++) {
 				pstmt.setString(1, list.get(i).getHealthData());
 				pstmt.setString(2, list.get(i).getMemberId());

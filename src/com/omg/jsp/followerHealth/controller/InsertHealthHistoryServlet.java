@@ -39,7 +39,8 @@ public class InsertHealthHistoryServlet extends HttpServlet {
 		
 		String[] sarr = new String[10];
 		
-		sarr[0] = loginUser.getMemberId();
+//		sarr[0] = loginUser.getMemberId();
+		sarr[0] = request.getParameter("memberId");
 		sarr[1] = request.getParameter("height");
 		sarr[2] = request.getParameter("weight");
 		sarr[3] = request.getParameter("sleep");
