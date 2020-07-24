@@ -35,7 +35,6 @@ public class SelectCurriculumDetailServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String curriculumCode = (String) request.getParameter("curriCode");
-		System.out.println("도착 : " + curriculumCode);
 		
 		HashMap<String, Object> videoListnCurriculum = new TrainerVideoService().selectVideoInCurriculum(curriculumCode);
 		

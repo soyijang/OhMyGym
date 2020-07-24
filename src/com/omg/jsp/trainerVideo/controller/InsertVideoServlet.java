@@ -26,7 +26,11 @@ public class InsertVideoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("왔다");
+		request.setCharacterEncoding("UTF-8");
+		
+		String curriTitle = request.getParameter("title");
+		String curriCode = request.getParameter("code");
+		
 	}
 
 	/**
