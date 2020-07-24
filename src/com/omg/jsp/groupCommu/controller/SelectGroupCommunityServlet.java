@@ -33,17 +33,30 @@ public class SelectGroupCommunityServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String roomId = request.getParameter("roomId");
+		String type = request.getParameter("type");
+		
 		ArrayList<GroupCommuPost> postList = new GroupCommuService().selectPost(roomId);
 		
-		Collections.sort(postList, new Comparator<GroupCommuPost>() {
-
-			@Override
-			public int compare(GroupCommuPost o1, GroupCommuPost o2) {
+		if(type.equals("최신")) {
+			Collections.sort(postList, new Comparator<GroupCommuPost>() {
+				@Override
+				public int compare(GroupCommuPost o1, GroupCommuPost o2) {
+					
+					return Integer.parseInt(o1.getGroupBoardNum()) - Integer.parseInt(o2.getGroupBoardNum());
+				}
 				
-				return Integer.parseInt(o1.getGroupBoardNum()) - Integer.parseInt(o2.getGroupBoardNum());
-			}
-			
-		});
+			});
+		}
+		else {
+			Collections.sort(postList, new Comparator<GroupCommuPost>() {
+				@Override
+				public int compare(GroupCommuPost o1, GroupCommuPost o2) {
+					
+					return Integer.parseInt(o1.getGroupBoardNum()) - Integer.parseInt(o2.getGroupBoardNum());
+				}
+				
+			});
+		}
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

@@ -21,7 +21,6 @@
             margin-top: 30px;
             margin-left: 30px;
             margin: 30px;
-            display: inline-block;
             width: 1180px;
         }
 
@@ -221,8 +220,7 @@
 <body>
     <%@ include file="../../common/managerNav.jsp" %>
     <section>
-     <article id="omoneyDirectPaymentArea">
-            <div class="serach_wrap" style="display: none;">
+    <div class="serach_wrap" style="display: none;">
                 <div class="dark_bg" onclick="jQuery('.serach_wrap').fadeOut('slow')"></div>
                 <div class="search_box">
                     <div style="width: 100%; height: 30px; background: orangered; border-radius: 8px;">
@@ -246,7 +244,6 @@
                     </div>
                 </div>
             </div>
-        </article>
     <script>
     	var findUser = false;
     	var haveOhMoneyVal = 0;
@@ -456,7 +453,7 @@
 
         <!--테이블 표시 영역-->
         <article id="tableArea">
-            <div align="center">
+            <div align="center" style="padding-top: 25px; padding-bottom: 25px; width: 100%; background: white; border-radius: 8px;">
                <div align="left" style="margin-left: 40px; margin-bottom: 15px;"><button class="btn" id="ohMoneyBtn" style="" onclick="jQuery('.serach_wrap').fadeIn('slow');">OH머니 수기지급</button></div>
                 <table id="listTable" style="width: 1100px;">
                     <tr>

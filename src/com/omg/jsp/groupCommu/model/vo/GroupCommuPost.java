@@ -11,6 +11,7 @@ public class GroupCommuPost implements Serializable{
 	private String groupUserId;
 	private String userType;
 	private String groupDateTime;
+	private String groupLikeCount;
 	private int groupContainerNum;
 	
 	public GroupCommuPost() {}

@@ -401,6 +401,7 @@ table.return_list {
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 	text-align: center;
+
 }
 
 table.return_list thead {
@@ -680,13 +681,28 @@ div#return_list_div {
                                     	"<td>"+"<a style='display:none;' id=RefundManager"+data[key].refundNum+">"+data[key].managerId +"</a>"+Relistnum+"</td>"+
                                     	"<td>"+data[key].refundDate+"</td>"+
                                     	"<td id=Refundmoney"+data[key].refundNum+">"+data[key].money+"</td>"+
-                                    	"<td>"+"<a style='cursor: pointer;' onclick='Download("+data[key].fileCode+")'><i class='fas fa-file'></i></a>"+"</td>"+
+                                    	"<td>"+"<a id='fileIcon"+Relistcount+"' style='cursor: pointer;' onclick='Download("+data[key].fileCode+")'><i class='fas fa-file'></i></a>"+"</td>"+
                                     	"<td><button id=btn"+data[key].refundNum+" onclick='checkReturn("+data[key].refundNum+");'>"+data[key].refundState+"</button></td></tr>");
+                	 					
+                   	 					if(data[key].fileCode == 'EMPTY'){
+                	 						$("#fileIcon"+Relistcount).css({'color':'lightgray','cursor':'default'})
+                	 						
+                	 					}else{
+                	 						$("#fileIcon"+Relistcount).css({'color':'orangered','cursor':'pointer'})
+                	 					}
+                	 					
+                   	 					if(data[key].refundState=='확인대기'){
+                   	 						$("#btn"+data[key].refundNum).css({'width':60,'height':20,'background':'navy','color':'white','border-radius':25,'font-weight':'bold'});
+                   	 					}
+                   	 					
+                   	 					
                 	 					Relistnum = Relistnum - 1;
                 	 					Relistcount = Relistcount + 1;
                 	 					if(Relistcount > 8){
                 	 						break;
                 	 					}
+                	 					
+             
                 	 				}
                    	 			},
                    	 			error : function() {
@@ -694,6 +710,8 @@ div#return_list_div {
                    	 			}
                     		})
                         }
+                        
+                        
                         
                         function Download(val){
                     		location.href = "<%=request.getContextPath()%>/downFile.all?num="+val;                    	
@@ -959,6 +977,7 @@ div#return_list_div {
 		                           	 				
 		                                            $("#btn"+numberVal).attr('disabled','true');
 		                                            $("#btn"+numberVal).text("최종확인");
+		                                        	$("#btn"+numberVal).css({'width':60,'height':20,'background':'none','color':'black','font-weight':'default'});
 		                           	 			},
 		                           	 			error : function() {
 		                           	 				console.log("실패!")
