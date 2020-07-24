@@ -122,14 +122,14 @@ span.center {
 		<div id="eat"><label>먹은식단</label></div>
 		<div id="eat">
 		<button id="eatphoto" onclick="">
-		<a href="javascript:openWindowPop('/omg/views/bobstagram/bobstagram_detail_insert02.jsp', 'popup');">
+		<a href="javascript:openWindowPop('/omg/views/follower/followerDiet/followerTodayMealSearch.jsp', 'popup');">
 		사진추가</a></button></div>
 	
 		<hr>
 			<p>총 칼로리 섭취량 <mark style="background: white; color: red;">670</mark> kcal</p>
 		<hr>
 		<div id="eat"><label>밥사진</label></div>
-		<div id="eat"><button id="eatphoto" onclick=""><a href="javascript:openWindowPop('/omg/views/bobstagram/bobstagram_detail_insert02.jsp', 'popup');">
+		<div id="eat"><button id="eatphoto" onclick=""><a href="javascript:openWindowPop('/omg/views/follower/followerDiet/followerTodayMealSearch.jsp', 'popup');">
 		사진추가</a></button></div>
 		<hr>
 	</div>

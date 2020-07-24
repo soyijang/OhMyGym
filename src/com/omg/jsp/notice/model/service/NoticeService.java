@@ -21,7 +21,7 @@ public class NoticeService {
 		return list;
 	}
 	
-	//공지사항 목록 조회용 메소드 [user]
+	//공지사항 목록 조회용 메소드 [follow]
 		public ArrayList<Notice> selectList2(){
 			
 			Connection con = getConncection();
@@ -30,6 +30,16 @@ public class NoticeService {
 			close(con);
 			
 			return list2;
+		}
+	//공지사항 목록 조회용 메소드 [Trainer]
+		public ArrayList<Notice> selectList3(){
+			
+			Connection con = getConncection();
+					
+			ArrayList<Notice> list3 = new NoticeDao().selectList3(con);
+			close(con);
+			
+			return list3;
 		}
 	
 
@@ -99,6 +109,28 @@ public class NoticeService {
 		int result = 0;
 		
 		notice = new NoticeDao().FollowSelectOne(con, nno);
+		result = new NoticeDao().viewCount(con, nno);
+		
+		if(notice != null && result > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+		
+		close(con);
+		
+		return notice;
+		
+	}
+	
+	public Notice TrainerSelectOne(int nno) {
+		
+		Connection con = getConncection();
+		
+		Notice notice = null;
+		int result = 0;
+		
+		notice = new NoticeDao().TrainerSelectOne(con, nno);
 		result = new NoticeDao().viewCount(con, nno);
 		
 		if(notice != null && result > 0) {
