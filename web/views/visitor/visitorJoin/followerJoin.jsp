@@ -592,7 +592,7 @@ body {
 			<%-- , <%= request.getContextPath() %>InsertHealthNow --%>
 			<div>
 			
-			<div id="visitQuestion">
+			<%-- <div id="visitQuestion">
 				<div id="visitQuestionIn" class="questionBox">
 					 <form id="questionForm" action="<%= request.getContextPath() %>/insertHistory.hi" method="post" > 
 						<div id="quesionMain">
@@ -722,7 +722,7 @@ body {
             }
         }
 
-    </script>
+    </script> --%>
 
 
 

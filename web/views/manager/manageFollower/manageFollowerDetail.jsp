@@ -125,6 +125,10 @@ HashMap<String, Object> hmap = (HashMap<String, Object>) request.getAttribute("i
         }
 
         /*섹션*/
+        
+        table {
+        margin-bottom : 50px;
+        }
 
         .customer_content_table{
             border-radius: 5px;
@@ -188,7 +192,7 @@ HashMap<String, Object> hmap = (HashMap<String, Object>) request.getAttribute("i
         }
 
         table.cash_table td{
-            font-size: 1.25em;
+            font-size: 0.5em;
             text-align: center;
             font-weight: 900;
         }
