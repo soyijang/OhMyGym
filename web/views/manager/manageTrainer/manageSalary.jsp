@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.omg.jsp.trainerSalary.model.vo.*, java.util.*"%>
+<% ArrayList<Salary> list = (ArrayList<Salary>) request.getAttribute("salarylist"); %>	
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +146,7 @@
         <!--검색 영역 종료-->
         <!--정렬 설정 영역-->
         <article id="alignmentArea">
-			<button class="btn" id="monthBtn" onclick="">월별 급여대장</button>
+			<button class="btn" id="monthBtn" onclick="">내역서 일괄다운로드</button>
             <select name="alignment" id="alignment">
                 <option value="trainingDate">No 순</option>
                 <option value="matchingNumDesc">ID 순</option>
@@ -168,40 +170,72 @@
             <div align="center">
                 <table>
                     <tr>
+                        <th width="30px;">선택</th>
                         <th width="30px;">No</th>
-                        <th width="100px;">트레이너ID</th>
-                        <th width="50px">회원명</th>
-                        <th width="80px;">이메일</th>
-                        <th width="80px;">연락처</th>
-                        <th width="80px;">회당 수업료</th>
+                        <th width="40px;">관리코드</th>
+                        <th width="60px;">트레이너ID</th>
+                        <th width="50px;">회원 등급</th>
+                        <th width="60px;">회당 수업료</th>
+                        <th width="30px;">지급월</th>
                         <th width="50px;">수업횟수</th>
-                        <th width="80px;">총 금액</th>
-                        <th width="60px;">세액</th>
-                        <th width="80px;">최종금액</th>
-                        <th width="50px">지급여부</th>
-                        <th width="50px">이의신청</th>
-                        <th width="80px">회원상세정보</th>
-                        <th width="80px">정산내역서</th>
+                        <th width="60px;">총 금액</th>
+                        <th width="60px;">세액(3.3%)</th>
+                        <th width="60px;">최종금액</th>
+                        <th width="40px">지급여부</th>
+                        <th width="50px">회원상세정보</th>
+                        <th width="50px">정산내역서</th>
+                        <th width="50px">비용지급확인</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>soi0205</td>
-                        <td>장소이</td>
-                        <td>soi0205@naver.com</td>
-                        <td>010-9974-8184</td>
-                        <td>20,000</td>
-                        <td>8</td>
-                        <td>160,000</td>
-                        <td>5,280</td>
-                        <td>154,720</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td><button class="btn" id="infoBtn" onclick="">상세정보</button></td><!-- 트레이너 상세정보로 이동 -->
-                        <td><button class="btn" id="infoBtn" onclick="">다운로드</button></td><!-- 정산내역서 엑셀로 다운 -->
+                    
+                    <% int listnum = list.size(); %>
+	                <% for(int i=0; i<list.size(); i++){ %>
+                    
+                    <form name="updateSalaryManage" id="updateSalaryManage" action="<%=request.getContextPath()%>/update.manager.salary.gd" method = "post">
+				 	<tr>
+				 	
+				 	<!-- 밥먹고와서 총액, 세액 JSP로계산해야함  -->
+				 	<%
+				 	double totalFee = list.get(i).getLevelFee() * list.get(i).getTrainingTimes();
+				 	double tax = list.get(i).getLevelFee() * list.get(i).getTrainingTimes() * 33/1000 ;
+				 	double finalFee = totalFee - tax ;
+				 	%>
+				 	
+                        <td><input type="checkbox"></td>
+                        <td><%= listnum %></td>
+                        <td><%= list.get(i).getSalaryManageCode() %></td>
+                        <td><%= list.get(i).getTrainerId() %></td>
+                        <td><%= list.get(i).getLevelName() %></td>
+                        <td><%= list.get(i).getLevelFee() %>원</td>
+                        <td><%= list.get(i).getSalaryMonth() %>월</td>
+                        <td><%= list.get(i).getTrainingTimes() %>회</td>
+                        <td><%= totalFee %>원</td>
+                        <td><%= tax %>원</td>
+                        <td><%= finalFee %>원</td>
+                        <td><%= list.get(i).getPayYN() %></td>
+                        <td><div onclick="">상세정보</div></td><!-- 트레이너 상세정보로 이동 -->
+	                    <td><div onclick="">다운로드</div><!-- 정산내역서 엑셀로 다운 -->
+                        <td><button onclick="ok()">비용지급확인</button></td>
+	                    </td>
                     </tr>
+                    
+                    <input type="hidden" name="salaryManageCode" value="<%= list.get(i).getSalaryManageCode() %>">
+                    
+                    </form>
+                    <% listnum -= 1;} %>
+                    
                 </table>
             </div>
         </article>
     </section>
+    
+     <script type="text/javascript">
+	
+		function ok() {
+			alert('비용지급처리가 완료되었습니다!');
+		}
+		
+	</script>
+    
+    
 </body>
 </html>

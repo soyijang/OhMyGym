@@ -161,17 +161,6 @@ h4 {
 									class="btns_sys red_big_xb" data-login-btn="login"><span>팔로워
 										회원가입</span></a>
 							</div>
-							<div id="_loginCheck" class="chk_login_area">
-								<ul>
-									<li><label for="_chkBtnLogin" class="chk_box"
-										data-login="autoLogin"><input type="checkbox"
-											id="_chkBtnLogin"> 로그인 상태 유지</label></li>
-									<li><label for="_chkBtnSave" class="chk_box "
-										data-login="saveId"> <input type="checkbox"
-											id="_chkBtnSave"> 아이디 저장
-									</label></li>
-								</ul>
-							</div>
 							<div id="_findLoginArea" class="find_login_area">
 								<a href="../follower/followerLogin/followerFindId.jsp" class="find">아이디/비밀번호 찾기</a>
 							</div>
@@ -206,12 +195,6 @@ h4 {
 							</div>
 							<div class="btn_login_area">
 								<a href="" id="_userLogin" class="btns_sys red_big_xb"><span>트레이너 회원가입</span></a>
-							</div>
-							<div id="_loginCheck" class="chk_login_area">
-								<ul>
-									<li><label for="_chkBtnLogin" class="chk_box"><input type="checkbox" id="_chkBtnLogin"> 로그인 상태 유지</label></li>
-									<li><label for="_chkBtnSave" class="chk_box "><input type="checkbox" id="_chkBtnSave"> 아이디 저장</label></li>
-								</ul>
 							</div>
 
 							<div class="none_login_area">

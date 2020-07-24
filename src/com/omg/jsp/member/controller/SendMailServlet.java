@@ -30,6 +30,7 @@ public class SendMailServlet extends HttpServlet {
 		SendSMS sms = new SendSMS();
 		sms.sendMail();
 		
+		System.out.println("전송된 번호 : " + Config.getReceiver());
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

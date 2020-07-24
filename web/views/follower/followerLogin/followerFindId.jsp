@@ -218,14 +218,14 @@ label.findText {
 							<a onclick="jQuery('.findId_wrap').fadeIn('fast');"
 								class="btns_sys red_mid_d" data-find-btn="idGatePhone"><span>확인</span></a>
 						</div>
-						<div class="find_gate">
+						<!-- <div class="find_gate">
 							<i class="ico ico_phone_chk"></i>
 							<p class="title">본인명의 휴대폰으로 인증</p>
 							<p class="text_small">회원님의 명의로 등록된 휴대폰으로 가입여부 및 본인여부를 확인합니다.</p>
-							<!-- 휴대폰본인인증 api 연결 -->
+							휴대폰본인인증 api 연결
 							<a href="javascript:void(0);" class="btns_sys red_mid_d"
 								data-find-btn="idGateCertify"><span>확인</span></a>
-						</div>
+						</div> -->
 					</div>
 					<div id="_tab2" class="tab_cont" style="display: none">
 						<h5 class="blind">비밀번호 변경하기</h5>
@@ -236,12 +236,13 @@ label.findText {
 							<a onclick="jQuery('.findPass_wrap').fadeIn('fast');"
 								class="btns_sys red_mid_d" data-find-btn="pwGatePhone"><span>확인</span></a>
 						</div>
+						
+						<!-- 인증번호 발송하기 -->
 						<div class="find_gate">
 							<i class="ico ico_email"></i>
 							<p class="title">등록된 이메일로 변경하기</p>
 							<p class="text_small">가입 당시 입력한 이메일로 비밀번호 재설정 메일을 발송합니다.</p>
-							<a onclick=doDisplay3(); class="btns_sys red_mid_d"
-								data-find-btn="pwGateEmail"><span>확인</span></a>
+							<a onclick=doDisplay3(); class="btns_sys red_mid_d"><span>확인</span></a>
 						</div>
 					</div>
 					
@@ -331,31 +332,31 @@ label.findText {
 	
 	function bonin(index){
 		
-	/* 	var page = ""; */
 		if(index == 1){
 		/* 	page= "findId.me"; */
 			document.getElementById('findIdForm').action="<%=request.getContextPath()%>/findId.me"; 
 		}
 		else if(index == 2){
-			page = "sendmail.me";
-			<%-- document.getElementById('findIdForm').action="<%=request.getContextPath()%>/sendmail.me"; --%>
-		}
-		/* $("#findIdForm").submit(); */
-		
-		$.ajax({
-			url: page,
-			type: "get",
-			data: {
-				findIdForm:findIdForm
-			},
-			success: function (data) {
-				console.log("성공!");
-			},
-			error: function (data) {
-				console.log("실패!");
-			}
+			/* 문자로 인증번호 전송 어떻게 ajax하냐~!~!~!~!*/
+			$.ajax({
+				url: "/sendmail.me",
+				type: "get",
+				data: {
+					findIdForm:findIdForm
+				},
+				success: function (data) {
+					console.log("성공!");
+				},
+				error: function (data) {
+					console.log("실패!");
+				}
+				
+			});
 			
-		});
+		<%-- 	document.getElementById('findIdForm').action="<%=request.getContextPath()%>/sendmail.me";  --%>
+		}
+		/* 	$("#findIdForm").submit();   */
+		
 	}
 	
 	</script>

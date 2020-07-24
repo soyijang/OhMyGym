@@ -96,7 +96,6 @@ h4 {
 
 						<!-----------------------------관리자로그인------------------------------------->
 						<div id="_tab1" class="tab_cont" style="display: block;">
-							<h5 class="blind">관리자 로그인</h5>
 							<form id="mloginForm"
 								action="<%=request.getContextPath()%>/login.mg" method="post">
 								<div class="member_login">
@@ -119,6 +118,7 @@ h4 {
 								<a onclick="mlogin();" id="_userLogin"
 									class="btns_sys red_big_xb"><span>로그인</span></a>
 							</div>
+							<h4 style="color: black;">※ 관리자 신규가입요청은 마스터계정에서 '개발요청페이지'를 통해 진행바랍니다.</h4>
 						</form>
 			</div></div></div>
 		</div>
