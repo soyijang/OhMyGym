@@ -215,7 +215,7 @@ th {
 	<nav>
 		<%@ include file="../../common/followerNav.jsp"%>
 	</nav>
-
+	<br><br>
 	<aside style="display: inline-block; float: left; width: 20%;">
 		<%@ include file="followerHealthAside.jsp"%>
 	</aside>
@@ -231,9 +231,7 @@ th {
 			<div id="healthInfoNow" align="center">
 				<table style="width: 90%;" id="healthInfoNowTable">
 					<tr>
-						<th colspan="4" style="height: 50px;"><h3><%= loginUser.getName() %>님의
-								건강정보
-							</h3></th>
+						<th colspan="4" style="height: 50px;"><h3><%= loginUser.getName() %>님의 건강정보</h3></th>
 					</tr>
 					<tr>
 						<th>키</th>

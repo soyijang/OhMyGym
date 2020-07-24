@@ -1,6 +1,7 @@
 package com.omg.jsp.matching.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.omg.jsp.matching.model.service.MatchingService;
+import com.omg.jsp.member.model.vo.Member;
 
 /**
- * Servlet implementation class UpdateMatchingApprovalServlet
+ * Servlet implementation class RejectServlet
  */
-@WebServlet("/approval.mc")
-public class UpdateMatchingApprovalServlet extends HttpServlet {
+@WebServlet({ "/RejectServlet", "/reject.mc" })
+public class RejectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateMatchingApprovalServlet() {
+    public RejectServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,12 +32,31 @@ public class UpdateMatchingApprovalServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+
+		Member trainer = (Member) request.getSession().getAttribute("loginUser");
+		String trainerId = trainer.getMemberId();
 		String followerId = (String) request.getParameter("followerId");
+		String rejectReason = (String) request.getParameter("rejectReason");
 		
-		System.out.println("servlet follwerId : " + followerId);
+		System.out.println(trainerId + " " + followerId + " " + rejectReason);
 		
-		int result = new MatchingService().MatchingApproval(followerId);
+		HashMap<String, String> rejectInfo = new HashMap<String, String>();
+		
+		rejectInfo.put("trainerId", trainerId);
+		rejectInfo.put("followerId", followerId);
+		rejectInfo.put("rejectReason", rejectReason);
+		
+		int result = new MatchingService().requestReject(rejectInfo);
+		
+		/*String page = "";
+		if(result> 0) {
+			page = "/selectApplyList.pt";
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "매칭 거절 실패");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);*/
 	}
 
 	/**

@@ -39,8 +39,6 @@ public class MatchingService {
 		HashMap<String, Object> gradeAvg = new MatchingDao().selectGradeAvg(con);
 		list.add(gradeAvg);
 		
-		System.out.println(list);
-		
 		close(con);
 		
 		return list;
@@ -76,10 +74,8 @@ public class MatchingService {
 		Connection con = getConncection();
 		
 		int insertRequestResult = new MatchingDao().insertMatchRequest(con, matchingInfo);
-		System.out.println("requestResult : " + insertRequestResult);
 		
 		int insertMatchChatResult = new MatchingDao().insertMatchChat(con, matchingInfo);
-		System.out.println("MatchChatResult : " + insertMatchChatResult);
 		
 //		int totalResult = insertRequestResult + insertMatchChatResult;
 		HashMap<String, Integer> checkInsert = new HashMap<String, Integer>();
@@ -151,11 +147,9 @@ public class MatchingService {
 		 RequestInformation requestInfo = new MatchingDao().selectFollowerInfo(con, followerId);
 		 ArrayList<String> healthInfo = new MatchingDao().selectFollowerHealthInfo(con, followerId);
 
-		 requestInfo.setHeight(healthInfo.get(0));
-		 requestInfo.setWeight(healthInfo.get(1));
-		 requestInfo.setWishPart(healthInfo.get(2));
-		      
-		 System.out.println(requestInfo);
+		 requestInfo.setHeight(healthInfo.get(3));
+		 requestInfo.setWeight(healthInfo.get(0));
+		 requestInfo.setWishPart(healthInfo.get(1));
 		      
 		 close(con);
 		     
@@ -189,12 +183,47 @@ public class MatchingService {
 		
 		int result = new MatchingDao().endMatch(con, trainerId, followerId);
 		
+		System.out.println("service result : " + result);
+		
 		if(result > 0) {
 			commit(con);
 		} else {
 			rollback(con);
 		}
 		close(con);
+		
+		return result;
+	}
+
+	public int MatchingApproval(String followerId) {
+		Connection con = getConncection();
+		
+		int result = new MatchingDao().MatchingApproval(con, followerId);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+	public int requestReject(HashMap<String, String> rejectInfo) {
+		Connection con = getConncection();
+		
+		int result = 0;
+		
+		int updateRequestTypeResult = new MatchingDao().requestReject(con, rejectInfo);
+		int insertReject = new MatchingDao().insertReject(con, rejectInfo);
+		
+		result = updateRequestTypeResult + insertReject;
+		
+		if(result < 1) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
 		
 		return result;
 	}
