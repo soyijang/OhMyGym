@@ -43,7 +43,7 @@ public class AddCountLikeServlet extends HttpServlet {
 				
 			} else {
 				//좋아요 삭제
-				checkNum = new GroupCommuService().removeLike(likedId);
+				checkNum = new GroupCommuService().removeLike(likedId, postId);
 			}
 		}
 		

@@ -11,7 +11,7 @@ public class GroupCommuPost implements Serializable{
 	private String groupUserId;
 	private String userType;
 	private String groupDateTime;
-	private String groupLikeCount;
+	private int groupLikeCount;
 	private int groupContainerNum;
 	
 	public GroupCommuPost() {}
@@ -94,6 +94,14 @@ public class GroupCommuPost implements Serializable{
 				+ groupFileCode + ", groupDate=" + groupDate + ", groupBoardNum=" + groupBoardNum + ", groupUserId="
 				+ groupUserId + ", userType=" + userType + ", groupDateTime=" + groupDateTime + ", groupContainerNum="
 				+ groupContainerNum + "]";
+	}
+
+	public int getGroupLikeCount() {
+		return groupLikeCount;
+	}
+
+	public void setGroupLikeCount(int groupLikeCount) {
+		this.groupLikeCount = groupLikeCount;
 	}
 
 }
