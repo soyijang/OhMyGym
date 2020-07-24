@@ -146,7 +146,7 @@ a:hover {
 				<ul id="header_bottom_sidemenu" class="sideMenu">
 					<li><a><div class="NavLink">공지사항</div></a>
 						<ul>
-							<li><a href="" style="color: white;">공지사항</a></li>
+							<li><a href="<%=request.getContextPath()%>/TrainerNotice.no" style="color: white;" style="color: white;">공지사항</a></li>
 						</ul></li>
 					<li><a><div class="NavLink">문의하기</div></a>
 						<ul>
