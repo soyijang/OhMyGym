@@ -321,25 +321,20 @@ a#goTalkBtn{
                type: "get",
                success: function(data) {
                   var result = data;
+                  var requestInfo = result["requestInformation"];
+                  var healthInfo = result["healthInfo"];
                   var now = new Date();
                   
-                  var temp = result['memberAge'].substring(0,2);
-                  if(temp.charAt(0) > 5 && temp.charAt(0) <= 9) {
-                     var ageYear = "19" + temp;
-                  } else {
-                     var ageYear = "20" + temp;
-                  }
+                  var age = requestInfo['memberAge'].substring(0,4) * 1;
                   
-                  $("#applyid").text(result['followerId']);
-                  $("#applyname").text(result['followerName']);
-                  $("#age").text(now.getFullYear() - ageYear + 1);
-                  $("#tpart").text(result['wishPart']);
-                  $("#tall").text(result['height']);
-                  $("#weight").text(result['weight']);
-                  $("#followerComment").text(result['chatContent']);
+                  $("#applyid").text(requestInfo['followerId']);
+                  $("#applyname").text(requestInfo['followerName']);
+                  $("#age").text(now.getFullYear() - age + 1);
+                  $("#tpart").text(healthInfo[2]);
+                  $("#tall").text(healthInfo[0]);
+                  $("#weight").text(healthInfo[1]);
+                  $("#followerComment").text(requestInfo['chatContent']);
                   $("#userId").val(result['followerId']);
-                  
-                  
                },
                error: function(data) {
                   console.log("실패");

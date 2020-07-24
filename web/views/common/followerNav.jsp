@@ -128,7 +128,8 @@ ul#header_bottom_sidemenu li ul li {
 }
 
 a {
-	text-decoration: none
+	text-decoration: none;
+	cursor: pointer;
 }
 </style>
 </head>
@@ -144,13 +145,13 @@ a {
 	<nav id="navigateID">
 		<div class="container" style="vertical-align: middle;">
 			<ul class="header_bottom_menu" id="header_bottom">
-				<li id="page_NAME"><a href=""><div id="logo">
+				<li id="page_NAME"><a href="/omg/views/follower/followerMain.jsp"><div id="logo">
 							<img src="/omg/resources/img/OHmyGymLogo.png">
 						</div></a></li>
 				<ul id="header_bottom_sidemenu" class="sideMenu">
-					<li><a><div class="NavLink"style="color: rgb(63, 63, 63);">공지/이벤트</div></a>
+					<li><a><div class="NavLink"style="color: rgb(63, 63, 63);">공지사항</div></a>
 						<ul>
-							<li><a style="color: white;">이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/followNotice.no" style="color: white;">공지사항</a></li>
+							<li><a href="<%=request.getContextPath()%>/followNotice.no" style="color: white;">공지사항</a></li>
 						</ul>
 					</li>
 					<li><a><div class="NavLink" style="color: rgb(63, 63, 63);">문의하기</div></a>
@@ -175,7 +176,6 @@ a {
 							<li><a href="../fOhMyGym/fTrainingRoom.jsp"
 								style="color: white;">트레이닝</a>
 								&nbsp;&nbsp;&nbsp;<a onclick="groupCommu();" style="color: white;">그룹소통방</a>
-								&nbsp;&nbsp;&nbsp;<a>챌린지</a>
 								&nbsp;&nbsp;&nbsp;<a href="../fOhMyGym/fFeedbackList.jsp" style="color: white;">피드백룸</a>
 								&nbsp;&nbsp;&nbsp;<a href="../fOhMyGym/fReview.jsp" style="color: white;">트레이닝 리뷰</a>
 							</li>

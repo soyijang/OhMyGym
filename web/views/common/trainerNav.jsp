@@ -124,6 +124,9 @@ ul#header_bottom_sidemenu li ul li {
 	margin-left: 200px;
 	margin-top: -4px;
 }
+a:hover {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -137,25 +140,25 @@ ul#header_bottom_sidemenu li ul li {
 	<nav id="navigateID">
 		<div class="container" style="vertical-align: middle;">
 			<ul class="header_bottom_menu" id="header_bottom">
-				<li id="page_NAME"><a href=""><div id="logo">
+				<li id="page_NAME"><a href="/omg/views/trainer/trainerMain.jsp"><div id="logo">
 							<img src="/omg/resources/img/OHmyGymLogo_Trainner.png">
 						</div></a></li>
 				<ul id="header_bottom_sidemenu" class="sideMenu">
-					<li><a><div class="NavLink">공지/이벤트</div></a>
+					<li><a><div class="NavLink">공지사항</div></a>
 						<ul>
-							<li><a>이벤트</a>&nbsp;&nbsp;&nbsp;<a>공지사항</a></li>
+							<li><a href="" style="color: white;">공지사항</a></li>
 						</ul></li>
 					<li><a><div class="NavLink">문의하기</div></a>
 						<ul>
-							<li><a>자주묻는질문</a>&nbsp;&nbsp;&nbsp;<a>직접문의하기</a></li>
+							<li><a style="color: white;">자주묻는질문</a>&nbsp;&nbsp;&nbsp;<a style="color: white;">직접문의하기</a></li>
 						</ul></li>
 					<li><a><div class="NavLink">건강정보</div></a> <!-- <ul>
                                 <li><a>팔로워후기</a>&nbsp;&nbsp;&nbsp;<a>트레이너후기</a></li>
                             </ul> --></li>
 					<li><a><div class="NavLink">OH 마이피티</div></a>
 						<ul>
-							<li><a style="color: white; text-decoration: none;" href="<%= request.getContextPath() %>/selectApplyList.pt">매칭신청 목록</a>&nbsp;&nbsp;&nbsp;<a  style="color: white; text-decoration: none;" href="<%= request.getContextPath() %>/selectCurriculumList.cu">커리큘럼 관리</a>
-								&nbsp;&nbsp;&nbsp;<a>나의 경력</a>&nbsp;&nbsp;&nbsp;<a>그룹소통방</a></li>
+							<li><a style="color: white; text-decoration: none;" href="<%= request.getContextPath() %>/selectApplyList.pt">매칭신청 목록</a>&nbsp;&nbsp;&nbsp;<a style="color: white; text-decoration: none;" href="<%= request.getContextPath() %>/selectCurriculumList.cu">커리큘럼 관리</a>
+								&nbsp;&nbsp;&nbsp;<a style="color: white">그룹소통방</a></li>
 						</ul></li>
 					<li><a><div class="NavLink">팔로워관리</div></a></li>
 				</ul>
