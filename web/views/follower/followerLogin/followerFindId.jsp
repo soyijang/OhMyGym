@@ -160,7 +160,7 @@ label.findText {
 						<input class="findInput" type="text" name="findId_Phone" placeholder="전화번호"><br>
 						<button onclick="bonin(2);" class="sendNum">인증번호 전송</button><br> 
 						<input class="findInput" type="text" name="findId_Num" style="margin-top: 10px" placeholder="인증번호">
-					<br><button onclick="bonin(1);" class="findInputBtn" value="아이디 찾기">아이디 찾기</button><br>
+					<br><button onclick="bonin(1);" class="sendNum"" value="아이디 찾기">아이디 찾기</button><br>
 					</div>
 				</form>
 			</div>

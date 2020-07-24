@@ -641,7 +641,7 @@ body {
 	<!-- end main center -->
 	</div>
 	</div>
-	<div style="position: absolute; top: 1100px;">
+	<div style="position: absolute; top: 1500px;">
 		<%@ include file="../../common/footer.jsp"%>
 
 	</div>
