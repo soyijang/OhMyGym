@@ -78,7 +78,8 @@ public class MemberInsertServlet extends HttpServlet {
 		if(result > 0) {
 	         //page = "index.jsp";
 	         request.setAttribute("plag", "1");
-	         page = "/insertHistory.hi";
+//	         page = "/insertHistory.hi"; 건강정보 입력
+	         page = "views/visitor/login.jsp";
 	         
 	         request.setAttribute("successCode", "insertMember");
 	         request.getRequestDispatcher(page).forward(request, response);
