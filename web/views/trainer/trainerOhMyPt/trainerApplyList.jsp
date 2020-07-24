@@ -210,7 +210,7 @@ a#goTalkBtn{
                         </tr>
                         <tr>
                            <td colspan="5"><form id="selectUser" action="<%= request.getContextPath() %>/matchingChat.trainer" method="post">
-                              <input type="text" id="userId" name="userId" style="display: none;"></form>
+                              <input type="text" id="userId" name="userId" style="display: none;" value=""></form>
                            <textarea id="followerComment" readonly></textarea><a id="goTalkBtn" onclick="goMatchChat();">직접상담하기</a><br>
                            </td>
                         </tr>      
@@ -324,6 +324,8 @@ a#goTalkBtn{
                   var requestInfo = result["requestInformation"];
                   var healthInfo = result["healthInfo"];
                   var now = new Date();
+                  console.log(healthInfo);
+                  console.log(requestInfo);
                   
                   var age = requestInfo['memberAge'].substring(0,4) * 1;
                   
@@ -334,7 +336,7 @@ a#goTalkBtn{
                   $("#tall").text(healthInfo[0]);
                   $("#weight").text(healthInfo[1]);
                   $("#followerComment").text(requestInfo['chatContent']);
-                  $("#userId").val(result['followerId']);
+                  $("#userId").val(requestInfo['followerId']);
                },
                error: function(data) {
                   console.log("실패");
@@ -348,6 +350,8 @@ a#goTalkBtn{
           $("#tall").text("");
           $("#weight").text("");
           $("#followerComment").text("");
+          
+          
         }
           
          function inputReject(){
