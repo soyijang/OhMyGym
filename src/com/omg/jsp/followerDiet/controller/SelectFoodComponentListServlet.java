@@ -36,8 +36,6 @@ public class SelectFoodComponentListServlet extends HttpServlet {
 		
 		ArrayList<FoodComponent> list = new FoodComponentService().selectList();
 		
-		System.out.println("FoodComponent list : "+list);
-		
 		String page="";
 		
 		if(list != null) {
@@ -50,7 +48,7 @@ public class SelectFoodComponentListServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	
-		
+		System.out.println("FoodComponent list : "+list);
 	}
 
 	/**
