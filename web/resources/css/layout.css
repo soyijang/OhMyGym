@@ -615,13 +615,11 @@ strong {
     float: left;
     margin-right: 20px;
     width: 180px;
-    background-color: #f8f8f8;
     z-index: 10
 }
 
 #content .aside_wrap .profile_wrap {
     margin-bottom: 10px;
-    background-color: #fff
 }
 
 #content .aside_wrap .banner_wrap img {
@@ -1040,7 +1038,6 @@ strong {
 
 #content.main .profile_wrap .profile {
     position: relative;
-    padding: 30px 40px 20px
 }
 
 #content.main .profile_wrap .profile .photo {

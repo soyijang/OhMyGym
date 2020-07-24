@@ -58,7 +58,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a id="myPage" class="link_text" href="trainerMypage/trainerMypageMain.jsp" >
+                                <a id="myPage" class="link_text" href="<%=request.getContextPath()%>/trinerinfo.mp" >
                                     <img src="../../resources/img_icon/myIcon.png" style="width: 92px; height: 93;"><br>
                                 </a>
                             </td>
@@ -70,14 +70,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <a id="myPage" class="link_text" href="trainerMypage/trainerMypageMain.jsp" >
+                                <a id="myPage" class="link_text" href="<%=request.getContextPath()%>/trinerinfo.mp" >
                                     	마이페이지
                                 </a>
                             </td>
                             <td>
-                                <a id="followergide" class="link_text" href="" >
-                                    	팔로워관리
-                                </a>
+                                <a id="followergide" class="link_text" href="" > 팔로워관리 </a>
                             </td>
                         </tr>
                         <tr>

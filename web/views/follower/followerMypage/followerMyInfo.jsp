@@ -9,6 +9,34 @@
 <link rel="stylesheet" type="text/css" href="/omg/resources/css/fmypageContainer.css">
 <link rel="stylesheet" type="text/css" href="/omg/resources/css/tjob.css">
 <title>Insert title here</title>
+<style type="text/css">
+
+.box-file-input label{
+    display:inline-block;
+    background: orangered;
+    color:#fff;
+    padding:0px 15px;
+    line-height:35px;
+    cursor:pointer;
+}
+
+.box-file-input #upload:after{
+    content:"프로필사진 등록";
+}
+
+.box-file-input #save:after{
+    content:"프로필사진  저장";
+}
+
+.box-file-input .file-input{
+    display:none;
+}
+
+.box-file-input .filename{
+    display:inline-block;
+    padding-left:10px;
+}
+</style>
 </head>
 
 <body>
@@ -98,12 +126,18 @@
 					
 					<div class="info-body">
  						<form enctype="multipart/form-data" id="profileUploadForm">
-							<div align="center" id="profile-area">
-								<img id="profileImg" width="350" height="200">
-								<input type="file" id="profile" name="profile">
+							<div align="center" id="profile-area" class="box-file-input">
+								<img id="profileImg" width="350" height="200"><br><br>
+								
+									<label id="upload">
+									<input type="file" id="profile" name="profile" class="file-input">
+									</label>
+										
+									<label id="save">
+									<button onclick="profileImg();"></button>
+									</label>				
 							</div>
 						</form>
-						<button onclick="profileImg();">저장</button>
 		
 					
 						<form action="<%=request.getContextPath()%>/update.pf" method = "post">
