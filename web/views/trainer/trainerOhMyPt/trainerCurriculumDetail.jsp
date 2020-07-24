@@ -168,7 +168,6 @@
                 </table>
 
 	           	<script>
-
 	           			$(function() {
 	        				$(".video-list").click(function() {
 	        					//var num = $(this).children().childred().eq(0).val();
@@ -177,21 +176,7 @@
 	        					location.href="<%= request.getContextPath()%>/selectOne.vi?num=" + num;
 	        				});
 	        			});
-	           			
-	           			<%-- $(function() {
-	           				$("#listArea td").mouseenter(function(){
-	           					$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
-	           				}).mouseout(function(){
-	           					$(this).parent().css({"background":"black"});
-	           				}).click(function(){
-	           					var num = $(this).parent().children().eq(0).text();
-	           					//console.log(num);
-	           					location.href="<%=request.getContextPath()%>/selectOne.no?num=" + num;
-	           				});
-	           			}); --%>
-	           			
 	           	</script>
-                
             </div>
         </article>
         <!--커리큘럼 출력 종료-->

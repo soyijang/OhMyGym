@@ -549,6 +549,7 @@ public class MatchingDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      ArrayList<String> hi = new ArrayList<String>();
+	      String healthInfo = "";
 	      
 	      String query = prop.getProperty("selectHealthInfo");
 	      
@@ -559,11 +560,17 @@ public class MatchingDao {
 	         rset = pstmt.executeQuery();
 	         
 	         while(rset.next()) {
-	            hi.add(rset.getString("HEALTH_DATA"));
+	        	 healthInfo = rset.getString("HEALTH_DATA");
+	        	 
+	        	 hi.add(healthInfo);
 	         }
 	      } catch (SQLException e) {
 	         e.printStackTrace();
+	      } finally {
+	    	  close(pstmt);
+	    	  close(rset);
 	      }
+	      
 	      return hi;
 	   }
 	

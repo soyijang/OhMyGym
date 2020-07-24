@@ -32,20 +32,20 @@ public class HealthInfoDao {
 	public ArrayList<HealthInfo> selectHealthInfo(Connection con, Member loginUser) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<HealthInfo> list = null;
+		ArrayList<HealthInfo> list = new ArrayList<HealthInfo>();
+		HealthInfo hi = null;
+		String memberId = loginUser.getMemberId();
 		
 		String query = prop.getProperty("selectHealthInfo");
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, loginUser.getMemberId());
+			pstmt.setString(1, memberId);
 			
 			rset = pstmt.executeQuery();
 			
-			list = new ArrayList<>();
-			
 			while(rset.next()) {
-				HealthInfo hi = new HealthInfo();
+				hi = new HealthInfo();
 				
 				hi.setHealthData(rset.getString("HEALTH_DATA"));
 				hi.setHealthInfoCode(rset.getString("HEALTH_INFO_CODE"));
@@ -54,9 +54,6 @@ public class HealthInfoDao {
 					
 				list.add(hi);
 			}
-			
-			System.out.println("healthInfoDao HealthInfo List: " + list);
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

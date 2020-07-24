@@ -1,6 +1,7 @@
 package com.omg.jsp.matching.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.omg.jsp.matching.model.service.MatchingService;
-import com.omg.jsp.matching.model.vo.RequestInformation;
 
 /**
  * Servlet implementation class SelectRequestFollowerInfoServlet
@@ -35,7 +35,7 @@ public class SelectRequestFollowerInfoServlet extends HttpServlet {
 		
 		String followerId = request.getParameter("followerId");
 		
-		RequestInformation requestInfo = new MatchingService().selectFollowerInfo(followerId);
+		HashMap<String, Object> requestInfo = new MatchingService().selectFollowerInfo(followerId);
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

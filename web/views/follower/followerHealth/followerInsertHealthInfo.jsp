@@ -175,6 +175,7 @@ th {
 #healthInfoNowTable td, #modifyHealthInfo td {
 	text-align: left;
 	padding-left: 10px;
+	width: 300px;
 }
 
 #modifyHealthInfo input {

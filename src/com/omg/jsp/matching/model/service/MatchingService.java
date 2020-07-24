@@ -141,15 +141,16 @@ public class MatchingService {
 	}
 	
 	
-	public RequestInformation selectFollowerInfo(String followerId) {
+	public HashMap<String, Object> selectFollowerInfo(String followerId) {
 		 Connection con = getConncection();
+		 
+		 HashMap<String, Object> requestInfo = new HashMap<String, Object>();
 		      
-		 RequestInformation requestInfo = new MatchingDao().selectFollowerInfo(con, followerId);
+		 RequestInformation requestInformation = new MatchingDao().selectFollowerInfo(con, followerId);
 		 ArrayList<String> healthInfo = new MatchingDao().selectFollowerHealthInfo(con, followerId);
-
-		 requestInfo.setHeight(healthInfo.get(3));
-		 requestInfo.setWeight(healthInfo.get(0));
-		 requestInfo.setWishPart(healthInfo.get(1));
+		 
+		 requestInfo.put("requestInformation", requestInformation);
+		 requestInfo.put("healthInfo", healthInfo);
 		      
 		 close(con);
 		     
