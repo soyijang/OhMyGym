@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.omg.jsp.followerDiet.model.service.FollowerDietService;
-import com.omg.jsp.followerDiet.model.vo.FollowerDiet;
+import com.omg.jsp.followerDiet.model.service.FoodComponentService;
+import com.omg.jsp.followerDiet.model.vo.FoodComponent;
 
 /**
- * Servlet implementation class SelectFollowDietListServlet
+ * Servlet implementation class SelectFoodComponentListServlet
  */
-@WebServlet("/selectList.bo")
-public class SelectFollowerDietListServlet extends HttpServlet {
+@WebServlet("/SelectFoodComponent.no")
+public class SelectFoodComponentListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectFollowerDietListServlet() {
+    public SelectFoodComponentListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +32,24 @@ public class SelectFollowerDietListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<FollowerDiet> list = new FollowerDietService().selectList();
+		response.setCharacterEncoding("UTF-8");
 		
-		System.out.println("Servlet FollowDiet List :"+list);
+		ArrayList<FoodComponent> list = new FoodComponentService().selectList();
+		
+		System.out.println("FoodComponent list : "+list);
 		
 		String page="";
-		if(list!=null) {
-			page = "views/follower/followerDiet/followerTodayMealList1.jsp";
+		
+		if(list != null) {
+			page="views/follower/followerDiet/followerTodayMealSearch.jsp";
 			request.setAttribute("list", list);
+			
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "error");
+			page="views/common/errorPage.jsp";
+			request.setAttribute("msg", "공지사항 조회 실패");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-		
-		
+	
 		
 	}
 

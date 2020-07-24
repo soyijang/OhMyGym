@@ -13,7 +13,6 @@
             <div class="title">공지/이벤트</div>
             <ul class="class_category_list">
                 <li class="navi-item"><a href="">공지사항</a></li>
-                <li class="navi-item"><a href="">이벤트</a></li>
             </ul>
 	        </div>
 	    </div> 

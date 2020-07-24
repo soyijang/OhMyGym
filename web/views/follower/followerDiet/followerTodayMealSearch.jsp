@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.omg.jsp.followerDiet.model.vo.*"%>
+    <% ArrayList<FoodComponent> list = (ArrayList<FoodComponent>) request.getAttribute("list");
+    System.out.println("list : "+list);
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +12,7 @@
 	href="/omg/resources/css/daumcommon.css">
 <link rel="stylesheet" type="text/css"
 	href="/omg/resources/css/fmypageContainer.css">
-	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 	<style>
 		.save {
 			float: right;
@@ -50,33 +53,21 @@
 </head>
 <body>
 
-	<div class="left-container"
-			style="width: 500px; margin:30px; text-align: left; background: white;">
+	<div class="left-container" style="width: 500px; margin:30px; text-align: left; background: white;">
 				<P style="font-size: 20px; border-bottom: 1px solid gray; background: white;">식단 검색하기</P>
 				<input type="search" name="search" id="eatsearch" placeholder="&nbsp;&nbsp;&nbsp;먹은 음식 검색">
 				
 			<div style="border: 1px solid gray;">
+			
+		<%-- 	<form action="<%=request.getContextPath()%>/SelectFoodComponent.no" method="post"> --%>
 			<table id="food">
+			<% for(FoodComponent f: list){ %>
 				<tr>
-					<td width="150px" height="50px" style="text-align: center;">떡만두국</td>
-					<td width="250px" style="text-align: center;">519 Kcal(1인분)</td>
-					<td><input type="checkbox"></tds>
+					<td width="150px" height="50px" style="text-align: center;"><%=f.getFoodName() %></td>
+					<td width="250px" style="text-align: center;"><%=f.getFoodCalorie() %> Kcal(1인분)</td>
+					<td><input type="checkbox" name="menu"></td>
 				</tr>
-				<tr>
-					<td width="150px"  height="50px" style="text-align: center;">밥</td>
-					<td width="250px" style="text-align: center;">300 Kcal(1인분)</td>
-					<td><input type="checkbox"></tds>
-				</tr>
-				<tr>
-					<td width="150px" height="50px" style="text-align: center;">잡곡밥</td>
-					<td width="250px" style="text-align: center;">352 Kcal(1인분)</td>
-					<td><input type="checkbox"></tds>
-				</tr>
-				<tr>
-					<td width="150px" height="50px" style="text-align: center;">햇반</td>
-					<td width="250px" style="text-align: center;">280 Kcal(1인분)</td>
-					<td><input type="checkbox"></tds>
-				</tr>
+				<%} %>
 				
 			</table>
 			
@@ -99,5 +90,21 @@
 		<div id="selecbutton">
 		<a href='javascript:self.close();'><button id="selec">선택 완료</button></a>
 		</div>
+		</div>
+		<%-- 
+		 <script>
+
+     
+    $(function() {
+       $("#food td").click(function(){
+          var num = $(this).parent().children().eq(0).text();
+         
+         location.href="<%=request.getContextPath()%>/selectOne.no?num="+num;
+         
+       });
+    }); 
+   
+    
+   </script> --%>
 </body>
 </html>
