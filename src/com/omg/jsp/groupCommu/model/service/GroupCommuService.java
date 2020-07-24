@@ -128,4 +128,18 @@ public class GroupCommuService {
 		return list;
 	}
 
+	public int deletePost(String postId) {
+		Connection con = getConncection();
+		
+		int result = new GroupCommuDao().deletePost(con, postId);
+	
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		} 
+		close(con);
+		return result;
+	}
+
 }

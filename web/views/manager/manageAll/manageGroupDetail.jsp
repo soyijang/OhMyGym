@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+	rel="stylesheet">
 <title>오마이짐 관리자 페이지</title>
 <style>
         article#group_commu_article {
@@ -165,6 +168,25 @@
             color:rgb(145, 46, 0)
         }
 
+		div.user_img{
+			display: inline-block;
+		}	
+
+		div.user_img img{
+			border-radius: 70%; 
+			overflow: hidden;
+		}
+
+		div.user_profile{
+			display: inline-block; 
+			vertical-align: top;
+		}
+
+		div.post_Content_img{
+			padding: 20px; 
+			text-align: center;
+		}
+	
         textarea.post_box{
             height: auto;
             border:none;
@@ -356,7 +378,25 @@
         $(".comments_box").css("height", $(".comments_box").height()/2);
     </script>
     <script>
-
+	function removePost(value){
+		var isdelete = confirm("해당 게시물을 삭제하시겠습니까?");
+		if(isdelete){
+			$.ajax({
+				url : "/omg/deleteGroupCommu.manager",
+				data : {
+					postNum : value
+				},
+				type : "post",
+				success : function(data) {
+					selectAllPost();
+				},
+				error : function() {
+					alert("게시물 삭제에 실패했습니다");
+				}
+			})
+		}
+	}
+    
 	function selectAllPost(){
 		$("#add_postBox").val('');
 		var roomId = "<%=groupInfo.getGroupCommuNum()%>";
@@ -367,23 +407,24 @@
 			},
 			type : "post",
 			success : function(data) {
+				var $addPostPart = $("#postcontainer");
+		    	$("#postcontainer").children().remove();
 				for(var key in data){
-					var $addPostPart = $("#postcontainer");
 					$addPostPart.prepend("<div id='postcontainer'>" +
 						"<div class='post_part' id='postcontent'>"+
 						"<div class='user_img' style='display: inline-block;'>"+
 						"<img class='"+data[key].groupUserId+"' width='50px' height='50px'></div>"+
 						"<div id='user_profile' class='user_profile'>"+
 						"<em class='user_name'>"+data[key].groupUserId+"</em><br>"+ 
-						"<span class='upload_time'>"+data[key].groupDate+" "+data[key].groupDateTime+"</span></div><hr>"+
+						"<span class='upload_time'>"+data[key].groupDate+" "+data[key].groupDateTime+"</span></div>"+
+						"<div style='display: inline-block; float: right; cursor: pointer' onclick='removePost("+data[key].groupBoardNum+");'><i class='fas fa-ellipsis-v'></i></div><hr>"+
 						"<div class='post_Content'>"+
 						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
 						"<div id='post_Content_img'>"+"</div>"+
 						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
 						"<span class='like' style='margin-right: 10px; font-weight: bold;'><a style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
 						"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
-						"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
-						"북마크 <a>"+"</a></span></div>"+
+						"</div>"+
 						"<details id='open_comment' open style='margin-top: 15px;'>"+
 						"<summary>댓글</summary>"+
 						"<div class='post_commentback'>"+
@@ -413,10 +454,10 @@
 						$addCommentPart.prepend("<div class='post_part_comment' style='padding: 5px;'>"+
 							"<div class='user_img' style='display: block; float: left; margin-top: 10px;'>"+
 								"<img class='"+data[key].commentUserId+"' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
-							"<div id='user_profile' style='display: block; float: left; margin-left: 15px; margin-top: 10px;'>"+
-								"<em class='user_name_comment' style='font-size: 10px; display: block; float: left;'>"+
+							"<div id='user_profile' style='display: block; float: left; margin-left: 15px; '>"+
+								"<em class='user_name_comment' style=' font-weight: bold; font-size: 10px; display: block; float: left;'>"+
 								data[key].commentUserId+
-								"</em><br> <span class='upload_time_comment' style='font-size: 10px;'>"+"5분전"+"</span>	</div>"+
+								"</em><br> <span class='upload_time_comment' style='font-size: 10px;'>"+data[key].commentDate+"<br>"+data[key].commentTime+"</span></div>"+
 							"<textarea class='comments_box' cols='55' name='post_comments_content' style='display: block; height: 60px; float: left;' readonly>"+
 							data[key].commentContent+"</textarea></div>");
 						

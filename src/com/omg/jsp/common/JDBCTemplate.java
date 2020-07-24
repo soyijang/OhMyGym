@@ -29,11 +29,6 @@ public static Connection getConncection() {
 			String user = prop.getProperty("user");
 			String password = prop.getProperty("password");
 			
-			System.out.println(driver);
-			System.out.println(url);
-			System.out.println(user);
-			System.out.println(password);
-			
 			
 			Class.forName(driver);
 			

@@ -141,7 +141,7 @@
 
         <!--테이블 표시 영역-->
         <article id="tableArea">
-            <div align="center">
+           <div align="center" style="padding-top: 25px; padding-bottom: 25px; width: 100%; background: white; border-radius: 8px;">
                 <table>
                     <tr>
                         <th width="30px;">No</th>
@@ -154,7 +154,6 @@
                         <th width="170px;">세부내용</th>
                         <th width="80px;">환급가능여부</th>
                         <th width="80px;">결제/취소 수단</th>
-                        <th width="80px">상세정보</th>
                     </tr>
                     <% int listnum = list.size(); %>
                     <% for(int i = 0; i < list.size(); i++) {%>
@@ -169,7 +168,6 @@
 	                        <td><%=list.get(i).getContent() %></td>
 	                        <td><%=list.get(i).getIsRefund() %></td>
 	                        <td><%=list.get(i).getOhmoneyMean()%></td>
-	                        <td><button class="btn" id="infoBtn" onclick="">상세정보</button></td>
 	                    </tr>
                     <% listnum = listnum - 1; } %>
                 </table>

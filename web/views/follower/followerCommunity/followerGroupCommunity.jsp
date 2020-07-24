@@ -364,6 +364,10 @@ div.post_commentback{
 	width: 100%; 
 	height: 100%;"
 }
+
+div.Board_side_nav_btn{
+	cursor: pointer;
+}
 </style>
 </head>
 
@@ -396,16 +400,16 @@ div.post_commentback{
 					<div class="Board_side_container">
 						<ul class="side_menu">
 							<li style="padding-right: -20px;">
-								<div class="Board_side_nav_btn">인기</div>
+								<div class="Board_side_nav_btn" id="board_btn_select" onclick="selectDiv('최신');">최신</div>
 							</li>
 							<li>
-								<div class="Board_side_nav_btn" id="board_btn_select">최신</div>
+								<div class="Board_side_nav_btn"  onclick="selectDiv('인기');">인기</div>
 							</li>
 							<li>
-								<div class="Board_side_nav_btn">운동</div>
+								<div class="Board_side_nav_btn"  onclick="selectDiv('운동');">운동</div>
 							</li>
 							<li>
-								<div class="Board_side_nav_btn">식단</div>
+								<div class="Board_side_nav_btn"  onclick="selectDiv('식단');">식단</div>
 							</li>
 						</ul>
 					</div>
@@ -426,7 +430,13 @@ div.post_commentback{
 									</div>
 									<div id="user_profile" class="post_userprofile">
 										<em class="user_name"><%=loginUser.getName()%>
-										</em><br>
+										</em>
+										<select style="float: right;" id="postType">
+											<option>운동</option>
+											<option>식단</option>
+										</select>
+										 
+										<br>
 										<!-- 사용자 프로필 -->
 										<input type="file" name="selectuploadImg" id="selectuploadImg"
 											onchange="loadImg(this)" style="display: none"> <a
@@ -460,46 +470,83 @@ div.post_commentback{
 	
 	<script>
 
-	function selectAllPost(){
+	function selectAllPost(value){
+		$("#postcontainer").children().remove();
 		$("#add_postBox").val('');
 		var roomId = "<%=matchInfo.getGroupCommuNum()%>";
 		$.ajax({
 			url : "/omg/selectGroupCommu.follower",
 			data : {
-				roomId : roomId
+				roomId : roomId,
+				type : value
 			},
 			type : "post",
 			success : function(data) {
 				for(var key in data){
 					var $addPostPart = $("#postcontainer");
-					$addPostPart.prepend("<div id='postcontainer'>" +
-						"<div class='post_part' id='postcontent'>"+
-						"<div class='user_img' style='display: inline-block;'>"+
-						"<img class='"+data[key].groupUserId+"' width='50px' height='50px'></div>"+
-						"<div id='user_profile' class='user_profile'>"+
-						"<em class='user_name'>"+data[key].groupUserId+"</em><br>"+ 
-						"<span class='upload_time'>"+data[key].groupDate+" "+data[key].groupDateTime+"</span></div><hr>"+
-						"<div class='post_Content'>"+
-						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
-						"<div id='post_Content_img'>"+"</div>"+
-						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
-						"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data[key].groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
-						"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
-						"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
-						"북마크 <a>"+"</a></span></div>"+
-						"<details id='open_comment' open style='margin-top: 15px;'>"+
-						"<summary>댓글</summary>"+
-						"<div class='post_commentback'>"+
-						"<div id='post_comments"+data[key].groupBoardNum+"'>"+"</div>"+
-							"<div id='add_comments'>"+
-									"<div class='add_part_comment' style='padding: 5px; min-height: 40px;'>"+
-										"<div style='float: left;'>"+
-											"<textarea id='input_comment"+data[key].groupBoardNum+"' onclick='printData("+data[key].groupBoardNum+");' placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
-											"</textarea>"+
-											"<button id='add_comment_btn' onclick='addReply("+data[key].groupBoardNum+");'>입력하기</button>"+
-											"</div></div></div></div></details></div></div>");
-					selectLikes(data[key].groupBoardNum);
-			        profileload(data[key].groupUserId);
+					if(value == '최신'){
+						$addPostPart.prepend("<div id='postcontainer'>" +
+								"<div class='post_part' id='postcontent'>"+
+								"<div class='user_img' style='display: inline-block;'>"+
+								"<img class='"+data[key].groupUserId+"' width='50px' height='50px'></div>"+
+								"<div id='user_profile' class='user_profile'>"+
+								"<em class='user_name'>"+data[key].groupUserId+"</em><br>"+ 
+								"<span class='upload_time'>"+data[key].groupDate+" "+data[key].groupDateTime+"</span></div>"+
+								"<div style='display: inline-block; float: right;'><i class='fas fa-ellipsis-v'></i></div>"+"<div style='margin-left: 60px; font-size: 0.8em; font-weight: bold;'>#"+data[key].groupType+"</div><hr>"+
+								"<div class='post_Content'>"+
+								"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
+								"<div id='post_Content_img'>"+"</div>"+
+								"<div id='MarkAndLike' style='margin-top: 20px;'>"+
+								"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data[key].groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
+								"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
+								"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
+								"북마크 <a>"+"</a></span></div>"+
+								"<details id='open_comment' open style='margin-top: 15px;'>"+
+								"<summary>댓글</summary>"+
+								"<div class='post_commentback'>"+
+								"<div id='post_comments"+data[key].groupBoardNum+"'>"+"</div>"+
+									"<div id='add_comments'>"+
+											"<div class='add_part_comment' style='padding: 5px; min-height: 40px;'>"+
+												"<div style='float: left;'>"+
+													"<textarea id='input_comment"+data[key].groupBoardNum+"' onclick='printData("+data[key].groupBoardNum+");' placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
+													"</textarea>"+
+													"<button id='add_comment_btn' onclick='addReply("+data[key].groupBoardNum+");'>입력하기</button>"+
+													"</div></div></div></div></details></div></div>");
+							selectLikes(data[key].groupBoardNum);
+					        profileload(data[key].groupUserId);
+					}else{
+						if(data[key].groupType == value){
+							$addPostPart.prepend("<div id='postcontainer'>" +
+								"<div class='post_part' id='postcontent'>"+
+								"<div class='user_img' style='display: inline-block;'>"+
+								"<img class='"+data[key].groupUserId+"' width='50px' height='50px'></div>"+
+								"<div id='user_profile' class='user_profile'>"+
+								"<em class='user_name'>"+data[key].groupUserId+"</em><br>"+ 
+								"<span class='upload_time'>"+data[key].groupDate+" "+data[key].groupDateTime+"</span></div>"+
+								"<div style='display: inline-block; float: right;'><i class='fas fa-ellipsis-v'></i></div>"+"<div style='margin-left: 60px; font-size: 0.8em; font-weight: bold;'>#"+data[key].groupType+"</div><hr>"+
+								"<div class='post_Content'>"+
+								"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
+								"<div id='post_Content_img'>"+"</div>"+
+								"<div id='MarkAndLike' style='margin-top: 20px;'>"+
+								"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data[key].groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
+								"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
+								"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
+								"북마크 <a>"+"</a></span></div>"+
+								"<details id='open_comment' open style='margin-top: 15px;'>"+
+								"<summary>댓글</summary>"+
+								"<div class='post_commentback'>"+
+								"<div id='post_comments"+data[key].groupBoardNum+"'>"+"</div>"+
+									"<div id='add_comments'>"+
+											"<div class='add_part_comment' style='padding: 5px; min-height: 40px;'>"+
+												"<div style='float: left;'>"+
+													"<textarea id='input_comment"+data[key].groupBoardNum+"' onclick='printData("+data[key].groupBoardNum+");' placeholder='댓글을 입력해주세요.' onkeydown='resize(this)' onkeyup='resize(this)'class='input_comments_box' cols='42' name='post_comments_content' style='float: left; margin-left: 30px; border-radius: 10px; resize: none; display: block; height: auto; float: left;'>"+
+													"</textarea>"+
+													"<button id='add_comment_btn' onclick='addReply("+data[key].groupBoardNum+");'>입력하기</button>"+
+													"</div></div></div></div></details></div></div>");
+							selectLikes(data[key].groupBoardNum);
+					        profileload(data[key].groupUserId);
+						}	
+					}
 				}
 				updatePosts();
 				selectAllComment();
@@ -522,10 +569,10 @@ div.post_commentback{
 						$addCommentPart.prepend("<div class='post_part_comment' style='padding: 5px;'>"+
 							"<div class='user_img' style='display: block; float: left; margin-top: 10px;'>"+
 								"<img class='"+data[key].commentUserId+"' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
-							"<div id='user_profile' style='display: block; float: left; margin-left: 15px; margin-top: 10px;'>"+
-								"<em class='user_name_comment' style='font-size: 10px; display: block; float: left;'>"+
+							"<div id='user_profile' style='display: block; float: left; margin-left: 15px;'>"+
+								"<em class='user_name_comment' style='font-size: 10px; font-weight: bold; display: block; float: left;'>"+
 								data[key].commentUserId+
-								"</em><br> <span class='upload_time_comment' style='font-size: 10px;'>"+"5분전"+"</span>	</div>"+
+								"</em><br> <span class='upload_time_comment' style='font-size: 10px;'>"+data[key].commentDate+"<br>"+data[key].commentTime+"</span></div>"+
 							"<textarea class='comments_box' cols='55' name='post_comments_content' style='display: block; height: 60px; float: left;' readonly>"+
 							data[key].commentContent+"</textarea></div>");
 						
@@ -540,9 +587,9 @@ div.post_commentback{
 	}
 	
 	
-	$(function(){
-		selectAllPost();
-	})
+// 	$(function(){
+// 		selectAllPost();
+// 	})
 	
 	
 	</script>
@@ -608,6 +655,7 @@ div.post_commentback{
 			var writerId =  "<%=loginUser.getMemberId()%>";
 			var writer = "<%=loginUser.getName()%>";
 			var content = $("#add_postBox").val();
+			var postType = $("#postType option:selected").val();
 			$("#add_postBox").val('');
 			$.ajax({
 				url : "/omg/insertGroupCommu.follower",
@@ -615,7 +663,8 @@ div.post_commentback{
 					roomId : roomId,
 					writer : writer,
 					content : content,
-					writerId : writerId
+					writerId : writerId,
+					postType : postType
 				},
 				type : "post",
 				success : function(data) {
@@ -626,7 +675,8 @@ div.post_commentback{
 						"<img class='"+data.groupUserId+"' width='50px' height='50px'></div>"+
 						"<div id='user_profile' class='user_profile'>"+
 						"<em class='user_name'>"+data.groupUserId+"</em><br>"+ 
-						"<span class='upload_time'>"+"</span></div><hr>"+
+						"<span class='upload_time'>"+"방금전"+"</span></div>"+
+						"<div style='display: inline-block; float: right;'><i class='fas fa-ellipsis-v'></i></div>"+"<div style='margin-left: 60px; font-size: 0.8em; font-weight: bold;'>#"+data.groupType+"</div><hr>"+
 						"<div class='post_Content'>"+
 						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data.groupContent+"</textarea></div>"+	
 						"<div id='post_Content_img'>"+"</div>"+
@@ -687,9 +737,9 @@ div.post_commentback{
 							"<div class='user_img' style='display: block; float: left; margin-top: 10px;'>"+
 								"<img class='"+data.commentUserId+"' width='30px' height='30px' style='border-radius: 70%; overflow: hidden;'></div>"+
 							"<div id='user_profile' style='display: block; float: left; margin-left: 15px; margin-top: 10px;'>"+
-								"<em class='user_name_comment' style='font-size: 10px; display: block; float: left;'>"+
+								"<em class='user_name_comment' style='font-size: 10px; font-weight: bold; display: block; float: left;'>"+
 								data.commentUserId+
-								"</em><br> <span class='upload_time_comment' style='font-size: 10px;'>"+"5분전"+"</span>	</div>"+
+								"</em><br> <span class='upload_time_comment' style='font-size: 10px;'>방금전</span></div>"+
 							"<textarea class='comments_box' cols='55' name='post_comments_content' style='display: block; height: 60px; float: left;' readonly>"+
 							data.commentContent+"</textarea></div>");
  					 profileload(data.commentUserId);
@@ -778,6 +828,15 @@ div.post_commentback{
 	
 	</script>
 	<!-- 프로필 사진을 불러오는 ajax 스크립트 -->
+	<script>
+	selectDiv("최신");
+		function selectDiv(value){
+			selectAllPost(value)
+		}
+	
+	
+	</script>
+	
 	<script>
 	var profileManageCode;
 

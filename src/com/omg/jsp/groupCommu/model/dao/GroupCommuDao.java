@@ -44,7 +44,7 @@ public class GroupCommuDao {
 		try {
 			pstmt = con.prepareStatement(query);
 				
-			pstmt.setString(1, "운동");
+			pstmt.setString(1, requestPost.getGroupType());
 			pstmt.setString(2, requestPost.getGroupContent());
 			pstmt.setString(3, requestPost.getGroupUserId());
 			pstmt.setString(4, "follower");
@@ -335,6 +335,30 @@ public class GroupCommuDao {
 		
 		return list;
 
+	}
+
+	public int deletePost(Connection con, String postId) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("deletePost");	
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1,postId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 
 }
