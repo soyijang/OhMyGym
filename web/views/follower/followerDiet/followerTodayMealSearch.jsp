@@ -61,13 +61,13 @@
 			
 		<%-- 	<form action="<%=request.getContextPath()%>/SelectFoodComponent.no" method="post"> --%>
 			<table id="food">
-			<% for(FoodComponent f: list){ %>
+		<%-- 	<% for(FoodComponent f: list){ %>
 				<tr>
 					<td width="150px" height="50px" style="text-align: center;"><%=f.getFoodName() %></td>
 					<td width="250px" style="text-align: center;"><%=f.getFoodCalorie() %> Kcal(1인분)</td>
 					<td><input type="checkbox" name="menu"></td>
 				</tr>
-				<%} %>
+				<%} %> --%>
 				
 			</table>
 			
