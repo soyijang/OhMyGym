@@ -9,7 +9,7 @@
 </head>
 <body style="background-color: lightgray;">
 	
-	<div align="center" style="margin-top: 2010px; border: 3px black;">
+	<div align="center" style="margin-top: 200px; border: 3px black;">
 		<br><img src="/omg/resources/img/alert.png" style="width: 7%; height: 7%">
    	 	<h1 align="center">오마이짐 페이지 오류안내</h1>
     	<h3 align="center" style="color: gray;"><%= msg%></h3>

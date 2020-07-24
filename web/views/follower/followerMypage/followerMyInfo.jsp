@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/omg/resources/css/fmypageContainer.css">
 <link rel="stylesheet" type="text/css" href="/omg/resources/css/tjob.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <title>Insert title here</title>
 <style type="text/css">
 
@@ -41,7 +43,7 @@
 
 <body>
 
-	<section style="height: 1500px;">
+	<section style="height: 1700px;">
 		<div class="mypage-contents">
 			<%@ include file="followerMypageAside.jsp"%>
 			<script>
@@ -133,9 +135,11 @@
 									<input type="file" id="profile" name="profile" class="file-input">
 									</label>
 										
-									<label id="save">
-									<button onclick="profileImg();"></button>
-									</label>				
+									<div style="vertical-align: middle; background-color:orangered; height: 35px; width: 110px;">
+									<a style ="vertical-align: middle; text-align: center; cursor:pointer; color: white; font-weight: bold;" 
+									onclick="profileImg();">프로필사진 저장
+									</a>
+									</div>
 							</div>
 						</form>
 		
@@ -243,24 +247,23 @@
 									<p>※ 휴대폰번호 수정을 위해서는 휴대폰 본인인증이 필요합니다.</p>
 								</div>
 							</div>
-							<!-- <div class="term-container">
+							 <div class="term-container">
 								<div class="term-wrapper">
 									<input readonly="" type="radio" name="isAgreeAllmarketing"
 										class="term-input"><label class="term-label">추천상품,
 										이벤트 및 마케팅 정보 수신에 동의(선택)</label>
 								</div>
 								<div class="term-wrapper sub-term">
-									<input type="radio" name="email_acceptance"
+									<input type="checkbox" name="email_acceptance"
 										class="term-input"><label class="term-label email">이메일</label><input
-										type="radio" name="sms_acceptance" class="term-input"><label
+										type="checkbox" name="sms_acceptance" class="term-input"><label
 										class="term-label">SMS</label>
 								</div>
-							<br> -->
-							
+							<br> 
 							<!-- 버튼영역 -->
 							<br>
 							<div align="center">
-								<button type="submit" style="background-color:orangered; color: white; font-weight:bold;  width: 50px; height: 30px">저장</button>
+								<button type="submit" onclick="alert('회원정보수정이 완료되었습니다!');" style="background-color:orangered; color: white; font-weight:bold;  width: 50px; height: 30px">저장</button>
 								<button style="background-color:gray; color: white; font-weight:bold;  width: 50px; height: 30px">취소</button>
 							</div>
 							
