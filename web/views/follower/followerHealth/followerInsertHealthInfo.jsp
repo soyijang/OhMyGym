@@ -230,7 +230,7 @@ th {
 		<article id="healthInfoNowArea">
 			<!-- 현재 건강정보 출력 -->
 			<div id="healthInfoNow" align="center">
-				<table style="width: 90%;" id="healthInfoNowTable">
+				<table style="width: 90%; text-align: center;" id="healthInfoNowTable">
 					<tr>
 						<th colspan="4" style="height: 50px;"><h3><%= loginUser.getName() %>님의 건강정보</h3></th>
 					</tr>

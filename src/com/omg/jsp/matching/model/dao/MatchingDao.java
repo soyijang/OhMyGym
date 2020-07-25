@@ -303,7 +303,7 @@ public class MatchingDao {
 		}
 		return trList;
 	}
-	public HashMap<String, Object> selectGradeAvg(Connection con) {
+	public HashMap<String, Object> selectGradeAvg(Connection con, ArrayList<String> trainerList) {
 		Statement stmt = null;
 		ResultSet rset = null;
 		HashMap<String, Object> avgMap = new HashMap<String, Object>();
@@ -317,6 +317,8 @@ public class MatchingDao {
 			while(rset.next()) {
 				avgMap.put(rset.getString("TRAINER_ID"), (Object) rset.getDouble("AVG(GRADE)"));
 			}
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -746,9 +748,30 @@ public class MatchingDao {
 		
 		return result;
 	}
-	
-	
-	
+	public ArrayList<String> selectTrainerIdList(Connection con) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<String> trainerIdList = new ArrayList<String>();
+		String trainerId = "";
+		
+		String query = prop.getProperty("selectTrainerNameList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				trainerId = rset.getString("MEMBER_ID");
+				
+				trainerIdList.add(trainerId);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return trainerIdList;
+	}
 }
 
 
