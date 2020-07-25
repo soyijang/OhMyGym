@@ -191,4 +191,37 @@ public class FileDao {
 		return resultFile;
 	}
 
+
+	public Files checkPost(Connection con, String boardId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Files resultFile = null;
+		
+		String query = prop.getProperty("checkPostImg");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, boardId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				resultFile = new Files();
+				resultFile.setFileCode(rset.getString("FILE_CODE"));
+				resultFile.setFileManageName(rset.getString("FILE_MANAGE_NAME"));
+				resultFile.setFileOriginName(rset.getString("FILE_ORIGIN_NAME"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return resultFile;
+	}
+
 }

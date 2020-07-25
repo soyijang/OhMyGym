@@ -9,9 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.omg.jsp.common.PageInfo;
 import com.omg.jsp.member.model.dao.MemberDao;
 import com.omg.jsp.ohmoney.model.vo.OhMoney;
 import com.omg.jsp.ohmoney.model.vo.ReFundOhMoney;
@@ -212,22 +214,29 @@ public class OhMoneyDao {
 		return refundList;
 	}
 
-	public ArrayList<OhMoney> manageListOhMoney(Connection con) {
+	public ArrayList<OhMoney> manageListOhMoney(Connection con, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		ArrayList<OhMoney> list = new ArrayList<OhMoney>();
 		
-		String query = prop.getProperty("manageListOhMoney");
+		String query = prop.getProperty("listOhMoneyPage");
 		
 		try {
 			pstmt = con.prepareStatement(query);
+	
+			int startRow = (((pi.getMaxPage()-1) - (pi.getCurrentPage() -1)) * pi.getLimit() + (pi.getListCount() % pi.getLimit()));
 			
+			int endRow =  startRow - pi.getLimit() + 1;
+
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);		
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				OhMoney moneyData = new OhMoney();
 				
+				moneyData.setRowNum(rset.getInt("RNUM"));
 				moneyData.setManageCode(rset.getString("OMONEY_MANAGECODE"));
 				moneyData.setOhmoneyDate(rset.getString("OMONEY_DATE"));
 				moneyData.setOhmoneyType(rset.getString("OMONEY_TYPE"));
@@ -251,22 +260,29 @@ public class OhMoneyDao {
 		return list;
 	}
 
-	public ArrayList<ReFundOhMoney> manageListRefund(Connection con) {
+	public ArrayList<ReFundOhMoney> manageListRefund(Connection con, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		ArrayList<ReFundOhMoney> list = new ArrayList<ReFundOhMoney>();
 		
-		String query = prop.getProperty("manageListRefund");
+		String query = prop.getProperty("listReturnMoneyPage");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			
+			int startRow = (((pi.getMaxPage()-1) - (pi.getCurrentPage() -1)) * pi.getLimit() + (pi.getListCount() % pi.getLimit()));
+			
+			int endRow =  startRow - pi.getLimit() + 1;
+
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);		
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				ReFundOhMoney moneyData = new ReFundOhMoney();
 				
+				moneyData.setRowNum(rset.getInt("RNUM"));
 				moneyData.setRefundNum(rset.getString("RETURN_NUM"));
 				moneyData.setMemberId(rset.getString("MEMBER_ID"));
 				moneyData.setMemberName(rset.getString("MEMBER_NAME"));
@@ -425,25 +441,32 @@ public class OhMoneyDao {
 		return result;
 	}
 
-	public ArrayList<OhMoney> listDirectMoney(Connection con) {
+	public ArrayList<OhMoney> listDirectMoney(Connection con, PageInfo pi) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		ArrayList<OhMoney> directList = null;
 		
-		String query = prop.getProperty("listDirectMoney");
+		String query = prop.getProperty("listDirectMoneyPage");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			
-			directList = new ArrayList<OhMoney>();
+			int startRow = (((pi.getMaxPage()-1) - (pi.getCurrentPage() -1)) * pi.getLimit() + (pi.getListCount() % pi.getLimit()));
 			
+			int endRow =  startRow - pi.getLimit() + 1;
+			
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);		
 			rset = pstmt.executeQuery();
+
+			directList = new ArrayList<OhMoney>();
 			
 			while(rset.next()) {
 				OhMoney moneyData = new OhMoney();
 				
+				moneyData.setRowNum(rset.getInt("RNUM"));
 				moneyData.setManageCode(rset.getString("OMONEY_MANAGECODE"));
 				moneyData.setUserId(rset.getString("MEMBER_ID"));
 				moneyData.setOhmoneyAmount(rset.getString("OMONEY_AMOUNT"));
@@ -491,6 +514,82 @@ public class OhMoneyDao {
 		
 			
 		return result;
+	}
+
+	public int getDirectListCount(Connection con) {
+
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("directListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("listCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
+	public int getReturnCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("returnListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return listCount;
 	}
 
 }

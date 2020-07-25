@@ -51,4 +51,13 @@ public class FileService {
 		return file;
 	}
 
+	public Files checkPost(String boardId) {
+		Connection con = getConncection();
+		Files file = new FileDao().checkPost(con, boardId);
+		
+		close(con);
+		
+		return file;
+	}
+
 }

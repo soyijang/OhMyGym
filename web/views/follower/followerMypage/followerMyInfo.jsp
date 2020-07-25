@@ -69,6 +69,18 @@
 				     })
 				}		
 				profileload();
+				
+				
+				function loadImg(value) {
+					if (value.files && value.files[0]) {
+						var reader = new FileReader();
+
+						reader.onload = function(e) {
+							$("#profileImg").attr("src", e.target.result);
+						}
+						reader.readAsDataURL(value.files[0]);
+					}
+				}
 			</script>
 			<script>
 								function changeProfile(code){
@@ -129,10 +141,10 @@
 					<div class="info-body">
  						<form enctype="multipart/form-data" id="profileUploadForm">
 							<div align="center" id="profile-area" class="box-file-input">
-								<img id="profileImg" width="350" height="200"><br><br>
+								<img id="profileImg" width="350" height="200" ><br><br>
 								
 									<label id="upload">
-									<input type="file" id="profile" name="profile" class="file-input">
+									<input type="file" id="profile" name="profile" class="file-input"onchange="loadImg(this);">
 									</label>
 										
 									<div style="vertical-align: middle; background-color:orangered; height: 35px; width: 110px;">

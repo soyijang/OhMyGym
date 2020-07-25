@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "java.util.*" import="com.omg.jsp.ohmoney.model.vo.OhMoney"%>
-<% ArrayList<OhMoney> list = (ArrayList<OhMoney>) request.getAttribute("directMoneyList");%>
+    pageEncoding="UTF-8" import = "java.util.*" import="com.omg.jsp.ohmoney.model.vo.OhMoney, com.omg.jsp.common.*" %>
+<% ArrayList<OhMoney> list = (ArrayList<OhMoney>) request.getAttribute("directMoneyList");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -338,7 +346,7 @@
                             <p style="text-align: left; margin-left: 20px; font-weight: bold; font-size: 17px;">수기지급사유</p>
                             <table width="600px"style="border-top: 2px solid; margin-top: 5px;">
                                 <tr height="40px">
-                                    <td><input type="radio" id="systemError" name="reason" value="시스템 에러로 인한 수기지급"><label for="systemError"> 시스템 에러&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+                                    <td><input type="radio" id="systemError" name="reason" value="시스템 에러 복구를 위한 수기지급"><label for="systemError"> 시스템 에러&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
                                     <td><input type="radio" id="event" name="reason" value="이벤트 진행 결과로 인한 수기지급"><label for="event">이벤트진행&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
                                     <td><input type="radio" id="other" name="reason">&nbsp;<input id="otherText" type="text" for="other" onkeyup="otherTextIn();" placeholder="기타 사유"></td>
                                 </tr>
@@ -483,6 +491,38 @@
                     <%listNum -=1; } %>
                 </table>
             </div>
+            
+            <div class="pagingArea" align="center">
+			<button onclick="location.href='<%=request.getContextPath()%>/directList.manager?currentPage=1'"><<</button>
+			<% if(currentPage <= 1) {%>
+			<button disabled> < </button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/directList.manager?currentPage=<%=currentPage-1%>'"><</button>
+			<%} %>
+
+			<%
+				for (int p = startPage; p <= endPage; p++) {
+					if (p == currentPage) {
+			%>
+					<button disabled><%=p %></button>
+			<%
+				} else {
+			%>
+					<button onclick="location.href='<%=request.getContextPath()%>/directList.manager?currentPage=<%=p%>'"><%=p %></button>
+			<%
+				}
+
+				}
+			%>
+			<%
+				if (currentPage >= maxPage) {
+			%>
+			<button disabled> > </button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/directList.manager?currentPage=<%=currentPage+1%>'">></button>
+			<%} %>
+			<button onclick="location.href='<%=request.getContextPath()%>/directList.manager?currentPage=<%=maxPage%>'">>></button>
+		</div>
         </article>
         <!--테이블 표시 영역 종료-->
 
