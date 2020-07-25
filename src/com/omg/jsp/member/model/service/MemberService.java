@@ -194,6 +194,38 @@ public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
 		
 		return list;
 	}
+
+	//비밀번호찾기전 회원인지 확인
+	public Member findPwd(Member findPwdUser) {
+		  Connection con = getConncection();
+		   
+		   Member member = new MemberDao().findPwd(con, findPwdUser);
+		   if(member != null) {
+		      commit(con);
+		   }else {
+		      close(con);
+		   }
+		   
+		   return member;
+	}
+
+	//비밀번호변경
+	public int updatePwd(Member requestMember) {
+
+		 Connection con = getConncection();
+		   int result = new MemberDao().updatePwd(con, requestMember);
+		   
+		   if(result > 0) {
+		      commit(con);
+		   }else {
+		      rollback(con);
+		   }
+		   
+		   close(con);
+		   return result;
+	}
+
+
 	
 
 }

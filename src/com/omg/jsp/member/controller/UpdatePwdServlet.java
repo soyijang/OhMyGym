@@ -1,27 +1,28 @@
 package com.omg.jsp.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.omg.jsp.member.model.service.MemberService;
 import com.omg.jsp.member.model.vo.Member;
 
 /**
- * Servlet implementation class FindIdServlet
+ * Servlet implementation class UpdatePwdServlet
  */
-@WebServlet("/findId.me")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/update.pwd")
+public class UpdatePwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdServlet() {
+    public UpdatePwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,31 +33,34 @@ public class FindIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF8");
-		String name = request.getParameter("findId_Name");
-		String phone = request.getParameter("findId_Phone");
-		String phone2 = phone.substring(0, 3) + "-" + phone.substring(3, 7) + "-" + phone.substring(7, 11);
+		HttpSession session = request.getSession();
+		Member loginUser = (Member) session.getAttribute("findUser");
+		String userId = loginUser.getMemberId();
+		String userType = loginUser.getMemberDivision();
 		
-		System.out.println("서블릿 findid_name: " + name);
-		System.out.println("서블릿 findid_phone: " + phone2);
+		String page = "";
+		String password = "";
+		String password1 = request.getParameter("pass1");
+		String password2 = request.getParameter("pass2");
 		
-		Member findIdUser = new Member();
-		findIdUser.setName(name);
-		findIdUser.setPhone(phone2);
+		if(password1.equals(password2)) {
 		
-		Member findUser = new MemberService().findId(findIdUser);
-		
-		if(findUser != null) {
-			request.getSession().setAttribute("findUser", findUser);
+			password = password1;
 			
-			//1. 트레이너인지 팔로워인지 구분하여 화면에 안내.
-			//2. 페이지에서는 구분과 아이디 보여줌
-			response.sendRedirect("views/visitor/findId.jsp");
-		}else {
-			request.setAttribute("msg","회원로그인실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
-	}
+			Member requestMember = new Member();
+			requestMember.setMemberId(userId);
+			requestMember.setMemberPwd(password);
+			System.out.println("userId : "+ userId);
+			System.out.println("requestMember : " + requestMember);
+			
+			int result = new MemberService().updatePwd(requestMember);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			new Gson().toJson(result, response.getWriter());
+			}
+			
+		} 
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
