@@ -3,6 +3,7 @@ package com.omg.jsp.ohmoney.model.vo;
 import java.io.Serializable;
 
 public class OhMoney implements Serializable{
+	private int rowNum;
 	private String userId;
 	private String userName;
 	private String ohmoneyType;
@@ -154,6 +155,14 @@ public class OhMoney implements Serializable{
 
 	public void setNofundBal(int nofundBal) {
 		this.nofundBal = nofundBal;
+	}
+
+	public int getRowNum() {
+		return rowNum;
+	}
+
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
 	}
 	
 	

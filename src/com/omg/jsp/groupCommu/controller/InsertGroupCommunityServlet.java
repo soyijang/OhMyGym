@@ -29,12 +29,14 @@ public class InsertGroupCommunityServlet extends HttpServlet {
 		String writer = request.getParameter("writer");
 		String content = request.getParameter("content");
 		String type = request.getParameter("postType");
+		String fileCode = request.getParameter("fileCode");
 		
 		GroupCommuPost requestPost = new GroupCommuPost();
 		
 		requestPost.setGroupUserId(writerId);
 		requestPost.setGroupContent(content);
 		requestPost.setGroupType(type);
+		requestPost.setGroupFileCode(fileCode);
 		
 		int result = new GroupCommuService().insertPost(requestPost, roomId);
 		

@@ -8,6 +8,7 @@ import static com.omg.jsp.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.omg.jsp.common.PageInfo;
 import com.omg.jsp.ohmoney.model.dao.OhMoneyDao;
 import com.omg.jsp.ohmoney.model.vo.OhMoney;
 import com.omg.jsp.ohmoney.model.vo.ReFundOhMoney;
@@ -81,20 +82,20 @@ public class OhMoneyService {
 		return refundList;
 	}
 
-	public ArrayList<OhMoney> manageListOhMoney() {
+	public ArrayList<OhMoney> manageListOhMoney(PageInfo pi) {
 		Connection con = getConncection();
 		
-		ArrayList<OhMoney> list = new OhMoneyDao().manageListOhMoney(con);
+		ArrayList<OhMoney> list = new OhMoneyDao().manageListOhMoney(con, pi);
 		
 		close(con);
 		
 		return list;
 	}
 
-	public ArrayList<ReFundOhMoney> manageListRefund() {
+	public ArrayList<ReFundOhMoney> manageListRefund(PageInfo pi) {
 		Connection con = getConncection();
 		
-		ArrayList<ReFundOhMoney> list = new OhMoneyDao().manageListRefund(con);
+		ArrayList<ReFundOhMoney> list = new OhMoneyDao().manageListRefund(con, pi);
 		
 		close(con);
 		
@@ -175,11 +176,11 @@ public class OhMoneyService {
 		return result;
 	}
 
-	public ArrayList<OhMoney> listDirectMoney() {
+	public ArrayList<OhMoney> listDirectMoney(PageInfo pi) {
 		
 		Connection con = getConncection();
 		
-		ArrayList<OhMoney> directList = new OhMoneyDao().listDirectMoney(con);
+		ArrayList<OhMoney> directList = new OhMoneyDao().listDirectMoney(con, pi);
 		
 		close(con);
 		
@@ -199,6 +200,36 @@ public class OhMoneyService {
 		} close(con);
 		
 		return result;
+	}
+
+	public int getDirectListCount() {
+		Connection con = getConncection();
+		
+		int listCount = new OhMoneyDao().getDirectListCount(con);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	public int getListCount() {
+		Connection con = getConncection();
+		
+		int listCount = new OhMoneyDao().getListCount(con);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	public int getReturnCount() {
+		Connection con = getConncection();
+		
+		int listCount = new OhMoneyDao().getReturnCount(con);
+		
+		close(con);
+		
+		return listCount;
 	}
 
 }

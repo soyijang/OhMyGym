@@ -439,8 +439,9 @@ div.Board_side_nav_btn{
 										 
 										<br>
 										<!-- 사용자 프로필 -->
+										<form id="ImgUploadForm">
 										<input type="file" name="selectuploadImg" id="selectuploadImg"
-											onchange="loadImg(this)" style="display: none"> <a
+											onchange="loadImg(this)" style="display: none"></form> <a
 											id="addImgBtn" style=""
 											onclick="document.all.selectuploadImg.click()">이미지추가</a>
 										<button id="uploadBtn" onclick="addPost();"
@@ -496,7 +497,7 @@ div.Board_side_nav_btn{
 								"<div style='display: inline-block; float: right;'><i class='fas fa-ellipsis-v'></i></div>"+"<div style='margin-left: 60px; font-size: 0.8em; font-weight: bold;'>#"+data[key].groupType+"</div><hr>"+
 								"<div class='post_Content'>"+
 								"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
-								"<div id='post_Content_img'>"+"</div>"+
+								"<div id='post_Content_img'>"+"<img style='margin-left: 160px; width: 150px; height: 150px;' id='postFile"+data[key].groupBoardNum+"'>"+"</div>"+
 								"<div id='MarkAndLike' style='margin-top: 20px;'>"+
 								"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data[key].groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
 								"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
@@ -515,6 +516,7 @@ div.Board_side_nav_btn{
 													"</div></div></div></div></details></div></div>");
 							selectLikes(data[key].groupBoardNum);
 					        profileload(data[key].groupUserId);
+					        imgPostload(data[key].groupBoardNum);
 					}else{
 						if(data[key].groupType == value){
 							$addPostPart.prepend("<div id='postcontainer'>" +
@@ -527,7 +529,7 @@ div.Board_side_nav_btn{
 								"<div style='display: inline-block; float: right;'><i class='fas fa-ellipsis-v'></i></div>"+"<div style='margin-left: 60px; font-size: 0.8em; font-weight: bold;'>#"+data[key].groupType+"</div><hr>"+
 								"<div class='post_Content'>"+
 								"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
-								"<div id='post_Content_img'>"+"</div>"+
+								"<div id='post_Content_img'>"+"<img style='margin-left: 160px; width: 150px; height: 150px;' id='postFile"+data[key].groupBoardNum+"'>"+"</div>"+
 								"<div id='MarkAndLike' style='margin-top: 20px;'>"+
 								"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data[key].groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
 								"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
@@ -546,6 +548,7 @@ div.Board_side_nav_btn{
 													"</div></div></div></div></details></div></div>");
 							selectLikes(data[key].groupBoardNum);
 					        profileload(data[key].groupUserId);
+					        imgPostload(data[key].groupBoardNum);
 						}	
 					}
 				}
@@ -599,21 +602,7 @@ div.Board_side_nav_btn{
 			obj.style.height = "1px";
 			obj.style.height = (12 + obj.scrollHeight) + "px";
 		}
-
-		var inputImg = 1;
-		function loadImg(value) {
-			if (value.files && value.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					var inputImgArea = document.getElementById("add_img");
-					inputImgArea.innerHTML += "<img id='titleImg"+inputImg+"' width='150' height='150'><br>";
-					$("#titleImg" + inputImg).attr("src", e.target.result);
-					inputImg = inputImg + 1;
-				}
-				reader.readAsDataURL(value.files[0]);
-			}
-		}
+		
 	</script>
 
 	<script>
@@ -650,13 +639,14 @@ div.Board_side_nav_btn{
 			obj.style.height = (12 + obj.scrollHeight) + "px";
 			$(obj).parent().parent("div .add_part_comment").css("height",$(obj).height() + 12);
 		}
-
+		var fileCode = "";
 		function addPost() {
 			var roomId = "<%=matchInfo.getGroupCommuNum()%>";
 			var writerId =  "<%=loginUser.getMemberId()%>";
 			var writer = "<%=loginUser.getName()%>";
 			var content = $("#add_postBox").val();
 			var postType = $("#postType option:selected").val();
+			console.log("입력파일코드: " + fileCode)
 			$("#add_postBox").val('');
 			$.ajax({
 				url : "/omg/insertGroupCommu.follower",
@@ -665,10 +655,12 @@ div.Board_side_nav_btn{
 					writer : writer,
 					content : content,
 					writerId : writerId,
-					postType : postType
+					postType : postType,
+					fileCode : fileCode
 				},
 				type : "post",
 				success : function(data) {
+					console.log("입력? " + fileCode);
 					var $addPostPart = $("#postcontainer");
 					$addPostPart.prepend("<div id='postcontainer'>" +
 						"<div class='post_part' id='postcontent'>"+
@@ -680,7 +672,7 @@ div.Board_side_nav_btn{
 						"<div style='display: inline-block; float: right;'><i class='fas fa-ellipsis-v'></i></div>"+"<div style='margin-left: 60px; font-size: 0.8em; font-weight: bold;'>#"+data.groupType+"</div><hr>"+
 						"<div class='post_Content'>"+
 						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data.groupContent+"</textarea></div>"+	
-						"<div id='post_Content_img'>"+"</div>"+
+						"<div id='post_Content_img'>"+"<img style='margin-left: 160px; width: 150px; height: 150px;' id='postFile"+data.groupBoardNum+"'>"+"</div>"+
 						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
 						"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data.groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
 						"좋아요</a>"+0+"<a id='postlike"+data.groupBoardNum+"'>"+"</a></span>"+
@@ -701,16 +693,65 @@ div.Board_side_nav_btn{
 			               $(item).height(1).height( $(item).prop('scrollHeight'));
 			               $(item).css("height", $(item).height());
 			        profileload(data.groupUserId);
+			        imgPostload(data.groupBoardNum);
+			        $("#add_img").children().remove()
+			        fileCode = "";
 			        })
 				},
 				error : function() {
 					console.log("실패!")
 				}
 
-			})	
+			})
 		}
-	</script>
 
+	</script>
+	
+	<script>
+	
+	var inputImg = 1;
+
+		function loadImg(value) {
+			if (value.files && value.files[0]) {
+				var reader = new FileReader();
+	
+				reader.onload = function(e) {
+					var inputImgArea = document.getElementById("add_img");
+					inputImgArea.innerHTML += "<form id='ImgUploadForm"+inputImg+"'>"+
+					
+					"<img id='titleImg"+inputImg+"' width='150' height='150'></form><br>";
+					$("#titleImg" + inputImg).attr("src", e.target.result);
+					inputImg = inputImg + 1;
+					upfileImg();
+				}
+				reader.readAsDataURL(value.files[0]);
+			}
+		}
+		
+		
+		
+		function upfileImg(){
+			var form = $('#ImgUploadForm')[0];
+            console.log(form)
+            var data = new FormData(form);
+            
+            $.ajax({
+            	url : "/omg/upFile.all",
+                type : 'post',
+                data : data,
+                contentType : false,
+                processData : false, 
+               success : function(data) {
+ 	            	alert("업로드 되었습니다.");
+ 	            	fileCode = data.fileCode;
+ 				},
+ 				error : function(){
+ 					alert("업로드 에 실패했습니다");
+ 				}
+            })
+		}
+		
+	</script>
 	<script>
 		function printData(value) {
 			console.log(value);
@@ -862,7 +903,29 @@ div.Board_side_nav_btn{
 	
 	
 	</script>
+	<script>
+	var imgManageCode;
+
+	function imgPostload(boardId){
+		
+	     $.ajax({
+			 url : "/omg/postload.all",
+		     type : 'post',
+		     data : {
+		    	 	boardId : boardId
+			       },
+			       success : function(data) {
+			    	   imgManageCode = data.fileManageName;
+			    	   if(imgManageCode != 'EMPTY') $("#postFile"+boardId).attr("src", "<%=request.getContextPath()%>/resources/test/"+imgManageCode); 
+			    	   else $("#postFile"+boardId).remove()
+			       },
+			 		error : function(){
+			 			imgManageCode = "";
+			 		}
+	     })
+	}		
 	
+	</script>
 	<script>
 	var profileManageCode;
 
@@ -875,7 +938,6 @@ div.Board_side_nav_btn{
 			       },
 			       success : function(data) {
 			          profileManageCode = data.fileManageName;
-			          console.log(profileManageCode);
 			          $("."+userId).attr("src", "<%=request.getContextPath()%>/resources/test/"+profileManageCode); 
 			 		},
 			 		error : function(){

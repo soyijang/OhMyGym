@@ -46,9 +46,10 @@ public class GroupCommuDao {
 				
 			pstmt.setString(1, requestPost.getGroupType());
 			pstmt.setString(2, requestPost.getGroupContent());
-			pstmt.setString(3, requestPost.getGroupUserId());
-			pstmt.setString(4, "follower");
-			pstmt.setString(5, roomId);
+			pstmt.setString(3, requestPost.getGroupFileCode());
+			pstmt.setString(4, requestPost.getGroupUserId());
+			pstmt.setString(5, "follower");
+			pstmt.setString(6, roomId);
 			
 			result = pstmt.executeUpdate();
 			

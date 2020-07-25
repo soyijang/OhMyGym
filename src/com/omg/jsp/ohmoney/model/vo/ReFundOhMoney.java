@@ -1,6 +1,8 @@
 package com.omg.jsp.ohmoney.model.vo;
 
 public class ReFundOhMoney {
+	
+	private int rowNum;
 	private String refundNum;
 	private String refundState;
 	private String memberId;
@@ -91,6 +93,14 @@ public class ReFundOhMoney {
 
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+
+	public int getRowNum() {
+		return rowNum;
+	}
+
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
 	}
 	
 	
