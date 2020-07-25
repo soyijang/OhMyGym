@@ -623,6 +623,69 @@ public int userIdCheck(String memberId) {
 		} 
 	return -1; //데이터베이스 오류
 	}
+
+
+
+//비밀번호찾기
+public Member findPwd(Connection con, Member findPwdUser) {
+	PreparedStatement pstmt = null;
+	Member findUser = null;
+	ResultSet rset = null;
+	
+	String query = prop.getProperty("findPwd");
+	
+	try {
+		pstmt = con.prepareStatement(query);
+		pstmt.setString(1, findPwdUser.getName());
+		pstmt.setString(2, findPwdUser.getPhone());
+		pstmt.setString(3, findPwdUser.getMemberId());
+		
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			findUser = new Member();
+			findUser.setMemberId(rset.getString("MEMBER_ID"));
+			findUser.setMemberDivision(rset.getString("MEMBER_TYPE"));
+			findUser.setName(rset.getString("MEMBER_NAME"));
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+		close(rset);
+	}
+	
+	return findUser;
+}
+
+
+
+
+public int updatePwd(Connection con, Member m) {
+	
+	PreparedStatement pstmt = null;
+	int result = 0;
+	
+	String query = prop.getProperty("updatePwd");
+	try {
+		pstmt = con.prepareStatement(query);
+		pstmt.setString(1, m.getMemberPwd());
+		pstmt.setString(2, m.getMemberId());
+		
+		System.out.println("m : " + m);
+		result = pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+		
+	}
+	
+	System.out.println("result : " + result);
+	return result;
+}
 	
 
 }

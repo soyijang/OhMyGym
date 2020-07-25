@@ -1,23 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.omg.jsp.member.controller.*"%>
+	
+	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/common/common.css">
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/common/layout.css">
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/pages/mix_common.css">
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/front/assets/css/motion.css?20200601_1">
-<link rel="stylesheet"
-	href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/pages/member.css">
+<link rel="stylesheet" href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/common/common.css">
+<link rel="stylesheet" href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/common/layout.css">
+<link rel="stylesheet" href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/pages/mix_common.css">
+<link rel="stylesheet" href="//s.wemep.co.kr/front/assets/css/motion.css?20200601_1">
+<link rel="stylesheet" href="//s.wemep.co.kr/ui/v2.7.13/dist/pc/css/pages/member.css">
 <script src="//s.wemep.co.kr/front/assets/js/pc/vendor.js?20200601_1"></script>
 <script src="//s.wemep.co.kr/front/assets/js/pc/plugins.js?20200601_1"></script>
-
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 .login_wrap {
 	margin-top: 100px;
@@ -141,59 +138,6 @@ label.findText {
 </head>
 <body>
 
-	<!-- 아이디찾기 세부영역 -->
-	<div class="findId_wrap" style="display: none;">
-		<div class="dark_bg" onclick="jQuery('.findId_wrap').fadeOut('fast')"></div>
-		<div class="findId_box">
-
-			<div style="width: 100%; height: 30px; background: orangered; border-radius: 8px;">
-				<div style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; margin-left: 200px; padding-top: 5px;">아이디 찾기</div>
-				<img class="close" onclick="jQuery('.findId_wrap').fadeOut('fast')" src="/omg/resources/img_icon/closeIcon.png" width="20px" height="20px">
-			</div>
-			
-			<div class="findId_content" style="text-align: center; margin-top: 25px">
-				
-				<form id="findIdForm" action="" method="post">
-					<label class="findText"> 가입시 입력하신 성명과 전화번호를 <br>정확히 입력후 인증번호를 입력하세요</label><br> <br>
-					<div style="text-align: left; margin-left: 167px;">
-						<input class="findInput" type="text" name="findId_Name" placeholder="이름"><br> <br> 
-						<input class="findInput" type="text" name="findId_Phone" placeholder="전화번호"><br>
-						<button onclick="bonin(2);" class="sendNum">인증번호 전송</button><br> 
-						<input class="findInput" type="text" name="findId_Num" style="margin-top: 10px" placeholder="인증번호">
-					<br><button onclick="bonin(1);" class="sendNum"" value="아이디 찾기">아이디 찾기</button><br>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- 비밀번호 찾기 세부영역-->
-	<div class="findPass_wrap" style="display: none;">
-		<div class="dark_bg"
-			onclick="jQuery('.findPass_wrap').fadeOut('fast')"></div>
-		<div class="findPass_box">
-			<div style="width: 100%; height: 30px; background: orangered; border-radius: 8px;">
-				<div style="color: white; font-weight: bold; font-family: 'Noto Sans KR'; margin-left: 200px; padding-top: 5px;">비밀번호 찾기</div>
-				<img class="close" onclick="jQuery('.findPass_wrap').fadeOut('fast')" src="/omg/resources/img_icon/closeIcon.png" width="20px" height="20px">
-			</div>
-			<div class="findPass_content" style="text-align: center; margin-top: 25px">
-				<form id="findPassForm" action="<%=request.getContextPath()%>/findPass.me" method="post">
-					<label class="findText"> 가입시 입력하신 아이디와 이름, 전화번호를<br> 정확히 입력후 인증번호를 입력해주세요 </label><br> <br>
-					<div style="text-align: left; margin-left: 167px;">
-						<input class="findInput" type="text" name="findPass_Id" placeholder="아이디"><br> <br> 
-						<input class="findInput" type="text" name="findPass_Name" placeholder="이름"><br> <br> 
-						<input class="findInput" type="text" name="findPass_Phone" placeholder="전화번호"> 
-						<a class="sendNum" onclick="" style="">인증번호 전송</a> <br> 
-						<input class="findInput" type="text" name="findId_Num" style="margin-top: 10px" placeholder="인증번호">
-					</div>
-					<br><input class="findInputBtn" type="submit" value="비밀번호찾기버튼">
-					<!-- 문자보내기 API사용 -->
-				</form>
-			</div>
-		</div>
-	</div>
-
 	<%@ include file="/views/common/nonNav.jsp"%>
 	<!-- 첫목록 -->
 	<section style="height: 800px;">
@@ -215,17 +159,8 @@ label.findText {
 							<i class="ico ico_phone"></i>
 							<p class="title">등록된 휴대폰 번호로 아이디 찾기</p>
 							<p class="text_small">가입 당시 입력한 휴대폰 번호로 인증번호를 발송합니다.</p>
-							<a onclick="jQuery('.findId_wrap').fadeIn('fast');"
-								class="btns_sys red_mid_d" data-find-btn="idGatePhone"><span>확인</span></a>
+							<a onclick="doDisplay4();" class="btns_sys red_mid_d" data-find-btn="idGatePhone"><span>확인</span></a>
 						</div>
-						<!-- <div class="find_gate">
-							<i class="ico ico_phone_chk"></i>
-							<p class="title">본인명의 휴대폰으로 인증</p>
-							<p class="text_small">회원님의 명의로 등록된 휴대폰으로 가입여부 및 본인여부를 확인합니다.</p>
-							휴대폰본인인증 api 연결
-							<a href="javascript:void(0);" class="btns_sys red_mid_d"
-								data-find-btn="idGateCertify"><span>확인</span></a>
-						</div> -->
 					</div>
 					<div id="_tab2" class="tab_cont" style="display: none">
 						<h5 class="blind">비밀번호 변경하기</h5>
@@ -233,7 +168,7 @@ label.findText {
 							<i class="ico ico_phone"></i>
 							<p class="title">등록된 휴대폰 번호로 비밀번호 변경하기</p>
 							<p class="text_small">가입 당시 입력한 휴대폰 번호로 인증번호를 발송합니다.</p>
-							<a onclick="jQuery('.findPass_wrap').fadeIn('fast');"
+							<a onclick="doDisplay5();"
 								class="btns_sys red_mid_d" data-find-btn="pwGatePhone"><span>확인</span></a>
 						</div>
 						
@@ -242,17 +177,15 @@ label.findText {
 							<i class="ico ico_email"></i>
 							<p class="title">등록된 이메일로 변경하기</p>
 							<p class="text_small">가입 당시 입력한 이메일로 비밀번호 재설정 메일을 발송합니다.</p>
-							<a onclick=doDisplay3(); class="btns_sys red_mid_d"><span>확인</span></a>
+							<a onclick="doDisplay3();" class="btns_sys red_mid_d"><span>확인</span></a>
 						</div>
 					</div>
 					
 					<!-- 이메일로 비번찾기 - 구글메일 api연결예정 -->
 					<div id="_findInEmail" class="tab_cont" style="display: none">
-						<h5 class="blind">비밀번호 찾기</h5>
 						<div class="find_idpw">
 							<div class="find_top">
-								<i class="ico ico_email_1"></i>
-								<p class="title">등록된 이메일로 찾기</p>
+								<p class="title">등록된 이메일로 비밀번호 변경</p>
 								<p class="text_small">가입 당시 입력한 이메일로 비밀번호 재설정 메일을 발송합니다.</p>
 							</div>
 							<div class="input_area">
@@ -261,41 +194,91 @@ label.findText {
 									class="inpt_default" value="" style="width: 350px;">
 							</div>
 							<div class="input_area" data-otom-el="container">
-								<i class="ico ico_inp_id"></i> <label for="_findEmailId"
-									class="lbl_type"></label> <input type="email"
-									data-otom-el="input" placeholder="이메일" id="_findEmailId"
-									class="inpt_default" value="" style="width: 350px;"
-									maxlength="150" autocomplete="off" aria-expanded="false"
-									aria-autocomplete="list" aria-haspopup="listbox"
-									role="combobox">
-								<div class="auto_complete" data-otom-el="result"
-									aria-atomic="true" aria-live="assertive" role="listbox"></div>
+								<input type="email" placeholder="이메일" id="_findEmailId" class="inpt_default" value="" style="width: 350px;" maxlength="150">
 							</div>
 							<div class="btn_agree_area">
-								<a href="javascript:void(0);" id="_confirm"
-									class="btns_sys red_big_xb add_space"><span>확인</span></a>
+								<a href="" id="_confirm" class="btns_sys red_big_xb add_space"><span>확인</span></a>
 							</div>
 						</div>
+					</div>
+					
+					<!-- 아이디찾기 세부영역 -->
+					<div id="_findIdPhone" class="tab_cont" style="display: none">
+					<form id="findIdForm" action="" method="post">
+						<div class="find_idpw">
+							<div class="find_top">
+								<p class="title">등록된 휴대폰번호로 아이디 찾기</p>
+								<p class="text_small">가입 당시 입력한 휴대폰번호로 인증번호를 발송합니다.</p>
+							</div>
+							<div class="input_area">
+								<input type="text" placeholder="이름" name="findId_Name" id="findId_Name" class="inpt_default" value="" style="width: 350px;">
+							</div>
+							<div class="input_area">
+								<input type="text" placeholder="휴대폰번호" name="findId_Phone"  id="findId_Phone" class="inpt_default" value="" style="width: 350px;" maxlength="150">
+							</div>
+							<div class="input_area">
+								<input type="text" placeholder="인증번호" id="findId_Num" name="findId_Num" class="inpt_default" value="" style="width: 350px;" maxlength="150">
+								<br>
+								<span style="color: black; font-size:small; margin-top: 10px; ">※ 인증 가능한 시간 : <span id="timer" ></span></span>
+							</div>	
+							<div class="btn_agree_area" style="padding: 0; margin-top: 30px;">
+								<div onclick="bonin(2);" style="padding: 0; width: 210px;" id="_confirm" class="btns_sys red_big_xb add_space"><span>인증번호 전송</span></div>
+								<div onclick="bonin(1);" style="padding: 0;  width: 210px;" id="_confirm" class="btns_sys red_big_xb add_space"><span>확인</span></div>
+							</div>
+						</div>
+					</form>	
+					</div>
+					
+					<!-- 비밀번호 찾기 세부영역-->
+					<div id="_findPwdPhone" class="tab_cont" style="display: none">
+					<form id="findPwdForm" action="" method="post">
+						<div class="find_idpw">
+							<div class="find_top">
+								<p class="title">등록된 휴대폰번호로 비밀번호 변경</p>
+								<p class="text_small">가입 당시 입력한 휴대폰번호로 인증번호를 발송합니다.</p>
+							</div>
+							<div class="input_area">
+								<input type="text" placeholder="아이디" name="findPwd_Id" id="findPwd_Id" class="inpt_default" value="" style="width: 350px;">
+							</div>
+							<div class="input_area">
+								<input type="text" placeholder="이름" name="findPwd_Name" id="findPwd_Name" class="inpt_default" value="" style="width: 350px;">
+							</div>
+							<div class="input_area">
+								<input type="text" placeholder="휴대폰번호" name="findPwd_Phone"  id="findPwd_Phone" class="inpt_default" value="" style="width: 350px;" maxlength="150">
+							</div>
+							<div class="input_area">
+								<input type="text" placeholder="인증번호" id="findPwd_Num" name="findPwd_Num" class="inpt_default" value="" style="width: 350px;" maxlength="150">
+								<br>
+								<span style="color: black; font-size:small; margin-top: 10px; ">※ 인증 가능한 시간 : <span id="timer" ></span></span>
+							</div>	
+							<div class="btn_agree_area" style="padding: 0; margin-top: 30px;">
+								<div onclick="bonin(4);" style="padding: 0; width: 210px;" id="_confirm" class="btns_sys red_big_xb add_space"><span>인증번호 전송</span></div>
+								<div onclick="bonin(3);" style="padding: 0;  width: 210px;" id="_confirm" class="btns_sys red_big_xb add_space"><span>확인</span></div>
+							</div>
+						</div>
+					</form>	
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<footer>
-		<%@ include file="../../common/footer.jsp"%>
-	</footer>
+
 	<script>
 	
 	function doDisplay(){
 		var con = document.getElementById("_tab1");
 		var con2 = document.getElementById("_tab2");
 		var con3 = document.getElementById("_findInEmail");
+		var con4 = document.getElementById("_findIdPhone");
+		var con5 = document.getElementById("_findPwdPhone");
 		
 		if(con.style.display=='none'){
 			con.style.display = 'block';
 			con2.style.display = 'none';
-		}
 			con3.style.display = 'none';
+			con4.style.display = 'none';
+			con5.style.display = 'none';
+		}
 		
 		document.getElementById("idfind").className = "on";
 		document.getElementById("pwdfind").className = "";
@@ -307,12 +290,16 @@ label.findText {
 		var con = document.getElementById("_tab1");
 		var con2 = document.getElementById("_tab2");
 		var con3 = document.getElementById("_findInEmail");
+		var con4 = document.getElementById("_findIdPhone");
+		var con5 = document.getElementById("_findPwdPhone");
 		
 		 if (con2.style.display=='none'){
-				con.style.display = 'none';
-				con2.style.display = 'block';
-			}
+			con.style.display = 'none';
+			con2.style.display = 'block';
 			con3.style.display = 'none';
+			con4.style.display = 'none';
+			con5.style.display = 'none';
+			}
 		 
 		 document.getElementById("pwdfind").className = "on";
 		 document.getElementById("idfind").className = "";
@@ -330,36 +317,165 @@ label.findText {
 		
 	}
 	
-	function bonin(index){
+	function doDisplay4() {
 		
-		if(index == 1){
-		/* 	page= "findId.me"; */
-			document.getElementById('findIdForm').action="<%=request.getContextPath()%>/findId.me"; 
-		}
-		else if(index == 2){
-			/* 문자로 인증번호 전송 어떻게 ajax하냐~!~!~!~!*/
-			$.ajax({
-				url: "/sendmail.me",
-				type: "get",
-				data: {
-					findIdForm:findIdForm
-				},
-				success: function (data) {
-					console.log("성공!");
-				},
-				error: function (data) {
-					console.log("실패!");
-				}
-				
-			});
-			
-		<%-- 	document.getElementById('findIdForm').action="<%=request.getContextPath()%>/sendmail.me";  --%>
-		}
-		/* 	$("#findIdForm").submit();   */
+		var con = document.getElementById("_tab1");
+		var con2 = document.getElementById("_findIdPhone");
+		
+		 if (con2.style.display=='none'){
+				con.style.display = 'none';
+				con2.style.display = 'block';
+			}
 		
 	}
 	
+	function doDisplay5() {
+		
+		var con = document.getElementById("_tab2");
+		var con2 = document.getElementById("_findPwdPhone");
+		
+		 if (con2.style.display=='none'){
+				con.style.display = 'none';
+				con2.style.display = 'block';
+			}
+		
+	}
+	
+	//꺼내온 랜덤수
+	var randomNum;
+	
+	function bonin(index){
+		
+		var findId_Name = document.getElementById('findId_Name').value;
+		var findId_Phone = document.getElementById('findId_Phone').value;
+		var findPwd_Name = document.getElementById('findPwd_Name').value;
+		var findPwd_Phone = document.getElementById('findPwd_Phone').value;
+		var findPwd_Id = document.getElementById('findPwd_Id').value;
+		
+		/* 아이디찾기 */
+		/* 입력 이후 확인 클릭시 */
+		if(index == 1){
+			var inputNum = document.getElementById('findId_Num').value;
+			console.log("randomNum : " + randomNum);
+			console.log("inputNum : " + inputNum);
+			
+			/* 입력값 일치여부 확인 */
+			if(randomNum == inputNum){
+				document.getElementById('findIdForm').action="<%=request.getContextPath()%>/findId.me"; 
+				document.getElementById('findIdForm').submit();
+			}else{
+				alert("인증번호가 일치하지 않습니다! 다시 인증을 진행해주세요!");
+			}
+			
+		}
+		/* 인증번호 보내기 버튼 실행시 */
+		else if(index == 2){
+			
+			/* 클릭하면 타이머 실행 */
+			var AuthTimer = new $ComTimer()
+			AuthTimer.comSecond = 60; //타이머시간
+			AuthTimer.fnCallback = function(){alert("다시인증을 시도해주세요.");}
+			AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
+			AuthTimer.domId = document.getElementById("timer");
+					  
+			/* 문자로 인증번호 전송 */
+			$.ajax({
+				url: "/omg/sendmail.me",
+				type: "post",
+				data: {
+					findId_Name:findId_Name,
+					findId_Phone:findId_Phone,
+				},
+				success: function (data) {
+					/* 문자전송완료 alert */
+					alert("인증번호가 전송되었습니다!");
+					console.log("성공!");
+					console.log(data);
+					randomNum = data;
+				},
+				error: function () {
+					console.log("실패!");
+				}
+			});
+			
+			}
+		
+		/* 비밀번호찾기 */
+		/* 입력 이후 확인 클릭시 */
+		if(index == 3){
+			var inputNum = document.getElementById('findPwd_Num').value;
+			console.log("randomNum : " + randomNum);
+			console.log("inputNum : " + inputNum);
+			
+			/* 입력값 일치여부 확인 */
+			if(randomNum == inputNum){
+				document.getElementById('findPwdForm').action="<%=request.getContextPath()%>/findPass.me"; 
+				document.getElementById('findPwdForm').submit();
+			}else{
+				alert("인증번호가 일치하지 않습니다! 다시 인증을 진행해주세요!");
+			}
+			
+		}
+		/* 인증번호 보내기 버튼 실행시 */
+		else if(index == 4){
+			
+			/* 클릭하면 타이머 실행 */
+			var AuthTimer = new $ComTimer()
+			AuthTimer.comSecond = 60; //타이머시간
+			AuthTimer.fnCallback = function(){alert("다시인증을 시도해주세요.");}
+			AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
+			AuthTimer.domId = document.getElementById("timer");
+					  
+			/* 문자로 인증번호 전송 */
+			$.ajax({
+				url: "/omg/sendmail.me",
+				type: "post",
+				data: {
+					findPwd_Name:findPwd_Name,
+					findPwd_Phone:findPwd_Phone,
+					findPwd_Id:findPwd_Id
+				},
+				success: function (data) {
+					/* 문자전송완료 alert */
+					alert("인증번호가 전송되었습니다!");
+					console.log("성공!");
+					console.log(data);
+					randomNum = data;
+				},
+				error: function () {
+					console.log("실패!");
+				}
+			});
+			
+			}
+		}
+	
+	/* 타이머객체 */
+	function $ComTimer(){
+	}
+	$ComTimer.prototype = {
+	    comSecond : ""
+	    , fnCallback : function(){}
+	    , timer : ""
+	    , domId : ""
+	    , fnTimer : function(){
+	        var m = Math.floor(this.comSecond / 60) + "분 " + (this.comSecond % 60) + "초";	// 남은 시간 계산
+	        console.log(m);
+	        this.comSecond--;					// 1초씩 감소
+	        this.domId.innerText = m;
+	        if (this.comSecond < 0) {			// 시간이 종료 되었으면..
+	            clearInterval(this.timer);		// 타이머 해제
+	            alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.")
+	        }
+	    }
+	    ,fnStop : function(){
+	        clearInterval(this.timer);
+	    }
+	}
+	
 	</script>
-
+	<footer>
+		<%@ include file="../../common/footer.jsp"%>
+	</footer>
 </body>
 </html>

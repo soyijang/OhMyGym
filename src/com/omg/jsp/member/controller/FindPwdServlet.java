@@ -14,14 +14,14 @@ import com.omg.jsp.member.model.vo.Member;
 /**
  * Servlet implementation class FindIdServlet
  */
-@WebServlet("/findId.me")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/findPass.me")
+public class FindPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdServlet() {
+    public FindPwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +33,29 @@ public class FindIdServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF8");
-		String name = request.getParameter("findId_Name");
-		String phone = request.getParameter("findId_Phone");
+		String name = request.getParameter("findPwd_Name");
+		String phone = request.getParameter("findPwd_Phone");
 		String phone2 = phone.substring(0, 3) + "-" + phone.substring(3, 7) + "-" + phone.substring(7, 11);
+		String userId = request.getParameter("findPwd_Id");
 		
-		System.out.println("서블릿 findid_name: " + name);
-		System.out.println("서블릿 findid_phone: " + phone2);
 		
-		Member findIdUser = new Member();
-		findIdUser.setName(name);
-		findIdUser.setPhone(phone2);
+		System.out.println("서블릿 findPwd_name: " + name);
+		System.out.println("서블릿 findPwd_phone: " + phone2);
+		System.out.println("서블릿 findPwd_Id: " + userId);
 		
-		Member findUser = new MemberService().findId(findIdUser);
+		Member findPwdUser = new Member();
+		findPwdUser.setName(name);
+		findPwdUser.setPhone(phone2);
+		findPwdUser.setMemberId(userId);
+		
+		//일치하는 회원이 있으면 담아서 가져옴
+		Member findUser = new MemberService().findPwd(findPwdUser);
 		
 		if(findUser != null) {
 			request.getSession().setAttribute("findUser", findUser);
 			
-			//1. 트레이너인지 팔로워인지 구분하여 화면에 안내.
-			//2. 페이지에서는 구분과 아이디 보여줌
-			response.sendRedirect("views/visitor/findId.jsp");
+			//비밀번호 재설정 페이지로 이동
+			response.sendRedirect("views/visitor/findPwd.jsp");
 		}else {
 			request.setAttribute("msg","회원로그인실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
