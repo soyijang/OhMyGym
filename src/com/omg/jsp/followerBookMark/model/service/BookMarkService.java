@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.omg.jsp.followerBookMark.model.dao.BookMarkDao;
 import com.omg.jsp.followerBookMark.model.vo.BookMark;
+import com.omg.jsp.followerBookMark.model.vo.GroupBookMark;
+
 import static com.omg.jsp.common.JDBCTemplate.*;
 
 public class BookMarkService {
@@ -30,6 +32,33 @@ public class BookMarkService {
 		Connection con = getConncection();
 		
 		int result = new BookMarkDao().deleteBookMark(con, userId, boardNum);
+		
+		if(result>0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+	//북마크 불러오기 부분
+	public ArrayList<GroupBookMark> selectGroupList(String userId) {
+		
+		Connection con = getConncection();
+		
+		ArrayList <GroupBookMark> list = new BookMarkDao().selectGroupList(con,userId);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public int deleteGroupBookMark(String userId, String boardNum) {
+		Connection con = getConncection();
+		
+		int result = new BookMarkDao().deleteGroupBookMark(con, userId, boardNum);
 		
 		if(result>0) {
 			commit(con);

@@ -33,6 +33,8 @@ public class InsertGroupCommunityServlet extends HttpServlet {
 		
 		GroupCommuPost requestPost = new GroupCommuPost();
 		
+		if(fileCode.equals("")) fileCode = "EMPTY";
+		
 		requestPost.setGroupUserId(writerId);
 		requestPost.setGroupContent(content);
 		requestPost.setGroupType(type);

@@ -228,5 +228,27 @@ public class MatchingService {
 		
 		return result;
 	}
+	//트레이너 그룹룸 확인
+	public MatchingRequest getMatch(String memberId) {
+		Connection con = getConncection();
+		
+		MatchingRequest matchResult = new MatchingDao().getMatch(con, memberId);
+		
+		close(con);
+		
+		return matchResult;
+	}
+
+	//매칭확인 코드부분 ㅎㅎ..
+	public boolean alreadyMatch(String userId) {
+		
+		Connection con = getConncection();
+		
+		boolean result = new MatchingDao().alreadyMatch(con, userId);
+		
+		close(con);
+		
+		return result;
+	}
 
 }

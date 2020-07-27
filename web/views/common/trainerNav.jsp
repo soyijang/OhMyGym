@@ -158,7 +158,7 @@ a:hover {
 					<li><a><div class="NavLink">OH 마이피티</div></a>
 						<ul>
 							<li><a style="color: white; text-decoration: none;" href="<%= request.getContextPath() %>/selectApplyList.pt">매칭신청 목록</a>&nbsp;&nbsp;&nbsp;<a style="color: white; text-decoration: none;" href="<%= request.getContextPath() %>/selectCurriculumList.cu">커리큘럼 관리</a>
-								&nbsp;&nbsp;&nbsp;<a style="color: white">그룹소통방</a></li>
+								&nbsp;&nbsp;&nbsp;<a style="color: white; cursor: pointer;" onclick="groupCommu();">그룹소통방</a></li>
 						</ul></li>
 					<li><a><div class="NavLink">팔로워관리</div></a></li>
 				</ul>
@@ -173,7 +173,10 @@ a:hover {
 			alert("<%= loginUser.getName()%>트레이너님 내일도 오마이짐에서 만나요!");
 			location.href= "<%= request.getContextPath()%>/logout.me";
 		}
-	
+		
+		function groupCommu(){
+			location.href="<%=request.getContextPath()%>/groupCommu.follower";
+		}
 	</script>
 </body>
 </html>

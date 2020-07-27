@@ -6,6 +6,7 @@ public class GroupBookMark implements java.io.Serializable{
 	private String groupBoardNum; //그룹북마크=그룹소통
 	private String groupContent; //그룹소통방꺼 내용
 	private String groupDate; //그룹소통방꺼 게시일
+	private String fileCode; // 추가
 	public GroupBookMark() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -45,6 +46,12 @@ public class GroupBookMark implements java.io.Serializable{
 	public String toString() {
 		return "GroupBookMark [memberId=" + memberId + ", groupBoardNum=" + groupBoardNum + ", groupContent="
 				+ groupContent + ", groupDate=" + groupDate + "]";
+	}
+	public String getFileCode() {
+		return fileCode;
+	}
+	public void setFileCode(String fileCode) {
+		this.fileCode = fileCode;
 	}
 	
 	

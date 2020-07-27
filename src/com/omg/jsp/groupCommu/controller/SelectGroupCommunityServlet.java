@@ -34,8 +34,10 @@ public class SelectGroupCommunityServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String roomId = request.getParameter("roomId");
 		String type = request.getParameter("type");
-		System.out.println(type);
 		ArrayList<GroupCommuPost> postList = new GroupCommuService().selectPost(roomId);
+		
+		if(type == null) type = "최신";
+		
 		if(type.equals("인기")) {
 			Collections.sort(postList, new Comparator<GroupCommuPost>() {
 				@Override

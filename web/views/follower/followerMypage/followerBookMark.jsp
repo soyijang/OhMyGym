@@ -91,7 +91,7 @@
 						<% } %>
 						
 						
-					<%-- 	<% for(GroupBookMark b : list2) { %>
+						<% for(GroupBookMark b : list2) { %>
 						<li class="listItem" >
 							
 							<div class="articleImg" style="height: 150px;">
@@ -121,7 +121,7 @@
 								</div>
 							</div>
 						</li>
-						<% } %> --%>
+						<% } %> 
 					</ul>
 					<br>
 
@@ -156,7 +156,6 @@
 			$("#deleteOneBookMark").submit();
 			
 		}
-		<%-- 
 		/* 그룹소통방 북마크 삭제용 */
 		function deleteBookmark2(boardNum, userId) {
 			
@@ -166,10 +165,10 @@
 			document.getElementById("saveBoardNum").value = boardNum;
 			document.getElementById("saveUserId").value = userId;
 			
-			$("#deleteOneBookMark").attr("action","<%= request.getContextPath() %>/update.gbm");
+			$("#deleteOneBookMark").attr("action","<%= request.getContextPath() %>/groupUpdate.bm");
 			$("#deleteOneBookMark").submit();
 			
-		} --%>
+		} 
 	
 	</script>
 	

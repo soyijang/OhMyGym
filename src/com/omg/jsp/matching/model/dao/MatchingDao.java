@@ -747,8 +747,70 @@ public class MatchingDao {
 		return result;
 	}
 	
+	//트레이너 매칭 확인
+	public MatchingRequest getMatch(Connection con, String memberId) {
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		MatchingRequest matchResult = new MatchingRequest();
+		
+		String query = prop.getProperty("getMatch");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				matchResult.setTrainerId(rset.getString("TRAINER_ID"));
+				matchResult.setTrainerName(rset.getString("MEMBER_NAME"));
+				matchResult.setGroupCommuNum(rset.getString("GROUP_CONTAINERNUM"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return matchResult;
+	}
 	
-	
+	//팔로워 매칭여부 
+	public boolean alreadyMatch(Connection con, String userId) {
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		boolean result = true;
+		
+		String query = prop.getProperty("alreadyMatch");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = false;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
+
 }
 
 

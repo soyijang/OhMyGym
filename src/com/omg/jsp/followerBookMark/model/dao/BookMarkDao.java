@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.omg.jsp.followerBookMark.model.vo.BookMark;
+import com.omg.jsp.followerBookMark.model.vo.GroupBookMark;
+
 import static com.omg.jsp.common.JDBCTemplate.*;
 
 
@@ -76,6 +78,62 @@ public class BookMarkDao {
 		PreparedStatement pstmt = null;
 		
 		String query = prop.getProperty("deleteBookMark");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, boardNum);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<GroupBookMark> selectGroupList(Connection con, String userId) {
+		ArrayList<GroupBookMark> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectGroupList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			list = new ArrayList<GroupBookMark>();
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				GroupBookMark bookmark = new GroupBookMark();
+				bookmark.setMemberId(rset.getString("MEMBER_ID"));
+				bookmark.setGroupBoardNum(rset.getString("GROUP_BOARDNUM"));
+				bookmark.setGroupContent(rset.getString("GROUP_CONTENT"));
+				bookmark.setGroupDate(rset.getString("GROUP_BOOKMARK_DATE"));
+				bookmark.setFileCode(rset.getString("GROUP_FILECODE"));
+				
+				list.add(bookmark);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+
+	public int deleteGroupBookMark(Connection con, String userId, String boardNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = prop.getProperty("deleteGroupBookMark");
 		
 		try {
 			pstmt = con.prepareStatement(query);
