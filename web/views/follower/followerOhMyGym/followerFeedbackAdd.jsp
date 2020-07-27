@@ -88,6 +88,7 @@
         <!--피드백룸 타이틀 종료-->
 
         <!--피드백 목록 출력-->
+        <form action="<%= request.getContextPath() %>/insert.feedback" method="post" enctype="multipart/form-data">
         <article id="fFeedbackAddArea">
             <div id="fFeedbackAdd" align="center">
                 <table align="center">
@@ -116,6 +117,7 @@
                 <button id="inputFeedbackBtn" type="submit">작성하기</button>
             </div>
         </article>
+        </form>
         <!--피드백 글 작성 버튼 구역 종료-->
 
     </section>
