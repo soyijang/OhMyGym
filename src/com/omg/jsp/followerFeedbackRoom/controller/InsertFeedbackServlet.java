@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.omg.jsp.common.MyFileRenamePolicy;
+import com.omg.jsp.file.model.service.FileService;
+import com.omg.jsp.file.model.vo.Files;
+import com.omg.jsp.followerFeedbackRoom.model.service.FeedbackRoomService;
+import com.omg.jsp.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -65,10 +69,42 @@ public class InsertFeedbackServlet extends HttpServlet {
 			System.out.println("세파:" + saveFiles);
 			System.out.println("오파:" + originFiles);
 			
+			Files upfile = new Files();
+			
+			if(originFiles != null) {
+				savePath =  "resources/feedback";
+				System.out.println("savePath : " + savePath);
+				upfile.setFilePath(savePath);
+				upfile.setFileOriginName(originFiles);
+				upfile.setFileManageName(saveFiles);
+			}
+			
+			Files myFile = new FileService().fileUpload(upfile);
+			
+			String filecode = new FileService().selectOneFileCode(saveFiles);
+			
 			String feedbackTitle = multiRequest.getParameter("feedbackTitle");
 			String feedbackContent = multiRequest.getParameter("feedbackContent");
+			Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+			String memberId = loginUser.getMemberId();
 			System.out.println("feedbackTitle : " + feedbackTitle);
 			System.out.println("feedbackContent : " + feedbackContent);
+			
+			String requestManageCode = new FeedbackRoomService().selectRequestManageCode(memberId);
+			
+			int insertResult = new FeedbackRoomService().insertFeedback(feedbackTitle, feedbackContent, filecode, requestManageCode);
+			
+			String page = "";
+				if(insertResult > 0) {
+					page = "views/follower/followerOhMyGym/insertFeedbackResultPage.jsp";
+				} else {
+					page = "views/common/errorPage.jsp";
+					request.setAttribute("msg", "피드백 업로드 실패");
+				}
+				
+				request.getRequestDispatcher(page).forward(request, response);
+			
+			
 			
 		}
 	}

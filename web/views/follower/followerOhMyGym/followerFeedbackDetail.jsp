@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> 
+    pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.file.model.vo.*, com.omg.jsp.followerFeedbackRoom.model.vo.*"%> 
+<% 
+	HashMap<String, Object> feedbackInfo = (HashMap<String, Object>) request.getAttribute("feedbackInfo");
+	FeedbackRoom feedback = (FeedbackRoom) feedbackInfo.get("feedback");
+	Files video = (Files) feedbackInfo.get("video");
+	System.out.println(video.getFilePath() + "/" + video.getFileManageName());
+%>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -138,14 +144,25 @@
             <div id="fShowFeedback">
                 <table align="center">
                     <tr>
-                        <td><input id="fFeedbackTitle" type="text" value="제목 출력 영역"></td>
+                        <td style="text-align: left;">
+                        	<b><%= feedback.getFeedbackTitle() %></b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                        	업로드 일자 : <%= feedback.getFeedbackUploadDate() + " " + feedback.getFeedbackUploadTime() %>
+                        </td>
                     </tr>
                     <tr style="height: 75%;">
                         <td>
                             <div align="center">
-                                <div id="ShowMediaArea">회원동영상출력</div><br>
+                            	<br><br>
+                                <!-- <div id="ShowMediaArea">회원동영상출력</div><br> -->
+                                <video style="width:400px; height: 250px;" controls>
+                                	<source src="<%= request.getContextPath() + "/" + video.getFilePath() + "/" + video.getFileManageName() %>">
+                                </video>
                                 <div id="fFeedbackContentArea">
-                                    <textarea name="" id="fFeedbackContent" style="height: 150px;"></textarea>
+                                    <textarea name="" id="fFeedbackContent" style="height: 150px;"><%= feedback.getFeedbackContent() %></textarea>
                                 </div>
                             </div>
                         </td>
@@ -153,7 +170,7 @@
                 </table>
                  <!--트레이너 답글 출력 영역-->
                  <article>
-                    <div id="trainerRepleArea">
+                    <div id="trainerRepleArea" style="display: none;">
                         <img src="../../resources/tOhMyPtIcon/fFeedbackReple.png" align="left">
                         <div id="trainerReple">
                             <div id="trainerProfile" style="background: yellow;"></div>

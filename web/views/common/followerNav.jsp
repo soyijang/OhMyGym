@@ -173,7 +173,7 @@ a {
 					<li><a href="../fOhMyGym/fTrainingRoom.jsp">
 					<div class="NavLink" style="color: rgb(63, 63, 63);">OH! MY GYM</div></a>
 						<ul>
-							<li><a href="../fOhMyGym/fTrainingRoom.jsp"
+							<li><a href="<%= request.getContextPath() %>/views\follower\followerOhMyGym\followerTrainingRoom.jsp"
 								style="color: white;">트레이닝</a>
 								&nbsp;&nbsp;&nbsp;<a onclick="groupCommu();" style="color: white;">그룹소통방</a>
 								&nbsp;&nbsp;&nbsp;<a href="<%= request.getContextPath() %>/selectList.fb" style="color: white;">피드백룸</a>

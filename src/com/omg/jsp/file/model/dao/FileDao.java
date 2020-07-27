@@ -286,4 +286,37 @@ public class FileDao {
 		return filecode;
 	}
 
+
+	public Files selectFeedbackVideo(Connection con, String filecode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Files video = new Files();
+		
+		String query = prop.getProperty("selectFeedbackVideo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, filecode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				video.setFileCode(rset.getString("FILE_CODE"));
+				video.setFileManageName(rset.getString("FILE_MANAGE_NAME"));
+				video.setFileOriginName(rset.getString("FILE_ORIGIN_NAME"));
+				video.setFilePath(rset.getString("FILE_PATH"));
+				video.setFileUploadDate(rset.getString("FILE_UPLOAD_DATE"));
+				video.setFileUploadTime(rset.getString("FILE_UPLOAD_TIME"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return video;
+	}
+
 }

@@ -34,10 +34,11 @@ public class MatchingService {
 
 	public ArrayList<HashMap<String, Object>> selectTrainerList() {
 		Connection con = getConncection();
-		//
+		
 		ArrayList<String> trainerList = new MatchingDao().selectTrainerIdList(con);
 		
-		//
+		
+		
 		ArrayList<HashMap<String, Object>> list = new MatchingDao().selectTrainerList(con);
 		HashMap<String, Object> gradeAvg = new MatchingDao().selectGradeAvg(con, trainerList);
 		list.add(gradeAvg);
