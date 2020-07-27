@@ -171,14 +171,14 @@ label.findText {
 							<a onclick="doDisplay5();"
 								class="btns_sys red_mid_d" data-find-btn="pwGatePhone"><span>확인</span></a>
 						</div>
-						
-						<!-- 인증번호 발송하기 -->
+<!-- 						
+						인증번호 발송하기
 						<div class="find_gate">
 							<i class="ico ico_email"></i>
 							<p class="title">등록된 이메일로 변경하기</p>
 							<p class="text_small">가입 당시 입력한 이메일로 비밀번호 재설정 메일을 발송합니다.</p>
 							<a onclick="doDisplay3();" class="btns_sys red_mid_d"><span>확인</span></a>
-						</div>
+						</div> -->
 					</div>
 					
 					<!-- 이메일로 비번찾기 - 구글메일 api연결예정 -->
@@ -249,7 +249,7 @@ label.findText {
 							<div class="input_area">
 								<input type="text" placeholder="인증번호" id="findPwd_Num" name="findPwd_Num" class="inpt_default" value="" style="width: 350px;" maxlength="150">
 								<br>
-								<span style="color: black; font-size:small; margin-top: 10px; ">※ 인증 가능한 시간 : <span id="timer" ></span></span>
+								<span style="color: black; font-size:small; margin-top: 10px; ">※ 인증 가능한 시간 : <span id="timer2" ></span></span>
 							</div>	
 							<div class="btn_agree_area" style="padding: 0; margin-top: 30px;">
 								<div onclick="bonin(4);" style="padding: 0; width: 210px;" id="_confirm" class="btns_sys red_big_xb add_space"><span>인증번호 전송</span></div>
@@ -424,7 +424,7 @@ label.findText {
 			AuthTimer.comSecond = 60; //타이머시간
 			AuthTimer.fnCallback = function(){alert("다시인증을 시도해주세요.");}
 			AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
-			AuthTimer.domId = document.getElementById("timer");
+			AuthTimer.domId = document.getElementById("timer2");
 					  
 			/* 문자로 인증번호 전송 */
 			$.ajax({

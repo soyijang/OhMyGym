@@ -9,12 +9,15 @@
 <title>Insert title here</title>
 </head>
 <body>
- <div class="left-container"><div class="class_category_container">
-            <div class="title">건강정보 게시판</div>
-            <ul class="class_category_list">
-                <li class="navi-item">건강정보 게시판</li>
-            </ul>
-	        </div>
-	    </div> 
+ 	<div class="left-container">
+		<div class="class_category_container">
+			<div class="title">건강관리</div>
+			<ul class="class_category_list" style="height: 230px;">
+				<li class="navi-item "><a href="<%=request.getContextPath()%>/selectList.diet">오늘의 밥그릇</a></li>
+				<li class="navi-item "><a href="<%=request.getContextPath()%>/followHealthInfo.no">건강정보게시판</a></li>
+				<li class="navi-item "><a href="<%= request.getContextPath() %>/healthInfo.hi">내 상태 기록</a></li>
+			</ul>
+		</div>
+	</div>
 </body>
 </html>

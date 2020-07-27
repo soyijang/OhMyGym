@@ -46,7 +46,7 @@
 
     <aside>
         <%@ include file="followerNoticeAside.jsp" %>
-    </aside>
+    </aside>q
     <section>
         <!--헤더 영역-->
         <article id="menuTitleArea">
@@ -83,7 +83,9 @@
                     </td>
                 </tr>
             </table>
+            
             <div align="right">
+                <button onclick="bookMark(<%=notice.getManagerId()%>);">북마크</button>
                 <button onclick="history.back(-1)">목록으로</button>
             </div>
         </article> 

@@ -5,28 +5,26 @@ public class Report implements java.io.Serializable{
 	private String reportManageCode;
 	private String reportCategory;
 	private String reportDate;
-	private String reportTitle;
 	private String reportContent;
-	private String boardNum;
 	private String memberId;
 	private String reportTime;
 	private String reportedMemberId;
+	private String reportUrl;
 	public Report() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Report(String reportManageCode, String reportCategory, String reportDate, String reportTitle,
-			String reportContent, String boardNum, String memberId, String reportTime, String reportedMemberId) {
+	public Report(String reportManageCode, String reportCategory, String reportDate, String reportContent,
+			String memberId, String reportTime, String reportedMemberId, String reportUrl) {
 		super();
 		this.reportManageCode = reportManageCode;
 		this.reportCategory = reportCategory;
 		this.reportDate = reportDate;
-		this.reportTitle = reportTitle;
 		this.reportContent = reportContent;
-		this.boardNum = boardNum;
 		this.memberId = memberId;
 		this.reportTime = reportTime;
 		this.reportedMemberId = reportedMemberId;
+		this.reportUrl = reportUrl;
 	}
 	public String getReportManageCode() {
 		return reportManageCode;
@@ -46,23 +44,11 @@ public class Report implements java.io.Serializable{
 	public void setReportDate(String reportDate) {
 		this.reportDate = reportDate;
 	}
-	public String getReportTitle() {
-		return reportTitle;
-	}
-	public void setReportTitle(String reportTitle) {
-		this.reportTitle = reportTitle;
-	}
 	public String getReportContent() {
 		return reportContent;
 	}
 	public void setReportContent(String reportContent) {
 		this.reportContent = reportContent;
-	}
-	public String getBoardNum() {
-		return boardNum;
-	}
-	public void setBoardNum(String boardNum) {
-		this.boardNum = boardNum;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -82,12 +68,19 @@ public class Report implements java.io.Serializable{
 	public void setReportedMemberId(String reportedMemberId) {
 		this.reportedMemberId = reportedMemberId;
 	}
+	public String getReportUrl() {
+		return reportUrl;
+	}
+	public void setReportUrl(String reportUrl) {
+		this.reportUrl = reportUrl;
+	}
 	@Override
 	public String toString() {
 		return "Report [reportManageCode=" + reportManageCode + ", reportCategory=" + reportCategory + ", reportDate="
-				+ reportDate + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent + ", boardNum="
-				+ boardNum + ", memberId=" + memberId + ", reportTime=" + reportTime + ", reportedMemberId="
-				+ reportedMemberId + "]";
+				+ reportDate + ", reportContent=" + reportContent + ", memberId=" + memberId + ", reportTime="
+				+ reportTime + ", reportedMemberId=" + reportedMemberId + ", reportUrl=" + reportUrl + "]";
 	}
+
+	
 	
 }
