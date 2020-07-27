@@ -59,5 +59,25 @@ public class FileService {
 		
 		return file;
 	}
+	
+	public String selectOneFileCode(String saveFiles) {
+		Connection con = getConncection();
+		
+		String fileCode = new FileDao().selectOneFileCode(con, saveFiles);
+		System.out.println("service filecode: " + fileCode);
+		close(con);
+		
+		return fileCode;
+	}
+
+	public Files selectTrainingVideo(String videoCode) {
+		Connection con = getConncection();
+		
+		Files file = new FileDao().selectTrainingVideo(con, videoCode);
+		
+		close(con);
+		
+		return file;
+	}
 
 }

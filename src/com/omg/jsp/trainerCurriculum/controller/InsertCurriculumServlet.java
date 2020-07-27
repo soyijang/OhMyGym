@@ -1,7 +1,6 @@
-package com.omg.jsp.trainerVideo.controller;
+package com.omg.jsp.trainerCurriculum.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,18 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.trainerCurriculum.model.service.TrainerCurriculumService;
+import com.omg.jsp.trainerCurriculum.model.vo.TrainerCurriculum;
 
 /**
- * Servlet implementation class InsertVideoServlet
+ * Servlet implementation class InsertCurriculumServlet
  */
-@WebServlet({ "/InsertVideoServlet", "/insertVideoPage.vo" })
-public class InsertVideoPageServlet extends HttpServlet {
+@WebServlet({ "/InsertCurriculumServlet", "/insert.cu" })
+public class InsertCurriculumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertVideoPageServlet() {
+    public InsertCurriculumServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,18 +34,19 @@ public class InsertVideoPageServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		String memberId = loginUser.getMemberId();
+		String newCurriTitle = request.getParameter("newCurriculumTitle");
 		
-		HashMap<String, Object> curriculum = new TrainerCurriculumService().selectCurriculumList(loginUser);
+		int result = new TrainerCurriculumService().insertCurriculum(newCurriTitle, memberId);
 		
 		String page = "";
-		if(!curriculum.isEmpty()) {
-			page = "views/trainer/trainerOhMyPt/trainerInsertMedia.jsp";
-			request.setAttribute("curriculum", curriculum);
+		if(result > 0) {
+			page = "";
+			
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "동영상 등록페이지 출력 실패");
+			request.setAttribute("msg", "커리큘럼 추가 실패");
 		}
-		
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 

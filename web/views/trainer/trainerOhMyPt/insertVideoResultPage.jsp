@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.trainerCurriculum.model.vo.*"%>
-<% HashMap<String, Object> hmap = (HashMap<String, Object>) request.getAttribute("curriculum");
-	ArrayList<TrainerCurriculum> curriculum = (ArrayList<TrainerCurriculum>) hmap.get("curriculum");
-%>
 <!DOCTYPE html> 
 <html lang="ko">
 <head>
@@ -86,7 +83,7 @@
     #addMediaBtnArea {
         text-align: center;
     }
-    #addMediaBtnArea button{
+    #addMediaBtnArea button, #goList{
         background: orangered;
         border-style: none;
         color: white;
@@ -123,58 +120,20 @@
     </aside>
     
     <section>
-        <!--커리큘럼 관리 타이틀-->
         <article id="titleArea">
             <div>
                 <h1 style="margin-top: 6px;">&nbsp;&nbsp;&nbsp;커리큘럼 관리</h1>
             </div>
         </article>
-        <!--커리큘럼 관리 타이틀 종료-->
 
-        <!--커리큘럼 입력-->
         <article id="inputMediaArea">
-            <div id="inputMedia">
-        		<form action="<%= request.getContextPath() %>/insertVideo.vo" method="post" enctype="multipart/form-data" id="uploadVideoForm">
-	                <table style="margin: 20px; width:955px;" id="inputMediaTable">
-	                    <tr>
-	                        <td class="inputMediaTd"><input type="text" name="mediaTitle" id="mediaTitle" placeholder="동영상 제목을 입력하세요."></td>
-	                    </tr>
-	                    <tr>
-	                        <td class="inputMediaTd">
-	                            <select name="curriCode" id="curriCode" style="height: 25px;">
-	                            	<% for(int i = 0; i < curriculum.size(); i++) { %>
-	                                <option value="<%=curriculum.get(i).getCurriculumCode()%>"><%=curriculum.get(i).getCurriculumTitle()%></option>
-	                                <% } %>
-	                                <option value="other">커리큘럼 추가</option>
-	                            </select>
-	                            <!--select- option이 커리큘럼 추가일 때 display 속성값 변경-->
-	                            <input id="newCurriculum" name="newCurriculumTitle" type="text" style="margin-left: 10px; border: none; width: 800px; display: none;" placeholder="생성할 커리큘럼 제목을 입력하세요.">
-	                        </td>
-	                    </tr>
-	                    <tr style="height: 350px; vertical-align: top;">
-	                        <td style="height: 25px; border: none;">	
-	                            <input type="file" name="files" style="border:none; margin-top:5px;">
-	                        </td>
-	                    </tr>
-	                    <tr id="addMediaBtnArea">
-	                    	<td><button id="addMediaBtn">동영상 추가</button></td>
-	                    </tr>
-	                </table>
-        		</form>
+            <div id="inputMedia" style="text-align: center; vertical-align: middle; font-weight: bold; font-size: 1.4em;">
+            	<br><br><br><br><br><br>
+            	트레이닝 영상 업로드 완료!<br><br><br>
+            	<button id="goList" onclick="location.href='<%= request.getContextPath() %>/selectCurriculumList.cu'">목록으로</button>
             </div>
         </article>
-        <!--커리큘럼 입력 종료-->
         
-        <script>
-        	$("#curriCode").change(function() {
-        		console.log($("#curriCode").val());
-        		 if($("#curriCode option:selected").val() == 'other') {
-             		$("#newCurriculum").css("display", "inline-block");
-             	} else {
-             		$("#newCurriculum").css("display", "none");
-             	}
-        	});
-        </script>
     </section>
     <br><br><br><br>
     <!--footer start-->

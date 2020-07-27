@@ -97,5 +97,28 @@ private Properties prop = new Properties();
 		
 		return video;
 	}
+	
+	public int insertTrainerVideo(Connection con, String videoTitle, String memberId, String curriCode,
+			String filecode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insetTrainerVideo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, curriCode);
+			pstmt.setString(2, filecode);
+			pstmt.setString(3, videoTitle);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

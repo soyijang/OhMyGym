@@ -124,5 +124,53 @@ public class TrainerCurriculumDao {
 		
 		return curriculum;
 	}
+	
+	public int insertCurriculum(Connection con, String newCurriculumTitle, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("inserCurriculum");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, newCurriculumTitle);
+			pstmt.setString(2, memberId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public String selectCurriculumTitle(Connection con, String videoCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String curriculumTitle = "";
+		
+		String query = prop.getProperty("selectCurriculumTitle");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, videoCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				curriculumTitle = rset.getString("CURRICULUM_TITLE");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return curriculumTitle;
+	}
 
 }

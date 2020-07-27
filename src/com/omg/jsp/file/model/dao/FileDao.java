@@ -223,5 +223,67 @@ public class FileDao {
 		
 		return resultFile;
 	}
+	
+	public Files selectTrainingVideo(Connection con, String videoCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Files file = null;
+		
+		String query = prop.getProperty("selectTrainingVideo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, videoCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				file = new Files();
+				
+				file.setFileCode(rset.getString("FILE_CODE"));
+				file.setFileManageName(rset.getString("FILE_MANAGE_NAME"));
+				file.setFileOriginName(rset.getString("FILE_ORIGIN_NAME"));
+				file.setFilePath(rset.getString("FILE_PATH"));
+				file.setFileUploadDate(rset.getString("FILE_UPLOAD_DATE"));
+				file.setFileUploadTime(rset.getString("FILE_UPLOAD_TIME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return file;
+	}
+
+
+	public String selectOneFileCode(Connection con, String saveFiles) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String filecode = "";
+		
+		String query = prop.getProperty("selectOneFileCode");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, saveFiles);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				filecode = rset.getString("FILE_CODE");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return filecode;
+	}
 
 }

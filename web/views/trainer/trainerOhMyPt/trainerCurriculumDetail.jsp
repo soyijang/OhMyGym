@@ -181,7 +181,7 @@
         </article>
         <!--커리큘럼 출력 종료-->
         <article id="addMediaBtnArea">
-        	<form action="<%= request.getContextPath() %>/insertVideo.vo" method="post">
+        	<form action="<%= request.getContextPath() %>/insertVideoPage.vo" method="post">
         		<input type="hidden" value="<%= curriculum.get("title") %>" name="title">
         		<input type="hidden" value="<%= curriculum.get("code") %>" name="code">
             	<button type="submit" id="addMediaBtn">동영상 추가</button>

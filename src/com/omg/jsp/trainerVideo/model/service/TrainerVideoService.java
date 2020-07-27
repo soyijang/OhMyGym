@@ -38,5 +38,21 @@ public class TrainerVideoService {
 		
 		return video;
 	}
+	
+	public int insertTrainerVideo(String videoTitle, String memberId, String curriCode, String filecode) {
+		Connection con = getConncection();
+		
+		int result = new TrainerVideoDao().insertTrainerVideo(con, videoTitle, memberId, curriCode, filecode);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
 
 }

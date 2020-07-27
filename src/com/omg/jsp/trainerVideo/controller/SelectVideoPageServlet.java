@@ -1,6 +1,7 @@
 package com.omg.jsp.trainerVideo.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,23 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.omg.jsp.file.model.service.FileService;
-import com.omg.jsp.file.model.vo.Files;
+import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.trainerCurriculum.model.service.TrainerCurriculumService;
-import com.omg.jsp.trainerVideo.model.service.TrainerVideoService;
-import com.omg.jsp.trainerVideo.model.vo.TrainerVideo;
 
 /**
- * Servlet implementation class SelectOneVideoServlet
+ * Servlet implementation class InsertVideoServlet
  */
-@WebServlet("/selectOne.vi")
-public class SelectOneVideoServlet extends HttpServlet {
+@WebServlet({ "/InsertVideoServlet", "/insertVideoPage.vo" })
+public class SelectVideoPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneVideoServlet() {
+    public SelectVideoPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,22 +33,19 @@ public class SelectOneVideoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String videoCode = (String) request.getParameter("num");
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		
-		TrainerVideo video = new TrainerVideoService().selectOneVideo(videoCode);
-		String curriculumTitle = new TrainerCurriculumService().selectCurriculumTitle(videoCode);
-		Files file = new FileService().selectTrainingVideo(videoCode);
+		HashMap<String, Object> curriculum = new TrainerCurriculumService().selectCurriculumList(loginUser);
 		
 		String page = "";
-		if(video != null && curriculumTitle != null && file != null) {
-			page = "views/trainer/trainerOhMyPt/trainerVideoDetail.jsp";
-			request.setAttribute("video", video);
-			request.setAttribute("curriTitle", curriculumTitle);
-			request.setAttribute("file", file);
+		if(!curriculum.isEmpty()) {
+			page = "views/trainer/trainerOhMyPt/trainerInsertMedia.jsp";
+			request.setAttribute("curriculum", curriculum);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "트레이닝 영상 로드 실패");
+			request.setAttribute("msg", "동영상 등록페이지 출력 실패");
 		}
+		
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.trainerCurriculum.model.vo.*, com.omg.jsp.trainerVideo.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.trainerCurriculum.model.vo.*, com.omg.jsp.trainerVideo.model.vo.*, com.omg.jsp.file.model.vo.*"%>
 <% 
 	TrainerVideo video = (TrainerVideo) request.getAttribute("video");
+	String curriTitle = (String) request.getAttribute("curriTitle");
+	Files videoFile = (Files) request.getAttribute("file");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -159,7 +161,7 @@
                 <table id="showVideoList">
                     <tr>
                         <th>커리큘럼</th>
-                        <td id="curriTitle" style="width: 280px;">temp</td>
+                        <td id="curriTitle" style="width: 280px;"><%= curriTitle %></td>
                         <th>업로드일</th>
                         <td style="width: 200px;"><%= video.getTrainerUploadDate() + " " + video.getTrainerUploadTime() %></td>
                         <th>북마크 수</th>
@@ -171,11 +173,13 @@
 	                </tr>
 	                <tr>
                     	<th>첨부파일</th>
-                    	<td colspan="5" style="text-align: left; padding-left: 30px;">temp</td>
+                    	<td colspan="5" style="text-align: left; padding-left: 30px;"><%= videoFile.getFileOriginName() %></td>
                     </tr>
                     <tr style="height: 400px;">
                     	<td colspan="6">
-                    		<video src="" style="width:400px; height: 250px;" controls></video>
+                    		<video style="width:400px; height: 250px;" controls>
+                    			<source src="/omg/resources/curriculum/test.mp4">
+                    		</video>
                     	</td>
                     </tr>
                 </table>

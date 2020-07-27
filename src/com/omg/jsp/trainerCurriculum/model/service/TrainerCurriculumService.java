@@ -1,6 +1,6 @@
 package com.omg.jsp.trainerCurriculum.model.service;
 
-import static com.omg.jsp.common.JDBCTemplate.getConncection;
+import static com.omg.jsp.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -25,6 +25,30 @@ public class TrainerCurriculumService {
 		curriInfo.put("video", video);
 		
 		return curriInfo;
+	}
+	
+	public int insertCurriculum(String newCurriculumTitle, String memberId) {
+		Connection con = getConncection();
+		
+		int result = new TrainerCurriculumDao().insertCurriculum(con, newCurriculumTitle, memberId);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+	public String selectCurriculumTitle(String videoCode) {
+		Connection con = getConncection();
+		
+		String curriculumTitle = new TrainerCurriculumDao().selectCurriculumTitle(con, videoCode);
+		
+		close(con);
+		
+		return curriculumTitle;
 	}
 
 }
