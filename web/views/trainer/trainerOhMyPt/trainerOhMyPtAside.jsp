@@ -38,9 +38,8 @@
  <div class="left-container"><div class="class_category_container">
             <div class="title">OH!마이피티</div>
             <ul class="class_category_list">
-                <li class="navi-item">매칭신청 목록</li>
-                <li class="navi-item">커리큘럼 관리</li>
-                <li class="navi-item">나의 경력</li>
+                <li class="navi-item"><a href="<%= request.getContextPath() %>/selectApplyList.pt">매칭신청 목록</a></li>
+                <li class="navi-item"><a  href="<%= request.getContextPath() %>/selectCurriculumList.cu">커리큘럼 관리</a></li>
                 <li class="navi-item">그룹소통방</li>
             </ul>
 	        </div>

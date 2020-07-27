@@ -157,13 +157,19 @@
 	                	<th style="width: 550px;">동영상 제목</th>
 	                	<th>업로드 시간</th>
 	                </tr>
-                    <% for(int i = 0; i < videoList.size(); i++) { %>
-		                <tr class="video-list">
-		                	<td style="display:none;"><input type="hidden" name="videoCode" value="<%= videoList.get(i).getTrainerVideoCode() %>"></td>
-		                	<td><%= videoList.size() - i %></td>
-		                	<td style="padding-left: 30px; text-align: left;"><%= videoList.get(i).getVideoTitle() %></td>
-		                	<td><%= videoList.get(i).getTrainerUploadDate() + " " + videoList.get(i).getTrainerUploadTime() %></td>
-		                </tr>
+	                <% if(videoList.size() > 0) { %>
+	                    <% for(int i = 0; i < videoList.size(); i++) { %>
+			                <tr class="video-list">
+			                	<td style="display:none;"><input type="hidden" name="videoCode" value="<%= videoList.get(i).getTrainerVideoCode() %>"></td>
+			                	<td><%= videoList.size() - i %></td>
+			                	<td style="padding-left: 30px; text-align: left;"><%= videoList.get(i).getVideoTitle() %></td>
+			                	<td><%= videoList.get(i).getTrainerUploadDate() + " " + videoList.get(i).getTrainerUploadTime() %></td>
+			                </tr>
+		            	<% } %>
+	            	<% } else { %>
+	            		<tr>
+	            			<td colspan="4">커리큘럼에 저장 된 영상이 없습니다.</td>
+	            		</tr>
 	            	<% } %>
                 </table>
 
