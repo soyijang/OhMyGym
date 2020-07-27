@@ -1,7 +1,6 @@
 package com.omg.jsp.followerDiet.controller;
 
-import java.io.IOException; 
-import java.util.ArrayList;
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.omg.jsp.followerDiet.model.service.FoodComponentService;
-import com.omg.jsp.followerDiet.model.vo.FoodComponent;
+import com.omg.jsp.followerDiet.model.service.FollowerDietService;
 
 /**
- * Servlet implementation class SelectFoodComponentListServlet
+ * Servlet implementation class DeleteFollowerDietServlet
  */
-@WebServlet("/SelectFoodComponent.no")
-public class SelectFoodComponentListServlet extends HttpServlet {
+@WebServlet("/deleteOne.dt")
+public class DeleteFollowerDietServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectFoodComponentListServlet() {
+    public DeleteFollowerDietServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,16 +30,20 @@ public class SelectFoodComponentListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setCharacterEncoding("UTF-8");
-		String inputname = request.getParameter("inputname");
-		ArrayList<FoodComponent> foodlistall = new FoodComponentService().selectList(inputname);
+		String savedietCode = request.getParameter("savedietCode");
 		
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		new Gson().toJson(foodlistall, response.getWriter());	
-	
-		System.out.println("foodlistall : "+foodlistall);
-	}
+		int result = new FollowerDietService().deleteDiet(savedietCode);
+		
+		String page = "";
+		if(result > 0 ) {
+			page="/selectList.diet";
+		}else {
+			page="views/common/errorPage.jsp";
+			request.setAttribute("msg", "식단삭제,조회실패!");
+		}
+		request.getRequestDispatcher(page).forward(request, response);
+		}
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

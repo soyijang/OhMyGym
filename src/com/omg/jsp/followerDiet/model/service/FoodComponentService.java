@@ -9,12 +9,24 @@ import static com.omg.jsp.common.JDBCTemplate.*;
 
 public class FoodComponentService {
 
-	public ArrayList<FoodComponent> selectList(){
+	//음식이름 포함된 리스트
+	public ArrayList<FoodComponent> selectList(String inputname){
 		Connection con=getConncection();
 		
-		ArrayList<FoodComponent> list = new FoodComponentDao().selectList(con);
+		ArrayList<FoodComponent> list = new FoodComponentDao().selectList(con, inputname);
 		close(con);
 		
 		return list;
 	}
+	
+	//음식이름 전체리스트 리스트
+	public ArrayList<FoodComponent> selectListall(){
+		Connection con=getConncection();
+		
+		ArrayList<FoodComponent> list = new FoodComponentDao().selectListAll(con);
+		close(con);
+		
+		return list;
+	}
+	
 }

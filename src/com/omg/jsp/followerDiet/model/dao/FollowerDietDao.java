@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -28,19 +27,20 @@ public class FollowerDietDao {
 	
 	}
 	
-	public ArrayList<FollowerDiet> selectList(Connection con) {
+	public ArrayList<FollowerDiet> selectList(Connection con, String memberId) {
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<FollowerDiet> list = null;
+		ArrayList<FollowerDiet> list =  null;
 		
 		String query = prop.getProperty("selectList");
 		
 		try {
-			stmt=con.createStatement();
-			rset=stmt.executeQuery(query);
 			
-			list=new ArrayList<FollowerDiet>();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<FollowerDiet>();
 			
 			while(rset.next()) {
 				
@@ -52,16 +52,23 @@ public class FollowerDietDao {
 				fd.setDietManageCode(rset.getString("DIET_MANAGECODE"));
 				fd.setMemberId(rset.getString("MEMBER_ID"));
 				fd.setFoodCode(rset.getString("FOOD_CODE"));
+				fd.setFoodName(rset.getString("FOOD_NAME"));
+				fd.setFoodCalorie(rset.getString("FOOD_CALORIE"));
+				fd.setFoodCarbohydrate(rset.getString("FOOD_CARBOHYDRATE"));
+				fd.setFoodProtein(rset.getString("FOOD_PROTEIN"));
+				fd.setFoodFat(rset.getString("FOOD_FAT"));
+				fd.setFoodWater(rset.getString("FOOD_WATER"));
 				
 				list.add(fd);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(stmt);
+			close(pstmt);
 			close(rset);
 		}
 		
+		System.out.println("dao 식단 리스트 : " + list);
 		
 		return list;
 	}
@@ -91,7 +98,54 @@ public class FollowerDietDao {
 	}
 	
 	
+	//추가용
+	public int insertdiet(Connection con, FollowerDiet insertdiet) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		System.out.println("insertdiet.getIntakeDate():" + insertdiet.getIntakeDate());
+		String query = prop.getProperty("insertDiet");
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			
+			pstmt.setInt(1, insertdiet.getIntakeVolume());
+			pstmt.setString(2, insertdiet.getIntakeDate());
+			pstmt.setString(3, insertdiet.getIntekeTime());
+			pstmt.setString(4, insertdiet.getMemberId());
+			pstmt.setString(5, insertdiet.getFoodName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
 	
+	//식단 삭제용
+	public int deleteDiet(Connection con, String savedietCode) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = prop.getProperty("deleteDiet");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, savedietCode);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	
