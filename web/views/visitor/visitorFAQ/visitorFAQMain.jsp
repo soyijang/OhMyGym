@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.faq.model.vo.*" %>
+<%ArrayList<FAQ> list = (ArrayList<FAQ>) request.getAttribute("list"); %>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     
 
@@ -55,342 +57,299 @@
     <title>1:1 Q&amp;A | OH MY GYM</title>
 
    <style>
-        @charset "UTF-8";
+    .wrapper {
+      max-width: 1100px;
+      margin: auto
+    }
 
-     
+    .content {
+      margin: auto;
+      background-color: #fff
+    }
 
-        /*contents area*/
-        .wrap {
-            clear: both;
-            position: relative;
-            width: 100%;
-        }
+    .content .member_header {
+      padding: 60px 0 70px
+    }
 
-       
+    .content .member_header .title {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: bold;
+      color: #000
+    }
 
-       
+    .content .member_header .sub_title {
+      font-size: 14px;
+      line-height: 23px;
+      font-weight: bold;
+      text-align: right;
+      float: right
+    }
 
-        /* SCROLLBAR Chrome Safari*/
-        #brand_list_print::-webkit-scrollbar {
-            width: 7px;
-        }
+    .content .member_header .sub_title .color {
+      color: #ff6f61
+    }
 
-        #brand_list_print::-webkit-scrollbar-track {
-            background: #fff;
-        }
+    .content .member_header .sub_title .right_arrow {
+      height: 11px;
+      margin: 0 6px;
+      vertical-align: baseline
+    }
 
-        #brand_list_print::-webkit-scrollbar-thumb {
-            height: 50px;
-            width: 50px;
-        }
+    .content .right-container {
+      display: inline-block;
+      float: right;
+      width: 740px;
+      min-height: 700px
+    }
 
-       
-        /*cs*/
-        .cs_area {
-            border-top: 1px solid #ddd;
-            padding-top: 15px;
-        }
+  </style>
+  <style>
+    .left-container {
+      display: inline-block;
+      width: 290px;
+      padding: 30px 30px 35px 30px;
+      border: solid 1px #dadada;
+      box-sizing: border-box
+    }
 
-        .cs_contents {
-            border: 1px solid #ddd;
-            padding: 10px 10px 0 10px;
-            font-size: 12px;
-            line-height: 20px;
-            margin: 15px 0 0 0;
-        }
+    .left-container .class_category_container {
+      font-size: 14px;
+      color: #000
+    }
 
-        .cs_time {
-            line-height: 35px;
-            text-align: center;
-            border: 1px solid #ddd;
-            background: #f3f3f3;
-            font-size: 12px;
-            margin-top: -1px;
-        }
+    .left-container .title {
+      font-size: 16px;
+      font-weight: bold;
+      padding-bottom: 12px;
+      border-bottom: solid 2.5px #141414
+    }
 
-        .cs_numb {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
+    .left-container .class_category_list li {
+      padding: 14px 0 14px;
+      border-bottom: solid 1px #ececec;
+      border-collapse: collapse;
+      list-style: none;
+      cursor: pointer;
+      color: #3b3b3b
+    }
 
-        .cs_info {
-            color: #b2b2b2;
-            padding: 5px 0 10px 0;
-        }
+    .left-container .class_category_list li.on {
+      color: #ff6f61
+    }
 
-        .cs_info.first {
-            border-bottom: 1px solid #ddd;
-        }
+    .left-container .class_category_list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0
+    }
+  </style>
+  <style>
+    .wrapper {
+      background-color: #fff
+    }
 
-        .cs_info .link_type {
-            color: #000;
-        }
+    .faq_container {
+      margin: auto;
+      width: 1100px
+    }
 
-        .cs_contents .txt_num_cs {
-            color: #666;
-        }
+    .faq_container .right-container {
+      display: inline-block;
+      float: right;
+      width: 740px
+    }
 
-        .box_cs_left {
-            line-height: 21px;
-            margin: 15px;
-        }
+    .faq_container .right-container .faq_list_container .search_wrapper {
+      margin-bottom: 40px
+    }
 
-        .txt_tel_left {
-            font: 24px 'Musinsa';
-            margin-bottom: 15px;
-        }
+    .faq_container .right-container .faq_list_container .search_wrapper .search_box {
+      width: 100%;
+      height: 53px;
+      border-radius: 2px;
+      background-color: #ffffff;
+      border: solid 1px #dadada;
+      padding: 15px;
+      box-sizing: border-box;
+      font-size: 15px;
+      background-image: url(/site_media/new_images/qna-ic-search@2x.png);
+      background-repeat: no-repeat;
+      background-size: 26px;
+      background-position: center right 15px
+    }
 
-        .txt_tel_left .fa.fa-phone {
-            margin-top: 5px;
-        }
+    .faq_container .right-container .faq_list_container .search_wrapper .search_icon {
+      float: right;
+      width: 50px;
+      height: 53px;
+      margin-top: -53px;
+      position: relative;
+      cursor: pointer
+    }
 
-        .txt_csinfo_left {
-            font-weight: bold;
-            color: #000;
-        }
+    .faq_container .right-container .faq_list_container .faq_wrapper {
+      width: 100%
+    }
 
-        .box_info_left {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #ddd;
-        }
+    .faq_container .right-container .faq_list_container .faq_wrapper .faq_title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #0d0d0d;
+      padding-bottom: 10px;
+      border-bottom: solid 2.5px #141414
+    }
 
-        .box_info_left a {
-            color: #000;
-            font-weight: bold;
-            text-decoration: underline;
-        }
+    .faq_container .right-container .faq_list_container .faq_wrapper .faq_title .color {
+      font-weight: bold;
+      color: #ff6f61
+    }
 
-        .box_bottom_left {
-            margin: 15px;
-        }
+    .faq_container .right-container .faq_list_container .faq_wrapper .search {
+      font-size: 13px;
+      font-weight: normal
+    }
 
-        .box_bottom_left:after {
-            clear: both;
-            display: block;
-            content: "";
-        }
+    
 
-        .box_bottom_left li a {
-            width: 62px;
-        }
-
-        
-
-        /*right*/
-        .right_area {
-            position: absolute;
-            left: 0px;
-            top: 100px;
-            right: 0;
-            min-width: 1289px;
-            border-left: 1px solid #ddd;
-        }
-
-        
-    </style>
+    .faq_container .right-container .faq_list_container .faq_question_list .question_item {
+      padding: 20px 0 16px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #000;
+      border-bottom: solid 1px #dadada;
+      border-collapse: collapse;
+      list-style: none;
+      background-repeat: no-repeat;
+      background-size: 15px;
+      background-position: center right 15px;
+      
+    }
 
 
-    <style>
-        .container-cs-counsel {
-            position: absolute;
-            left: 400px;
-            top: 200px;
-            right: 0;
-            min-width: 1289px;
-            border-left: 1px solid #ddd;
-        }
-    </style>
+    .faq_container .right-container .faq_list_container .faq_question_list .question_item.no_question {
+      background-image: none
+    }
+
+    .faq_container .right-container .faq_list_container .faq_question_list .question_item:last-child {
+      border-bottom: solid 1px #141414
+    }
+
+    .faq_container .right-container .faq_list_container .faq_question_list .answer_wrppaer {
+      background-color: #f8f8f8;
+      padding: 15px 20px;
+      border-bottom: solid 1px #dadada
+    }
+
+    .faq_container .right-container .faq_list_container .faq_question_list .answer_wrppaer .answer_content {
+      font-size: 13px;
+      color: #4f4f4f;
+      text-align: left;
+      line-height: 1.7;
+      letter-spacing: normal
+    }
+
+    .inbound_btn_container {
+      margin-top: 30px
+    }
+
+    .inbound_btn_container .title {
+      background-repeat: no-repeat;
+      background-size: 15px;
+      background-position: top 3px right 5px
+    }
+
+
+    .inbound_btn_container .qna_btn {
+      margin-top: 20px;
+      line-height: 52px;
+      height: 52px;
+      border-radius: 2px;
+      background-color: #ff6f61;
+      font-size: 15px;
+      font-weight: normal;
+      color: #fff;
+      text-align: center;
+      cursor: pointer
+    }
+
+  </style>
+ 
 
 
 </head>
 <body>
- <%@ include file="../../common/followerNav.jsp"%>
+  <%@ include file="../../common/nonNav.jsp"%> 
     <section>
+  
+  
+  <div class="content" id="app">
 
-
-    <!-- wrap -->
-    <div class="wrap">
-
-
-        <div class="left_area">
-
-
-
+    
+    <div class="wrapper">
+      <div class="faq_container">
+        <div class="member_header">
+          <div class="title">고객센터</div>
+          <div class="sub_title"><span class="content">고객센터</span> >
+           
+            <span class="color">자주묻는 질문</span>
+          </div>
         </div>
-       
-        
-    </div>
-    <!--// 왼쪽 메뉴 영역 -->
-    <div class="left-container">
-        <div class="class_category_container">
-          <div class="title">자주 묻는 질문</div>
-          <ul class="class_category_list">
-            <li class="navi-item on">전체</li>
-            <li class="navi-item ">오마이짐이란?</li>
-            <li class="navi-item ">수강문의</li>
-            <li class="navi-item ">연기/환불</li>
-            <li class="navi-item ">결제/캐시</li>
-            <li class="navi-item ">회원정보</li>
-            <li class="navi-item ">기타</li>
-          </ul>
-          
+        <div class="left-container">
+          <div class="class_category_container">
+            <div class="title">자주 묻는 질문</div>
+            <ul class="class_category_list">
+              <li class="navi-item on">전체</li>
+              <li class="navi-item ">오마이짐이란?</li>
+              <li class="navi-item ">수강문의</li>
+              <li class="navi-item ">연기/환불</li>
+              <li class="navi-item ">결제/캐시</li>
+              <li class="navi-item ">회원정보</li>
+              <li class="navi-item ">기타</li>
+            </ul>
+            <div class="inbound_btn_container">
+              <div class="title">1:1 문의하기</div>
+              <div onclick="qnaBtn()" class="qna_btn">1:1 문의</div>
+            </div>
+          </div>
+        </div>
+        <div class="right-container question_list">
+          <div class="faq_list_container">
+            <div class="search_wrapper">
+              <input class="search_box" placeholder="질문을 검색해보세요" value="">
+              <div class="search_icon" data-testid="search-btn">
+              </div>
+            </div>
+            <div class="faq_wrapper">
+              <div class="faq_title">전체</div>
+              
+            
+            
+              <ul class="faq_question_list">
+              <% for(FAQ f : list){ %>
+                <li class="question_item ">
+                  <div class="question"><%= f.getQuestion() %></div>
+                  <br>
+                  <div class="answer"><%= f.getAnswer() %></div>
+                </li>
+                <% } %>
+               
+                
+              </ul>
+              
+            </div>
+          </div>
         </div>
       </div>
-    <!-- 오른쪽 콘텐츠 영역 -->
-    <div class="right_area container-cs-counsel">
-        <!-- 컨텐츠 영역 -->
-        <!-- 상단 로케이션 -->
-        <div class="pagenation">
-            <div class="nav_sub"><a href="/">OH MY GYM</a><span class="icon_entity">&gt;</span><a
-                    href="/app/cs">고객센터</a><span class="icon_entity">&gt;</span><span>1:1 Q&amp;A</span></div>
-        </div>
-        <!-- //상단 로케이션 -->
-        <!-- 타이틀 -->
-        <div class="right_contents">
-            <h2 class="title-page">1:1 문의</h2>
-        </div>
-        <!-- //타이틀 -->
-        <!-- CS Center 탭버튼 -->
-        <div class="cs_center_tap">
-            <ul>
-                <li class="hover_effect_none">
-                    <span class="title">Tel. 010-9974-8184</span>
-                    <span>평일 9:00~18:00(점심 12:00~13:00)</span>
-                </li>
-                <li class="active">
-                    <a href="/app/cs/counsel">
-                        <span class="title">1:1 Q&amp;A</span>
-                        <span>질문 전 FAQ(자주 묻는 질문)을 먼저 확인해 주세요.</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="/app/cs/faq">
-                        <span class="title">FAQ</span>
-                        <span>자주 묻는 질문</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- //CS Center 탭버튼 -->
-        <form name="f1" id="f1" method="post" action="/app/cs/counsel_save">
-            <input type="hidden" name="qna_board_no" value="">
-            <input type="hidden" name="cmd" value="add">
-            <!--			<input type="hidden" name="pay_type" value="" />-->
-            <!--			<input type="hidden" name="d_pay_state" value="" />-->
-            <input type="hidden" name="opener" value="N">
-            <!--			<input type="hidden" name="ord_opt_no" value="" />-->
-            <input type="hidden" name="faq_view_yn" value="N">
-            <input type="hidden" name="image_yn" value="N">
-            <input type="hidden" name="period">
-           
-            <!-- 고객센터 콘텐츠 -->
-            <div class="right_contents">
-                <h3 class="title_cs font-mss">1:1 Q&amp;A</h3>
+    </div>
+    
+  </div>
+  
 
 
-                <div class="section_form">
-                    <!-- [D] 주문확인 -->
-                    <div class="harf_area">
-                        <header class="n-section-title">
-                            <h2 class="tit">문의 작성</h2>
-                        </header>
-                        <table class="n-table table-row">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">문의유형</th>
-                                    <td>
-                                        <div class="bg-select">
-                                            <select name="qa_kind" style="width: 150px; height: 40px;">
-                                                <option value="">문의유형 선택</option>
-                                                <option value="8">업로드 문의</option>
-                                                <option value="9">팔로워 관련</option>
-                                                <option value="10">기능 관련</option>
-                                                <option value="11">프로필</option>
-                                                <option value="20">정산 문의</option>
-                                                <option value="12">신고</option>
-                                                <option value="13">기타 문의</option>
-
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                                
-                                <tr>
-                                    <th scope="row">작성자</th>
-                                    <td>
-                                        <p style="color: black;">홍길동</p>
-                                    </td>
-                                </tr>
-                                <tr class="n-same-row">
-                                    <th scope="row">휴대전화</th>
-                                    <td>
-                                        <p style="color: black;">010-0000-0000</p>
-                                    </td>
-                                </tr>
-                                <tr class="n-same-row">
-                                    <th scope="row">이메일</th>
-                                    <td>
-                                        <p style="color: black;">hong123@kh.or.kr</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">제목</th>
-                                    <td>
-                                        <input type="text" class="n-input" name="subject" value=""
-                                            placeholder="제목을 입력해주세요." style="height: 30px; width: 200px;">
-                                    </td>
-                                </tr>
-                                <tr class="n-same-row">
-                                    <th scope="row">문의내용</th>
-                                    <td>
-                                        <textarea name="qa_msg" cols="100" rows="100" class="n-input"
-                                            placeholder="내용을 입력해주세요." style="resize: none;" rows="10"></textarea>
-                                    </td>
-                                </tr>
-                                <tr class="n-same-row">
-                                    <th scope="row">사진</th>
-                                    <td class="file-upload">
-                                        <ul class="file_show" id="file_show">
-                                        </ul>
-                                        <button type="button" class="btn-file" onclick="$('#Filedata').click();" style="height: 40px; width: 100px; background-color: white; color: orangered; border:1px solid orangered;">파일
-                                            선택</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- //[D] 주문확인 -->
-                    
-                </div>
-                <!-- 버튼 -->
-                <div class="n-btn-group" style="float: right; margin-right: 400;">
-                    <button onclick="" style="color: orangered; background-color: white; border: 1px solid orangered; width: 100px; height: 40px;">저장</button>
-                    <button onclick="" style="color: white; background-color: orangered; border: none; width: 100px; height: 40px;">취소</button>
-                </div>
-                <!-- //버튼 -->
-            </div>
-            <!-- //고객센터 콘텐츠 -->
-            <!--// 컨텐츠 영역 -->
-        </form>
-
-        <form id="upload_form" name="upload_form" method="post" action="/xf/lib/fileupload.php" target="hf"
-            enctype="multipart/form-data">
-            <input type="hidden" name="TYPE" value="CS">
-            <input type="hidden" name="MODE" value="m">
-            <input type="hidden" name="DIR" value="/data/cs/">
-            <input type="hidden" name="GOODS_NO" value="">
-            <input type="hidden" name="GOODS_SUB" value="">
-            <input type="hidden" name="LIMIT" value="2560">
-            <input type="hidden" name="files" value="">
-            <input type="file" name="Filedata[]" id="Filedata" class="input_file w100" onchange="uploadImage();"
-                style="display: none !important;">
-        </form>
-        <iframe name="hf" src="about:blank" style="display: none; width: 100%; height: 300px;"></iframe>
-    </section>
+ <div style="position: absolute; top:1000px;">
         <%@ include file="../../common/footer.jsp" %>
         
-       
+       </div>
 
 
     </div>
@@ -399,7 +358,13 @@
 
     
     </div>
-    
+    <script>
+    	function qnaBtn() {
+    		alert('로그인이 필요한 서비스입니다.');
+    		location.href="/omg/views/visitor/login.jsp"
+    		
+    	}
+    </script>
 
 
 </body>

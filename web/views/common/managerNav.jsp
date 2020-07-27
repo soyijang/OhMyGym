@@ -152,8 +152,8 @@
         <ul><details open><summary>고객센터</summary>
             <li><a href="<%= request.getContextPath()%>/selectList.no">공지사항</a></li>
             <li><a href="#">이벤트</a></li>
-            <li><a href="#">자주묻는질문</a></li>
-            <li><a href="#">직접묻는질문</a></li>
+            <li><a href="<%= request.getContextPath()%>/FAQList.mg">자주묻는질문</a></li>
+            <li><a href="<%= request.getContextPath()%>/QNAList.mg">직접묻는질문</a></li>
             <li><a href="../managerAboutMypage/manageReport.jsp">신고내역관리</a></li>
             <li><a href="../managerAboutMypage/manageStamp.jsp">스탬프관리</a></li><br>
         </details></ul>

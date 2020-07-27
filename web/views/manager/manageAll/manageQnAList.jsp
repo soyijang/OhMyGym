@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*, java.util.*, com.omg.jsp.qna.model.vo.*"%>
+<%ArrayList<QNA> list = (ArrayList<QNA>) request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,8 +121,8 @@
             font-size: 13px;
             height: 40px;
             border-bottom: 4px double black;
-            
-            color: black;
+            background-color: navy;
+            color: white;
             font-weight: bold;
         }
         td {
@@ -246,11 +247,12 @@
 
         <!--테이블 표시 영역-->
         <article id="tableArea">
+        <form id="fofofo" action="<%= request.getContextPath()%>/QNADetail" method="post">
             <div align="center">
+            <input type="hidden" name="managerId" value="<%=  loginManager.getManagerId() %>">
                 <table>
                     <tr>
                         <th width="70px;">No</th>
-                        <th width="70px;">사용자구분</th>
                         <th width="100px">카테고리</th>
                         <th width="500px;">제목</th>
                         <th width="70px;">작성자</th>
@@ -258,35 +260,44 @@
                         <th width="70px;">답변상태</th>
                     </tr>
                    
-                    <tr>
-                        <td>2</td>
-                        <td>트레이너</td>
-                        <td>업로드</td>
-                        <td>업로드가 이상합니다</td>
-                        <td>이감자</td>
-                        <td>2020-07-01</td>
-                        <td>
-                            <button class="btn2" id="answerBtn" onclick="">답변하기</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>팔로워</td>
-                        <td>결제관련</td>
-                        <td>결제가 이상합니다</td>
-                        <td>한진희</td>
-                        <td>2020-06-29</td>
-                        <td>
-                            <button class="btn2" id="editBtn" onclick="">수정하기</button>
-                        </td>
-                    </tr>
+                    <% for(QNA q : list) { %>
+				<tr>
+				<input type="hidden" name="manageCode" value="<%=  q.getManageCode() %>">
+					<td><%= q.getManageCode() %></td>
+					<td><%= q.getCategory() %></td>
+					<td><%= q.getQuestionTitle() %></td>
+					<td><%= q.getMemberId() %></td>
+					<td><%= q.getDate() %></td>
+					<% if(q.getQnaYn().equals("N")){ %>
+            		<td><button onclick="next" style="background-color:orangered; color:white; border:none; width:70px; height:25px;">답변하기</button></td>
+         			<% } else {%>
+         			<td><button onclick="next" style="background-color:gray; color:white; border:none width:70px; height:25px;" >답변하기</button></td>
+					
+					<%-- onclick="detail('<%= q.getManageCode() %>')"  --%>
+				</tr>
+				<%} } %>
 
                 </table>
             </div>
         </article>
+        </form>
         <!--테이블 표시 영역 종료-->
 
        
     </section>
+    <script>
+    function next(){
+            $("#fofofo").submit();
+        
+            
+         }
+    </script>
+    <%-- 
+     <script>
+    
+    function detail(manageCode) {
+    	location.href = "<%= request.getContextPath()%>/QNADetail?manageCode="+manageCode;
+    }
+    </script>  --%>
 </body>
 </html>
