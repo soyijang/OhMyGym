@@ -4,6 +4,9 @@
 	TrainerVideo video = (TrainerVideo) request.getAttribute("video");
 	String curriTitle = (String) request.getAttribute("curriTitle");
 	Files videoFile = (Files) request.getAttribute("file");
+	String root = request.getSession().getServletContext().getRealPath("/");
+	String savePath = root + "resources/curriculum/";
+	System.out.println(savePath + videoFile.getFileManageName());
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -178,7 +181,7 @@
                     <tr style="height: 400px;">
                     	<td colspan="6">
                     		<video style="width:400px; height: 250px;" controls>
-                    			<source src="/omg/resources/curriculum/test.mp4">
+                    			<source src="<%= savePath + videoFile.getFileManageName() %>">
                     		</video>
                     	</td>
                     </tr>

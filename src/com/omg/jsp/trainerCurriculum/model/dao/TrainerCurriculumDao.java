@@ -130,6 +130,7 @@ public class TrainerCurriculumDao {
 		int result = 0;
 		
 		String query = prop.getProperty("inserCurriculum");
+		System.out.println(newCurriculumTitle + " " + memberId);
 		
 		try {
 			pstmt = con.prepareStatement(query);

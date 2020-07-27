@@ -87,9 +87,9 @@ public class InsertVideoServlet extends HttpServlet {
 			String curriCode = multiRequest.getParameter("curriCode");
 			System.out.println("curriCode : " + curriCode);
 			if(curriCode.equals("other")) {
-				String newCurriculumTitle = request.getParameter("newCurriculumTitle");
+				String newCurriculumTitle = multiRequest.getParameter("newCurriculumTitle");
+				System.out.println("controller : " + newCurriculumTitle);
 				int newCurriResult = new TrainerCurriculumService().insertCurriculum(newCurriculumTitle, memberId);
-//				System.out.println("newCurriTitle : " + newCurriculumTitle);
 			}
 			
 			Files upfile = new Files();
