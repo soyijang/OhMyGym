@@ -138,7 +138,7 @@ public class QNADao {
 	public QNA selectOne(Connection con, String manageCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		QNA qna = null;
+		QNA q = null;
 		
 		String query = prop.getProperty("selectOne");
 		
@@ -149,12 +149,14 @@ public class QNADao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				QNA q = new QNA();
+				q = new QNA();
 				
+				q.setManageCode(rset.getString("QNA_MANAGECODE"));
 				q.setCategory(rset.getString("QNA_CATEGORY"));
 				q.setQuestionTitle(rset.getString("QNA_QUESTION_TITLE"));
 				q.setQuestionContent(rset.getString("QNA_QUESTION_CONTENT"));
 				q.setDate(rset.getString("QNA_DATE"));
+				q.setMemberId(rset.getString("MEMBER_ID"));
 				
 				
 				
@@ -162,11 +164,15 @@ public class QNADao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+			close(rset);
 		}
 		
 		
 		
-		return qna;
+		return q;
 	}
 
 

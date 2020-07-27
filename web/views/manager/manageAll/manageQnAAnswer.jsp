@@ -2,7 +2,9 @@
     pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*, java.util.*, com.omg.jsp.qna.model.vo.*"%>
     
 <%ArrayList<QNA> list = (ArrayList<QNA>) request.getAttribute("list");
-  ArrayList<String> al = (ArrayList<String>) request.getAttribute("al");%>
+  ArrayList<String> al = (ArrayList<String>) request.getAttribute("al");
+  QNA q = (QNA) request.getAttribute("q");
+  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,46 +179,41 @@
     <section>
         <!--헤더 영역-->
         <article id="menuTitleArea">
-            <p style="font-weight: bold; font-size: 1.5em; padding-top: 30px; padding-left: 30px;">시스템 개발 요청</p>
+            <p style="font-weight: bold; font-size: 1.5em; padding-top: 30px; padding-left: 30px;">문의 답변</p>
         </article>
         <!--헤더 영역 종료-->
 
        
         <!--테이블 표시 영역-->
         <article id="tableArea">
+             <form id="next" action="<%= request.getContextPath()%>/InsertQNAAnswer" method="post">
             <div align="center">
-            <form action="<%= request.getContextPath()%>/InsertQNAAnswer" method="post">
-            <input type="hidden" id="managerId" name="managerId" value="<%= al.get(1) %>">
-            <input type="hidden" id="manageCode" name="manageCode" value="<%= al.get(2) %>">
+            <input type="hidden" id="managerId" name="managerId" value="<%= al.get(0) %>">
+            <input type="hidden" id="manageCode" name="manageCode" value="<%= al.get(1) %>">
                 <table>
                     <tr>
-                        <td style="background-color: palevioletred;">항목구분</td>
-                        <td colspan="2"><input type="radio" id=contentc value="1" name=contentc checked="">수강문의
-                            <input type="radio" id=contentc name=contentc value="2">연기/환불
-                            <input type="radio" id=contentc name=contentc value="3">결제/캐시
-                            <input type="radio" id=contentc name=contentc value="4">회원정보
-                            <input type="radio" id=contentc name=contentc value="5">기타
-                            <%= list.get(0).getCategory() %></td>
+                    	<td style="background-color: palevioletred; width: 200px;">구분</td>
+                        <td><%= q.getCategory() %></td>
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred; width: 200px;">사용자명</td>
-                        <td><a style="text-decoration: none; float: left; margin-left: 70;"><%= list.get(0).getMemberId() %></a></td>
+                        <td><a style="text-decoration: none; float: left; margin-left: 70;">&nbsp;&nbsp;&nbsp;&nbsp;<%= q.getMemberId() %></a></td>
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred;">제목</td>
-                        <td><a style="text-decoration: none; float: left; margin-left: 70;"><%= list.get(0).getQuestionTitle() %></a></td>
+                        <td><a style="text-decoration: none; float: left; margin-left: 70;">&nbsp;&nbsp;&nbsp;&nbsp;<%= q.getQuestionTitle() %></a></td>
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred;">내용상세</td>
-                        <td><a style="text-decoration: none; float: left; margin-left: 70;"><%= list.get(0).getQuestionContent() %></a></td>
+                        <td><a style="text-decoration: none; float: left; margin-left: 70;">&nbsp;&nbsp;&nbsp;&nbsp;<%= q.getQuestionContent() %></a></td>
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred;">문의일자</td>
-                        <td><a style="text-decoration: none; float: left; margin-left: 70;"><%= list.get(0).getDate() %></a></td>
+                        <td><a style="text-decoration: none; float: left; margin-left: 70;">&nbsp;&nbsp;&nbsp;&nbsp;<%= q.getDate() %></a></td>
                     </tr>
                     <tr>
                     	<td style="background-color: palevioletred;">답변하기</td>
-                    	<td><input type="text" name="title" placeholder="답변 제목을 입력해주세요">
+                    	<td><input type="text" name="title" style="height: 25px; width: 765px;"placeholder="답변 제목을 입력해주세요">
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred;">답변하기</td>
@@ -229,10 +226,10 @@
                  <!--테이블 표시 영역 종료-->
                     <!--버튼 처리 영역(임시)-->
                     <br>
-                <button onclick="" style="float: right; margin-right: 40; background-color: orangered; color: white; border: none; height: 30px; width: 100px;">저장</button>
+                <button onclick="next" style="float: right; margin-right: 40; background-color: orangered; color: white; border: none; height: 30px; width: 100px;">저장</button>
                   <!--버튼 처리 영역(임시) 종료-->
             </div>
-            </form>
+             </form> 
         </article>
        
 
@@ -240,5 +237,13 @@
       
      
     </section>
+    
+    <script>
+    function next(){
+            $("#next").submit();
+        
+            
+         }
+    </script>
 </body>
 </html>

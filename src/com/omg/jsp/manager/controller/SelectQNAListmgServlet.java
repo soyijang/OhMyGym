@@ -33,6 +33,11 @@ public class SelectQNAListmgServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		ArrayList<QNA> list = new QNAService().selectList();
 		
 		System.out.println("select board list controller : " + list);
@@ -41,13 +46,15 @@ public class SelectQNAListmgServlet extends HttpServlet {
 		if(list != null) {
 			page = "views/manager/manageAll/manageQnAList.jsp";
 			request.setAttribute("list", list);
+			request.getRequestDispatcher(page).forward(request, response);
 				
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시판 조회 실패!");
+			request.getRequestDispatcher(page).forward(request, response);
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

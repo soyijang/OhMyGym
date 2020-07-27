@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.omg.jsp.QNAAnswer.model.service.QNAAnswerService;
 import com.omg.jsp.QNAAnswer.model.vo.QNAAnswer;
+import com.omg.jsp.manager.model.vo.Manager;
+import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.qna.model.service.QNAService;
 import com.omg.jsp.qna.model.vo.QNA;
 
@@ -33,15 +35,24 @@ public class SelectQNADetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		String manageCode = request.getParameter("manageCode");
-		String managerId = request.getParameter("managerId");   
+//		String managerId = request.getParameter("managerId");
+		Manager loginUser = (Manager) request.getSession().getAttribute("loginManager");
+		
+		System.out.println(loginUser);
+		String managerId = loginUser.getManagerId();
+		
+		System.out.println(loginUser);
+		
+		
+		
 		
 		QNA q = new QNAService().selectOne(manageCode);
-		
-		QNAAnswer qa = new QNAAnswer();
-		
-		qa.setManagerId(managerId);
-		qa.setManageCode(manageCode);
 		
 		ArrayList<String> al = new ArrayList<String>();
 		
@@ -52,14 +63,16 @@ public class SelectQNADetailServlet extends HttpServlet {
 		al.add(manageCode);
 		
 		System.out.println("detail arraylist : " + al);
+		System.out.println("detail q : " + q);
 		
 		
 		
 		
 		String page = "";
-		if(!al.isEmpty()) {
+		if(q != null) {
 			page = "views/manager/manageAll/manageQnAAnswer.jsp";
 			request.setAttribute("al", al);
+			request.setAttribute("q", q);
 			request.getRequestDispatcher(page).forward(request, response);
 		} else {
 			page = "views/common/errorPage.jsp";
