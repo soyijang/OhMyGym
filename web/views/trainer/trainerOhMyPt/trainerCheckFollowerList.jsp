@@ -161,7 +161,7 @@
 		border: 3px solid orangered; 
 		transition: all ease 0.1s 0s;
 	}
-	
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
@@ -251,11 +251,13 @@
 				<div id="followerListCont" style="padding-left: 50px;">
 				
 				<%for(int i = 0; i < lists.size(); i++){ %>
-					<div id="followerListEle" >
-						<div id="<%=lists.get(i).getFollowerId()%>"  style="display: inline-block;margin-left: 15px; margin-top: 25px; display: inline-block;" ><img class="<%=lists.get(i).getFollowerId()%>" width="90px" height="90px" style="border-radius: 70%; overflow: hidden;"></div>
+					<div id="followerListEle" class="followerListEle">
+						<div id="<%=lists.get(i).getFollowerId()%>"  style="display: inline-block; float: left; margin-left: 15px; margin-top: 25px; display: inline-block;" ><img class="<%=lists.get(i).getFollowerId()%>" width="90px" height="90px" style="border-radius: 70%; overflow: hidden;"></div>
+                          <img style="opacity: 0.7; float: right; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" class="<%=lists.get(i).getFollowerId()%>" width="170px" height="100%">
                         <div id="user_profile"  style="margin-left: 15px; margin-top: 25px; display: inline-block; vertical-align: top;">
                         	<div class="user_name" ><%=lists.get(i).getFollowerName()%>&nbsp;&nbsp;&nbsp;&nbsp;<a class="height<%=lists.get(i).getFollowerId()%>"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="weight<%=lists.get(i).getFollowerId()%>"></a></div><hr>
                         	<div class="user_date" ><a style="font-size: 0.6em;">매칭일 </a><%=lists.get(i).getMatchingDate()%>&nbsp;&nbsp;&nbsp;&nbsp;<a class="part<%=lists.get(i).getFollowerId()%>"></a></div>
+                      
                         </div>
 					</div>
 					<script>

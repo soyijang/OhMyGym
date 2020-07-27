@@ -133,7 +133,7 @@ a:hover {
 	<div class="container_top">
 		<ul class="header_top_menu" id="header_top">
 			<li id="webIntro"><a onclick="logout();">로그아웃</a></li>
-			<li id="webClasses"><a href="<%=request.getContextPath()%>/trinerinfo.mp">마이페이지</a></li>
+			<li id="webClasses"><a href="<%=request.getContextPath()%>/views/trainer/trainerMypage/trainerMyInfo.jsp">마이페이지</a></li>
 		</ul>
 	</div>
 	<br>

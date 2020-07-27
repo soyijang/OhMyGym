@@ -89,9 +89,9 @@ ArrayList<String> trainerInfo = (ArrayList<String>) hmap.get("trainerInfo"); %>
 									<a href="" >자격정보 수정하기</a> 
 									<a href="" >정산조회</a>
 								</div>
-								<div class="txt_alram">
-									<p><a href=""><%= trainerInfo.get(2) %></a></p>
-								</div>
+<!-- 								<div class="txt_alram"> -->
+<%-- 									<p><a href=""><%= trainerInfo.get(2) %></a></p> --%>
+<!-- 								</div> -->
 								<a href="" class="btn_setup_profile img_spr" title="설정">설정</a>
 							</div>
 						
