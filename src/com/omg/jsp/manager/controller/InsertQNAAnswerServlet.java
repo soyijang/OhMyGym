@@ -37,12 +37,16 @@ public class InsertQNAAnswerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		String manageCode = request.getParameter("manageCode");
 		String content = request.getParameter("content");
 		String managerId = request.getParameter("managerId");   
 		String title = request.getParameter("title");
 		
-		QNA q = new QNAService().selectOne(manageCode);
+		
 		
 		QNAAnswer qa = new QNAAnswer();
 		
@@ -61,7 +65,7 @@ public class InsertQNAAnswerServlet extends HttpServlet {
 		
 		String page = "";
 		if(result > 0) {
-	         page = "/omg/views/manager/manageAll/managerQnAList.jsp";
+	         page = "views/manager/manageAll/manageQnAList.jsp";
 	         request.setAttribute("successCode", "insertQNAAnswer");
 	         request.getRequestDispatcher(page).forward(request, response);
 	      } else {
