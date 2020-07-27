@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> 
+    pageEncoding="UTF-8" import="com.omg.jsp.followerFeedbackRoom.model.vo.*, java.util.*"%> 
+<% 
+	ArrayList<FeedbackRoom> feedbackList = (ArrayList<FeedbackRoom>) request.getAttribute("feedbackList");
+%>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -44,7 +47,7 @@
     }
     #tFeedbackListArea th {
         height: 50px;
-        border-bottom: 2px double gray;
+        border-bottom: 4px double gray;
     }
     #inputFeedbackBtn {
         border-style: none;
@@ -95,84 +98,30 @@
                         <th style="width:150px;">일시</th>
                         <th style="width:150px;">답변여부</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a><img src="../../resources/tOhMyPtIcon/newIcon.png" style="margin-left: 15px;"></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon1.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">운동이 습관이 되기까지 #1회차</a></td>
-                        <td>2020-07-08 16:43:52</td>
-                        <td><img src="../../resources/fFeedbackImg/fFeedbackIcon2.png"></td>
-                    </tr>
+                    <!-- 게시글 1도 없을때 조건문 처리 -->
+                    <% if(feedbackList.size() > 0) { 
+	                    	for(int i = 0; i < feedbackList.size(); i++) { %>
+	                    <tr>
+	                        <td>1</td>
+	                        <td>
+	                        	<a href=""><%= feedbackList.get(i).getFeedbackTitle() %></a>
+	                        	<!-- DB에 업로드 날짜가 sysdate와 일치하고, 트레이너 답변 미작성인 경우 표시 -->
+	                        	<img src="<%= request.getContextPath() %>/resources/tOhMyPtIcon/newIcon.png" style="margin-left: 15px;">
+	                        </td>
+	                        <td><%= feedbackList.get(i).getFeedbackUploadDate() + " " + feedbackList.get(i).getFeedbackUploadTime() %></td>
+	                        <td>
+	                        	<!-- ajax 이용해서 피드백 올라왔으면 display 속성값 변경 -->
+	                        	<img style="display: none;" class="noFeedback" src="<%= request.getContextPath() %>/resources/fFeedbackImg/fFeedbackIcon1.png">
+	                        	<img style="display: none;" class="yesFeedback" src="<%= request.getContextPath() %>/resources/fFeedbackImg/fFeedbackIcon2.png">
+	                        </td>
+	                    </tr>
+	                    <% } %>
+                    <% } else { %>
+                    	<tr>
+                    		<td colspan="4">작성된 피드백 글이 없습니다.</td>
+                    	</tr>
+                    <% } %>
+                    
                 </table>
             </div>
         </article>
@@ -181,9 +130,17 @@
         <!--피드백 글 작성 버튼 구역-->
         <article style="position: relative; left: 80%; display: inline;">
             <div>
-                <a id="inputFeedbackBtn" href="<%=request.getContextPath()%>/views/fOhMyGym/fFeedbackDetail.jsp" style="padding-top:7px;">작성하기</a>
+                <a id="inputFeedbackBtn" onclick="addFeedback();" style="padding-top:7px;">작성하기</a>
             </div>
         </article>
+        
+        <script>
+        	<%-- 피드백 글 작성하는 페이지 주소 : href="<%=request.getContextPath()%>/follower/followerOhMyGym/followerFeedbackDetail.jsp" --%>
+        	function addFeedback() {
+        		var requestManageCode=<%= feedbackList.get(0).getRequestManageCode() %>;
+        		location.href="<%= request.getContextPath() %>/views/follower/followerOhMyGym/followerFeedbackAdd.jsp?num=" + requestManageCode;
+        	}
+        </script>
         <!--피드백 글 작성 버튼 구역 종료-->
     </section>
     <br><br>

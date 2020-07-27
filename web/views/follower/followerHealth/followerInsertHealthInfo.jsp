@@ -250,8 +250,8 @@ th {
 						<th>집중 부위</th>
 						<td><%= list.get(4).getHealthData() %></td>
 						<th>활동 수준</th>
-						<td>
-							<% 
+						<td><%= list.get(5).getHealthData() %>
+							<%-- <% 
 	              			String active = "";
 	              		
 	              			if(list.get(5).getHealthData().equals("veryHard")) {
@@ -265,7 +265,7 @@ th {
 	              			} else if(list.get(5).getHealthData().equals("veryFew")){
 	              				active = "활동량  매우 적음";
 	              			} 
-	              			%> <%= active %>
+	              			%> <%= active %> --%>
 						</td>
 					</tr>
 					<tr>
@@ -325,11 +325,10 @@ th {
 								value="<%if(list.get(4).getHealthData() != null) {%><%= list.get(4).getHealthData() %><% } %>"></td>
 							<th>활동 수준</th>
 							<td><select style="width: 308px;" name="active" id="select">
-									<option value="veryHard">활동량 매우 많음</option>
-									<option value="hard">활동량 많음</option>
-									<option value="normal">보통</option>
-									<option value="few">활동량 적음</option>
-									<option value="veryFew">활동량 매우 적음</option>
+									<option value="매우활동적">매우활동적</option>
+									<option value="다소활동적">다소활동적</option>
+									<option value="조금활동적">조금활동적</option>
+									<option value="활동적이지않음">활동적이지않음</option>
 								</select> 
 								<script>
 									$(function(){

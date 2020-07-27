@@ -176,7 +176,7 @@ a {
 							<li><a href="../fOhMyGym/fTrainingRoom.jsp"
 								style="color: white;">트레이닝</a>
 								&nbsp;&nbsp;&nbsp;<a onclick="groupCommu();" style="color: white;">그룹소통방</a>
-								&nbsp;&nbsp;&nbsp;<a href="../fOhMyGym/fFeedbackList.jsp" style="color: white;">피드백룸</a>
+								&nbsp;&nbsp;&nbsp;<a href="<%= request.getContextPath() %>/selectList.fb" style="color: white;">피드백룸</a>
 								&nbsp;&nbsp;&nbsp;<a href="../fOhMyGym/fReview.jsp" style="color: white;">트레이닝 리뷰</a>
 							</li>
 						</ul>
