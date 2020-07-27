@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.omg.jsp.member.model.vo.*, java.util.*, com.omg.jsp.qna.model.vo.*"%>
+    
+<%ArrayList<QNA> list = (ArrayList<QNA>) request.getAttribute("list");
+  ArrayList<String> al = (ArrayList<String>) request.getAttribute("al");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -182,6 +185,9 @@
         <!--테이블 표시 영역-->
         <article id="tableArea">
             <div align="center">
+            <form action="<%= request.getContextPath()%>/InsertQNAAnswer" method="post">
+            <input type="hidden" id="managerId" name="managerId" value="<%= al.get(1) %>">
+            <input type="hidden" id="manageCode" name="manageCode" value="<%= al.get(2) %>">
                 <table>
                     <tr>
                         <td style="background-color: palevioletred;">항목구분</td>
@@ -189,27 +195,32 @@
                             <input type="radio" id=contentc name=contentc value="2">연기/환불
                             <input type="radio" id=contentc name=contentc value="3">결제/캐시
                             <input type="radio" id=contentc name=contentc value="4">회원정보
-                            <input type="radio" id=contentc name=contentc value="5">기타</td>
+                            <input type="radio" id=contentc name=contentc value="5">기타
+                            <%= list.get(0).getCategory() %></td>
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred; width: 200px;">사용자명</td>
-                        <td><a style="text-decoration: none; float: left; margin-left: 70;">김진오</a></td>
+                        <td><a style="text-decoration: none; float: left; margin-left: 70;"><%= list.get(0).getMemberId() %></a></td>
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred;">제목</td>
-                        <td><a style="text-decoration: none; float: left; margin-left: 70;">결제가 안됩니다</a></td>
+                        <td><a style="text-decoration: none; float: left; margin-left: 70;"><%= list.get(0).getQuestionTitle() %></a></td>
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred;">내용상세</td>
-                        <td><a style="text-decoration: none; float: left; margin-left: 70;">결제가 안됩니다. 해결해주세요 엉엉</a></td>
+                        <td><a style="text-decoration: none; float: left; margin-left: 70;"><%= list.get(0).getQuestionContent() %></a></td>
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred;">문의일자</td>
-                        <td><a style="text-decoration: none; float: left; margin-left: 70;">2020-07-07</a></td>
+                        <td><a style="text-decoration: none; float: left; margin-left: 70;"><%= list.get(0).getDate() %></a></td>
+                    </tr>
+                    <tr>
+                    	<td style="background-color: palevioletred;">답변하기</td>
+                    	<td><input type="text" name="title" placeholder="답변 제목을 입력해주세요">
                     </tr>
                     <tr>
                         <td style="background-color: palevioletred;">답변하기</td>
-                        <td><textarea placeholder="내용을 입력해주세요" cols="125" rows="10" style="resize: none; margin-top: 20; margin-bottom: 20;"></textarea></td>
+                        <td><textarea name="content" placeholder="내용을 입력해주세요" cols="125" rows="10" style="resize: none; margin-top: 20; margin-bottom: 20;"></textarea></td>
                         
                     </tr>
                     
@@ -221,6 +232,7 @@
                 <button onclick="" style="float: right; margin-right: 40; background-color: orangered; color: white; border: none; height: 30px; width: 100px;">저장</button>
                   <!--버튼 처리 영역(임시) 종료-->
             </div>
+            </form>
         </article>
        
 

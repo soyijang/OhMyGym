@@ -204,6 +204,7 @@ $("#memberId").keyup(function(){
 body {
 	font-family: "Noto Sans KR";
 }
+
 </style>
 
 </head>
@@ -282,13 +283,13 @@ body {
 												<th>이름</th>
 												<td><input type="text" name="memberName"
 													id="memberName" value="" 
-													size="50" maxlength="50" style="height: 40px"
+													size="50" maxlength="50" style="height: 40px; border:1px solid lightgray;"
 													placeholder="이름을 입력해주세요"></td>
 											</tr>
 											<tr>
 												<th>아이디</th>
 												<td><input type="text" name="memberId" id="memberId"
-													value="" style="height: 40px" 
+													value="" style="height: 40px; border:1px solid lightgray;"
 													size="50" maxlength=12 placeholder="아이디를 입력해주세요">
 													<a onclick="IdCheckFunction()"
 														style="color: orangered; cursor: pointer;">중복확인</a>
@@ -304,7 +305,7 @@ body {
 											<tr>
 												<th>비밀번호</th>
 												<td><input type="password" name="memberPwd"
-													id="memberPwd1" style="height: 40px"
+													id="memberPwd1" style="height: 40px; border:1px solid lightgray;"
 													class="MS_input_txt w137" value="" size="50" maxlength="20"
 													onkeyup="passwordCheckFunction();"
 													placeholder="비밀번호를 입력해주세요"> <span class="idpw-info"><br>
@@ -315,7 +316,7 @@ body {
 											<tr>
 												<th>비밀번호 확인</th>
 												<td><input type="password" name="memberPwd2"
-													id="memberPwd2" style="height: 40px"
+													id="memberPwd2" style="height: 40px; border:1px solid lightgray;"
 													value="" size="50" maxlength="20"
 													onkeyup="passwordCheckFunction();"
 													placeholder="비밀번호를 한번 더 입력해주세요">
@@ -325,7 +326,7 @@ body {
 											<tr>
 												<th>생일/성별</th>
 												<td class="select"><select name="birthYear"
-													id="birthYear" style="width: 100px; height: 40px;"
+													id="birthYear" style="width: 100px; height: 40px; border:1px solid lightgray;"
 													>
 														<option value="">선택</option>
 														<option value="1920">1920</option>
@@ -430,7 +431,7 @@ body {
 														<option value="2019">2019</option>
 														<option value="2020">2020</option>
 												</select> 년 <select name="birthmonth" 
-													style="width: 100px; height: 40px;">
+													style="width: 100px; height: 40px; border:1px solid lightgray;">
 														<option value="">선택</option>
 														<option value="01">1</option>
 														<option value="02">2</option>
@@ -445,7 +446,7 @@ body {
 														<option value="11">11</option>
 														<option value="12">12</option>
 												</select> 월 <select name="birthdate"
-													style="width: 100px; height: 40px;">
+													style="width: 100px; height: 40px; border:1px solid lightgray;">
 														<option value="">선택</option>
 														<option value="01">1</option>
 														<option value="02">2</option>
@@ -492,7 +493,7 @@ body {
 													<div class="tb-l post">
 
 														<input type="text" name="zipNo" 
-															id="zipNo" style="width: 100px; height: 40px;"
+															id="zipNo" style="width: 100px; height: 40px; border:1px solid lightgray;"
 															 value="" size="7" maxlength="15"
 															readonly="readonly">
 														<a onclick="openDaumZipAddress()"
@@ -503,14 +504,14 @@ body {
 											<tr>
 												<th>집주소</th>
 												<td><input type="text" name="haddress1" 
-													id="haddress1" style="width: 360px; height: 40px;"
+													id="haddress1" style="width: 360px; height: 40px; border:1px solid lightgray;"
 													 value="" size="50"
 													maxlength="100" readonly="readonly"></td>
 											</tr>
 											<tr>
 												<th>상세주소</th>
 												<td><input type="text" name="haddress2" 
-													id="haddress2" style="width: 360px; height: 40px;"
+													id="haddress2" style="width: 360px; height: 40px; border:1px solid lightgray;"
 													 value="" size="50"
 													maxlength="100"></td>
 											</tr>
@@ -521,14 +522,14 @@ body {
 												<th>이메일</th>
 												<td class="select">
 												
-													<input type="text" name="email1" id="email1" style="width: 100px; height: 40px;"
+													<input type="text" name="email1" id="email1" style="width: 100px; height: 40px; border:1px solid lightgray;"
 													size="10" maxlength="20" value="">
 													<span>@</span> <input
 														type="text" name="email2" id="email2"
-														style="width: 200px; height: 40px;"
+														style="width: 200px; height: 40px; border:1px solid lightgray;"
 														value="" size="15" maxlength="25">
 											<select name="selectEmail" id="selectEmail"
-													style="width: 100px; height: 40px;"
+													style="width: 100px; height: 44px; border:1px solid lightgray;"
 													style="margin-right:5px;" >
 														<option value="directly" id="directly">직접입력</option>
 														<option value="naver.com">naver.com</option>
@@ -555,7 +556,7 @@ body {
 													 value=""> 
 													<select
 													name="tel1" id="etcphone1" 
-													style="width: 100px; height: 40px;"
+													style="width: 100px; height: 44px; border:1px solid lightgray;"
 													class="MS_select MS_tel">
 														<option value="">선택</option>
 														<option value="010">010</option>
@@ -566,10 +567,10 @@ body {
 														<option value="019">019</option>
 												</select> - <input type="text" name="tel2" 
 													id="etcphone2"  value="" size="4"
-													maxlength="4" style="width: 115px; height: 40px;">
+													maxlength="4" style="width: 115px; height: 40px; border:1px solid lightgray;">
 													- <input type="text" name="tel3" 
 													id="etcphone3"  value="" size="4"
-													maxlength="4" style="width: 115px; height: 40px;"
+													maxlength="4" style="width: 115px; height: 40px; border:1px solid lightgray;"
 													minlength="4">
 
 													<a onclick=""
@@ -583,7 +584,7 @@ body {
 												<th>은행</th>
 												<td><input type="hidden" name="bankCode" 
 													value=""> <select name="bankCode" id="bankCode"
-												style="width: 100px; height: 40px;"
+												style="width: 100px; height: 44px; border:1px solid lightgray;"
 													class="MS_bank">
 														<option value="">선택</option>
 														<option value="1">국민은행</option>
@@ -597,7 +598,7 @@ body {
 													
 
 												</select> <input type="text" name="bankAccount" 
-													id="bankAccount" style="width: 255px; height: 40px;"
+													id="bankAccount" style="width: 255px; height: 40px; border:1px solid lightgray;"
 													class="MS_bank" value="" size="30" maxlength="100"
 													placeholder="계좌번호입력 ('-'제외)">
 											</tr>
@@ -625,7 +626,7 @@ body {
 
 			<div class="confirm">
 				<button type="submit" onclick="insertMember()"
-					style="width: 200px; height: 40px; background-color: orangered; color: white; border: none;">가입하기</button>
+					style="width: 200px; height: 40px; background-color: orangered; color: white; border: none; margin-top: 50px;">가입하기</button>
 
 			</div>
 			
