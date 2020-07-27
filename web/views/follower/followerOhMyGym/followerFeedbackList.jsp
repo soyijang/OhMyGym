@@ -98,8 +98,8 @@
                         <th style="width:150px;">일시</th>
                         <th style="width:150px;">답변여부</th>
                     </tr>
-                    <% if(feedbackList.size() > 0) { 
-	                    	for(int i = 0; i < feedbackList.size(); i++) { %>
+                    <% if(feedbackList.size() > 1) { 
+	                    	for(int i = 0; i < feedbackList.size() - 1; i++) { %>
 	                    <tr class="feedback-list">
 	                        <td><%= feedbackList.size() - i %><input type="hidden" value="<%= feedbackList.get(i).getFollowerVideoCode() %>"></td>
 	                        <td>
