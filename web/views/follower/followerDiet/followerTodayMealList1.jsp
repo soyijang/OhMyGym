@@ -122,8 +122,9 @@ java.text.SimpleDateFormat"%>
 		<div class="class_category_container">
 			<div class="title">건강관리</div>
 			<ul class="class_category_list" style="height: 230px;">
-				<li class="navi-item ">건강정보</li>
-				<li class="navi-item ">밥스타그램</li>
+				<li class="navi-item "><a href="<%=request.getContextPath()%>/selectList.diet">오늘의 밥그릇</a></li>
+				<li class="navi-item "><a href="<%=request.getContextPath()%>/followHealthInfo.no">건강정보게시판</a></li>
+				<li class="navi-item "><a href="<%= request.getContextPath() %>/healthInfo.hi">내 상태 기록</a></li>
 			</ul>
 		</div>
 	</div>

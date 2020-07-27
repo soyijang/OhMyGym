@@ -98,21 +98,19 @@
                         <th style="width:150px;">일시</th>
                         <th style="width:150px;">답변여부</th>
                     </tr>
-                    <!-- 게시글 1도 없을때 조건문 처리 -->
-                    <% if(feedbackList.size() > 0) { 
-	                    	for(int i = 0; i < feedbackList.size(); i++) { %>
-	                    <tr>
-	                        <td>1</td>
+                    <% if(feedbackList.size() > 1) { 
+	                    	for(int i = 0; i < feedbackList.size() - 1; i++) { %>
+	                    <tr class="feedback-list">
+	                        <td><%= feedbackList.size() - i %><input type="hidden" value="<%= feedbackList.get(i).getFollowerVideoCode() %>"></td>
 	                        <td>
-	                        	<a href=""><%= feedbackList.get(i).getFeedbackTitle() %></a>
+	                        	<%= feedbackList.get(i).getFeedbackTitle() %>
 	                        	<!-- DB에 업로드 날짜가 sysdate와 일치하고, 트레이너 답변 미작성인 경우 표시 -->
 	                        	<img src="<%= request.getContextPath() %>/resources/tOhMyPtIcon/newIcon.png" style="margin-left: 15px;">
 	                        </td>
 	                        <td><%= feedbackList.get(i).getFeedbackUploadDate() + " " + feedbackList.get(i).getFeedbackUploadTime() %></td>
 	                        <td>
 	                        	<!-- ajax 이용해서 피드백 올라왔으면 display 속성값 변경 -->
-	                        	<img style="display: none;" class="noFeedback" src="<%= request.getContextPath() %>/resources/fFeedbackImg/fFeedbackIcon1.png">
-	                        	<img style="display: none;" class="yesFeedback" src="<%= request.getContextPath() %>/resources/fFeedbackImg/fFeedbackIcon2.png">
+	                        	<img class="noFeedback" src="<%= request.getContextPath() %>/resources/fFeedbackImg/fFeedbackIcon1.png">
 	                        </td>
 	                    </tr>
 	                    <% } %>
@@ -135,11 +133,18 @@
         </article>
         
         <script>
-        	<%-- 피드백 글 작성하는 페이지 주소 : href="<%=request.getContextPath()%>/follower/followerOhMyGym/followerFeedbackDetail.jsp" --%>
         	function addFeedback() {
         		var requestManageCode=<%= feedbackList.get(0).getRequestManageCode() %>;
         		location.href="<%= request.getContextPath() %>/views/follower/followerOhMyGym/followerFeedbackAdd.jsp?num=" + requestManageCode;
         	}
+        	
+        	$(function() {
+				$(".feedback-list").click(function() {
+					var num = $(this).find("input").val();
+					console.log(num);
+					location.href="<%= request.getContextPath()%>/selectOne.fb?num=" + num;
+				});
+			});
         </script>
         <!--피드백 글 작성 버튼 구역 종료-->
     </section>

@@ -27,7 +27,7 @@
 			<td class="stamp">로그인1회<img src="/omg/resources/img/successstamp.png"></td>
 			<td class="stamp">트레이너 매칭<img src="/omg/resources/img/successstamp.png"></td>
 			<td class="stamp">건강기록 작성<img src="/omg/resources/img/successstamp.png"></td>
-			<td class="stamp">운동영상시청 3회<img src="/omg/resources/img/successstamp.png"></td>
+			<td class="stamp">운동영상시청 3회<img src="/omg/resources/img/trystamp.png"></td>
 			</tr>
 			<tr>
 			<td class="stamp_no">프로필사진 업로드<img src="/omg/resources/img/trystamp.png"></td>
@@ -43,7 +43,7 @@
 		<br>
 		<!-- 메일 수신 동의예정 -->
 		<div align="center"> 
-			<button style="width: 200px; height: 50px; color:white; font-weight:bold; background-color: orangered;" onclick="alert('이벤트 수신동의가 필요한 계정입니다!');">상품응모권 메일로 받기!</button>			
+			<button style="width: 200px; height: 50px; color:white; font-weight:bold; background-color: orangered;" onclick="alert('스탬프를 아직 다 모으지 못했습니다!');">상품응모권 메일로 받기!</button>			
 		</div>
 		
 	</div>

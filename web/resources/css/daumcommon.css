@@ -1124,9 +1124,8 @@ button.btn_cs {
 }
 
 .select_custom .btn_select:hover, .select_custom .btn_select:focus {
-	border-color: #508cf7;
-	background-color: #000080;
-	color: #ffffff;
+	background-color: orangered;
+	color: white;
 	text-decoration: none
 }
 
@@ -5348,11 +5347,6 @@ button.btn_cs {
 	height: 38px
 }
 
-.troll_field .select_custom .btn_select {
-	height: 36px;
-	line-height: 36px
-}
-
 .troll_field .select_custom .inquiry_option {
 	top: 38px;
 	width: 198px
@@ -5363,14 +5357,12 @@ button.btn_cs {
 }
 
 .troll_field .tf_etc {
-	position: absolute;
 	left: 0;
 	top: 38px;
-	width: 509px;
+	width: 500px;
 	height: 130px;
 	padding: 10px 15px;
 	border: 1px solid #d0d0d0;
-	border-top: 0;
 	resize: none
 }
 

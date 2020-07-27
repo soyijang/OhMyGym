@@ -89,7 +89,7 @@ h4 {
 	<%@ include file="../common/nonNav.jsp"%>
 
 	<div align="center">
-		<br> <img src="../../resources/img/OHmyGymLogo.png">
+		<br> <img src="/omg/resources/img/OHmyGymLogo.png">
 		<div class="login_wrap">
 			<div class="login_inner">
 				<div id="_loginArea" class="login_area" data-container="loginArea">
@@ -118,8 +118,8 @@ h4 {
 										</li>
 									</ul>
 								</div>
-							
-							<!-- 횟수초과시 -->
+<!-- 구현 실패							
+							횟수초과시
 							<p class="inpt_er_text" style="display: none;">아이디, 비밀번호를 다시 확인해 주세요.</p>
 							<div id="_captcha" class="captcha" style="display: none">
 								<div class="captch_wp">
@@ -150,14 +150,14 @@ h4 {
 									style="display: none">자동입력 방지문자가 일치하지 않습니다. 다시 입력해 주세요.</p>
 							</div>
 
-
+ -->
 							<!-- 로그인버튼 -->
 							<div class="btn_login_area">
 								<a onclick="flogin();" id="_userLogin"
 									class="btns_sys red_big_xb"><span>로그인</span></a>
 							</div>
 							<div class="btn_login_area">
-								<a href="javascript:void(0);" id="_userLogin"
+								<a href="/omg/views/visitor/visitorJoin/terms.jsp" id="_userLogin"
 									class="btns_sys red_big_xb" data-login-btn="login"><span>팔로워
 										회원가입</span></a>
 							</div>
@@ -194,7 +194,7 @@ h4 {
 								<a onclick="tlogin();" id="_nonUserLogin" class="btns_sys red_big_xb"><span>로그인</span></a>
 							</div>
 							<div class="btn_login_area">
-								<a href="" id="_userLogin" class="btns_sys red_big_xb"><span>트레이너 회원가입</span></a>
+								<a href="/omg/views/visitor/visitorJoin/terms.jsp" id="_userLogin" class="btns_sys red_big_xb"><span>트레이너 회원가입</span></a>
 							</div>
 
 							<div class="none_login_area">

@@ -48,7 +48,7 @@ public class InsertVideoServlet extends HttpServlet {
 			if(ServletFileUpload.isMultipartContent(request)) {
 			
 			//최대 크기가 0보다 작을 경우 용량 무제한
-			int maxSize = 1024 * 1024 * 20;
+			int maxSize = 1024 * 1024 * 5000;
 			
 //			String root = request.getSession().getServletContext().getRealPath("/");
 			String root = request.getSession().getServletContext().getRealPath("/");

@@ -26,8 +26,6 @@
 				</div>
 			</div>
 			
-			<form action="" method="post">
-
 				<div class="info_agree">
 
 					<div class="info_user">
@@ -90,17 +88,18 @@
 				</div>
 				<div class="wrap_btn">
 					<button >
-						<a href="/home.daum"><img src="/omg/resources/button/deleteno.png"></a>
+						<a href="/omg/index.jsp"><img src="/omg/resources/button/deleteno.png"></a>
 					</button>
 					<div onclick="popup();">
 						<img src="/omg/resources/button/deletenext.png">
 					</div>
 				</div>
-			</form>
-
-			<!-- 회원탈퇴_안내동의 팝업 -->
+				
+				
+<!--구현실패 
+			회원탈퇴_안내동의 팝업
 			<div id="wrongLayer" class="userinfo_layer"
-				style="top: 300px; margin-left: -188px; display: none;">
+				style="top: 300px; margin-left: 188px; display: none;">
 				<div class="inner_myinfo_layer">
 					<div class="layer_head">
 						<strong class="screen_out">회원탈퇴 안내동의 레이어</strong>
@@ -117,7 +116,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
 		</div>
 	</div>
@@ -125,14 +124,16 @@
 	<%@ include file="../../common/footer.jsp"%>
 	
 	<script type="text/javascript">
+	
 		function popup() {
 			var con_test = confirm('잔여 캐쉬가 존재합니다! 탈퇴를 그대로 진행하시겠습니까?');
+			
 			if(con_test == true){
-				var con = document.getElementById("wrongLayer");
-				con.style.display = 'block';
+				location.replace('/omg/update.wd');
+				var finalcon = confirm("탈퇴처리가 완료되었습니다!");
 			}
 			else if(con_test == false){
-			  document.write("취소를 누르셨군요.");
+			  location.href('views/follower/followerMypage/followerWithdraw.jsp');
 			}
 		}
 	</script>

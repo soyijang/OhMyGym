@@ -36,8 +36,8 @@ public class SendMailServlet extends HttpServlet {
 		sendInfo.setReceiver(phone);
 		sendInfo.setContent(name + "님! OHMYGYM 본인인증 문자입니다. (인증번호 : " + randomNum + ")");
 		
-	/*	SendSMS sms = new SendSMS();
-		sms.sendMail();*/
+		SendSMS sms = new SendSMS();
+		sms.sendMail();
 		
 		//인증번호 알려주기
 	      response.setContentType("application/json");

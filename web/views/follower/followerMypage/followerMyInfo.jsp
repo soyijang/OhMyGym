@@ -168,13 +168,13 @@
 								<div class="info-form-label">비밀번호</div>
 								<div class="info-form-input">
 									<input name="password" type="password"
-										placeholder="영문 대소문자/숫자/특수문자(4~16자)" class="pw-input" value="">
+										placeholder="영문 대소문자/숫자/특수문자(8~16자)" class="pw-input" value="">
 								</div>
 							</div>
 							<div class="info-row">
 								<div class="info-form-label">비밀번호 확인</div>
 								<div class="info-form-input">
-									<input name="repassword" type="password" class="re-pw-input"
+									<input name="repassword" type="password" class="re-pw-input" placeholder="영문 대소문자/숫자/특수문자(8~16자)" 
 										maxlength="20" value="">
 								</div>
 							</div>

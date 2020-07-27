@@ -1,7 +1,6 @@
-package com.omg.jsp.report.controller;
+package com.omg.jsp.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,21 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.omg.jsp.member.model.service.MemberService;
 import com.omg.jsp.member.model.vo.Member;
-import com.omg.jsp.report.model.service.ReportService;
-import com.omg.jsp.report.model.vo.Report;
 
 /**
- * Servlet implementation class InsertReportServlet
+ * Servlet implementation class MemberWithdrawServlet
  */
-@WebServlet("/insert.rp")
-public class InsertReportServlet extends HttpServlet {
+@WebServlet("/update.wd")
+public class MemberWithdrawServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertReportServlet() {
+    public MemberWithdrawServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,26 +34,18 @@ public class InsertReportServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		
 		String userId = loginUser.getMemberId();
-		
-		Report report = new Report();
-		report.setMemberId(userId);
-		report.setReportCategory(request.getParameter("category"));
-		report.setReportContent(request.getParameter("etcReason"));
-		report.setReportedMemberId(request.getParameter("reportedId"));
-		report.setReportUrl(request.getParameter("urlAddr"));
-		
+		System.out.println(userId);
+		int result = new MemberService().withdrawMember(userId);
 		String page = "";
-		int result = new ReportService().insertReport(report);
-		if(result > 0) {
-			System.out.println("신고완료!");
-			page = "views/follower/followerMypage/followerReport.jsp";
+		if(result>0) {
+			System.out.println("삭제성공");
+			page = "index.jsp";
 		}else {
 			 page = "views/common/errorPage.jsp";
-	         request.setAttribute("msg", "신고접수에 실패했습니다!");
+	         request.setAttribute("msg", "회원탈퇴를 실패했습니다!");
 		}
-		request.getRequestDispatcher(page).forward(request, response);
+		 request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 
