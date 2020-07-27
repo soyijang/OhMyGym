@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.omg.jsp.followerBookMark.model.service.BookMarkService;
 import com.omg.jsp.followerBookMark.model.vo.BookMark;
+import com.omg.jsp.followerBookMark.model.vo.GroupBookMark;
 import com.omg.jsp.member.model.vo.Member;
 
 /**
@@ -43,10 +44,15 @@ public class SelectFollowerBookMarkServlet extends HttpServlet {
 		ArrayList<BookMark> list = new BookMarkService().selectList(userId);
 		System.out.println("list : " + list);
 		
+		//그룹소통 북마크 불러오기 부분
+		ArrayList<GroupBookMark> groupList = new BookMarkService().selectGroupList(userId);
+		
 		String page = "";
 		if(list != null) {
 			page="views/follower/followerMypage/followerBookMark.jsp";
 			request.setAttribute("bookmarklist", list);
+			request.setAttribute("groupbookmarklist", groupList);
+			
 		}else {
 			page="views/common/errorPage.jsp";
 			request.setAttribute("msg", "북마크조회실패!");

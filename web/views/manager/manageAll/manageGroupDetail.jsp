@@ -420,7 +420,7 @@
 						"<div style='display: inline-block; float: right; cursor: pointer' onclick='removePost("+data[key].groupBoardNum+");'><i class='fas fa-ellipsis-v'></i></div><hr>"+
 						"<div class='post_Content'>"+
 						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
-						"<div id='post_Content_img'>"+"</div>"+
+						"<div id='post_Content_img'>"+"<img style='border-radius: 10px; margin-left: 150px; width: 200px; height: 200px;' id='postFile"+data[key].groupBoardNum+"'>"+"</div>"+
 						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
 						"<span class='like' style='margin-right: 10px; font-weight: bold;'><a style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
 						"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
@@ -432,6 +432,7 @@
 						"</div></div></details></div></div>");
 					selectLikes(data[key].groupBoardNum);
 			        profileload(data[key].groupUserId);
+			        imgPostload(data[key].groupBoardNum);
 				}
 				updatePosts();
 				selectAllComment();
@@ -535,6 +536,30 @@
 	     })
 	}		
 	profileload();
+	
+	</script>
+	
+	<script>
+	var imgManageCode;
+
+	function imgPostload(boardId){
+		
+	     $.ajax({
+			 url : "/omg/postload.all",
+		     type : 'post',
+		     data : {
+		    	 	boardId : boardId
+			       },
+			       success : function(data) {
+			    	   imgManageCode = data.fileManageName;
+			    	   if(imgManageCode != 'EMPTY') $("#postFile"+boardId).attr("src", "<%=request.getContextPath()%>/resources/test/"+imgManageCode); 
+			    	   else $("#postFile"+boardId).remove()
+			       },
+			 		error : function(){
+			 			imgManageCode = "";
+			 		}
+	     })
+	}		
 	
 	</script>
 </body>

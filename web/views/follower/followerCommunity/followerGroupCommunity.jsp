@@ -497,12 +497,12 @@ div.Board_side_nav_btn{
 								"<div style='display: inline-block; float: right;'><i class='fas fa-ellipsis-v'></i></div>"+"<div style='margin-left: 60px; font-size: 0.8em; font-weight: bold;'>#"+data[key].groupType+"</div><hr>"+
 								"<div class='post_Content'>"+
 								"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
-								"<div id='post_Content_img'>"+"<img style='margin-left: 160px; width: 150px; height: 150px;' id='postFile"+data[key].groupBoardNum+"'>"+"</div>"+
+								"<div id='post_Content_img'>"+"<img style='border-radius: 10px; margin-left: 150px; width: 200px; height: 200px;' id='postFile"+data[key].groupBoardNum+"'>"+"</div>"+
 								"<div id='MarkAndLike' style='margin-top: 20px;'>"+
 								"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data[key].groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
 								"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
-								"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
-								"북마크 <a>"+"</a></span></div>"+
+								"<span class='mark' style='font-weight: bold;'><i class='far fa-bookmark' style='margin-right: 5px; font-weight: bold; cursor: pointer;' id='postMark"+data[key].groupBoardNum+"' onclick='addBookMark("+data[key].groupBoardNum+")'>북마크</i>"+
+								"<a>"+"</a></span></div>"+
 								"<details id='open_comment' open style='margin-top: 15px;'>"+
 								"<summary>댓글</summary>"+
 								"<div class='post_commentback'>"+
@@ -517,6 +517,7 @@ div.Board_side_nav_btn{
 							selectLikes(data[key].groupBoardNum);
 					        profileload(data[key].groupUserId);
 					        imgPostload(data[key].groupBoardNum);
+					        selectBookMark(data[key].groupBoardNum);
 					}else{
 						if(data[key].groupType == value){
 							$addPostPart.prepend("<div id='postcontainer'>" +
@@ -529,12 +530,12 @@ div.Board_side_nav_btn{
 								"<div style='display: inline-block; float: right;'><i class='fas fa-ellipsis-v'></i></div>"+"<div style='margin-left: 60px; font-size: 0.8em; font-weight: bold;'>#"+data[key].groupType+"</div><hr>"+
 								"<div class='post_Content'>"+
 								"<textarea class='post_box' cols='60' name='post_content' readonly>"+data[key].groupContent+"</textarea></div>"+	
-								"<div id='post_Content_img'>"+"<img style='margin-left: 160px; width: 150px; height: 150px;' id='postFile"+data[key].groupBoardNum+"'>"+"</div>"+
+								"<div id='post_Content_img'>"+"<img style='border-radius: 10px; margin-left: 150px; width: 200px; height: 200px;' id='postFile"+data[key].groupBoardNum+"'>"+"</div>"+
 								"<div id='MarkAndLike' style='margin-top: 20px;'>"+
 								"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data[key].groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
 								"좋아요</a><a id='postlike"+data[key].groupBoardNum+"'>"+0+"</a></span>"+
-								"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
-								"북마크 <a>"+"</a></span></div>"+
+								"<span class='mark' style='font-weight: bold;'><i class='far fa-bookmark' style='margin-right: 5px; font-weight: bold; cursor: pointer;' id='postMark"+data[key].groupBoardNum+"' onclick='addBookMark("+data[key].groupBoardNum+")'>북마크</i>"+
+								"<a>"+"</a></span></div>"+
 								"<details id='open_comment' open style='margin-top: 15px;'>"+
 								"<summary>댓글</summary>"+
 								"<div class='post_commentback'>"+
@@ -549,6 +550,7 @@ div.Board_side_nav_btn{
 							selectLikes(data[key].groupBoardNum);
 					        profileload(data[key].groupUserId);
 					        imgPostload(data[key].groupBoardNum);
+					        selectBookMark(data[key].groupBoardNum);
 						}	
 					}
 				}
@@ -672,12 +674,12 @@ div.Board_side_nav_btn{
 						"<div style='display: inline-block; float: right;'><i class='fas fa-ellipsis-v'></i></div>"+"<div style='margin-left: 60px; font-size: 0.8em; font-weight: bold;'>#"+data.groupType+"</div><hr>"+
 						"<div class='post_Content'>"+
 						"<textarea class='post_box' cols='60' name='post_content' readonly>"+data.groupContent+"</textarea></div>"+	
-						"<div id='post_Content_img'>"+"<img style='margin-left: 160px; width: 150px; height: 150px;' id='postFile"+data.groupBoardNum+"'>"+"</div>"+
+						"<div id='post_Content_img'>"+"<img style='border-radius: 10px; margin-left: 150px; width: 200px; height: 200px;' id='postFile"+data.groupBoardNum+"'>"+"</div>"+
 						"<div id='MarkAndLike' style='margin-top: 20px;'>"+
 						"<span class='like' style='margin-right: 10px; font-weight: bold;'><a onclick='addLike("+data.groupBoardNum+");' style='cursor: pointer;'><i class='fas fa-thumbs-up' style='margin-right: 5px;'></i>"+
-						"좋아요</a>"+0+"<a id='postlike"+data.groupBoardNum+"'>"+"</a></span>"+
-						"<span class='mark' style='font-weight: bold;'> <i class='far fa-bookmark' style='margin-right: 5px;'></i>"+
-						"북마크 <a>"+"</a></span></div>"+
+						"좋아요</a>"+"<a id='postlike"+data.groupBoardNum+"'>"+"</a></span>"+
+						"<span class='mark' style='font-weight: bold;'><i class='far fa-bookmark' style='margin-right: 5px; font-weight: bold; cursor: pointer;' id='postMark"+data.groupBoardNum+"' onclick='addBookMark("+data.groupBoardNum+")'>북마크</i></a>"+
+						"<a>"+"</a></span></div>"+
 						"<details id='open_comment' open style='margin-top: 15px;'>"+
 						"<summary>댓글</summary>"+
 						"<div class='post_commentback'>"+
@@ -719,7 +721,7 @@ div.Board_side_nav_btn{
 					var inputImgArea = document.getElementById("add_img");
 					inputImgArea.innerHTML += "<form id='ImgUploadForm"+inputImg+"'>"+
 					
-					"<img id='titleImg"+inputImg+"' width='150' height='150'></form><br>";
+					"<img id='titleImg"+inputImg+"' width='200' height='200' style='border-radius: 10px;'></form><br>";
 					$("#titleImg" + inputImg).attr("src", e.target.result);
 					inputImg = inputImg + 1;
 					upfileImg();
@@ -867,6 +869,81 @@ div.Board_side_nav_btn{
  				}
  			})
 		}
+	
+	</script>
+	
+	<script>
+	//좋아요 코드를복사해서 북마크 하는것으로 수정할것
+	function checkBookMark(value){
+		var postId = value;
+		var markedId =  "<%=loginUser.getMemberId()%>";
+		var msg = "non";
+		$.ajax({
+				url : "/omg/addBookMark.follower",
+				data : {
+					postId : postId,
+					markedId : markedId,
+					msg : msg
+				},
+				type : "post",
+				success : function(data) {
+					if(data){
+						$("#postMark"+value).css("color","black");
+					} else {
+						$("#postMark"+value).css("color","orangered");
+					}
+				},
+				error : function(){
+					console.log("북마크 스타일 불러오기 실패");
+				}
+			})
+	}
+
+
+	function selectBookMark(value){
+		var postId = value;
+		$.ajax({
+				url : "/omg/checkBookMark.follower",
+				data : {
+					postId : postId
+				},
+				type : "post",
+				success : function(data) {
+					 checkBookMark(value);
+				},
+				error : function(){
+					console.log("북마크 불러오기 실패");
+				}
+			})
+	}
+
+	function addBookMark(value){
+			var markedId =   "<%=loginUser.getMemberId()%>";
+			var postId = value;
+			var msg = "add";
+
+			$.ajax({
+				url : "/omg/addBookMark.follower",
+				data : {
+					markedId : markedId,
+					postId : postId,
+					msg : msg
+				},
+				type : "post",
+				success : function(data) {
+					selectLikes(postId);
+					if(data){
+						$("#postMark"+value).css("color","orangered");
+					} else {
+						$("#postMark"+value).css("color","black");
+					}
+				},
+				error : function(){
+					console.log("싈패");
+				}
+			})
+	}
+
 	
 	</script>
 	<!-- 프로필 사진을 불러오는 ajax 스크립트 -->

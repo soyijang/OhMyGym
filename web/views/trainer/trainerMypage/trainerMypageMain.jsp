@@ -48,7 +48,19 @@ ArrayList<String> trainerInfo = (ArrayList<String>) hmap.get("trainerInfo"); %>
 	<header>
 		<%@ include file="../../common/trainerNav.jsp"%>
 	</header>
-
+	<script>
+		function loadImg(value) {
+			if (value.files && value.files[0]) {
+				var reader = new FileReader();
+	
+				reader.onload = function(e) {
+					$("#profileImg").attr("src", e.target.result);
+				}
+				reader.readAsDataURL(value.files[0]);
+			}
+		}
+	
+	</script>
 	<section style="height: 1000px;">
 		<div class="mypage-contents">
 			<%@ include file="trainerMypageAside.jsp"%>

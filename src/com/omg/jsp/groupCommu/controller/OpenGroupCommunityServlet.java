@@ -36,17 +36,30 @@ public class OpenGroupCommunityServlet extends HttpServlet {
 		Member member = (Member) session.getAttribute("loginUser");
 		
 		System.out.println(member.getMemberId());
-
-		MatchingRequest matchResult = new MatchingService().checkMatch(member.getMemberId());
-		
+		System.out.println(member.getMemberDivision());
+		MatchingRequest matchResult = null;
 		String page = "";
-		if(matchResult != null) {
-    		page = "views/follower/followerCommunity/followerGroupCommunity.jsp";
-    		request.setAttribute("matchResult", matchResult);
-    		request.getRequestDispatcher(page).forward(request, response);
-			
+		//구분해서 그룹방 확인
+		if(member.getMemberDivision().equals("follower")) {
+			 matchResult = new MatchingService().checkMatch(member.getMemberId());
+			 if(matchResult.getTrainerId() != null) {
+		    		page = "views/follower/followerCommunity/followerGroupCommunity.jsp";
+		    		request.setAttribute("matchResult", matchResult);
+		    		request.getRequestDispatcher(page).forward(request, response);
+				} else {
+					request.setAttribute("msg","트레이너와 매칭된 유저만 입장 가능합니다.");
+					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				}
 		} else {
-			System.out.println("조회실패");
+			 matchResult = new MatchingService().getMatch(member.getMemberId());
+			 if(matchResult.getTrainerId() != null) {
+		    		page = "views/trainer/trainerOhMyPt/trainerGroupCommunity.jsp";
+		    		request.setAttribute("matchResult", matchResult);
+		    		request.getRequestDispatcher(page).forward(request, response);
+				} else {
+					request.setAttribute("msg","페이지 로딩 오류!");
+					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				}
 		}
 
 	}

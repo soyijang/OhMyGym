@@ -275,7 +275,7 @@ td>a {
 						<td><%=hmap.get("trainerEmail")%></td>
 						<td><%=hmap.get("trainerPhone")%></td>
 						<td><%=hmap.get("matchedFollower")%></td>
-						<td><form id="selectDetail" action="<%= request.getContextPath() %>/groupCommu.manager" method="post" ><input type="text" name="trainerId" value="<%=hmap.get("trainerId")%>" style="display: none"></form><button class="movBtn" onclick="moveDetail();">이동하기</button></td>
+						<td><button class="movBtn" onclick="location.href='<%=request.getContextPath()%>/groupCommu.manager?trainerId=<%=hmap.get("trainerId")%>'">이동하기</button></td>
 					</tr>
 					<%listNum= listNum-1; }%>
 				</table>

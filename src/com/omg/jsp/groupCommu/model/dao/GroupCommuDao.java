@@ -414,4 +414,111 @@ public class GroupCommuDao {
 		
 		return result;
 	}
+
+	public boolean checkBookMark(Connection con, String markedId, String postId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = true;
+		
+		String query = prop.getProperty("checkBookMark");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, postId);
+			pstmt.setString(2, markedId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = false;//좋아요가 불가
+			} else {
+				result = true; //좋아요가 가능
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
+
+	public int addBookMark(Connection con, String markedId, String postId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("addBookMark");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, markedId);
+			pstmt.setString(2, postId);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int removeBookMark(Connection con, String markedId, String postId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("removeBookMark");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, markedId);
+			pstmt.setString(2, postId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int selectBookMark(Connection con, String postId) {
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		int resultNum = 0;
+		
+		String query = prop.getProperty("selectBookMark");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, postId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				resultNum += 1;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return resultNum;
+	}
 }

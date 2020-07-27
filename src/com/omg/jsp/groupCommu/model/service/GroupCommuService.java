@@ -156,4 +156,56 @@ public class GroupCommuService {
 		return result;
 	}
 
+	public boolean checkBookMark(String markedId, String postId) {
+		Connection con = getConncection();
+		
+		boolean result = new GroupCommuDao().checkBookMark(con, markedId, postId);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int addBookMark(String markedId, String postId) {
+		Connection con = getConncection();
+		
+		int result = new GroupCommuDao().addBookMark(con, markedId, postId);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+
+	}
+
+	public int removeBookMark(String markedId, String postId) {
+		Connection con = getConncection();
+		
+		int result = new GroupCommuDao().removeBookMark(con, markedId, postId);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int selectBookMark(String postId) {
+		Connection con = getConncection();
+		
+		int resultNumber = new GroupCommuDao().selectBookMark(con, postId);
+		
+		close(con);
+		
+		return resultNumber;
+	}
+
 }

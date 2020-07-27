@@ -27,8 +27,7 @@ public class PostloadServlet extends HttpServlet {
 		String boardId = request.getParameter("boardId");
 		
 		Files fileName = new FileService().checkPost(boardId);
-		
-		System.out.println(fileName);
+
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(fileName, response.getWriter());

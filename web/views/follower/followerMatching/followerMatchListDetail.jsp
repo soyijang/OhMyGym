@@ -681,7 +681,28 @@ font-weight: bold;
         }
         
         function submitMatching(){
-            jQuery('.matching_wrap').fadeIn('slow');
+        	
+        	//해당 유저가 매칭완료된 상태인지 확인하는 ajax
+        	var userId = "<%= loginUser.getMemberId() %>";
+        	$.ajax({
+				 url : "/omg/alreadyMatch.follower",
+			     type : 'post',
+			     data : {
+			          	userId : userId
+				       },
+				       success : function(data) {
+				    	   
+				    	   if(data == true){
+				    		   jQuery('.matching_wrap').fadeIn('slow');
+				    	   } else {
+				    		   alert("이미 다른 트레이너와 매칭하셨습니다.")
+				    	   }
+				    	   
+				   		},
+				 		error : function(){
+				 			alert("매칭확인 오류");
+				 		}
+		     })
         }
         
         function openChat(matchingNumber){//대화페이지 오픈
