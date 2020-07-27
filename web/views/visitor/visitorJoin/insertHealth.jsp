@@ -18,7 +18,7 @@
 div#visitQuestion{
         width: 700px; 
         height: 600px; 
-        margin-left: -80px; 
+        margin-left: 350px; 
         margin-right: auto; 
         margin-top: 100px; 
         margin-bottom: 100px; 
@@ -185,10 +185,10 @@ div#visitQuestion{
 				</div>
 				<img onclick="quest_clickNext();" class="contentNext_btn_quest"
 					src="/omg/resources/img_icon/next.png" width="70px" height="90px"
-					style="position: absolute; left: 70%; top: 1000px; border: 1px solid black;"> 
+					style="position: absolute; left: 65%; top: 670px;"> 
 				<img onclick="quest_clickBack();" class="contentNext_btn_quest"
 					src="/omg/resources/img_icon/back.png" width="70px" height="90px"
-					style="position: absolute; left: 30%; top: 1000px; border: 1px solid black;">
+					style="position: absolute; left: 30%; top: 670px;">
 			</div>
 			
 			<div>
