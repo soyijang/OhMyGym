@@ -63,7 +63,6 @@ ArrayList<String> trainerInfo = (ArrayList<String>) hmap.get("trainerInfo"); %>
 	</script>
 	<section style="height: 1000px;">
 		<div class="mypage-contents">
-			<%@ include file="trainerMypageAside.jsp"%>
 			<div class="right-container">
 				<div class="info-container">
 

@@ -160,7 +160,7 @@ a:hover {
 							<li><a style="color: white; text-decoration: none;" href="<%= request.getContextPath() %>/selectApplyList.pt">매칭신청 목록</a>&nbsp;&nbsp;&nbsp;<a style="color: white; text-decoration: none;" href="<%= request.getContextPath() %>/selectCurriculumList.cu">커리큘럼 관리</a>
 								&nbsp;&nbsp;&nbsp;<a style="color: white; cursor: pointer;" onclick="groupCommu();">그룹소통방</a></li>
 						</ul></li>
-					<li><a><div class="NavLink">팔로워관리</div></a></li>
+					<li><div class="NavLink" ><a style="text-decoration: none;" href="<%=request.getContextPath()%>/listFollower.trainer">팔로워관리</a></div></li>
 				</ul>
 			</ul>
 		</div>

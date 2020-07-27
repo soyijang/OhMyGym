@@ -181,7 +181,7 @@
                     <tr style="height: 400px;">
                     	<td colspan="6">
                     		<video style="width:400px; height: 250px;" controls>
-                    			<source src="<%= savePath + videoFile.getFileManageName() %>">
+                    			<source src="<%= request.getContextPath() + "/" + videoFile.getFilePath() + "/" + videoFile.getFileManageName() %>">
                     		</video>
                     	</td>
                     </tr>
