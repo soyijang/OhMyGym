@@ -279,7 +279,7 @@ th {
 						<td colspan="3"><%= list.get(8).getHealthData() %></td>
 					</tr>
 					<tr>
-						<td colspan="4" style="text-align: center;"><button
+						<td colspan="4" style="text-align: center;"><br><br><button
 								onclick="modifyInfo();">수정하기</button></td>
 					</tr>
 				</table>
@@ -300,17 +300,17 @@ th {
 						<tr>
 							<th>키</th>
 							<td>
-								<input type="text" style="width: 100px;" name="height" value="<%if(list.get(0).getHealthData() != null) {%><%= list.get(0).getHealthData() %><% } %>">
+								<input type="text" style="width: 280px;" name="height" value="<%if(list.get(0).getHealthData() != null) {%><%= list.get(0).getHealthData() %><% } %>">
 								cm
 							</td>
 							<th>몸무게</th>
-							<td><input type="text" style="width: 100px;" name="weight"
+							<td><input type="text" style="width: 280px;" name="weight"
 								value="<%if(list.get(1).getHealthData() != null) {%><%= list.get(1).getHealthData() %><% } %>">
 								kg</td>
 						</tr>
 						<tr>
 							<th>수면시간</th>
-							<td><input type="text" style="width: 100px;" name="sleep"
+							<td><input type="text" style="width: 300px;" name="sleep"
 								value="<%if(list.get(2).getHealthData() != null) {%><%= list.get(2).getHealthData() %><% } %>">
 							</td>
 							<th>운동시간</th>
@@ -349,12 +349,13 @@ th {
 						</tr>
 						<tr>
 							<th>목표</th>
-							<td colspan="3"><input type="text" style="width: 740px;"
+							<td colspan="3"><input type="text" style="width: 775px;"
 								placeholder="ex) x월까지 xx키로 감량 등" name="goal"
 								value="<%if(list.get(8).getHealthData() != null) {%><%= list.get(8).getHealthData() %><% } %>"></td>
 						</tr>
 						<tr>
-							<td colspan="4" style="text-align: center;"><input
+							
+							<td colspan="4" style="text-align: center;"><br><br><br><input
 								type="reset" value="취소" onclick="showInfo();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 								type="button" value="저장" id="checkBtn" onclick="go();"></td>
 						</tr>

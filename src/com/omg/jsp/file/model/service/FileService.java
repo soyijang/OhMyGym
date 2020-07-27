@@ -80,4 +80,15 @@ public class FileService {
 		return file;
 	}
 
+	public Files selectFeedbackVideo(String filecode) {
+		Connection con = getConncection();
+		
+		Files video = new FileDao().selectFeedbackVideo(con, filecode);
+		
+		close(con);
+		
+		return video;
+	}
+
+
 }

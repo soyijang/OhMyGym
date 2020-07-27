@@ -96,4 +96,62 @@ public class FeedbackRoomDao {
 		return feedbackList;
 	}
 
+	public int insertFeedback(Connection con, String feedbackTitle, String feedbackContent, String filecode, String requestManageCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertFeedback");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, filecode);
+			pstmt.setString(2, requestManageCode);
+			pstmt.setString(3, feedbackTitle);
+			pstmt.setString(4, feedbackContent);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public FeedbackRoom selectOneFeedback(Connection con, String followerVideoCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		FeedbackRoom feedback = new FeedbackRoom();
+		
+		String query = prop.getProperty("selectOneFeedback");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, followerVideoCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				feedback.setFeedbackContent(rset.getString("FEEDBACK_CONTENT"));
+				feedback.setFeedbackFileCode(rset.getString("FEEDBACK_FILECODE"));
+				feedback.setFeedbackTitle(rset.getString("FEEDBACK_TITLE"));
+				feedback.setFeedbackUploadDate(rset.getString("FEEDBACK_UPLOADDATE"));
+				feedback.setFeedbackUploadTime(rset.getString("FEEDBACK_UPLOADTIME"));
+				feedback.setFollowerVideoCode(rset.getString("FOLLOWER_VIDEO_CODE"));
+				feedback.setRequestManageCode(rset.getString("REQUEST_MANAGECODE"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return feedback;
+	}
+
 }

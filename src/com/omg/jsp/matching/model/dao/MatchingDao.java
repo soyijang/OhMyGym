@@ -308,11 +308,14 @@ public class MatchingDao {
 		ResultSet rset = null;
 		HashMap<String, Object> avgMap = new HashMap<String, Object>();
 		
+		System.out.println(trainerList);
+		
 		String query = prop.getProperty("selectGradeAvg");
 		
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
+			
 			
 			while(rset.next()) {
 				avgMap.put(rset.getString("TRAINER_ID"), (Object) rset.getDouble("AVG(GRADE)"));

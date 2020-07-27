@@ -176,7 +176,6 @@
 	           	<script>
 	           			$(function() {
 	        				$(".video-list").click(function() {
-	        					//var num = $(this).children().childred().eq(0).val();
 	        					var num = $(this).find("input").val();
 	        					console.log(num);
 	        					location.href="<%= request.getContextPath()%>/selectOne.vi?num=" + num;
