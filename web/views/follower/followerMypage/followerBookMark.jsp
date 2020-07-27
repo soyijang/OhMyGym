@@ -55,16 +55,17 @@
 					<ul class="news-article-list article-list list ui-area-article-list">
 					<h3 class="info-header">북마크 한 오마이짐 게시물</h3>
 					<p>※ 북마크기능을 통해 원하는 게시물만 모아볼 수 있습니다.<br>※ 북마크는 최근에 담긴 게시물부터 모여집니다.<br>※ 'x'버튼을 누르면 북마크에서 사라집니다.</p>	
+					
 						<% for(BookMark b : list) { %>
 						<li class="listItem" >
 							
 							<div class="articleImg" style="height: 150px;">
-								<a href="#" ><img src="../../resources/img/OHmyGymLogo.png"></a>
+								<a href="#" >사진이 없는 게시물입니다.</a>
 							</div>
 							<div class="articleInfo info" style="height: 150px;">
 								
 							<!-- 헤드라인 -->
-							<a href="#"><b style="font-size: large;"><%= b.getBoardTitle() %></b></a>
+							<a href="/omg/followSelectOne.no?num=<%=b.getBoardNum()%>"><b style="font-size: large;"><%= b.getBoardTitle() %></b></a>
 							
 							<!-- 삭제버튼 -->
 							<button onclick="deleteBookmark('<%=b.getBoardNum()%>', '<%=b.getMemberId()%>');" name="deleteImg" style="text-align: right; ">
@@ -84,7 +85,7 @@
 								</div>
 								
 								<div class="description">
-									<a href=""><p><%= b.getBoardContent() %></p></a>
+									<a href="/omg/followSelectOne.no?num=<%=b.getBoardNum()%>"><p><%= b.getBoardContent() %></p></a>
 								</div>
 							</div>
 						</li>
@@ -107,7 +108,7 @@
 								<div class="subInfo info">
 									<% 
 										String boardcode = b.getGroupBoardNum();
-										String boardname = "";
+										String boardname = "그룹소통방";
 										switch(boardcode){
 										case "10" : boardname = "공지사항"; break;
 										}

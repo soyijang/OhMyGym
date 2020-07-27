@@ -225,6 +225,22 @@ public int insertTrainerInfo(TrainerInfo requestTrainer, String memberId) {
 		   return result;
 	}
 
+	
+	//회원탈퇴
+	public int withdrawMember(String userId) {
+		 Connection con = getConncection();
+		   int result = new MemberDao().withdrawMember(con, userId);
+		   
+		   if(result > 0) {
+		      commit(con);
+		   }else {
+		      rollback(con);
+		   }
+		   
+		   close(con);
+		   return result;
+	}
+
 
 	
 

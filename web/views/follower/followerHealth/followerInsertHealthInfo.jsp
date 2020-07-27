@@ -217,7 +217,7 @@ th {
 		<%@ include file="../../common/followerNav.jsp"%>
 	</nav>
 	<br><br>
-	<aside style="display: inline-block; float: left; width: 20%;">
+	<aside>
 		<%@ include file="followerHealthAside.jsp"%>
 	</aside>
 

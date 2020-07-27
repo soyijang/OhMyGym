@@ -133,7 +133,7 @@
     <nav id="navigateID">
         <div class="container" style="vertical-align: middle;">
                 <ul class="header_bottom_menu" id="header_bottom">
-                    <li id="page_NAME"><a href="">
+                    <li id="page_NAME"><a href="/omg/index.jsp">
                     <div id="logo"><img src="/omg/resources/img/OHmyGymLogo.png"></div></a></li>
                     <ul id="header_bottom_sidemenu" class="sideMenu">
                         <li>
