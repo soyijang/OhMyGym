@@ -351,16 +351,16 @@
         <!--right area-->
         <article id="right-Area">
 
-
+<form action="<%= request.getContextPath()%>/InsertFAQ.mg" method="post">
             <div style="padding: 20;">
                 <div style=" width: auto; height: 30px; border-bottom:2px solid black; margin: 10;">
-                    <select>
-                        <option value="1">오마이짐이란?</option>
-                        <option value="2">수강문의</option>
-                        <option value="3">연기/환불</option>
-                        <option value="4">결제/캐시</option>
-                        <option value="5">회원정보</option>
-                        <option value="6">기타</option>
+                    <select id="cate" name="category">
+                        <option value="오마이짐이란?">오마이짐이란?</option>
+                        <option value="수강문의">수강문의</option>
+                        <option value="연기/환불">연기/환불</option>
+                        <option value="결제/캐시">결제/캐시</option>
+                        <option value="회원정보">회원정보</option>
+                        <option value="기타">기타</option>
 
                     </select>
                     
@@ -368,19 +368,20 @@
                 
                 <!-- input-area -->
                 <div style="margin: 10; ">
-                    <input type="text" style="width: 740px; font-size: 1.3em;" placeholder="질문을 입력해주세요">
+                <input type="hidden" id="managerId" name="managerId" value="<%= loginManager.getManagerId() %>">
+                    <input name="question" type="text" style="width: 740px; font-size: 1.3em;" placeholder="질문을 입력해주세요">
                     <br>
                     <br>
-                    <textarea cols="72;" rows="15;" style="resize: none; font-size: 1.3em;" placeholder="답변을 입력해주세요"></textarea>
+                    <textarea name="answer" cols="72;" rows="15;" style="resize: none; font-size: 1.3em;" placeholder="답변을 입력해주세요"></textarea>
 
                 </div>
-
+		
                 <div class="allBtn" style="float: right; margin-right: 12;">
-                    <button onclick="" class="saveBtn" style="width: 60px; height: 30px;">취소</button>
+                    <button onclick="reset" class="" style="width: 60px; height: 30px;">취소</button>
                     <button onclick="" class="createBtn" style="width: 60px; height: 30px;">저장</button>
                     </div>
 
-                
+                </form>
             </div>
         </article>
    

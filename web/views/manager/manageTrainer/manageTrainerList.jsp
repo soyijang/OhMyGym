@@ -90,8 +90,8 @@
             font-size: 13px;
             height: 40px;
             border-bottom: 3px double gray;
-            
-            color: black;
+            background-color: navy;
+            color: white;
             font-weight: bold;
         }
         td {

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -255,8 +255,8 @@ body {
 		<div id="content">
 			<%@ include file="../../common/nonNav.jsp"%>
 			<div class="container">
-				<form  id="joinForm" action="<%= request.getContextPath() %>/insert.me" method="post" onsubmit="return checks()">
-
+				<form  id="joinForm" action="<%= request.getContextPath() %>/insert.me" onsubmit="return checks()">
+						<%-- action="<%= request.getContextPath() %>/insert.me" --%>
 					<div id="main-center" style="margin-left: 450px">
 
 						<div class="join2">
@@ -281,12 +281,12 @@ body {
 												<th>이름</th>
 												<td><input type="text" name="memberName" id="memberName" value=""
 													class="MS_input_txt w137" size="50" maxlength="50"
-													style="height: 40px" placeholder="이름을 입력해주세요"></td>
+													style="height: 40px; border:1px solid lightgray;" placeholder="이름을 입력해주세요"></td>
 											</tr>
 											<tr>
 												<th>아이디</th>
 												<td><input type="text" name="memberId" id="memberId"
-													value="" style="height: 40px" 
+													value="" style="height: 40px; border:1px solid lightgray;"
 													size="50" maxlength=12 placeholder="아이디를 입력해주세요">
 													<a onclick="IdCheckFunction()"
 														style="color: orangered; cursor: pointer;">중복확인</a>
@@ -302,7 +302,7 @@ body {
 											<tr>
 												<th>비밀번호</th>
 												<td><input type="password" name="memberPwd"
-													id="memberPwd1" style="height: 40px"
+													id="memberPwd1" style="height: 40px; border:1px solid lightgray;" 
 													class="MS_input_txt w137" value="" size="50" maxlength="20"
 													onkeyup="passwordCheckFunction();"
 													placeholder="비밀번호를 입력해주세요"> <span class="idpw-info"><br>
@@ -312,7 +312,7 @@ body {
 											<tr>
 												<th>비밀번호 확인</th>
 												<td><input type="password" name="memberPwd2"
-													id="memberPwd2" style="height: 40px"
+													id="memberPwd2" style="height: 40px; border:1px solid lightgray;"
 													class="MS_input_txt w137" value="" size="50" maxlength="20"
 													onkeyup="passwordCheckFunction();"
 													placeholder="비밀번호를 한번 더 입력해주세요">
@@ -322,7 +322,7 @@ body {
 											<tr>
 												<th>생일/성별</th>
 												<td class="select"><select name="birthYear" id="birthYear"
-													style="width: 100px; height: 40px;"
+													style="width: 100px; height: 40px; border:1px solid lightgray;"
 													class="MS_select MS_birthday">
 														<option value="">선택</option>
 														<option value="1920">1920</option>
@@ -427,7 +427,7 @@ body {
 														<option value="2019">2019</option>
 														<option value="2020">2020</option>
 												</select> 년 <select name="birthMonth" class="MS_select MS_birthday"
-													style="width: 100px; height: 40px;">
+													style="width: 100px; height: 40px; border:1px solid lightgray;">
 														<option value="">선택</option>
 														<option value="01">1</option>
 														<option value="02">2</option>
@@ -442,7 +442,7 @@ body {
 														<option value="11">11</option>
 														<option value="12">12</option>
 												</select> 월 <select name="birthDate" class="MS_select MS_birthday"
-													style="width: 100px; height: 40px;">
+													style="width: 100px; height: 40px; border:1px solid lightgray;">
 														<option value="">선택</option>
 														<option value="01">1</option>
 														<option value="02">2</option>
@@ -489,7 +489,7 @@ body {
 													<div class="tb-l post">
 
 														<input type="text" name="zipNo" 
-															id="zipNo" style="width: 100px; height: 40px;"
+															id="zipNo" style="width: 100px; height: 40px; border:1px solid lightgray;"
 															 value="" size="7" maxlength="15"
 														>
 														<a onclick="openDaumZipAddress()"
@@ -501,7 +501,7 @@ body {
 												<th>집주소</th>
 												<td><input type="text" name="haddress1"
 												id="haddress1"
-													style="width: 360px; height: 40px;"
+													style="width: 360px; height: 40px; border:1px solid lightgray;"
 													class="MS_input_txt w415" value="" size="50"
 													maxlength="100" ></td>
 											</tr>
@@ -509,7 +509,7 @@ body {
 												<th>상세주소</th>
 												<td><input type="text" name="haddress2"
 													id="haddress2"
-													style="width: 360px; height: 40px;"
+													style="width: 360px; height: 40px; border:1px solid lightgray;"
 													class="MS_input_txt w415" value="" size="50"
 													maxlength="100"></td>
 											</tr>
@@ -520,14 +520,14 @@ body {
 												<th>이메일</th>
 												<td class="select">
 												
-													<input type="text" name="email1" id="email1" style="width: 100px; height: 40px;"
+													<input type="text" name="email1" id="email1" style="width: 100px; height: 40px; border:1px solid lightgray;"
 													size="10" maxlength="20" value="">
 													<span>@</span> <input
 														type="text" name="email2" id="email2"
-														style="width: 200px; height: 40px;"
+														style="width: 200px; height: 40px; border:1px solid lightgray;"
 														size="15" maxlength="25">
 											<select name="selectEmail" id="selectEmail"
-													style="width: 100px; height: 40px;"
+													style="width: 100px; height: 44px; border:1px solid lightgray;"
 													style="margin-right:5px;" >
 														<option value="directly" id="directly">직접입력</option>
 														<option value="naver.com">naver.com</option>
@@ -554,7 +554,7 @@ body {
 													form="join_form" value=""> 
 													<select
 													name="tel1" id="etcphone1" 
-													style="width: 100px; height: 40px;"
+													style="width: 100px; height: 44px; border:1px solid lightgray;"
 													class="MS_select MS_tel">
 														<option value="">선택</option>
 														<option value="010">010</option>
@@ -565,10 +565,10 @@ body {
 														<option value="019">019</option>
 												</select> - <input type="text" name="tel2" 
 													id="etcphone2" class="MS_input_tel" value="" size="4"
-													maxlength="4" style="width: 115px; height: 40px;">
+													maxlength="4" style="width: 115px; height: 40px; border:1px solid lightgray;">
 													- <input type="text" name="tel3" 
 													id="etcphone3" class="MS_input_tel" value="" size="4"
-													maxlength="4" style="width: 115px; height: 40px;"
+													maxlength="4" style="width: 115px; height: 40px; border:1px solid lightgray;"
 													minlength="4">
 
 													<a onclick=""
@@ -592,7 +592,7 @@ body {
 			<%-- , <%= request.getContextPath() %>InsertHealthNow --%>
 			<div>
 			
-			<%-- <div id="visitQuestion">
+			 <%-- <div id="visitQuestion">
 				<div id="visitQuestionIn" class="questionBox">
 					 <form id="questionForm" action="<%= request.getContextPath() %>/insertHistory.hi" method="post" > 
 						<div id="quesionMain">
@@ -764,24 +764,6 @@ body {
       
     </script>
 		
-	<!-- <script type="text/javascript">
-		//이메일 입력방식 선택 
-		$('#selectEmail').change(function(){
-			$("#selectEmail option:selected").each(function () {
-				if($(this).val()== '1'){ 
-					//직접입력일 경우
-					$("#email2").val(''); 
-					//값 초기화 
-					$("#email2").attr("disabled",false); 
-					//활성화
-				}else{ 
-					//직접입력이 아닐경우
-					$("#email2").val($(this).text()); 
-					//선택값 입력 
-					$("#email2").attr("disabled",true); 
-					//비활성화
-					} }); });
-	</script> -->
 
 	
 </body>

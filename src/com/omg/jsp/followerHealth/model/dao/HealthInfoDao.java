@@ -77,6 +77,7 @@ public class HealthInfoDao {
 				pstmt.setString(1, list.get(i).getHealthData());
 				pstmt.setString(2, list.get(i).getHealthInfoCode());
 				pstmt.setString(3, list.get(i).getMemberId());
+				System.out.println("memberId : " + list.get(i).getMemberId());
 				
 				result += pstmt.executeUpdate();
 			}
@@ -102,6 +103,7 @@ public class HealthInfoDao {
 			for(int i = 0; i < list.size(); i++) {
 				pstmt.setString(1, list.get(i).getHealthData());
 				pstmt.setString(2, list.get(i).getMemberId());
+				
 				pstmt.setString(3, list.get(i).getHealthInfoCode());
 				
 				result += pstmt.executeUpdate();
@@ -182,8 +184,9 @@ public class HealthInfoDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			for(int i = 0; i < list.size(); i++) {
-				pstmt.setString(1, list.get(i).getHealthData());
-				pstmt.setString(2, list.get(i).getMemberId());
+				pstmt.setString(1, list.get(i).getMemberId());
+				System.out.println("memberId : " + list.get(i).getMemberId());
+				pstmt.setString(2, list.get(i).getHealthData());
 				pstmt.setString(3, list.get(i).getHealthInfoCode());
 				
 				result += pstmt.executeUpdate();

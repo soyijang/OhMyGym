@@ -156,7 +156,7 @@ a {
 					</li>
 					<li><a><div class="NavLink" style="color: rgb(63, 63, 63);">문의하기</div></a>
 						<ul>
-							<li><a style="color: white;">자주묻는질문</a>&nbsp;&nbsp;&nbsp;<a style="color: white;">직접문의하기</a></li>
+							<li><a style="color: white;" href="/omg/FAQList.me">자주묻는질문</a>&nbsp;&nbsp;&nbsp;<a style="color: white;">직접문의하기</a></li>
 						</ul>
 					</li>
 					<li><a><div class="NavLink" style="color: rgb(63, 63, 63);">건강관리</div></a>

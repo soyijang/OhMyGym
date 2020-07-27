@@ -1,12 +1,16 @@
 package com.omg.jsp.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.omg.jsp.followerHealth.model.service.HealthInfoService;
+import com.omg.jsp.followerHealth.model.vo.HealthInfo;
 import com.omg.jsp.member.model.service.MemberService;
 import com.omg.jsp.member.model.vo.Member;
 import com.omg.jsp.member.model.vo.TrainerInfo;
@@ -35,6 +39,8 @@ public class MemberInsertServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		
+		
 		
 		String name = request.getParameter("memberName");
 		String memberId = request.getParameter("memberId");
@@ -78,12 +84,20 @@ public class MemberInsertServlet extends HttpServlet {
 		if(result > 0) {
 	         //page = "index.jsp";
 	         request.setAttribute("plag", "1");
+	         request.setAttribute("memberId", memberId);
 //	         page = "/insertHistory.hi"; 건강정보 입력
-	         page = "views/visitor/login.jsp";
+	         page = "views/visitor/visitorJoin/insertHealth.jsp";
+	         
+	         
+	         
+	         
 	         
 	         request.setAttribute("successCode", "insertMember");
 	         request.getRequestDispatcher(page).forward(request, response);
 	         //response.sendRedirect(page);
+	         
+	         
+	         
 	         
 	    } else {
 			page = "views/common/errorPage.jsp";
@@ -128,6 +142,8 @@ public class MemberInsertServlet extends HttpServlet {
 						break;
 		
 		}
+		
+		
 		
 		System.out.println("servlet member : " + requestMember);
 		

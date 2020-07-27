@@ -150,7 +150,7 @@ a:hover {
 						</ul></li>
 					<li><a><div class="NavLink">문의하기</div></a>
 						<ul>
-							<li><a style="color: white;">자주묻는질문</a>&nbsp;&nbsp;&nbsp;<a style="color: white;">직접문의하기</a></li>
+							<li><a style="color: white;" href="/omg//FAQList.tr">자주묻는질문</a>&nbsp;&nbsp;&nbsp;<a style="color: white;">직접문의하기</a></li>
 						</ul></li>
 					<li><a><div class="NavLink">건강정보</div></a> <!-- <ul>
                                 <li><a>팔로워후기</a>&nbsp;&nbsp;&nbsp;<a>트레이너후기</a></li>

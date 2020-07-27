@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.omg.jsp.faq.model.vo.*"%>
+    <%ArrayList<FAQ> list = (ArrayList<FAQ>) request.getAttribute("list"); %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,32 +132,6 @@
             border-collapse: collapse;
         }
 
-        tr {
-        
-            height: 20px;
-        }
-
-        th {
-            font-size: 13px;
-            height: 40px;
-            border-bottom: 3px double gray;
-
-            color: black;
-            font-weight: bold;
-        }
-
-        td {
-            font-family: "Noto Sans KR Regular ";
-            font-size: 14px;
-            height: 35px;
-            border-bottom: 2px solid gray;
-        }
-
-        td>a {
-            color: black;
-            text-decoration: underline;
-            font-size: 14px;
-        }
 
         #menuTitleArea {
             /* display: inline; */
@@ -169,32 +144,13 @@
             display: inline-block;
             width: 800px;
             height: 600px;
-            border: 1px solid black;
+           /*  border: 1px solid black; */
+        }
+        ul {
+        	list-style: none;
         }
 
-        #searchArea {
-            display: inline-block;
-            width: 400px;
-            position: absolute;
-            top: 60px;
-            left: 860px;
-            margin: 0;
-        }
 
-        #searchBtn {
-            width: 50px;
-            margin-left: 5px;
-        }
-
-        #alignmentArea {
-            margin: 0;
-            margin-top: 10;
-            display: inline-block;
-            position: relative;
-            left: 958px;
-            top: 25px;
-
-        }
 
         #pagingArea {
             display: inline-block;
@@ -210,27 +166,6 @@
             height: 20px;
         }
 
-        #infoBtn {
-            border-style: none;
-            background: orangered;
-            width: 70px;
-            color: white;
-            height: 25px;
-            cursor: pointer;
-        }
-
-        #riverBtn {
-            border-style: none;
-            background: navy;
-            width: 70px;
-            color: white;
-            height: 25px;
-            cursor: pointer;
-        }
-
-        #manyPeople {
-            margin-left: 30;
-        }
     </style>
 
     <!-- left-container -->
@@ -279,9 +214,10 @@
 
     <style>
         .answer {
-            padding: 10;
-            border-bottom: 2px solid black;
-            border-top: 2px solid black;
+            padding: 10px;
+            
+            border-bottom: 1px solid gray;
+            border-top: 1px solid gray;
          
 
         }
@@ -352,49 +288,28 @@
         <article id="right-Area">
 
 
-            <div style="padding: 20;">
+            <div style="padding: 20;" >
                 <div style="border-bottom:2px solid black; margin: 10;">
                     <h2 >전체</h2>
                     <div class="allBtn" style="float: right; margin-top: -40px;">
                     <button onclick="edit()" class="editBtn" style="width: 60px; height: 30px;">수정</button>
                     <button onclick="" class="saveBtn" style="width: 60px; height: 30px;">저장</button>
-                    <button onclick="location.href='createJaju'" class="createBtn" style="width: 60px; height: 30px;">생성</button>
+                    <button onclick="location.href='/omg/views/manager/manageAll/manageInsertFAQ.jsp'" class="createBtn" style="width: 60px; height: 30px;">생성</button>
                     </div>
                 </div>
                 
-                <ul class="question" style="margin-left: 20; margin-top: 10;">Q. 결제수단을 변경하고 싶어요.
-                    <li class="answer" style="font-size: 0.8em; margin-top: 10; margin-bottom: 10;">오마이짐은 시스템상 결제와 수강권 등록이 동시에 진행되고 있기 때문에, 
-                            결제수단을 변경하시기 위해서는 반드시 이전 결제내역을 환불 및 취소처리 하신 후 
-                            새롭게 신청을 진행해주셔야 해요.
-                            따라서,  환불가능 기간에만 결제수단 변경이 가능하신 점 꼭 참고해주시기 바랄게요! :)</li>
-
+                <ul class="question" style="margin-left: 20; margin-top: 10;"> 
+                <% for(FAQ f : list){ %>
+                <li class="question_item ">
+                <br>
+                  <div class="question"><%= f.getQuestion() %></div>
+                  <br>
+                  <div class="answer"><%= f.getAnswer() %></div>
+                </li>
+                <% } %>
                 </ul>
 
-                <ul class="question" style="margin-left: 20; margin-top: 10;">Q. 환불접수를 완료했어요. 앞으로 어떻게 진행되나요?
-                    <li class="answer" style="font-size: 0.8em; margin-top: 10; margin-bottom: 10;">접수 완료하신 날짜 기준, 순차적으로 확인 후 3-5일 이내(*영업일 기준)에 환불처리가 완료됩니다.
-                        처리 결과에 대해서는 메일 혹은 문자로 안내드릴테니 꼭 확인해주시기 바랄게요!</li>
-
-                </ul>
-
-                <ul class="question" style="margin-left: 20; margin-top: 10;">Q. 트레이너 피드백은 어떤 방법으로 받게 되나요?
-                    <li class="answer" style="font-size: 0.8em; margin-top: 10; margin-bottom: 10;">트레이너 피드백은  오마이짐페이지 메뉴 중 ‘트레이닝룸'을 눌러 확인하실 수 있어요!
-                        이메일 발송 및 파일 제공은 따로 이루어지지 않는다는 점, 참고 부탁드려요 :)</li>
-
-                </ul>
-
-                <ul class="question" style="margin-left: 20; margin-top: 10;">Q. 수강 중에 그만둬야 할 사정이 생기면 어떡하죠?
-                    <li class="answer" style="font-size: 0.8em; margin-top: 10; margin-bottom: 10;">트레이닝 시작 2주차(14일차)까지는, 규정에 따라 남은 수강 기간에 한해 연기 및 환불이 가능합니다.
-                        자세한 내용은  '연기 및 환불 규정'을 확인해주세요!</li>
-
-                </ul>
-
-                <ul class="question" style="margin-left: 20; margin-top: 10;">Q. 현금영수증/수강증이 필요해요.
-                    <li class="answer" style="font-size: 0.8em; margin-top: 10; margin-bottom: 10;">[고객센터 > 1:1 문의하기]에서 [서류발급신청] 으로
-                        문의 분류를 선택해 현금영수증 및 수강증 신청을 하실 수 있어요!</li>
-
-                </ul>
-
-                
+               
             </div>
         </article>
         <!--테이블 표시 영역 종료-->

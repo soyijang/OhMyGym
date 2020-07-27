@@ -145,7 +145,7 @@
                         <li>
                             <a><div class="NavLink">문의하기</div></a>
                             <ul>
-                                <li><a>자주묻는질문</a>&nbsp;&nbsp;&nbsp;<a>직접문의하기</a></li>
+                                <li><a href="/omg/FAQList">자주묻는질문</a>&nbsp;&nbsp;&nbsp;<a>직접문의하기</a></li>
                             </ul>
                         </li>
                         <li>

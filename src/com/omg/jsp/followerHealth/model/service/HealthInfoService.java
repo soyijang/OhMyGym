@@ -42,6 +42,7 @@ public class HealthInfoService {
 				rollback(con);
 			}
 		} else {
+			int insertHealthInfoResult = new HealthInfoDao().insertHealthHistory(con, list);
 			int insertHealthInfoNow = new HealthInfoDao().insertHealthInfoNow(con, list);
 			
 			if(insertHealthInfoNow > 0) {
