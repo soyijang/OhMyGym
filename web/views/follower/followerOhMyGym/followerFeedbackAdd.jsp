@@ -92,17 +92,16 @@
             <div id="fFeedbackAdd" align="center">
                 <table align="center">
                     <tr>
-                        <td><input id="fFeedbackTitle" type="text" placeholder="제목을 입력하세요."></td>
+                        <td><input id="fFeedbackTitle" name="feedbackTitle" type="text" placeholder="제목을 입력하세요."></td>
                     </tr>
                     <tr style="height: 70%;">
                         <td>
-                            <textarea name="fFeedbackContent" id="fFeedbackContent"></textarea>
+                            <textarea name="feedbackContent" id="fFeedbackContent"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td align="left">
-                            <input type="file"><br>
-                            <input type="file" style="margin-bottom: 5px;">
+                            <input type="file" name="file"><br>
                         </td>
                     </tr>
                 </table>

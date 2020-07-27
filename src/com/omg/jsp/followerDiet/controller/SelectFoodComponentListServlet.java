@@ -1,6 +1,6 @@
 package com.omg.jsp.followerDiet.controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.omg.jsp.followerDiet.model.service.FoodComponentService;
 import com.omg.jsp.followerDiet.model.vo.FoodComponent;
 
@@ -33,22 +36,14 @@ public class SelectFoodComponentListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setCharacterEncoding("UTF-8");
+		String inputname = request.getParameter("inputname");
+		ArrayList<FoodComponent> foodlistall = new FoodComponentService().selectList(inputname);
 		
-		ArrayList<FoodComponent> list = new FoodComponentService().selectList();
-		
-		String page="";
-		
-		if(list != null) {
-			page="views/follower/followerDiet/followerTodayMealSearch.jsp";
-			request.setAttribute("list", list);
-			
-		} else {
-			page="views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 조회 실패");
-		}
-		request.getRequestDispatcher(page).forward(request, response);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(foodlistall, response.getWriter());	
 	
-		System.out.println("FoodComponent list : "+list);
+		System.out.println("foodlistall : "+foodlistall);
 	}
 
 	/**

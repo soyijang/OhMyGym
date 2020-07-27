@@ -247,7 +247,7 @@
 
         <!--테이블 표시 영역-->
         <article id="tableArea">
-        <form id="fofofo" action="<%= request.getContextPath()%>/QNADetail" method="post">
+        <%--  <form id="fofofo" action="<%= request.getContextPath()%>/QNADetail" method="post">  --%>
             <div align="center">
             <input type="hidden" name="managerId" value="<%=  loginManager.getManagerId() %>">
                 <table>
@@ -262,14 +262,14 @@
                    
                     <% for(QNA q : list) { %>
 				<tr>
-				<input type="hidden" name="manageCode" value="<%=  q.getManageCode() %>">
+				<%-- <input type="hidden" name="manageCode" value="<%=  q.getManageCode() %>"> --%>
 					<td><%= q.getManageCode() %></td>
 					<td><%= q.getCategory() %></td>
 					<td><%= q.getQuestionTitle() %></td>
 					<td><%= q.getMemberId() %></td>
 					<td><%= q.getDate() %></td>
 					<% if(q.getQnaYn().equals("N")){ %>
-            		<td><button onclick="next" style="background-color:orangered; color:white; border:none; width:70px; height:25px;">답변하기</button></td>
+            		<td><button onclick="detail('<%= q.getManageCode() %>', '<%= loginManager.getManagerId() %>')" style="background-color:orangered; color:white; border:none; width:70px; height:25px;">답변하기</button></td>
          			<% } else {%>
          			<td><button onclick="next" style="background-color:gray; color:white; border:none width:70px; height:25px;" >답변하기</button></td>
 					
@@ -280,24 +280,24 @@
                 </table>
             </div>
         </article>
-        </form>
+        <!--  </form> -->
         <!--테이블 표시 영역 종료-->
 
        
     </section>
-    <script>
+   <!--  <script>
     function next(){
             $("#fofofo").submit();
         
             
          }
-    </script>
-    <%-- 
-     <script>
+    </script> -->
     
-    function detail(manageCode) {
+    <script>
+    
+    function detail(manageCode, managerId) {
     	location.href = "<%= request.getContextPath()%>/QNADetail?manageCode="+manageCode;
     }
-    </script>  --%>
+    </script>  
 </body>
 </html>

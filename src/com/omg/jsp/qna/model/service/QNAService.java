@@ -48,11 +48,12 @@ public class QNAService {
 		
 		Connection con = getConncection();
 		
-		int result = 0;
 		
-		QNA notice = new QNADao().selectOne(con, manageCode);
+		QNA qna = new QNADao().selectOne(con, manageCode);
 		
-		return notice;
+		close(con);
+		
+		return qna;
 	}
 
 }
