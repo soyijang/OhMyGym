@@ -81,6 +81,7 @@ public class MemberInsertServlet extends HttpServlet {
 		case "follower" : requestMember.setMemberDivision("follower"); 
 		int result = new MemberService().insertMember(requestMember); 
 		System.out.println(email);
+		System.out.println("result : " + result);
 		if(result > 0) {
 	         //page = "index.jsp";
 	         request.setAttribute("plag", "1");
@@ -99,13 +100,14 @@ public class MemberInsertServlet extends HttpServlet {
 	         
 	         
 	         
-	    } else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "회원가입실패!");
-			request.getRequestDispatcher(page).forward(request, response);
-			
-			
-		}
+	    } 
+//		else {
+//			page = "views/common/errorPage.jsp";
+//			request.setAttribute("msg", "회원가입실패!");
+//			request.getRequestDispatcher(page).forward(request, response);
+//			
+//			
+//		}
 		
 		break;
 		

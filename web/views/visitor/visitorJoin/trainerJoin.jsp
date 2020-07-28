@@ -82,7 +82,6 @@
 			return false; 
 		}
 		
-		//비밀번호 유효성검사 
 		var pw = $("#memberPwd1").val();
 		 var num = pw.search(/[0-9]/g);
 		 var eng = pw.search(/[a-z]/ig);
@@ -103,12 +102,6 @@
 		    return true;
 		 }
 		
-		//비밀번호 확인란 공백 확인
-		if($("#memberPwd2").val() == ""){
-			alert("패스워드 확인란을 입력해주세요");
-			$("#memberPwd2").focus();
-			return false; 
-		}
 		
 		//이메일 공백 확인 
 		if($("#email1").val() == ""){

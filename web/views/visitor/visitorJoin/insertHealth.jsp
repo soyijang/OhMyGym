@@ -96,17 +96,17 @@ div#visitQuestion{
 								<label class="questionTitle">가장 집중적으로 운동하고싶은 부위를 골라주세요</label><br>
 								<div
 									style="margin-top: 20px; text-align: left; padding-left: 110px; color: white; font-size: 1.2em;">
-									<input type="checkbox" id="arm" name="focus" value="arm">
-									<label for="arm">팔/다리</label> &nbsp;<br> 
+									<input type="checkbox" id="arm" name="focus" value="팔/다리">
+									<label for="팔/다리">팔/다리</label> &nbsp;<br> 
 									<input
-										type="checkbox" id="chest" name="focus" value="chest">
-									<label for="chest">가슴 </label> &nbsp;<br> 
+										type="checkbox" id="chest" name="focus" value="가슴">
+									<label for="가슴">가슴 </label> &nbsp;<br> 
 									<input
-										type="checkbox" id="stomach" name="focus" value="stomach">
-									<label for="stomach">배 </label> &nbsp;<br> 
+										type="checkbox" id="stomach" name="focus" value="배">
+									<label for="배">배 </label> &nbsp;<br> 
 									<input
-										type="checkbox" id="hip" name="focus" value="hip"> <label
-										for="hip">엉덩이 </label> &nbsp;<br>
+										type="checkbox" id="hip" name="focus" value="엉덩이"> <label
+										for="엉덩이">엉덩이 </label> &nbsp;<br>
 								</div>
 							</div>
 							<div id="part4" class="questionPart" style="float: left;">
@@ -192,7 +192,7 @@ div#visitQuestion{
 			</div>
 			
 			<div>
-				<button onclick="finish()">가입하기</button>
+				<button onclick="finish()" style="margin-left: 600px; width: 200px; height: 40px; background-color: orangered; color: white; border: none;">가입하기</button>
 			</div>
 		</div>
 		<script>

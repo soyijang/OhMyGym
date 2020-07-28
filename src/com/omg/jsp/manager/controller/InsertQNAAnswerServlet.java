@@ -65,7 +65,7 @@ public class InsertQNAAnswerServlet extends HttpServlet {
 		
 		String page = "";
 		if(result > 0) {
-	         page = "views/manager/manageAll/manageQnAList.jsp";
+	         page = "views/manager/manageAll/manageReport.jsp";
 	         request.setAttribute("successCode", "insertQNAAnswer");
 	         request.getRequestDispatcher(page).forward(request, response);
 	      } else {

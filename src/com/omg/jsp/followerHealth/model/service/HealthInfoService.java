@@ -22,7 +22,7 @@ public class HealthInfoService {
 		
 		return list;
 	}
-
+//여
 	public int insertHealthHistory(ArrayList<HealthInfo> list) {
 		Connection con = getConncection();
 		
