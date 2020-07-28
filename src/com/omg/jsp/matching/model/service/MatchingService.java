@@ -14,6 +14,7 @@ import com.omg.jsp.matching.model.vo.MatchingChat;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.matching.model.vo.RequestInformation;
 import com.omg.jsp.member.model.vo.TrainerInfo;
+import com.omg.jsp.ohmoney.model.vo.OhMoney;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -185,12 +186,64 @@ public class MatchingService {
 
 	public int endMatch(String trainerId, String followerId) {
 		Connection con = getConncection();
+		 
+		//환불 가능 오머니, 환불 불가 오머니 금액 체크
+		HashMap<String, String> followerOmoney = new MatchingDao().checkOmoney(con, followerId);
 		
-		int result = new MatchingDao().endMatch(con, trainerId, followerId);
+		int inputOmoneyResult = 0;
+		int trainingPrice = 57500;
 		
-		System.out.println("service result : " + result);
+		OhMoney paymentResult = new OhMoney();
 		
-		if(result > 0) {
+		String temp = followerOmoney.get("refundbal");
+		String temp2 = followerOmoney.get("nofundbal");
+		String temp3 = followerOmoney.get("balance");
+		
+		int refundbal = 0;
+		int nofundbal = 0;
+		int balance = 0;
+		
+		if(temp != null) {
+			refundbal = Integer.parseInt(temp);
+		} else {
+			refundbal = 0;
+		}
+		
+		if(temp2 != null) {
+			nofundbal = Integer.parseInt(temp2);
+		} else {
+			nofundbal = 0;
+		}
+		
+		if(temp3 != null) {
+			balance = Integer.parseInt(temp3);
+		} else {
+			balance = 0;
+		}
+		
+		if(balance < trainingPrice) {
+			return 99;
+		} else {
+			if(nofundbal > trainingPrice) {
+				//오머니 환불 불가 금액으로만 결제
+				paymentResult.setNofundBal(nofundbal - trainingPrice);
+				paymentResult.setRefundBal(refundbal);
+			} else {
+				//오머니 환불가능 + 환불 불가 금액으로만 결제
+				int paymentBalance = -(nofundbal - trainingPrice);
+				paymentResult.setNofundBal(0);
+				paymentResult.setRefundBal(refundbal - paymentBalance);
+				paymentResult.setBalance(paymentBalance);
+			}
+			paymentResult.setBalance(paymentResult.getNofundBal() + paymentResult.getRefundBal());
+			inputOmoneyResult = new MatchingDao().insertPaymentOmoney(con, paymentResult, followerId);
+		}
+		
+		int updateMatchingResult = new MatchingDao().endMatch(con, trainerId, followerId);
+		
+		int result = inputOmoneyResult + updateMatchingResult;
+		
+		if(result > 1) {
 			commit(con);
 		} else {
 			rollback(con);

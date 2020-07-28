@@ -19,6 +19,7 @@ import com.omg.jsp.matching.model.vo.MatchingRequest;
 import com.omg.jsp.matching.model.vo.RequestInformation;
 import com.omg.jsp.member.model.dao.MemberDao;
 import com.omg.jsp.member.model.vo.TrainerInfo;
+import com.omg.jsp.ohmoney.model.vo.OhMoney;
 import com.omg.jsp.trainerCareer.model.vo.TrainerCareer;
 import com.omg.jsp.trainerCeritificate.model.vo.TrainerCeritificate;
 import com.omg.jsp.trainerEducation.model.vo.TrainerEducation;
@@ -730,27 +731,7 @@ public class MatchingDao {
 		
 		return result;
 	}
-	public int insertReject(Connection con, HashMap<String, String> rejectInfo) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("insertReject");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, rejectInfo.get("trainerId"));
-			pstmt.setString(2, rejectInfo.get("followerId"));
-			pstmt.setString(3, rejectInfo.get("rejectReason"));
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(con);
-		}
-		
-		return result;
-	}
+
 	public ArrayList<String> selectTrainerIdList(Connection con) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -835,6 +816,78 @@ public class MatchingDao {
 			} finally {
 				close(pstmt);
 				close(rset);
+			}
+			
+			return result;
+		}
+		
+		public int insertReject(Connection con, HashMap<String, String> rejectInfo) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = prop.getProperty("insertReject");
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, rejectInfo.get("trainerId"));
+				pstmt.setString(2, rejectInfo.get("followerId"));
+				pstmt.setString(3, rejectInfo.get("rejectReason"));
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(con);
+			}
+			
+			return result;
+		}
+		public HashMap<String, String> checkOmoney(Connection con, String followerId) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			HashMap<String, String> hmap = new HashMap<String, String>();
+			
+			String query = prop.getProperty("checkOmoney");
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, followerId);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					hmap.put("nofundbal", rset.getString("NOFUNDBAL"));
+					hmap.put("refundbal", rset.getString("REFUNDBAL"));
+					hmap.put("balance", rset.getString("BALANCE"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rset);
+			}
+			
+			return hmap;
+		}
+		public int insertPaymentOmoney(Connection con, OhMoney paymentResult, String followerId) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = prop.getProperty("insertPaymentOmoney");
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, followerId);
+				pstmt.setInt(2, paymentResult.getNofundBal());
+				pstmt.setInt(3, paymentResult.getRefundBal());
+				pstmt.setInt(4, paymentResult.getBalance());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
 			}
 			
 			return result;

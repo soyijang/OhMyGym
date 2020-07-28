@@ -671,38 +671,27 @@ font-weight: bold;
  				},
  				type : "post",
  				success : function(data) {
+ 					console.log(data);
+ 					if(data == 2) {
 		 				alert("매칭 최종 승인이 완료되었습니다.");
 		 				location.reload();
+ 					} else if(data == 99) {
+ 						alert("오머니 잔액이 부족합니다. 오머니 충전 페이지로 이동합니다.");
+ 						location.href="<%= request.getContextPath() %>/views/follower/followerMypage/followerMyOhMoney.jsp";
+ 					} else {
+ 						alert("매칭 실패");
+ 					}
  				},
  				error : function(){
  					alert("매칭 확인 실패");
  				}
  			});
+        	
+        	
         }
         
         function submitMatching(){
-        	
-        	//해당 유저가 매칭완료된 상태인지 확인하는 ajax
-        	var userId = "<%= loginUser.getMemberId() %>";
-        	$.ajax({
-				 url : "/omg/alreadyMatch.follower",
-			     type : 'post',
-			     data : {
-			          	userId : userId
-				       },
-				       success : function(data) {
-				    	   
-				    	   if(data == true){
-				    		   jQuery('.matching_wrap').fadeIn('slow');
-				    	   } else {
-				    		   alert("이미 다른 트레이너와 매칭하셨습니다.")
-				    	   }
-				    	   
-				   		},
-				 		error : function(){
-				 			alert("매칭확인 오류");
-				 		}
-		     })
+            jQuery('.matching_wrap').fadeIn('slow');
         }
         
         function openChat(matchingNumber){//대화페이지 오픈

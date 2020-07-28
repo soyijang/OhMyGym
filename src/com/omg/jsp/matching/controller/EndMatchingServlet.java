@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.omg.jsp.matching.model.service.MatchingService;
 import com.omg.jsp.matching.model.vo.MatchingRequest;
 
@@ -24,6 +25,10 @@ public class EndMatchingServlet extends HttpServlet {
 		String checkEnd = "수락";
 		
 		int result = new MatchingService().endMatch(trainerId, followerId);
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(result, response.getWriter());
 	}
 
 
