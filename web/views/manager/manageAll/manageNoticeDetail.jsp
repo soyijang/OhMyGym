@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" import="com.omg.jsp.notice.model.vo.Notice, com.omg.jsp.member.model.vo.*"%>
 	<% 
 		Notice notice = (Notice) request.getAttribute("notice");
+	
 	%>
 <!DOCTYPE html>
 <html>

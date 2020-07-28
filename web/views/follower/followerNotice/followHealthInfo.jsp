@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.omg.jsp.notice.model.vo.HealthInfo, com.omg.jsp.member.model.vo.*"%>
+    <% 
+    HealthInfo healthInfo = (HealthInfo) request.getAttribute("healthInfo");
+	%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 .titles{
    text-align: center;
@@ -89,6 +93,16 @@
    font-weight: bold;
    cursor: pointer;
 }
+#btn1 {
+		margin-left: 1400px;
+        width: 80px;
+        height: 25px;
+        border: none;
+        background: orangered;
+        color: white;
+        font-weight: 500;
+}
+
 </style>
 <body>
        <%@ include file="../../common/followerNav.jsp" %>
@@ -102,31 +116,105 @@
       <div class="mainBox">
          <div class="subtopBox">
             <div style="float: left;">건강정보알리미</div>
-          
+	          
             <div class="circle">알림이</div>
-            <div class="healthTitle">기름진 음식이라구요?</div>
+            <div class="healthTitle"><%=healthInfo.getBoardTitle() %></div>
+            
             <br>
             <div class="viewLine">
-               <div class="view" id="left">2020.06.19</div>
-               <div class="view" id="blackFont">10,597</div>
+            	<img id="postMark" src="/omg/resources/img/bookmark 1bookmark.png" onclick="postMark();">
+               <div class="view" id="left"><%=healthInfo.getWritedate() %>&nbsp;&nbsp;&nbsp;<%=healthInfo.getWriteTime()%></div>
+               <div class="view" id="blackFont"><%=healthInfo.getViewCount()%></div>
                <div class="view">조회수</div>
+               
             </div>
          </div>
-         <div class="subBottomBox">
+         <div class="subBottomBox"><br><br><br>
+       <img id="foodimg" src="/omg/resources/img/20200408523403 1health.png" style="height: 360px; width: 600px; ;"> 
+    
+        <br><br><br><br>
+        <%=healthInfo.getBoardContent()%>
         
-         <p>저탄수화물 고지방(저탄고지) 다이어트, LCHF 다이어트 또는 키토제닉(Ketogenic) 다이어트는 식이요법의 일종
-으로, 단순히 지방을 많이 먹는 것이 아니라 열량의 총 섭취량은 유지하면서 섭취 비중 가운데 탄수화물(당질)이 들어
-간 음식을 줄이고 지방이 들어간 음식을 늘려, 체내 인슐린 저항성을 낮추는 것을 목표로 한다. 실제로는 케톤식이라
-고 비슷한 방식이 있다. 주로 뇌전증 환자의 식이 요법으로, 고의로 케톤산을 만들어 뇌전증을 예방하는 방법으로써 부작용으로 성장 부전이 온다. 
-예를 들어 고깃집에 갈 경우 쌀밥은 먹지 말고 채소를 먹고, 고기와 고기의 비계를 위주로 먹으라는 것. LCHF에서 제시하는 조건을 맞추려면 탄수화물처럼 보이는 것은 의식적으로 기피해야 한다. 게다가 탄수화물이 포도당으로 저장되는 과정에서 인슐린이 분비되는 과정을 막기 위해 우리가 흔히 생각하는 밥, 빵 뿐 아니라 설탕 등 당분이 많이 들어간 과일, 뿌리채소 등도 제한 섭취하게 된다. 다시 말해, 식탁에서 밥, 빵, 면, 과일, 설탕, 뿌리채소는 모두 배제하라는 것이다. 
-즉,  신선한 잎채소와 신선한 육류만 섭취하며, 부족한 영양분은 버터나 치즈, 다른 채소들로 부가적 개념으로만 채우면 된다.
-물론 그렇다고 탄수화물을 전혀 섭취하지 말라는 것이 아니며, 만약 탄수화물 섭취량을 강박적으로 줄이면 질병을 야기할 수 있다. 이 식이요법의 핵심은 현대의 과도한 탄수화물의 섭취량을 상당하게 줄이는 데에 있다. 지방은 탄수화물 감소에 따른 열량 부족을 대체하는 수단인 것이다. 참고로 탄수화물의 절대량만 줄이면 그만큼 당뇨약의 복용량도 줄일 수 있기 때문에, 아예 소식을 하거나, 백미를 현미로 바꿔주는 것만으로도 비슷한 효과를 누릴 수 있다
          </div>
       </div>
-      <button id="btn">목록으로</button>
+      <button id="btn1" onclick="history.back(-1)">목록으로</button>
       <br><br>
        <footer>
     	<%@ include file="../../common/footer.jsp" %>
     </footer>
+    
+    <script>
+	function checkBookMark(value){
+		var postId = value;
+		var markedId =  "<%=loginUser.getMemberId()%>";
+		var msg = "non";
+		$.ajax({
+				url : "/omg/addBookMark.follower",
+				data : {
+					postId : postId,
+					markedId : markedId,
+					msg : msg
+				},
+				type : "post",
+				success : function(data) {
+					if(data){
+						$("#postMark"+value).css("color","black");
+					} else {
+						$("#postMark"+value).css("color","orangered");
+					}
+				},
+				error : function(){
+					console.log("북마크 스타일 불러오기 실패");
+				}
+			})
+	}
+
+
+	function selectBookMark(value){
+		var postId = value;
+		$.ajax({
+				url : "/omg/checkBookMark.follower",
+				data : {
+					postId : postId
+				},
+				type : "post",
+				success : function(data) {
+					 checkBookMark(value);
+				},
+				error : function(){
+					console.log("북마크 불러오기 실패");
+				}
+			})
+	}
+
+	function addBookMark(value){
+			var markedId =   "<%=loginUser.getMemberId()%>";
+			var postId = value;
+			var msg = "add";
+
+			$.ajax({
+				url : "/omg/addBookMark.follower",
+				data : {
+					markedId : markedId,
+					postId : postId,
+					msg : msg
+				},
+				type : "post",
+				success : function(data) {
+					selectLikes(postId);
+					if(data){
+						$("#postMark"+value).css("color","orangered");
+					} else {
+						$("#postMark"+value).css("color","black");
+					}
+				},
+				error : function(){
+					console.log("싈패");
+				}
+			})
+	}
+
+	
+	
 </body>
 </html>
