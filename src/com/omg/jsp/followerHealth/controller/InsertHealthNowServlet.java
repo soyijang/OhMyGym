@@ -63,22 +63,23 @@ public class InsertHealthNowServlet extends HttpServlet {
 		System.out.println("insertHealthHistory servlet : " + list);
 		
 		int result = new HealthInfoService().insertHealthHistory(list);
+		System.out.println(result);
 		
 		
-		
-
+//여기?
 			String page = "";
 			if(result > 0) {
-				page = "/omg/views/visitor/login.jsp";
+				page = "views/visitor/login.jsp";
 				
 				request.setAttribute("successCode", "insertMember");
 				request.getRequestDispatcher(page).forward(request, response);
 				//response.sendRedirect(request.getContextPath() + "/views/visitor/login.jsp");
-			} else {
-				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "회원가입 실패");
-				request.getRequestDispatcher(page).forward(request, response);
-			}
+			} 
+//			else {
+//				page = "views/common/errorPage.jsp";
+//				request.setAttribute("msg", "회원가입 실패");
+//				request.getRequestDispatcher(page).forward(request, response);
+//			}
 			
 		
 	

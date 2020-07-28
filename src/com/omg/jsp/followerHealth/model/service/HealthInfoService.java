@@ -22,7 +22,7 @@ public class HealthInfoService {
 		
 		return list;
 	}
-
+//여
 	public int insertHealthHistory(ArrayList<HealthInfo> list) {
 		Connection con = getConncection();
 		
@@ -41,6 +41,10 @@ public class HealthInfoService {
 			} else {
 				rollback(con);
 			}
+			
+			close(con);
+			
+			return updateHealthInfoNowResult;
 		} else {
 			int insertHealthInfoResult = new HealthInfoDao().insertHealthHistory(con, list);
 			int insertHealthInfoNow = new HealthInfoDao().insertHealthInfoNow(con, list);
@@ -50,11 +54,13 @@ public class HealthInfoService {
 			} else {
 				rollback(con);
 			}
+			
+			close(con);
+			
+			return insertHealthInfoNow;
 		}
 		
-		close(con);
 		
-		return updateHealthInfoNowResult;
 	}
 	
 	public int insertHealthInfoNow(ArrayList<HealthInfo> list) {
