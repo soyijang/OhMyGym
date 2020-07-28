@@ -139,7 +139,7 @@
         
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">
         <ul><details open><summary>건강정보게시판 관리</summary>
-            <li><a href="#">게시글작성/조회/수정</a></li><br>
+            <li><a href="<%=request.getContextPath()%>/healthInfoList.no">게시글작성/조회/수정</a></li><br>
         </details></ul>
         
         <img src="/omg/resources/imageManager/menuGroup.png" class="menuGroup">

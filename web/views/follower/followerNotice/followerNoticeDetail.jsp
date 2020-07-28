@@ -38,6 +38,9 @@
         background: orangered;
         font-weight: 500;
     }
+    #postMark{
+    	margin-left: 850px;
+    }
    
 </style>
 </head>
@@ -50,8 +53,10 @@
     <section>
         <!--헤더 영역-->
         <article id="menuTitleArea">
+        <div><img id="postMark" src="/omg/resources/img/bookmark 1bookmark.png" onclick="postMark();"></div>
             <div>
                 <h1 style="margin-top: 8px; font-size: 1.5em;">&nbsp;&nbsp;&nbsp;공지사항</h1>
+                
             </div>
         </article>
         <!--헤더 영역 종료-->

@@ -108,6 +108,7 @@
                     <th width="50px">No</th>
                     <th width="110px">분류</th>
                     <th>제목</th>
+                    <th>북마크</th>
                     <th width="60px">첨부파일</th>
                     <th width="100px">등록일</th>
                 </tr>
@@ -117,6 +118,7 @@
 					<td><%=n.getBoardNum() %></td>
 					<td><%=n.getBoardCode() %></td>
 					<td><%=n.getBoardTitle()%></td>
+					<td><%=n.getBookmarkCount()%></td>
 					<td><button>다운로드</button>
 				</td>
 					<td><%=n.getWritedate() %></td>
@@ -141,6 +143,79 @@
       });
      
    </script>
+   <script>
+	function checkBookMark(value){
+		var postId = value;
+		var markedId =  "<%=loginUser.getMemberId()%>";
+		var msg = "non";
+		$.ajax({
+				url : "/omg/addBookMark.follower",
+				data : {
+					postId : postId,
+					markedId : markedId,
+					msg : msg
+				},
+				type : "post",
+				success : function(data) {
+					if(data){
+						$("#postMark"+value).css("color","black");
+					} else {
+						$("#postMark"+value).css("color","orangered");
+					}
+				},
+				error : function(){
+					console.log("북마크 스타일 불러오기 실패");
+				}
+			})
+	}
+
+
+	function selectBookMark(value){
+		var postId = value;
+		$.ajax({
+				url : "/omg/checkBookMark.follower",
+				data : {
+					postId : postId
+				},
+				type : "post",
+				success : function(data) {
+					 checkBookMark(value);
+				},
+				error : function(){
+					console.log("북마크 불러오기 실패");
+				}
+			})
+	}
+
+	function addBookMark(value){
+			var markedId =   "<%=loginUser.getMemberId()%>";
+			var postId = value;
+			var msg = "add";
+
+			$.ajax({
+				url : "/omg/addBookMark.follower",
+				data : {
+					markedId : markedId,
+					postId : postId,
+					msg : msg
+				},
+				type : "post",
+				success : function(data) {
+					selectLikes(postId);
+					if(data){
+						$("#postMark"+value).css("color","orangered");
+					} else {
+						$("#postMark"+value).css("color","black");
+					}
+				},
+				error : function(){
+					console.log("싈패");
+				}
+			})
+	}
+
+	
+	</script>
     
     <footer>
     	<%@ include file="../../common/footer.jsp" %>

@@ -107,6 +107,7 @@
                     <th width="50px">No</th>
                     <th width="110px">구분</th>
                     <th>제목</th>
+                    <th>북마크</th>
                     <th width="60px">첨부파일</th>
                     <th width="100px">등록일</th>
                 </tr>
@@ -116,6 +117,7 @@
 					<td><%=n.getBoardNum() %></td>
 					<td><%=n.getBoardCategory() %></td>
 					<td><%=n.getBoardTitle()%></td>
+					<td><%=n.getBookmarkCount()%></td>
 					<td><button>다운로드</button>
 				</td>
 					<td><%=n.getWritedate() %></td>
