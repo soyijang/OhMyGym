@@ -43,7 +43,7 @@
 
 	function checks() {
 		var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-		var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+		var getCheck = RegExp(/^[a-zA-Z0-9]{8,12}$/);
 		var getName = RegExp(/^[가-힣]+$/);
 		
 		//아이디 공백확인
@@ -556,12 +556,12 @@ body {
 
 
 
-											<tr>
+										<tr>
 												<th>휴대폰</th>
 												<td><input type="hidden" name="tel"
 													 value=""> 
 													<select
-													name="tel1" id="etcphone1" 
+													name="tel1" id="tel" 
 													style="width: 100px; height: 44px; border:1px solid lightgray;"
 													class="MS_select MS_tel">
 														<option value="">선택</option>
@@ -572,19 +572,28 @@ body {
 														<option value="018">018</option>
 														<option value="019">019</option>
 												</select> - <input type="text" name="tel2" 
-													id="etcphone2"  value="" size="4"
+													id="tel" class="MS_input_tel" value="" size="4"
 													maxlength="4" style="width: 115px; height: 40px; border:1px solid lightgray;">
 													- <input type="text" name="tel3" 
-													id="etcphone3"  value="" size="4"
+													id="tel" class="MS_input_tel" value="" size="4"
 													maxlength="4" style="width: 115px; height: 40px; border:1px solid lightgray;"
 													minlength="4">
+													
 
-													<a onclick=""
+													<a onclick="sendSMS()"
 														style="color: orangered; cursor: pointer;">본인인증</a>
 												</td>
+												
 
 
 
+											</tr>
+											<tr>
+											<th>인증번호</th>
+												<td><input type="text" id="numnum" style="height: 40px; border:1px solid lightgray;"
+													size="50" placeholder="인증번호를 입력해주세요">
+													<a onclick="confirm()"
+														style="color: orangered; cursor: pointer;">확인</a></td>
 											</tr>
 											<tr>
 												<th>은행</th>
@@ -666,7 +675,61 @@ body {
          
       
    </script>
-   
+   <script>
+    var randomNum;
+    
+    
+    
+    function sendSMS() {
+    	
+    	var sum='010';
+    	$('input[id=tel]').map(function(){
+    		
+    		sum +=$(this).val();
+    		
+    		
+    		
+    	});
+        console.log(sum);
+    	
+    	/* 문자로 인증번호 전송 */
+		$.ajax({
+			url: "/omg/sendmail2.me",
+			type: "post",
+			data: {
+				sum:sum,
+			},
+			success: function (data) {
+				/* 문자전송완료 alert */
+				alert("인증번호가 전송되었습니다!");
+				console.log("성공!");
+				console.log(data);
+				randomNum = data;
+			},
+			error: function () {
+				console.log("실패!");
+			}
+		});
+    }
+    
+    function confirm(){
+		var inputNum = document.getElementById('numnum').value;
+		console.log("randomNum : " + randomNum);
+		console.log("inputNum : " + inputNum);
+		
+		/* 입력값 일치여부 확인 */
+		if(randomNum == inputNum){
+			alert("인증 성공!")
+		}else{
+			alert("인증번호가 일치하지 않습니다! 다시 인증을 진행해주세요!");
+		}
+		
+		
+		
+	}
+
+    
+    </script>
 
 </body>
 </html>
