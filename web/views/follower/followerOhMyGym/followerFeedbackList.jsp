@@ -101,7 +101,7 @@
                     <% if(feedbackList.size() > 1) { 
 	                    	for(int i = 0; i < feedbackList.size() - 1; i++) { %>
 	                    <tr class="feedback-list">
-	                        <td><%= feedbackList.size() - i %><input type="hidden" value="<%= feedbackList.get(i).getFollowerVideoCode() %>"></td>
+	                        <td><%= feedbackList.size() - i - 1 %><input type="hidden" value="<%= feedbackList.get(i).getFollowerVideoCode() %>"></td>
 	                        <td>
 	                        	<%= feedbackList.get(i).getFeedbackTitle() %>
 	                        	<!-- DB에 업로드 날짜가 sysdate와 일치하고, 트레이너 답변 미작성인 경우 표시 -->

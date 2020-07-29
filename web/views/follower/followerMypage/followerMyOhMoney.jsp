@@ -510,12 +510,12 @@ div#return_list_div {
 						오머니 선택</a>
 					<form>
 						<hr style="width: 90%; height: 2px; background: black;">
-						<input type="radio" value="10" style="cursor: pointer"
-							name="money" onclick="showMoney(10)">10원&nbsp; <input
-							type="radio" value="10000" style="cursor: pointer" name="money"
-							onclick="showMoney(10000)">10000원&nbsp; <input
-							type="radio" value="15000" style="cursor: pointer" name="money"
-							onclick="showMoney(15000)">15000원&nbsp;
+						<input type="radio" value="10000" style="cursor: pointer"
+							name="money" onclick="showMoney(10000)">10000원&nbsp; <input
+							type="radio" value="50000" style="cursor: pointer" name="money"
+							onclick="showMoney(50000)">50000원&nbsp; <input
+							type="radio" value="100000" style="cursor: pointer" name="money"
+							onclick="showMoney(100000)">100000원&nbsp;
 						<hr style="width: 90%; height: 0.5px; background: black;">
 					</form>
 					<br>
@@ -849,7 +849,7 @@ div#return_list_div {
                                         msg += '상점 거래ID : ' + rsp.merchant_uid;
                                         msg += '결제 금액 : ' + rsp.paid_amount;
                                         msg += '카드 승인번호 : ' + rsp.apply_num;
-                                        money = money * 1000; 
+                                        money = money; 
                                         addMoney(money);
                                         jQuery('.buy_wrap').fadeOut('slow')
                                     } else {
