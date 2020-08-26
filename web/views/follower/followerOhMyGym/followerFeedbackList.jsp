@@ -96,6 +96,7 @@
                         <th style="width:100px;">No</th>
                         <th style="width:400px;">제목</th>
                         <th style="width:150px;">일시</th>
+                        <!-- save -->
                         <th style="width:150px;">답변여부</th>
                     </tr>
                     <% if(feedbackList.size() > 1) { 
